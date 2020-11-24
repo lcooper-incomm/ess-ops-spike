@@ -41,12 +41,12 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-      
+          
       - name: Copy single file to remote
-        uses: ./
+        uses: garygrossgarten/github-action-scp@release
         with:
           local: test/oof.txt
-          remote: /dev_work/ESSops-spike/ESSops-spike/test
+          remote: scp/single/oof.txt
           host: 10.0.0.76
           username: ansible
           password: ansible
