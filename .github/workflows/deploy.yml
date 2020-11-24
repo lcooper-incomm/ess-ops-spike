@@ -34,3 +34,16 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: setup demo
+        run: |
+          mkdir test
+          touch test/oof.txt
+          touch test/.dot.txt
+      - name: Copy via ssh
+        uses: ./
+        with:
+          local: test
+          remote: /home/ansible
+          host: 10.0.0.76
+          username: ansible
+          password: ansible
