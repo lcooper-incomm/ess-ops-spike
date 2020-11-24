@@ -42,7 +42,7 @@ jobs:
       - name: Copy via ssh
         uses: ./
         with:
-          local: test
+          local: test/oof.txt
           remote: /home/ansible
           host: 10.0.0.76
           username: ansible
