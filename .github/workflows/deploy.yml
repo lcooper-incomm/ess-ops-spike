@@ -40,7 +40,8 @@ jobs:
           mkdir test
           touch test/oof.txt
           touch test/.dot.txt
-      - name: Copy via ssh
+      
+      - name: Copy single file to remote
         uses: ./
         with:
           local: test/oof.txt
@@ -48,3 +49,5 @@ jobs:
           host: 10.0.0.76
           username: ansible
           password: ansible
+
+    
