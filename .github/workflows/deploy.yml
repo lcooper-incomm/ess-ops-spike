@@ -5,8 +5,8 @@ name: CI
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -45,8 +45,8 @@ jobs:
       - name: Copy single file to remote
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: test/.dot.txt
-          remote: .dot.txt
+          local: test/oof.txt
+          remote: .oof.txt
           host: 10.0.0.76
           username: ansible
           password: ansible
