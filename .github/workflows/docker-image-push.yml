@@ -16,11 +16,19 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
-        name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.ARTIFACTORY_UNAME }}
-          password: ${{ secrets.ARTIFACTORY_PWORD }}
+      - uses: jfrog/setup-jfrog-cli@v1
+        env:
+          JF_ARTIFACTORY_1: ${{ secrets.artifactory_token_1 }}
+      - run: |
+                  # Ping the server
+          jfrog rt use docker.maven.incomm.com
+          jfrog rt ping
+          
+#         name: Login to DockerHub
+#         uses: docker/login-action@v1
+#         with:
+#           username: ${{ secrets.ARTIFACTORY_UNAME }}
+#           password: ${{ secrets.ARTIFACTORY_PWORD }}
       -
         name: Build and push
         id: docker_build
