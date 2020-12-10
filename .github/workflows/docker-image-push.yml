@@ -19,7 +19,7 @@ jobs:
          name: Login to ACR
         uses: docker/login-action@v1
         with:
-          registry: <registry-name>.azurecr.io
+          registry: docker.maven.com
           username: ${{ secrets.ARTIFACTORY_UNAME }}
           password: ${{ secrets.ARTIFACTORY_PWORD }}
 #         name: Login to DockerHub
