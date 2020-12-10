@@ -20,7 +20,6 @@ jobs:
         env:
           JF_ARTIFACTORY_1: ${{ secrets.artifactory_token_1 }}
       - run: |
-                  # Ping the server
           jfrog rt use docker.maven.incomm.com
           jfrog rt ping
           
