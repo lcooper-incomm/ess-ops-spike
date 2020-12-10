@@ -20,6 +20,7 @@ jobs:
         env:
           JF_ARTIFACTORY_1: ${{ secrets.ARTIFACTORY_TOKEN }}
       - run: |
+          jfrog rt config --interactive=false --enc-password=true --url=https://docker.maven.incomm.com/ --apikey=${{ secrets.ARTIFACTORY_TOKEN }}
           jfrog rt use docker.maven.incomm.com
           jfrog rt ping
           
