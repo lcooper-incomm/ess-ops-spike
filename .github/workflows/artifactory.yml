@@ -24,7 +24,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      # test jfrog-cli 
+      - uses: jfrog/setup-jfrog-cli@v1
+        env:
+          JF_ARTIFACTORY_1: ${{ secrets.ARTIFACTORY_TOKEN }}
+      - run: |
+          jfrog rt config --interactive=false --enc-password=true --url=https://docker.maven.incomm.com/ --apikey=${{ secrets.ARTIFACTORY_TOKEN }}
+          jfrog rt use docker.maven.incomm.com
+          jfrog rt ping:  
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
