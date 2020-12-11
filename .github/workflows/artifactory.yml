@@ -26,8 +26,8 @@ jobs:
       - uses: actions/checkout@v2
       # test jfrog-cli 
       - uses: jfrog/setup-jfrog-cli@v1
-      - run: jfrog --version
-             jfrog rt ping
+      - run: jfrog rt ping
+             jfrog --version
 #       - uses: jfrog/setup-jfrog-cli@v1
 #         env:
 #           JF_ARTIFACTORY_1: ${{ secrets.ARTIFACTORY_TOKEN }}
