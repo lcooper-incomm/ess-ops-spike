@@ -3,7 +3,10 @@ name: docker-image push ci
 on:
   workflow_dispatch:
   push:
-    branches: master
+      paths:
+      - '.github/workflows/docker-image**'
+  pull_request:
+    branches: [ main ]
 
 jobs:
   main:
