@@ -1,0 +1,23 @@
+<div class="summary-section order-amounts-section container">
+  <cca-key-value key="Subtotal">
+    <div class="currency-field" [ngClass]="{'text-muted': !selection?.getOrder()?.totals.subtotal}">{{selection?.getOrder()?.totals.subtotal?.displayValue || 'N/A'}}</div>
+  </cca-key-value>
+  <cca-key-value key="Total Purchase Fees">
+    <div class="currency-field" [ngClass]="{'text-muted': !selection?.getOrder()?.totals.purchaseFees}">{{selection?.getOrder()?.totals.purchaseFees?.displayValue || 'N/A'}}</div>
+  </cca-key-value>
+  <cca-key-value key="Total Handling Fees">
+    <div class="currency-field" [ngClass]="{'text-muted': !selection?.getOrder()?.totals.handlingFees}">{{selection?.getOrder()?.totals.handlingFees?.displayValue || 'N/A'}}</div>
+  </cca-key-value>
+  <cca-key-value key="Total Tax">
+    <div class="currency-field" [ngClass]="{'text-muted': !selection?.getOrder()?.totals.tax}">{{selection?.getOrder()?.totals.tax?.displayValue || 'N/A'}}</div>
+  </cca-key-value>
+  <cca-key-value key="Total Shipping">
+    <div class="currency-field" [ngClass]="{'text-muted': !selection?.getOrder()?.totals.shippingFees}">{{selection?.getOrder()?.totals.shippingFees?.displayValue || 'N/A'}}</div>
+  </cca-key-value>
+  <cca-key-value key="Total Fees Discount">
+    <div class="currency-field" [ngClass]="{'text-muted': !selection?.getOrder()?.totals.discounted}">{{selection?.getOrder()?.totals.discounted?.displayValue || 'N/A'}}</div>
+  </cca-key-value>
+  <cca-key-value key="Grand Total">
+    <div class="currency-field" [ngClass]="{'text-muted': !selection?.getOrder()?.totals.grandTotal}">{{selection?.getOrder()?.totals.grandTotal?.displayValue || 'N/A'}}</div>
+  </cca-key-value>
+</div>

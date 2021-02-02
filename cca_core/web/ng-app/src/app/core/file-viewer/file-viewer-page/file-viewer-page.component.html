@@ -1,0 +1,14 @@
+<ng-container [ngSwitch]="wizard.model.fileMimeType">
+  <ng-container *ngSwitchCase="'image/jpeg'">
+    <img [src]="srcHtml">
+  </ng-container>
+  <ng-container *ngSwitchCase="'application/pdf'">
+    <pdf-viewer [src]="srcArray"
+                [render-text]="true"
+                style="display: block;">
+    </pdf-viewer>
+  </ng-container>
+  <div *ngSwitchDefault>
+    The mime type "{{wizard.model.fileMimeType}}" is not supported.
+  </div>
+</ng-container>

@@ -1,0 +1,6 @@
+<div class="location-contacts-tab-container container">
+  <div class="text-muted" fxLayout="row" fxLayoutAlign="center center" fxFlex *ngIf="!selection?.getLocation()?.contacts.length">No Contact Information Available</div>
+  <div *ngIf="selection?.getLocation()?.contacts.length" fxLayout="row wrap" fxLayoutGap="5px">
+    <cca-contact [contact]="contact" *ngFor="let contact of selection.getLocation().contacts | orderBy : 'name'"></cca-contact>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+.help-tab-container {
+
+  .mat-elevation-z1 {
+    background-color: #eee;
+    padding: 10px;
+    margin: 0;
+  }
+}

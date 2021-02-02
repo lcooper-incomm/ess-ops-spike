@@ -1,0 +1,15 @@
+qa/screenshots/
+*/target/
+.idea/
+*.iml
+/web/src/main/resources/build.properties
+/web/src/main/resources/static/
+*/node_modules/
+*/bower_components/
+/web/ng-app/src/app/typescript
+/web/ng-app/src/app/_typescript
+/web/ng-app/debug.log
+junitresults.xml
+chromedriver.exe
+target/
+*/rebel.xml

@@ -1,0 +1,28 @@
+<div class="session-workspace-container">
+  <div class="workspace-header dock-header" fxLayout="row" fxLayoutAlign="start center">
+    <h3>Session Workspace</h3>
+    <div fxFlex></div>
+    <button mat-icon-button matTooltip="Refresh" (click)="loadSessions()">
+      <fa-icon icon="sync-alt"></fa-icon>
+    </button>
+  </div>
+  <div class="workspace-content hide-scroll">
+    <div class="active-session-card-container" *ngIf="activeSession">
+      <cca-session-workspace-card [session]="activeSession"></cca-session-workspace-card>
+    </div>
+    <div class="queued-session-card-container" *ngIf="incomingCallSessions.length">
+      <cca-session-workspace-card [session]="session" *ngFor="let session of incomingCallSessions | orderBy : 'id' : true"></cca-session-workspace-card>
+    </div>
+    <div class="incomplete-session-card-container">
+      <cca-session-workspace-card [session]="session" *ngFor="let session of incompleteSessions | orderBy : 'id' : true"></cca-session-workspace-card>
+    </div>
+    <button id="workspace-load-more-button" class="load-more" mat-raised-button color="primary" (click)="nextPage()" *ngIf="currentPage + 1 < totalPages">
+      <span fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <fa-icon icon="plus"></fa-icon>
+        <span>Load More</span>
+      </span>
+      <cca-spinner color="accent" #loadMoreSpinner></cca-spinner>
+    </button>
+  </div>
+  <cca-spinner color="primary" [size]="SpinnerSize.LARGE" #workspaceSpinner></cca-spinner>
+</div>

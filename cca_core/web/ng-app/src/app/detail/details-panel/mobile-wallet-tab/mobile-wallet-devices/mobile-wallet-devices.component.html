@@ -1,0 +1,41 @@
+<mat-accordion>
+  <mat-expansion-panel hideToggle *ngFor="let token of tokens">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="device-type-icon-container" [ngSwitch]="token.device?.simpleType">
+          <fa-icon icon="mobile" *ngSwitchCase="TokenDeviceTypes.PHONE"></fa-icon>
+          <fa-icon icon="tablet" *ngSwitchCase="TokenDeviceTypes.TABLET"></fa-icon>
+          <fa-icon icon="clock" *ngSwitchCase="TokenDeviceTypes.WATCH"></fa-icon>
+          <fa-icon icon="question-circle" *ngSwitchDefault></fa-icon>
+        </div>
+        {{ token.device?.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <cca-mobile-wallet-token-status [status]="token.status" fxFlex class="status"></cca-mobile-wallet-token-status>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div fxLayout="column" fxFlex="50">
+        <cca-key-value-with-placeholder key="Token ID" [value]="token.id"></cca-key-value-with-placeholder>
+        <cca-key-value key="Status">
+          <cca-mobile-wallet-token-status [status]="token.status" fxFlex class="status"></cca-mobile-wallet-token-status>
+        </cca-key-value>
+        <cca-key-value-with-placeholder key="Provision Date" [value]="token.provisionDate?.displayValue"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Expiration Date" [value]="formatExpirationDate(token.expirationDate)"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Type" [value]="token.type"></cca-key-value-with-placeholder>
+      </div>
+      <div fxLayout="column" fxFlex="50">
+        <cca-key-value-with-placeholder key="Device ID" [value]="token.device?.id"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Device Type" [value]="token.device?.type"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Device Name" [value]="token.device?.name"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Device Number" [value]="token.device?.number"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Device Location" [value]="token.device?.location"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="IP Address" [value]="token.device?.ipAddress"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Language" [value]="token.device?.language"></cca-key-value-with-placeholder>
+      </div>
+    </div>
+    <mat-action-row class="action-row">
+      <cca-mobile-wallet-device-action-toolbar [token]="token" class="action-toolbar"></cca-mobile-wallet-device-action-toolbar>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

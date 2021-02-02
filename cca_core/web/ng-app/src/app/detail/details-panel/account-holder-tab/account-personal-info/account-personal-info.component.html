@@ -1,0 +1,25 @@
+<cca-expansion-panel
+  class="alt-expansion-panel "
+  title="Personal Information"
+  [expanded]="true"
+  [hasActionRow]="false"
+  [buildingActions]="buildingActions">
+  <div fxLayout="row wrap" fxLayoutGap="10px" class="alt-panel-container">
+    <div class="summary-column">
+      <cca-key-value-with-placeholder key="Account ID" [value]="selection?.getCustomerAccount()?.id"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Business Name" [value]="selection?.getCustomer()?.businessName"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Customer Name" [value]="selection.description"></cca-key-value-with-placeholder>
+    </div>
+    <div class="summary-column">
+      <cca-key-value-with-placeholder key="Date of Birth" [value]="selection?.getCustomerAccount()?.customer?.dateOfBirth"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Date of Death" [value]="selection?.getCustomerAccount()?.customer?.dateOfDeath"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Online Username" [matTooltip]="'click to copy: ' + selection?.getCustomerAccount()?.customer?.username" matTooltipClass="mat-tooltip" [value]="selection?.getCustomerAccount()?.customer?.username" (click)="copyToClipboard()"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Mother's Maiden" [value]="selection?.getCustomerAccount()?.customer?.mothersMaidenName"></cca-key-value-with-placeholder>
+    </div>
+    <div class="summary-column">
+      <cca-key-value-with-placeholder key="Registration Date" [value]="selection?.getCustomerAccount()?.registeredDate?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Activation Date" [value]="selection?.selectedCustomerAccountCard?.activation?.activationDate?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Expiration Date" [value]="selection?.selectedCustomerAccountCard?.expirationDate"></cca-key-value-with-placeholder>
+    </div>
+  </div>
+</cca-expansion-panel>

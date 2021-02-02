@@ -1,0 +1,21 @@
+<div fxLayout="row" class="text-accent small info-container" *ngIf="!isAuthOnly && platform ==='ECOMM'">
+  <span><fa-icon icon="info-circle"></fa-icon></span>
+  <span><h4>The AUTHONLY Transaction is not available.</h4></span>
+</div>
+<div fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between baseline">
+      <h3 class="text-primary">Payment Information</h3>
+      <form [formGroup]="filterForm">
+        <cca-text-field [form]="filterForm" controlName="filter" placeholder="Filter"></cca-text-field>
+      </form>
+    </div>
+    <div>
+      <cca-key-value-with-placeholder *ngFor="let field of transactionFields" [key]="field.displayValue" [value]="field.value"></cca-key-value-with-placeholder>
+    </div>
+    <div class="text-muted text-center" *ngIf="error">
+      Payment Details Not Available
+    </div>
+  </div>
+</div>
+

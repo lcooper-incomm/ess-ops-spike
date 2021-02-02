@@ -1,0 +1,1 @@
+EXECUTE add_permission 'CCL_RELEASE_PRE_AUTH', 'CCL Release Pre-Auth', 'Ability to release a CCL pre-auth transaction.';

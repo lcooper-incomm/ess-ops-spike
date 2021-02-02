@@ -1,0 +1,12 @@
+UPDATE permission
+SET system_name = 'VMS_CHANGE_STATUS_FROM_DAMAGE_TO_ACTIVE',
+    description = 'VMS Change Status from Damage to Active'
+WHERE system_name = 'VMS_CHANGE_STATUS_FROM_DAMAGED_TO_ACTIVE';
+
+UPDATE permission
+SET system_name = 'VMS_CHANGE_STATUS_FROM_DAMAGE_TO_CLOSED'
+WHERE system_name = 'VMS_CHANGE_STATUS_FROM_DAMAGED_TO_CLOSED';
+
+UPDATE permission
+SET system_name = 'VMS_CHANGE_STATUS_FROM_DAMAGE_TO_LOST_STOLEN'
+WHERE system_name = 'VMS_CHANGE_STATUS_FROM_DAMAGED_TO_LOST_STOLEN';

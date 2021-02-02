@@ -1,0 +1,101 @@
+@import '~@angular/material/theming';
+@import '../../../../../../colors.scss';
+
+$description-width: 161.25px;
+$selection-background-color: mat-color($cca-app-muted, 700);
+$selection-color: white;
+
+.selection-group-item {
+
+  .selection-group-item-button {
+    width: 100%;
+    background-color: $selection-background-color;
+    color: $selection-color;
+
+    &.active,
+    &:hover {
+      outline: 1px solid;
+      outline-color: mat-color($cca-app-primary);
+
+      fa-icon {
+        color: mat-color($cca-app-primary);
+      }
+    }
+
+    .description-container {
+      font-size: 12px;
+      padding: 0 5px;
+
+      .description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: $description-width;
+
+        &.bulk-mode {
+          max-width: $description-width - 20px;
+        }
+      }
+
+      .sub-description-container {
+        font-size: 10px;
+        line-height: 10px;
+        height: 10px;
+      }
+    }
+
+    .icon-container {
+      padding-left: 5px;
+      width: 22.5px;
+    }
+
+    .menu-button-container {
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .05);
+      }
+
+      .mat-icon-button {
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+      }
+    }
+
+    .status-widget-container {
+      width: 40px;
+      margin-right: 3px;
+
+      fa-icon {
+        font-size: 10px;
+      }
+    }
+  }
+
+  .selection-drawer {
+    background-color: $selection-background-color;
+    margin-left: 19px;
+    color: $selection-color;
+
+    &.bulk-mode {
+      margin-left: 34px;
+    }
+
+    .helper-label {
+      font-size: 12px;
+      color: mat-color($cca-app-muted, 400);
+    }
+
+    .selection-child-button-container {
+
+      &.fixed-height {
+        height: 107px;
+      }
+    }
+
+    .selection-drawer-inner-container {
+      padding: 5px;
+    }
+  }
+
+}

@@ -1,0 +1,65 @@
+<div [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <cca-text-field class="default-width" [form]="form" controlName="firstName" placeholder="First Name"></cca-text-field>
+    <cca-text-field class="default-width" [form]="form" controlName="lastName" placeholder="Last Name"></cca-text-field>
+    <cca-postal-code-field class="default-width" [form]="form" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-postal-code-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field class="default-width">
+      <mat-select formControlName="category" placeholder="Category" [compareWith]="compareOptions" required="true">
+        <mat-option *ngFor="let option of bank.complaintCategories | orderBy : 'name'" [value]="option">{{option.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('category').hasError('required')">This field is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="default-width">
+      <mat-select formControlName="source" placeholder="Source" [compareWith]="compareOptions" required="true">
+        <mat-option *ngFor="let option of bank.complaintSources | orderBy : 'name'" [value]="option">{{option.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('source').hasError('required')">This field is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="default-width" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)">
+      <mat-select formControlName="cause" placeholder="Cause" [compareWith]="compareOptions" required="true">
+        <mat-option *ngFor="let option of bank.complaintCauses | orderBy : 'name'" [value]="option">{{option.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('cause').hasError('required')">This field is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <cca-text-field class="default-width" [form]="form" controlName="accountNumber" [placeholder]="isBankType(BankType.MASTERCARD) ? 'Account Number/Order Number' : 'Account Number'"></cca-text-field>
+  </div>
+  <div *ngIf="isBankType(BankType.MASTERCARD)">
+    <cca-text-field [form]="form" controlName="summary" placeholder="Summary Complaint"></cca-text-field>
+  </div>
+  <div>
+    <cca-comment-field [minRows]="2" [autoSize]="true" [form]="form" controlName="complaint" placeholder="Complaint"></cca-comment-field>
+  </div>
+  <div *ngIf="!inWizard" fxLayout="row">
+    <cca-comment-field fxFlex="grow" [form]="form" controlName="resolution" placeholder="Resolution"></cca-comment-field>
+    <cca-date-time-field [form]="form" controlName="resolutionDate" placeholder="Resolution Date (ET)"></cca-date-time-field>
+  </div>
+  <div *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)">
+    <cca-comment-field [minRows]="2" [autoSize]="true" [form]="form" controlName="enhancementsNeeded" placeholder="Enhancements Needed"></cca-comment-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)">
+    <mat-form-field class="default-width">
+      <mat-select formControlName="department" placeholder="Department" [compareWith]="compareOptions">
+        <mat-option *ngFor="let option of bank.complaintDepartments | orderBy : 'name'" [value]="option">{{option.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="default-width">
+      <mat-select formControlName="type" placeholder="Type" [compareWith]="compareOptions" required="true">
+        <mat-option *ngFor="let option of bank.complaintTypes | orderBy : 'name'" [value]="option">{{option.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('type').hasError('required')">This field is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="default-width" *ngIf="isBankType(BankType.AMERICAN_EXPRESS)">
+      <mat-select formControlName="discriminationType" placeholder="Discrimination Type" [compareWith]="compareOptions">
+        <mat-option *ngFor="let option of bank.complaintDiscriminationTypes | orderBy : 'name'" [value]="option">{{option.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-checkbox formControlName="isRegulatory" color="primary" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)">Regulatory?</mat-checkbox>
+    <cca-text-field [form]="form" controlName="compensation" placeholder="Financial Compensation" *ngIf="isBankType(BankType.MASTERCARD, BankType.METABANK)"></cca-text-field>
+  </div>
+</div>

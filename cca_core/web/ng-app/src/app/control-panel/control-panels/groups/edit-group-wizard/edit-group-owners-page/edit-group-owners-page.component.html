@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutGap="15px" [formGroup]="wizardForm">
+  <mat-form-field class="default-field-width">
+    <input type="text" placeholder="Add a group Owner" aria-label="Add a group Owner" matInput [formControl]="addOwnerControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addOwner($event.option.value)">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.username">
+        {{option.username}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <span fxFlex></span>
+  <mat-form-field class="default-field-width">
+    <input type="text" matInput placeholder="Filter Owner" aria-label="Filter Owner" formControlName="ownerControl">
+  </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-user-card #auto *ngFor="let owner of group?.owners | orderBy : 'displayName'" [ownerData]="owner" [groupId]="group.id" (updateOwners)='updateOwners($event)'></cca-user-card>
+</div>

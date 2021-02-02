@@ -1,0 +1,21 @@
+<div class="card-container container " fxLayout="column">
+  <div mat-dialog-title class="card-header {{color}}" fxLayoutAlign="start center">{{groupData.displayName}}
+    <span fxFlex></span>
+    <button mat-icon-button class="mat-icon-button" (click)="close( )">
+      <fa-icon fxFlexAlign="center" icon="times"></fa-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    
+    <ng-content></ng-content>
+  </mat-dialog-content>
+  <mat-dialog-actions class="card-actions" fxLayout="row">
+    <span fxFlex></span>
+    <button type="submit" mat-raised-button color="primary" [disabled]="isLocked || !isLoaded">
+      Save
+    </button>
+    <button type="button" mat-raised-button (click)="close()">
+      Cancel
+    </button>
+  </mat-dialog-actions>
+</div>

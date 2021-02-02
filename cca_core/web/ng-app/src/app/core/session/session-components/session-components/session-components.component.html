@@ -1,0 +1,57 @@
+<mat-tab-group class="case-tabs" animationDuration="0">
+  <mat-tab *ngIf="session.cardsComponent" label="Cards">
+    <div *matTabContent class="case-tab-content">
+      <cca-cards-session-component [component]="session.cardsComponent" [session]="session" [stackedView]="stackedView"></cca-cards-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.complaintComponent" label="Complaint">
+    <div *matTabContent class="case-tab-content">
+      <cca-complaint-session-component [component]="session.complaintComponent"></cca-complaint-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.customerComponent" label="Customer">
+    <div *matTabContent class="case-tab-content">
+      <cca-customer-session-component [component]="session.customerComponent"></cca-customer-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.disputeComponent" label="Dispute">
+    <div *matTabContent class="case-tab-content">
+      <cca-dispute-session-component [disputeComponent]="session.disputeComponent"></cca-dispute-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.documentsComponent" label="Documents">
+    <div *matTabContent class="case-tab-content">
+      <cca-documents-session-component [component]="session.documentsComponent"></cca-documents-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.encorComponent" label="Encor">
+    <div *matTabContent class="case-tab-content">
+      <cca-encor-session-component [component]="session.encorComponent"></cca-encor-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.lawEnforcementComponent" label="Law Enforcement">
+    <div *matTabContent class="case-tab-content">
+      <cca-law-enforcement-session-component [component]="session.lawEnforcementComponent"></cca-law-enforcement-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.merchantComponent" label="Merchant">
+    <div *matTabContent class="case-tab-content">
+      <cca-merchant-session-component [component]="session.merchantComponent"></cca-merchant-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.privacyRequestComponent" label="Personal Info">
+    <div *matTabContent class="case-tab-content">
+      <cca-privacy-request-session-component [component]="session.privacyRequestComponent"></cca-privacy-request-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.receiptComponent" label="Receipt">
+    <div *matTabContent class="case-tab-content">
+      <cca-receipt-session-component [component]="session.receiptComponent"></cca-receipt-session-component>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="session.refundRequestComponent" label="Refund Request">
+    <div *matTabContent class="case-tab-content">
+      <cca-refund-request-session-component [component]="session.refundRequestComponent"></cca-refund-request-session-component>
+    </div>
+  </mat-tab>
+</mat-tab-group>

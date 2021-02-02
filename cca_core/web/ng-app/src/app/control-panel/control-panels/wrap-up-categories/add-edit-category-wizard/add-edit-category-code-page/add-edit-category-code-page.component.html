@@ -1,0 +1,32 @@
+<div class="container" fxLayout="column">
+  <div fxLayout="row nowrap" fxFlex="grow" style="justify-content: space-between; align-items: center;">
+    <h4 class="text-accent">Wrap Up Codes</h4>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="15px">
+    <mat-card *ngFor="let code of wizard.model.category.wrapUpCodes"
+              style="width: 30%;"
+              [style.backgroundColor]="code.isActive ? 'inherit' : 'rgba(255, 0, 0, 0.1)'"
+              class="mb-15" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div>
+          {{code.displayName}} <span *ngIf="!code.isActive" style="font-size: 10px;" class="text-error">(inactive)</span>
+        </div>
+        <div fxFlex></div>
+        <fa-icon class="text-error clickable" icon="times" (click)="deleteCode(code)"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-card [matMenuTriggerFor]="addMenu"
+              class="mb-15 add-card" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div>
+          Add
+        </div>
+        <div fxFlex></div>
+        <fa-icon icon="plus" class="text-success clickable" style="margin-left: 10px;"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-menu #addMenu="matMenu">
+      <button *ngFor="let code of getCodeList()" mat-menu-item (click)="addCode(code)">{{ code.displayName }}</button>
+    </mat-menu>
+  </div>
+</div>

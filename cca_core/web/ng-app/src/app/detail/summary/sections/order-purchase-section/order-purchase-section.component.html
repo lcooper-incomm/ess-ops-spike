@@ -1,0 +1,15 @@
+<div class="summary-section order-purchase-section container">
+  <cca-key-value key="Payment Card">
+    <div *ngIf="selection?.getOrder()?.payment?.ccLastFour" fxLayout="row" fxLayoutGap="3px">
+      <div matTooltip="Last Four">{{selection.getOrder().payment.ccLastFour}}</div>
+      <div matTooltip="Type" *ngIf="selection.getOrder().payment.ccType">({{selection.getOrder().payment.ccType}})</div>
+    </div>
+    <div class="text-muted" *ngIf="!selection?.getOrder()?.payment?.ccLastFour">Not Available</div>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Payment Method" [value]="selection?.getOrder()?.payment?.method"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Payment Reason" [value]="selection?.getOrder()?.payment?.reason"></cca-key-value-with-placeholder>
+  <cca-key-value key="Payment Status">
+    <cca-order-payment-status [status]="selection.getOrder().payment.status" *ngIf="selection?.getOrder()?.payment?.status" fxFlex></cca-order-payment-status>
+    <div class="text-muted" *ngIf="!selection?.getOrder()?.payment?.status">Not Available</div>
+  </cca-key-value>
+</div>

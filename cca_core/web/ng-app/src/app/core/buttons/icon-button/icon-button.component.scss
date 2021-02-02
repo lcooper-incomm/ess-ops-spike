@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+@import '../../../../colors.scss';
+
+.icon-color {
+
+  &.primary {
+    color: mat-color($cca-app-primary);
+  }
+
+  &.warn {
+    color: mat-color($cca-app-warn);
+  }
+
+  &.success {
+    color: mat-color($cca-app-success);
+  }
+
+  &.accent {
+    color: mat-color($cca-app-accent);
+  }
+
+  &.edit {
+    color: #3F51B5;
+  }
+
+  &.text-muted {
+    color: mat-color($cca-app-muted, 400);
+  }
+}
+
+.mat-icon-button {
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+}
+

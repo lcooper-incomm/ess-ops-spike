@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutGap="15px">
+  <div>
+    <h3 class="text-primary">Dispute Information</h3>
+    <cca-key-value-with-placeholder key="Disputed Transaction ID"
+                                    [value]="wizard.model.transaction.id"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Raised Date"
+                                    [value]="wizard.model.session.createdDate.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Raised By"
+                                    [value]="wizard.model.session.createdBy.displayName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Reason"
+                                    [value]="wizard.model.session.disputeComponent.reasonCode?.displayValue"></cca-key-value-with-placeholder>
+  </div>
+  <div fxLayout="column">
+    <h3 class="text-primary">Resend Dispute Documents</h3>
+    <ng-container>
+      <cca-delivery-method-form [form]="wizardForm" [email]="this.wizard.model.session.customerComponent.emailAddress"
+                                [address]="this.wizard.model.session.customerComponent.address"
+                                [isGreenCard]="true"></cca-delivery-method-form>
+      <div fxLayout="row" class="resend-button-container">
+        <button mat-raised-button (click)="resendDocuments()" [disabled]="wizardForm.invalid">
+          Resend Documents
+          <cca-spinner [on]="sending"></cca-spinner>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

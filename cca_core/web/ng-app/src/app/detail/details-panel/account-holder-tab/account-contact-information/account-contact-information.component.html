@@ -1,0 +1,391 @@
+<cca-expansion-panel
+  class="alt-expansion-panel "
+  title="Contact Information"
+  [expanded]="true"
+  [hasActionRow]="false"
+  [buildingActions]="buildingActions">
+
+  <!--Start Addresses-->
+  <div class="alt-panel-container">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h4 class="text-accent">Addresses</h4>
+      <button
+        mat-icon-button
+        class="add-container"
+        [disabled]="addresses.length>=5 || addContactDisabled"
+        [cscorePopoverAnchor]="addAddressAnchor"
+        (click)="openPopover(addAddressAnchor)"
+        matTooltip="Add Address"
+      >
+        <fa-icon icon="plus-square"></fa-icon>
+      </button>
+      <!--Start Add Address PopOver-->
+      <cscore-popover
+        #addAddressAnchor
+        color="#fff"
+        defaultPosition="right"
+        panelClass="cscore-popover-compact">
+        <div fxLayout="row">
+          <cca-spinner #addAddressSpinner color="primary"></cca-spinner>
+          <cca-address-form
+            placeholder="Address"
+            controlName="address"
+            [form]="addressForm">
+          </cca-address-form>
+          <cca-icon-button
+            (click)="closePopover(addAddressAnchor)"
+            icon="window-close"
+            color="primary"
+          ></cca-icon-button>
+        </div>
+        <div fxLayout="row">
+
+          <mat-form-field [formGroup]="form" fxFlex="50">
+            <mat-select formControlName="addressType" placeholder="Address Type">
+              <mat-option *ngFor="let option of addressTypes | orderBy:'displayName'" [value]="option.value">
+                {{option.displayName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span fxFlex></span>
+          <div>
+            <button
+              class="submit-add-button"
+              mat-icon-button
+              (click)="addAddress(addressForm.getRawValue(), addAddressAnchor)"
+              [disabled]="!addressForm.valid || form.get('addressType').value ==null || addContactDisabled"
+            >
+              <fa-icon icon="check-square"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </cscore-popover>
+    </div>
+
+    <!--Start Address Element(s)-->
+    <div fxLayout="row wrap">
+      <div *ngFor="let address of addresses">
+        <div class="contact-content"
+             *ngIf="address.type === 'HOME' || address.type === 'WORK' || address.type === 'OTHER'">
+          <div class="primary-container">
+            <h5 class="text-muted" *ngIf="address.isPrimary">Primary</h5>
+          </div>
+          <div fxLayout="row">
+            <div class="contact-content" fxLayout="row">
+              <div fxLayout="row">
+                <cca-icon-button
+                  class="edit-btn"
+                  [isDisabled]="false"
+                  color="primary"
+                  icon="edit"
+                  [cscorePopoverAnchor]="editAddressAnchor"
+                  (click)="openEditAddressPopover(editAddressAnchor, address)"
+                  matTooltip="Edit Address"
+                  color="edit"
+                ></cca-icon-button>
+              </div>
+              <cca-address [address]="address"></cca-address>
+              <div style="margin-left: 10px">
+                <fa-icon class="contact-icon text-muted" *ngIf="address.type==='PHYSICAL' || address.type==='HOME'"
+                         icon="home"></fa-icon>
+                <fa-icon class="contact-icon text-muted" *ngIf="address.type==='MAILING'" icon="envelope"></fa-icon>
+              </div>
+              <!--Start Edit Address-->
+              <cscore-popover
+                #editAddressAnchor
+                color="#fff"
+                defaultPosition="right"
+                panelClass="cscore-popover-compact">
+                <div fxLayout="row">
+                  <cca-spinner [id]="address.id" #addressSpinner color="primary"></cca-spinner>
+                  <cca-address-form
+                    placeholder="Address"
+                    controlName="address"
+                    [form]="addressForm">
+                  </cca-address-form>
+                  <cca-icon-button
+                    (click)="closePopover(editAddressAnchor)"
+                    icon="window-close"
+                    color="primary"
+                  ></cca-icon-button>
+                </div>
+                <div fxLayout="row">
+                  <mat-form-field [formGroup]="form" fxFlex="50">
+                    <mat-select formControlName="addressType" placeholder="Address Type">
+                      <mat-option *ngFor="let option of addressTypes | orderBy:'displayName'" [value]="option.value">
+                        {{option.displayName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <!-- Primary -->
+                  <span fxFlex="50" fxLayoutAlign="center center" [formGroup]="form">
+                    <mat-checkbox formControlName="addressIsPrimary" *ngIf="!address.isPrimary"
+                                  matTooltip="Sets to Primary">
+                    Is primary
+                    </mat-checkbox>
+                  </span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end center" *ngIf="!showDeleteConfirmation">
+                  <button mat-raised-button
+                          class="toolbar-button mat-raised-button popover-button"
+                          color="primary"
+                          (click)="editAddress(address, editAddressAnchor)"
+                          [disabled]="!addressForm.valid"
+                          fxLayoutAlign="center center"
+                  ><span class="mat-button-wrapper">Submit</span></button>
+                </div>
+              </cscore-popover>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Start Email Addresses-->
+  <div class="alt-panel-container">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h4 class="text-accent">Email Addresses</h4>
+      <button
+        mat-icon-button
+        class="add-container"
+        [disabled]="selection?.getCustomerAccount()?.customer.emailAddresses.length >=5 || addContactDisabled"
+        [cscorePopoverAnchor]="addEmailAnchor"
+        (click)="openPopover(addEmailAnchor)"
+        matTooltip="Add Email"
+      >
+        <fa-icon icon="plus-square"></fa-icon>
+      </button>
+      <!--Start Add Email PopOver-->
+      <cscore-popover
+        #addEmailAnchor
+        color="#fff"
+        defaultPosition="right"
+        panelClass="cscore-popover-compact">
+
+        <div fxLayout="row">
+          <cca-spinner #addEmailSpinner color="primary"></cca-spinner>
+          <cca-email-address-field
+            class="default-field-width-long"
+            [form]="form"
+            controlName="emailAddress"
+            placeholder="Email"
+          ></cca-email-address-field>
+          <cca-icon-button
+            (click)="closePopover(addEmailAnchor)"
+            icon="window-close"
+            color="primary"
+          ></cca-icon-button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start end">
+          <span fxFlex></span>
+          <div>
+            <button
+              class="submit-add-button"
+              mat-icon-button
+              (click)="addEmail(form.get('emailAddress').value,addEmailAnchor)"
+              [disabled]="!form.get('emailAddress').valid"
+            >
+              <fa-icon icon="check-square"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </cscore-popover>
+    </div>
+
+    <!--Start Email Element(s)-->
+    <div fxLayout="row wrap">
+      <div class="contact-content" *ngFor="let email of selection?.getCustomerAccount()?.customer.emailAddresses">
+        <div class="primary-container">
+          <h5 class="text-muted" *ngIf="email.isPrimary">Primary</h5>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <cca-icon-button
+            class="edit-btn"
+            color="primary"
+            icon="edit"
+            [cscorePopoverAnchor]="editEmailAnchor"
+            (click)="openEditEmailPopover(editEmailAnchor, email)"
+            matTooltip="Edit Email"
+            color="edit"
+          ></cca-icon-button>
+          <span>{{email.email}}</span>
+        </div>
+        <!--Start Edit Email-->
+        <cscore-popover
+          #editEmailAnchor
+          color="#fff"
+          defaultPosition="right"
+          panelClass="cscore-popover-compact">
+
+          <div fxLayout="row">
+            <cca-spinner [id]="email.id" #emailSpinner color="primary"></cca-spinner>
+            <cca-email-address-field
+              class="default-field-width-long"
+              [form]="form"
+              controlName="emailAddress"
+              placeholder="Email"
+            ></cca-email-address-field>
+
+            <cca-icon-button
+              (click)="closePopover(editEmailAnchor)"
+              icon="window-close"
+              color="primary"
+            ></cca-icon-button>
+          </div>
+          <div fxLayout="row" *ngIf="!showDeleteConfirmation">
+            <span fxFlex></span>
+            <button mat-raised-button
+                    class="toolbar-button mat-raised-button popover-button"
+                    color="primary"
+                    (click)="editEmail(email,editEmailAnchor)"
+                    [disabled]="!form.get('emailAddress').valid"
+                    fxLayoutAlign="center center"
+            ><span class="mat-button-wrapper">Submit</span></button>
+          </div>
+        </cscore-popover>
+
+      </div>
+    </div>
+  </div>
+
+  <!--Start Phone Numbers-->
+  <div class="alt-panel-container">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h4 class="text-accent">Phone Numbers</h4>
+
+      <button
+
+        mat-icon-button
+        class="add-container"
+        [disabled]="phones.length >=5 || addContactDisabled"
+        [cscorePopoverAnchor]="addPhoneAnchor"
+        (click)="openPopover(addPhoneAnchor)"
+        matTooltip="Add Phone"
+      >
+        <fa-icon icon="plus-square"></fa-icon>
+      </button>
+      <cscore-popover
+        #addPhoneAnchor
+        color="#fff"
+        defaultPosition="right"
+        panelClass="cscore-popover-compact">
+        <div fxLayout="row">
+          <cca-spinner #addPhoneSpinner color="primary"></cca-spinner>
+          <cca-phone-number-field
+            placeholder="Phone"
+            controlName="phone"
+            [form]="form"
+            class="default-field-width">
+          </cca-phone-number-field>
+          <cca-icon-button
+            (click)="closePopover(addPhoneAnchor)"
+            icon="window-close"
+            color="primary"
+          ></cca-icon-button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start end">
+
+          <mat-form-field [formGroup]="form">
+            <mat-select formControlName="phoneType" placeholder="Phone Type">
+              <mat-option *ngFor="let option of phoneTypes | orderBy:'displayName'" [value]="option.value">
+                {{option.displayName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <span fxFlex></span>
+          <div>
+            <button
+              class="submit-add-button"
+              mat-icon-button
+              (click)="addPhone(form.get('phone').value,addPhoneAnchor)"
+              [disabled]="!form.get('phoneType').value && !addressForm.valid"
+            >
+              <fa-icon icon="check-square"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </cscore-popover>
+    </div>
+
+    <!--Start Phone Element(s)-->
+    <div fxLayout="row wrap">
+
+      <div *ngFor="let phone of phones">
+        <div class="contact-content"
+             *ngIf="phone.type === 'MOBILE' || phone.type === 'HOME' || phone.type === 'WORK' || phone.type === 'OTHER'">
+          <div class="primary-container">
+            <h5 class="text-muted" *ngIf="phone.isPrimary">Primary</h5>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <cca-icon-button
+              class="edit-btn"
+              [isDisabled]="false"
+              color="primary"
+              icon="edit"
+              [cscorePopoverAnchor]="editPhoneAnchor"
+              (click)="openEditPhonePopover(editPhoneAnchor, phone)"
+              matTooltip="Edit Phone"
+              color="edit"
+            ></cca-icon-button>
+            <span>{{phone.number}}</span>
+            <span class="phone-container" style="margin-left: 10px" fxLayoutAlign="center center">
+                <fa-icon class="contact-icon text-muted" *ngIf="phone.type==='HOME'" icon="home"></fa-icon>
+                <fa-icon class="contact-icon text-muted" *ngIf="phone.type==='MOBILE'" icon="mobile-alt"></fa-icon>
+              </span>
+          </div>
+        <!--Start Edit Phone-->
+          <cscore-popover
+          #editPhoneAnchor
+          color="#fff"
+          defaultPosition="right"
+          panelClass="cscore-popover-compact">
+
+          <div fxLayout="row">
+            <cca-spinner [id]="phone.id" #phoneSpinner color="primary"></cca-spinner>
+            <cca-phone-number-field
+              placeholder="Phone"
+              controlName="phone"
+              [form]="form"
+              class="default-field-width">
+            </cca-phone-number-field>
+            <cca-icon-button
+              (click)="closePopover(editPhoneAnchor)"
+              icon="window-close"
+              color="primary"
+            ></cca-icon-button>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field [formGroup]="form">
+              <mat-select formControlName="phoneType" placeholder="Phone Type">
+                <mat-option *ngFor="let option of phoneTypes | orderBy:'displayName'" [value]="option.value">
+                  {{option.displayName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+          </div>
+            <div fxLayout="row" *ngIf="!showDeleteConfirmation">
+              <!-- Primary -->
+              <span fxFlex="50" fxLayoutAlign="center center" [formGroup]="form">
+            <mat-checkbox formControlName="phoneIsPrimary" *ngIf="!phone.isPrimary" matTooltip="Sets to Primary">
+              Is primary
+            </mat-checkbox>
+          </span>
+              <span fxFlex></span>
+              <button mat-raised-button
+                      class="toolbar-button mat-raised-button popover-button"
+                      color="primary"
+                      (click)="editPhone(phone,editPhoneAnchor)"
+                      [disabled]="!form.get('phone').valid"
+                      fxLayoutAlign="center center"
+              ><span class="mat-button-wrapper">Submit</span></button>
+            </div>
+          </cscore-popover>
+        </div>
+      </div>
+    </div>
+  </div>
+</cca-expansion-panel>

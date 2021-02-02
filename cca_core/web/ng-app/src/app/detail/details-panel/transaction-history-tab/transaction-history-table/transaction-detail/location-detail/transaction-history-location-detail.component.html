@@ -1,0 +1,21 @@
+<div fxLayout="row">
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Terminal ID" [value]="transaction.nodes.terminal?.name"></cca-key-value-with-placeholder>
+    <cca-key-value class="container" href="javascript:void(0)" key="VAN" *ngIf="transaction.source !== 'passThru'">
+      <a href="javascript:void(0)" (click)="linkToProductByVan()" *ngIf="transaction.identifiers.van && transaction.identifiers.van.indexOf('*') === -1 && hasPermission">{{transaction?.identifiers?.van}}</a>
+      <span *ngIf="!transaction.identifiers.van || transaction.identifiers.van.indexOf('*') !== -1 || !hasPermission" ngClass="{'text-muted': !transaction.identifiers.van}">{{transaction.identifiers.van || 'Not Available'}}</span>
+    </cca-key-value>
+    <cca-key-value class="container" href="javascript:void(0)" key="PAN" *ngIf="transaction.source === 'passThru'">
+      <a href="javascript:void(0)" (click)="linkToProductByPan()" *ngIf="transaction.flags.isSwipeReload && transaction.identifiers.pan && hasPermission">{{transaction?.identifiers?.pan}}</a>
+      <span *ngIf="!transaction.identifiers.pan || !transaction.flags.isSwipeReload || !hasPermission" ngClass="{'text-muted': !transaction.identifiers.pan}">{{transaction.identifiers.pan || 'Not Available'}}</span>
+    </cca-key-value>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Currency Code" [value]="transaction?.amounts?.authorizedAmount?.descriptor?.description"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Process/OpCode" [value]="transaction.getResponseDisplayValue()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Comment" [value]="transaction.comment"></cca-key-value-with-placeholder>
+  </div>
+</div>
+

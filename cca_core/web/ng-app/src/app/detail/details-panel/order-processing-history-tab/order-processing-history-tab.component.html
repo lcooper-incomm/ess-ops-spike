@@ -1,0 +1,62 @@
+<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+  <mat-form-field class="default-field-width">
+    <mat-select (valueChange)="applyProductType($event)" placeholder="Product Type" [value]="productTypeFilter">
+      <mat-option value="All">All</mat-option>
+      <mat-option value="Digital">Digital</mat-option>
+      <mat-option value="Physical">Physical</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="default-field-width">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort matSortActive="date" matSortDirection="desc">
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let element" style="white-space: nowrap; padding-right: 10px;"> {{element.createDate?.displayValue}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let element" style="white-space: nowrap; padding-right: 10px;">
+        <div fxLayout="row nowrap" style="align-items: center;">
+          <span *ngIf="element.isPhysical !== undefined" style="padding-right: 10px;">
+            <ng-container *ngIf="element.isPhysical">
+              <fa-icon icon="envelope"></fa-icon>
+            </ng-container>
+            <ng-container *ngIf="!element.isPhysical">
+              <fa-icon icon="save"></fa-icon>
+            </ng-container>
+          </span>
+          {{element.type}}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element" style="white-space: nowrap; padding-right: 10px;">
+        {{element.name}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element" style="white-space: nowrap; padding-right: 10px;">
+        <cca-ecomm-order-status [statusString]="element.status"></cca-ecomm-order-status>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="comment">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Comment</th>
+      <td mat-cell *matCellDef="let element">
+        <span>{{element.comment}}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+</div>

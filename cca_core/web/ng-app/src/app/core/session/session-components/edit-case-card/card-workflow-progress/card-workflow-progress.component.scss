@@ -1,0 +1,64 @@
+$workflow-progress-column-width: 180px;
+$expand-button-container: 40px;
+$completed-steps-margin: 20px;
+
+.card-workflow-progress-container {
+  padding-bottom: 15px;
+  height: 100%;
+  width: $workflow-progress-column-width + $expand-button-container;
+  position: relative;
+
+  &.expanded {
+    width: 2 * $workflow-progress-column-width + $expand-button-container + $completed-steps-margin;
+  }
+
+  .workflow-progress-column {
+    min-width: $workflow-progress-column-width;
+  }
+
+  .expand-button-container {
+    width: $expand-button-container;
+
+    .expand-button {
+      margin-top: -9px;
+    }
+  }
+
+  .progress-container {
+    position: relative;
+
+    .background {
+      z-index: 1;
+      position: absolute;
+      top: 0;
+    }
+
+    .foreground {
+      z-index: 2;
+    }
+  }
+
+  .progress-count-container {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: dodgerblue;
+  }
+
+  .completed-steps-column {
+    margin-left: $completed-steps-margin;
+  }
+}
+
+::ng-deep .mat-progress-spinner.background circle {
+  stroke: rgb(224, 224, 224);
+}
+
+::ng-deep .mat-typography h4.reduce-bottom-margin {
+  margin-bottom: 5px;
+}

@@ -1,0 +1,11 @@
+.card-option {
+  width: 100%;
+  position: relative;
+  display: block;
+
+  .card-option-row {
+    height: 16px;
+    max-height: 16px;
+    line-height: 16px;
+  }
+}

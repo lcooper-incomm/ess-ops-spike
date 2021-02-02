@@ -1,0 +1,32 @@
+<div class="info-container">
+  <h3>Replace Card: {{wizard.model.pan}}</h3>
+</div>
+<div [formGroup]="wizardForm" fxLayout="column">
+  <mat-checkbox formControlName="isFraud"
+                [disableRipple]="true">
+    <label>Is Fraud</label>
+  </mat-checkbox>
+  <cca-select-field [form]="wizardForm"
+                    [options]="reasonOptions"
+                    placeholder="Reason"
+                    controlName="reason"></cca-select-field>
+  <cca-select-field [form]="wizardForm"
+                    [options]="wizard.model.shippingOptions"
+                    placeholder="Shipping Method"
+                    controlName="shippingMethod"></cca-select-field>
+  <mat-checkbox formControlName="isFeeWaived"
+                [disableRipple]="true"
+                *ngIf="hasShippingFee(wizard.model.request.shippingMethod)">
+    <label>Waive Fee</label>
+  </mat-checkbox>
+  <cca-comment-field [form]="wizardForm"
+                     placeholder="Comment"
+                     controlName="comment"></cca-comment-field>
+  <mat-checkbox formControlName="isPrimaryAddressValid"
+                [disableRipple]="true"
+                (change)="primaryAddressChanged()">
+    <label>Use Primary Address</label>
+  </mat-checkbox>
+  <cca-address-form #address
+                    [form]="wizardForm.get('address')"></cca-address-form>
+</div>

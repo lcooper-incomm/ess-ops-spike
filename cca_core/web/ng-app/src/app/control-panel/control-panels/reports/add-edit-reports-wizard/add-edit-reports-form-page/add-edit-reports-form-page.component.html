@@ -1,0 +1,12 @@
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.editMode"
+                                  key="ID"
+                                  [value]="wizard.model.report.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="column" fxFlex="grow" style="justify-content: space-between;">
+      <mat-checkbox formControlName="status" class="mb-15">Is Active</mat-checkbox>
+      <cca-text-field [form]="wizardForm" controlName="name" placeholder="Name"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="link" placeholder="Link"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="permissionDisplayName" placeholder="Permission Display Name"></cca-text-field>
+  </div>
+</form>

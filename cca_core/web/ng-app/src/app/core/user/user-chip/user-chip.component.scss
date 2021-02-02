@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+@import '../../../../colors.scss';
+
+.user-chip {
+  background-color: mat-color($cca-app-muted, 50);
+  color: black;
+  padding: 0px 5px;
+  border-radius: 3px;
+
+  fa-icon {
+    font-size: 16px;
+    line-height: 16px;
+    margin-right: 5px;
+  }
+
+  .mat-body-2 {
+    font-size: 12px;
+  }
+}

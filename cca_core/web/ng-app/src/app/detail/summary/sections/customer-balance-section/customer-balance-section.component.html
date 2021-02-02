@@ -1,0 +1,12 @@
+<div class="summary-section customer-balance-section">
+  <cca-key-value key="Account Balance">
+    <div>{{selection?.getCustomer()?.accounts.spending.ledgerBalance?.displayValue}}</div>
+  </cca-key-value>
+  <cca-key-value key="On Hold">
+    <div class="text-bold" [ngClass]="{'text-error': selection?.getCustomer()?.accounts.spending?.onHoldAmount?.value > 0.00}">{{selection?.getCustomer()?.accounts.spending?.onHoldAmount?.displayValue}}</div>
+  </cca-key-value>
+  <cca-key-value key="Available">
+    <div class="text-bold" [ngClass]="{'text-success': selection?.getCustomer()?.accounts.spending.availableBalance?.value >= 0,
+    'text-error': selection?.getCustomer()?.accounts.spending.availableBalance?.value < 0}">{{selection?.getCustomer()?.accounts.spending.availableBalance?.displayValue}}</div>
+  </cca-key-value>
+</div>

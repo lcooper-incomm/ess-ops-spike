@@ -1,0 +1,4 @@
+<div class="transaction-history-detail-container container" [ngSwitch]="transaction.platform">
+  <cca-greencard-transaction-history-detail *ngSwitchCase="PlatformType.GREENCARD" [selection]="selection" [transaction]="transaction"></cca-greencard-transaction-history-detail>
+  <cca-incomm-transaction-history-detail *ngSwitchDefault [selection]="selection" [transaction]="transaction"></cca-incomm-transaction-history-detail>
+</div>

@@ -1,0 +1,6 @@
+<form [formGroup]="wizardForm" fxLayout="column" fxLayoutGap="15px">
+  <cca-key-value-with-placeholder key="Birth Year"
+                                  [value]="this.wizard.model.birthYear"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Expiration Date"
+                                  [value]="this.wizard.model.displayExpDate"></cca-key-value-with-placeholder>
+</form>

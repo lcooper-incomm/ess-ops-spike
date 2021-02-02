@@ -1,0 +1,14 @@
+.session-history-tab-container {
+  height: 100%;
+  width: 100%;
+
+  .session-history-items-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    overflow-y: auto;
+  }
+}

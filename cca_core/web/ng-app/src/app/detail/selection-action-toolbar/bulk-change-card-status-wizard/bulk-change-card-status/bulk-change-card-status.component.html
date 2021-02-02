@@ -1,0 +1,11 @@
+<cca-order-item-display [cards]="wizard.model.cards"></cca-order-item-display>
+<form [formGroup]="wizardForm" style="margin-top:10px">
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="statusSelect" placeholder="Status" required>
+      <mat-option [value]="option.value" *ngFor="let option of statuses | orderBy: 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment"></cca-comment-field>
+</form>

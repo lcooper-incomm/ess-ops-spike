@@ -1,0 +1,12 @@
+<div *ngIf="wizard.model.isFailed">
+  An unexpected error occurred while changing the Card's status. Please try again, or contact an administrator for assistance.
+</div>
+<div *ngIf="!wizard.model.isFailed" fxLayout="column" fxLayoutGap="10px">
+  <div>The Card's status was successfully updated.</div>
+  <div>
+    <cca-key-value-with-placeholder key="Card Number:" [value]="this.wizard.model.card.identifiers.panMasked"></cca-key-value-with-placeholder>
+    <cca-key-value key="Current Status">
+      <cca-fsapi-status [status]="this.wizard.model.newStatus" style="width:40%"></cca-fsapi-status>
+    </cca-key-value>
+  </div>
+</div>

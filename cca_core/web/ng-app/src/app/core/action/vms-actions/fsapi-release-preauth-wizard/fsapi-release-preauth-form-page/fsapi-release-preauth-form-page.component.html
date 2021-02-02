@@ -1,0 +1,10 @@
+<div fxLayout="column" [formGroup]="wizardForm">
+  <mat-form-field class="default-width" fxFlex="1 1 auto">
+    <mat-select formControlName="reason" placeholder="Reason" required>
+      <mat-option [value]="option" *ngFor="let option of reasons | orderBy: 'label'">
+        {{option.displayValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</div>

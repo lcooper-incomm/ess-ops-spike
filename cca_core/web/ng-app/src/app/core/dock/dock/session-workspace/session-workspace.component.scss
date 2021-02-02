@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+@import '../../../../../colors.scss';
+
+.session-workspace-container {
+  height: 100%;
+  width: 100%;
+
+  .workspace-content {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    overflow-y: auto;
+
+    .active-session-card-container,
+    .queued-session-card-container {
+      margin-bottom: 15px;
+    }
+
+    .load-more {
+      width: 100%;
+    }
+  }
+}

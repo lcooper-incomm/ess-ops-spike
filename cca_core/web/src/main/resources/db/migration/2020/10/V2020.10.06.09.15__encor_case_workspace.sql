@@ -1,0 +1,1 @@
+EXECUTE add_permission 'ENCOR_CASE_WORKSPACE', 'ENCOR Case Workspace', 'Permission to use ENCOR case workspace';

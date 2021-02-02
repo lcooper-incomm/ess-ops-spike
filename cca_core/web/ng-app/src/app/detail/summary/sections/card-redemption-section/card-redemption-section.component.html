@@ -1,0 +1,11 @@
+<div class="summary-section card-redemption-section container" *ngIf="selection?.platform === PlatformType.INCOMM">
+  <cca-key-value-with-placeholder key="Redemption Details" [value]="selection?.getCard()?.srlData?.identifiers.headerId" *ngIf="!showRedemption"></cca-key-value-with-placeholder>
+  <div *ngIf="showRedemption">
+    <cca-key-value-with-placeholder key="MIN" [value]="selection.getCard().identifiers.min"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Partner Name" [value]="selection.getCard().redemption?.partnerVendorName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Operator Name" [value]="selection.getCard().redemption?.operatorVendorName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="External Identifier" [value]="selection.getCard().redemption?.operatorExternalId"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Extended Account Number" [value]="selection.getCard().redemption?.extendedAccountNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Last Updated" [value]="selection.getCard().redemption?.updateDate?.displayValue"></cca-key-value-with-placeholder>
+  </div>
+</div>

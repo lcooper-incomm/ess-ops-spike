@@ -1,0 +1,18 @@
+<cca-key-value-with-placeholder key="Bank" [value]="component?.bank?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder [key]="isBankType(BankType.MASTERCARD) ? 'Account Number/Order Number' : 'Account Number'" [value]="component?.accountNumber"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="First Name" [value]="component?.firstName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Last Name" [value]="component?.lastName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Category" [value]="component?.category?.name"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Cause" [value]="component?.cause?.name" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Complaint" [value]="component?.complaint"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Summary Compliant" [value]="component?.summary" *ngIf="isBankType(BankType.MASTERCARD)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Priority" [value]="priority" *ngIf="isBankType(BankType.MASTERCARD)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Resolution" [value]="component?.resolution"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Resolution Date" [value]="component?.resolutionDate?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Enhancements Needed" [value]="component?.enhancementsNeeded" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Department" [value]="component?.department?.name" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Type" [value]="component?.type?.name" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Discrimination Type" [value]="component?.discriminationType?.name" *ngIf="isBankType(BankType.AMERICAN_EXPRESS)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Financial Compensation" [value]="component?.compensation" *ngIf="isBankType(BankType.METABANK, BankType.MASTERCARD)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Is Regulatory" [value]="component?.isRegulatory ? 'Yes' : 'No'" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Source" [value]="component?.source?.name"></cca-key-value-with-placeholder>

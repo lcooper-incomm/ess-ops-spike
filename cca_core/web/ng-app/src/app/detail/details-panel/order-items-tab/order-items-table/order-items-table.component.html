@@ -1,0 +1,149 @@
+<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+  <h4 class="text-primary" style="margin: 0">{{dataSource.data.length}} Order Item<span
+    *ngIf="dataSource.data.length > 1 || dataSource.data.length ==0">s</span></h4>
+  <span fxFlex></span>
+  <mat-form-field class="default-field-width" *ngIf="isFilterable">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<div class="table-container" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Data Available</div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort matSortActive="name" matSortDirection="asc" [hidden]="!dataSource.data?.length">
+    <ng-container matColumnDef="imageUri">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" fxLayoutAlign="start center">
+        <div fxLayout="column" style="height: 120px;width: 143px">
+        <img src='{{element.imageUri}}' onerror="this.src='/assets/images/gift-card-icon.png'"
+             style="height: 75px; padding: 5px"/>
+          <span style="font-size: 12px ">{{element.giftBox?element.giftBox.name: null}} </span>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 110px;">Card Name</th>
+      <td mat-cell *matCellDef="let element" style="min-width: 110px;">
+        <div fxLayout="column">
+          <div>{{element.name}}</div>
+          <h6 matTooltip="SKU">{{element.additionalName ? element.additionalName : element.sku}}</h6>
+          <a *ngIf="element.animationUrl && element.productType === 'DIGITAL-ANIMATED'" class="text-accent" [href]="element.animationUrl" target="_blank" ccaClickSwallower [preventDefault]="false">View Animation</a>
+          <a class="text-accent" href="javascript:void(0)" (click)="navigateToDeliveriesAndFilterByOrderItem(element)" ccaClickSwallower *ngIf="viewDeliveries">View Deliveries</a>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</th>
+      <td mat-cell *matCellDef="let element">
+        <div>{{element.name}}</div>
+        <h6 matTooltip="SKU">{{element.sku}}</h6>
+        <!--<a class="text-accent" href="javascript:void(0)" (click)="navigateToDeliveriesAndFilterByOrderItem(element)" ccaClickSwallower *ngIf="viewDeliveries">View Deliveries</a>-->
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right" arrowPosition="before">Card Value</th>
+    <td mat-cell *matCellDef="let element">
+      <div fxLayout="row" fxLayoutAlign="end start">{{element?.initialValue?.displayValue}}</div>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productValue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right" arrowPosition="before">Product Value</th>
+    <td mat-cell *matCellDef="let element">
+      <div fxLayout="row" fxLayoutAlign="end start">{{element?.initialValue?.displayValue}}</div>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="purchaseFee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right" arrowPosition="before">Purchase Fee</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !element?.purchaseFee?.displayValue}">{{element?.purchaseFee?.displayValue || 'N/A'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="handlingFee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right" arrowPosition="before">Handling Fee</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !element?.handlingFee?.displayValue}">{{element?.handlingFee?.displayValue || 'N/A'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="discounted">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right" arrowPosition="before">Fee Discount</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !element?.totals.discounted?.displayValue}">{{element?.totals.discounted?.displayValue || 'N/A'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="balance">
+      <th mat-header-cell *matHeaderCellDef style="text-align: right" arrowPosition="before">Amount</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start">
+          <div style="width:150px; margin-left:10px;">
+            <cca-key-value-butterfly-align key="Card(s)" keyWidthPercent="40" [ngClass]="{'text-muted': !element?.totals.subtotal?.displayValue}">{{element.totals.subtotal?.displayValue || 'N/A'}}</cca-key-value-butterfly-align>
+            <cca-key-value-butterfly-align key="Purchasing Fee(s)" style="white-space: nowrap" keyWidthPercent="40" [ngClass]="{'text-muted': !element?.totals.purchaseFees?.displayValue}">{{element.totals.purchaseFees?.displayValue || 'N/A'}}</cca-key-value-butterfly-align>
+            <cca-key-value-butterfly-align key="Handling Fee(s)" style="white-space: nowrap" keyWidthPercent="40" [ngClass]="{'text-muted': !element?.totals.handlingFees?.displayValue}">{{element.totals.handlingFees?.displayValue || 'N/A'}}</cca-key-value-butterfly-align>
+            <cca-key-value-butterfly-align key="Total" keyWidthPercent="40" [ngClass]="{'text-muted': !element?.totals.grandTotal?.displayValue}"><strong>{{element.totals.grandTotal?.displayValue || 'N/A'}}</strong></cca-key-value-butterfly-align>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="recipientName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Recipient Name</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !selection.getOrder()?.customer?.getDisplayName()}">{{selection.getOrder()?.customer?.getDisplayName() || 'N/A'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="recipientEmail">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Recipient Email</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !selection.getOrder()?.customer?.getDisplayName()}">{{selection.getOrder()?.customer?.emailAddress || 'N/A'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="promotionCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center" arrowPosition="before">Promotion Code</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !element?.discount?.code}">{{element?.discount?.code || 'N/A'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="promotionCodeStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Promotion Code Status</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !element?.discount?.status}">{{element?.discount?.status || 'N/A'}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="promotionID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Promotion ID</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !element?.discount?.id}">
+          {{element?.discount?.id || 'N/A'}}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="promotionName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Promotion Name</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="end start" [ngClass]="{'text-muted': !element?.discount?.name}">
+          {{element?.discount?.name || 'N/A'}}
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="clickable" (click)="filterItems(row)" [ngClass]="{'selected-state': selectedId == row.id && selectedOrderFlag}" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+</div>

@@ -1,0 +1,14 @@
+<cca-expansion-panel title="Contact Information" [expanded]="true" [hasActionRow]="true" [actions]="actions"
+                     [buildingActions]="buildingActions">
+  <div fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-key-value-with-placeholder key="Email Address" [value]="selection?.getCustomer()?.emailAddress"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Home Phone" [value]="selection?.getCustomer()?.getPhoneNumberByType(CsCorePhoneNumberType.LANDLINE)?.number"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Mobile Phone" [value]="selection?.getCustomer()?.getPhoneNumberByType(CsCorePhoneNumberType.MOBILE)?.number"></cca-key-value-with-placeholder>
+    </div>
+    <div class="summary-column">
+      <cca-key-value-address key="Physical Address" [address]="selection?.getCustomer()?.getAddressByType(AddressType.PHYSICAL)"></cca-key-value-address>
+      <cca-key-value-address key="Mailing Address" [address]="selection?.getCustomer()?.getAddressByType(AddressType.MAILING)"></cca-key-value-address>
+    </div>
+  </div>
+</cca-expansion-panel>

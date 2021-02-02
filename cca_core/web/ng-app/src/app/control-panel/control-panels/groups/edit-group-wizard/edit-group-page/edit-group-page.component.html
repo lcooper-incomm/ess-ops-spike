@@ -1,0 +1,13 @@
+<div [formGroup]="wizardForm">
+  <div>
+    <mat-form-field>
+      <input formControlName="displayName" matInput placeholder="Display Name*" [value]="group?.displayName">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea formControlName="description" matInput placeholder="Description" [value]="group?.description" rows="3" resize="false"></textarea>
+    </mat-form-field>
+    <mat-slide-toggle [checked]="group?.isActive" [disabled]="group?.isLocked" (change)="toggleActive(group?.isActive)">
+      <span [ngClass]="group?.isActive ? 'text-success' : 'text-error'"><strong>{{group?.isActive ? 'Active' : 'Inactive'}}</strong></span>
+    </mat-slide-toggle>
+  </div>
+</div>

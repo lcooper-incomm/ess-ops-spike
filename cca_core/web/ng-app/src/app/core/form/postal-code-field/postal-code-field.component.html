@@ -1,0 +1,6 @@
+<mat-form-field [formGroup]="form">
+  <input class="postal-code-field form-field" type="text" matInput [formControlName]="controlName" placeholder="Postal Code" [required]="isControlRequired(form.get(controlName))"/>
+  <mat-error *ngIf="form.get(controlName).hasError('required')">
+    <i>This field is required</i>
+  </mat-error>
+</mat-form-field>

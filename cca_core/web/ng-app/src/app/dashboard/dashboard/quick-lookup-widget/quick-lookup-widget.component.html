@@ -1,0 +1,38 @@
+<form [formGroup]="lookUpForm" fxLayout="row" fxLayoutGap="15px">
+  <mat-form-field fxFlex="50">
+    <mat-label>{{lookUpForm.get( 'lookUpControl' ).value.displayValue ? lookUpForm.get( 'lookUpControl' ).value.lookupType.displayValue + ' by ' + lookUpForm.get( 'lookUpControl' ).value.displayValue : 'Lookup Type'}}</mat-label>
+    <mat-select formControlName="lookUpControl" (selectionChange)="reset()">
+      <mat-optgroup *ngFor="let group of lookUpGroups | orderBy : 'name'" [label]="group.name" [disabled]="group.disabled">
+        <mat-option *ngFor="let item of group.items | orderBy : 'displayValue'" [value]="item">
+          {{item.displayValue}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+  <cca-text-field fxFlex="50" [form]="lookUpForm" controlName="identifierControl" placeholder="{{lookUpForm.get('lookUpControl').value.displayValue ? lookUpForm.get('lookUpControl').value.displayValue : 'Identifier'}}"></cca-text-field>
+  <button class="container" (click)="doLookup()" [disabled]="!lookUpForm.get('lookUpControl').value.displayValue || !lookUpForm.get('identifierControl').value.length" mat-mini-fab color="accent" matTooltip="Search">
+    <cca-spinner #lookupSpinner [rounded]="true"></cca-spinner>
+    <fa-icon icon="search"></fa-icon>
+  </button>
+</form>
+<div [ngSwitch]="searchType">
+  <div *ngSwitchCase="LookupTypeEnum.CARD_NUMBER">
+    <div *ngIf="associatedCards?.length">
+      <h5 class="text-accent">Associated Cards:</h5>
+      <div fxLayout="row wrap">
+        <h5>{{associatedCards}}</h5>
+      </div>
+    </div>
+    <div *ngIf="!associatedCards.length && searchComplete" class="text-muted">No Results Found</div>
+  </div>
+  <div *ngSwitchCase="LookupTypeEnum.CARD_STATUS">
+    <div *ngIf="currentStatus" fxLayout="row" fxLayoutGap="15px">
+      <div class="text-muted">{{lookUpForm.get( 'lookUpControl' ).value.displayValue}} Status</div>
+      <cca-status [status]="currentStatus" fxFlex></cca-status>
+    </div>
+    <div *ngIf="!currentStatus && searchComplete" class="text-muted">No Results Found</div>
+  </div>
+  <div *ngSwitchCase="LookupTypeEnum.QUOTE_ID">
+    <div *ngIf="!quote && searchComplete" class="text-muted">No Results Found</div>
+  </div>
+</div>

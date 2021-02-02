@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.1.xsd">
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+      file name: cs-core-rest-client-1.0.2.jar
+      ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore:cs-core-rest-client:.*$</gav>
+        <cve>CVE-2015-1820</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+   file name: cs-core-rest-client-1.0.2.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore:cs-core-rest-client:.*$</gav>
+        <cve>CVE-2015-3448</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+      file name: model-1.0.0.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore\.auth:model:.*$</gav>
+        <cve>CVE-2016-9878</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+      file name: model-1.0.0.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore\.auth:model:.*$</gav>
+        <cve>CVE-2018-1196</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+      file name: model-1.0.0.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore\.auth:model:.*$</gav>
+        <cve>CVE-2018-1270</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+      file name: model-1.0.0.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore\.auth:model:.*$</gav>
+        <cve>CVE-2018-1271</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+      file name: model-1.0.0.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore\.auth:model:.*$</gav>
+        <cve>CVE-2018-1272</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+   file name: model-2.4.0+154.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.minion:model:.*$</gav>
+        <cve>CVE-2018-1270</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+   file name: model-2.4.0+154.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.minion:model:.*$</gav>
+        <cve>CVE-2018-1271</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+   file name: model-2.4.0+154.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.minion:model:.*$</gav>
+        <cve>CVE-2018-1272</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        False positive, found unrelated CPE
+   file name: model-2.4.0+154.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.minion:model:.*$</gav>
+        <cve>CVE-2016-9878</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        This dependency is used by Swagger, but regardless, the vulnerability is specific to Drupal, which we are not using.
+   file name: mapstruct-1.1.0.Final.jar
+   ]]></notes>
+        <gav regex="true">^org\.mapstruct:mapstruct:.*$</gav>
+        <cve>CVE-2013-4499</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        This is used by iText for PDF generation, and I can't update to the newest version, as we use Flying Saucer to
+        convert HTML to PDF, and that library requires this specific version of iText. Regardless, there are no private
+        keys being used or exposed in any way during this process that could be exposed to attack as described in the
+        vulnerability report. We are not creating encrypted or protected PDF files that would be exercising this code.
+   file name: bcmail-jdk14-138.jar
+   ]]></notes>
+        <gav regex="true">^org\.bouncycastle:bcmail-jdk14:.*$</gav>
+        <cve>CVE-2015-7940</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        This is actually the exact same vulnerability defined directly above, just through a related library.
+
+        This is used by iText for PDF generation, and I can't update to the newest version, as we use Flying Saucer to
+        convert HTML to PDF, and that library requires this specific version of iText. Regardless, there are no private
+        keys being used or exposed in any way during this process that could be exposed to attack as described in the
+        vulnerability report. We are not creating encrypted or protected PDF files that would be exercising this code.
+   file name: bcprov-jdk14-138.jar
+   ]]></notes>
+        <gav regex="true">^org\.bouncycastle:bcprov-jdk14:.*$</gav>
+        <cve>CVE-2015-7940</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2001-0509</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2007-5090</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2012-1856</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2012-2552</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2014-4061</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2015-1761</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2015-1762</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mssql-jdbc-6.2.1.jre8.jar
+   ]]></notes>
+        <gav regex="true">^com\.microsoft\.sqlserver:mssql-jdbc:.*$</gav>
+        <cve>CVE-2015-1763</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        Upgrading Spring Security would be necessary to resolve this, and it is not feasible for us right now.
+   file name: spring-tx-4.3.10.RELEASE.jar
+   ]]></notes>
+        <gav regex="true">^org\.springframework:spring-.*$</gav>
+        <cve>CVE-2018-1199</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        PATCH requests are not permitted in the app, so we are not vulnerable to this threat.
+   file name: model-1.0.0.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore\.auth:model:.*$</gav>
+        <cve>CVE-2017-8046</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+           PATCH requests are not permitted in the app, so we are not vulnerable to this threat.
+file name: spring-boot-1.5.6.RELEASE.jar
+   ]]></notes>
+        <gav regex="true">^org\.springframework\.boot:.*$</gav>
+        <cve>CVE-2017-8046</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        We do not use this embedded start script.
+   file name: model-1.0.0.jar
+   ]]></notes>
+        <gav regex="true">^com\.incomm\.cscore.*$</gav>
+        <cve>CVE-2018-1196</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        We do not use this embedded start script.
+file name: spring-boot-1.5.6.RELEASE.jar
+   ]]></notes>
+        <gav regex="true">^org\.springframework\.boot:.*$</gav>
+        <cve>CVE-2018-1196</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        We do not expose Spring Data REST endpoints, and are not subject to this vulnerability.
+   file name: spring-boot-starter-1.5.6.RELEASE.jar
+   ]]></notes>
+        <gav regex="true">^org\.springframework\.boot:.*$</gav>
+        <cve>CVE-2017-8046</cve>
+    </suppress>
+</suppressions>

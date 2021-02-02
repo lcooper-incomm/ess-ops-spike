@@ -1,0 +1,1 @@
+EXECUTE add_permission 'SERVE_ADJUST_BALANCE', 'Serve Adjust Balance', 'Ability to adjust the balance on a SERVE account';

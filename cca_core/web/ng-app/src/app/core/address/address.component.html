@@ -1,0 +1,10 @@
+<div class="address-container">
+  <div class="address-line-1">{{address?.line1}}</div>
+  <div class="address-line-2" *ngIf="address?.line2">{{address?.line2}}</div>
+  <div class="address-line-3" fxLayout="row" fxLayoutGap="3px">
+    <span class="address-city">{{address?.city}}{{(address?.city && address?.state) ? ',' : ''}}</span>
+    <span class="address-state">{{address?.state}}</span>
+    <span class="address-postal-code">{{address?.postalCode}}</span>
+  </div>
+  <div class="address-country" *ngIf="address?.country">{{address?.country}}</div>
+</div>

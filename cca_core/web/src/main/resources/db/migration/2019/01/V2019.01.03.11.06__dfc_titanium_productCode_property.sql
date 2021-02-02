@@ -1,0 +1,2 @@
+INSERT INTO cca_property (system_name, display_name, description, value)
+    VALUES('DFC_TITANIUM_MC_PRODUCT_CODES', 'DFC Titanium MasterCard productCodes', 'Comma delimited list of productCode values used to identify DFC Titanium MasterCard.', 'XP04,XP08');

@@ -1,0 +1,19 @@
+<div class="selections-tab-container">
+  <div class="selections-tab-header dock-header case-header" fxLayout="row" fxLayoutAlign="start center">
+    <h3>Selections</h3>
+  </div>
+  <form class="selection-groups-filter-form workspace-form" [formGroup]="filterForm" style="margin-bottom:0;">
+    <cca-text-field [form]="filterForm" controlName="filter" placeholder="Filter"></cca-text-field>
+  </form>
+  <div class="selection-groups-container hide-scroll" fxFlex>
+    <div fxLayout="column" fxLayoutGap="5px">
+      <cca-selections-group [type]="group.type" *ngFor="let group of groups | selectionGroup | orderBy : 'displayValue'"></cca-selections-group>
+    </div>
+  </div>
+  <div class="selections-toolbar-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <a href="javascript:void(0)" *ngIf="!(dockSelectionsTabState$ | async)?.isBulkModeEnabled" (click)="toggleBulkMode(true)">Edit</a>
+    <a href="javascript:void(0)" *ngIf="(dockSelectionsTabState$ | async)?.isBulkModeEnabled" (click)="toggleBulkMode(false)">Cancel</a>
+    <button mat-raised-button color="primary" *ngIf="(dockSelectionsTabState$ | async)?.isBulkModeEnabled" [matTooltip]="'Remove ' + selectedCount + ' Selected'" [disabled]="!selectedCount">Remove</button>
+  </div>
+</div>
+

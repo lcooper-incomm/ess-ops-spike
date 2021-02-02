@@ -1,0 +1,12 @@
+<div class="footer-container" [ngClass]="{'adjusted-for-vertical-summary': isVerticalSummaryPresent}" fxLayout="row" fxLayoutAlign="center end">
+  <div fxLayout="column" fxLayoutAlign="start center">
+    <img class="incomm-logo" src="/assets/images/incomm-logo.png"/>
+    <span class="copyright-container text-muted">
+      <fa-icon icon="copyright"></fa-icon>
+      {{currentYear}} InComm. All Rights Reserved.
+    </span>
+    <div class="environment-container {{color}}" matTooltip="Current Version">
+      {{version}}
+    </div>
+  </div>
+</div>

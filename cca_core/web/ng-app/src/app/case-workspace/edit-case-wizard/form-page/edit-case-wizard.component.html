@@ -1,0 +1,27 @@
+<form [formGroup]="wizardForm" fxLayout="row" fxLayoutGap="15px">
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="team" placeholder="Team">
+      <mat-option *ngFor="let option of wizard.model.teams | orderBy : 'displayName'" [value]="option">{{option?.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="wizardForm.get('team').value.id" class="default-field-width">
+    <mat-select formControlName="members" placeholder="Assignee">
+      <mat-option *ngFor="let option of members | orderBy : 'displayName'" [value]="option">{{option?.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="isClosedCase" class="default-width">
+    <mat-select formControlName="status" placeholder="Status">
+      <mat-option *ngFor="let option of statusOptions | orderBy : 'displayName'" [value]="option.systemName">{{option.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div>
+  <cca-key-value-with-placeholder key="SID" [value]="wizard.model.session?.id"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Queue" [value]="wizard.model.session?.queue?.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value key="Assignee" *ngIf="wizard.model.session.user">
+    <cca-user-chip [user]="wizard.model.session?.user" fxFlex="40" style="margin-top: 4px; margin-bottom: 6px"></cca-user-chip>
+  </cca-key-value>
+  <cca-key-value key="Status">
+    <cca-session-status [status]="wizard.model.session?.status" fxFlex="40"></cca-session-status>
+  </cca-key-value>
+</div>

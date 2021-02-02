@@ -1,0 +1,23 @@
+<div class="container" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <h3 class="text-primary">Current Fee Info</h3>
+    <div fxFlex></div>
+    <form [formGroup]="filterForm" style="margin: 0;" [hidden]="!dataSource.data?.length">
+      <cca-text-field controlName="filter" [form]="filterForm" placeholder="Filter"></cca-text-field>
+    </form>
+  </div>
+  <div class="text-muted" fxLayout="row" fxLayoutAlign="center center" *ngIf="!accountFee">No Fee Info Available</div>
+  <div *ngIf="accountFee" class="summary-column" style="max-width: 50%;">
+    <cca-key-value-with-placeholder key="Name" [value]="accountFee.displayName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Program" [value]="accountFee.programCodeName"></cca-key-value-with-placeholder>
+  </div>
+  <cscore-table #feeTable
+                [columns]="columns"
+                [dataSource]="dataSource"
+                [hidden]="!dataSource.data?.length">
+  </cscore-table>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-paginator fxFlex="100%" [length]="dataSource.data?.length" [pageSize]="10"
+                   [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 10"></mat-paginator>
+  </div>
+</div>

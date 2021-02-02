@@ -1,0 +1,4 @@
+<cca-key-value [key]="key" [keyWidthPercent]="keyWidthPercent" alignment="start start">
+  <cca-address *ngIf="address" [address]="address"></cca-address>
+  <div class="text-muted" *ngIf="!address">Not Available</div>
+</cca-key-value>

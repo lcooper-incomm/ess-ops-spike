@@ -1,0 +1,13 @@
+<div *ngIf="wizardForm.contains('token0')" fxLayout="column">
+  <ng-container *ngFor="let token of wizard.model.request.tokens; let i = index">
+    <ng-container *ngIf="token.type.toLowerCase() === 'string'">
+      <cca-text-field [form]="wizardForm" [controlName]="'token' + i" [placeholder]="token.name"></cca-text-field>
+    </ng-container>
+    <ng-container *ngIf="token.type.toLowerCase() === 'currency'">
+      <cca-currency-field [form]="wizardForm" [controlName]="'token' + i" [placeholder]="token.name"></cca-currency-field>
+    </ng-container>
+    <ng-container *ngIf="token.type.toLowerCase().indexOf('date') !== -1">
+      <cca-date-field [form]="wizardForm" [controlName]="'token' + i" [placeholder]="token.name"></cca-date-field>
+    </ng-container>
+  </ng-container>
+</div>

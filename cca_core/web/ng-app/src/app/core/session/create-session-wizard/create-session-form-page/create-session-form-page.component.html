@@ -1,0 +1,12 @@
+<form [formGroup]="wizardForm" fxLayout="row" fxLayoutGap="15px">
+  <mat-form-field id="create-session-session-class" class="default-width">
+    <mat-select formControlName="sessionClass" placeholder="Session Class" (selectionChange)="toggleSessionTypeRequired(); sessionTypeControl.setValue(null); autoSelectSingleSessionTypeOption();">
+      <mat-option *ngFor="let option of sessionClassOptions | orderBy:'displayName'" [value]="option">{{option.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field id="create-session-session-type" class="default-width" *ngIf="sessionClassControl.value">
+    <mat-select formControlName="sessionType" placeholder="Session Type">
+      <mat-option *ngFor="let option of sessionService.filterSessionTypes(sessionClassControl.value.sessionTypes) | orderBy:'displayName'" [value]="option">{{option.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

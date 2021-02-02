@@ -1,0 +1,4 @@
+<cca-key-value [key]="key" [alignment]="alignment" [keyWidthPercent]="keyWidthPercent">
+  <div [ngClass]="{'text-success': value?.value === 0}" *ngIf="value">{{value.displayValue}}</div>
+  <div class="text-error" *ngIf="!value">{{noFeeAmountDisplay}}</div>
+</cca-key-value>

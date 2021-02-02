@@ -1,0 +1,8 @@
+<div>
+  <cca-key-value-with-placeholder key="First Name" [value]="this.wizard.model.request.cardHolder.firstName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Last Name" [value]="this.wizard.model.request.cardHolder.lastName"></cca-key-value-with-placeholder>
+  <cca-key-value key="Address" alignment="start start">
+    <cca-address [address]="this.wizard.model.address"></cca-address>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Comment" [value]="this.wizard.model.request.comment"></cca-key-value-with-placeholder>
+</div>

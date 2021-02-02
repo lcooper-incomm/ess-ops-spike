@@ -1,0 +1,68 @@
+@import '~@angular/material/theming';
+@import '../../../../colors.scss';
+
+.toast {
+  width: 100%;
+  margin: 0 10px 10px 0;
+  background-color: mat-color($cca-app-muted, 900);
+  color: mat-color($cca-app-muted, 400);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+
+  &.error {
+
+    .icon-container {
+      color: red;
+    }
+  }
+
+  &.info {
+
+    .icon-container {
+      color: deepskyblue;
+    }
+  }
+
+  &.success {
+
+    .icon-container {
+      color: lightgreen;
+    }
+  }
+
+  &.warn {
+
+    .icon-container {
+      color: gold;
+    }
+  }
+
+  .action-container {
+    width: 50px;
+
+    fa-icon {
+      font-size: 24px;
+    }
+  }
+
+  .content-container {
+
+    ul {
+      margin: 0;
+    }
+
+    .splunk-link-container {
+      margin-top: 5px;
+
+      .splunk-link {
+        color: deepskyblue;
+      }
+    }
+  }
+
+  .icon-container {
+    width: 50px;
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,17 @@
+<form [formGroup]="wizardForm" fxLayout="row" fxLayoutGap="15px">
+  <mat-form-field class="default-width">
+    <mat-select id="create-session-session-class" data-test-id="create-session-session-class" formControlName="sessionClass" placeholder="Session Class" (selectionChange)="toggleSessionTypeRequired(); sessionTypeControl.setValue(null); this.autoSelectSingleSessionTypeOption ();">
+      <mat-option *ngFor="let option of sessionClassOptions | orderBy:'displayName'" [value]="option">{{option.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="default-width" *ngIf="sessionClassControl.value">
+    <mat-select id="create-session-session-type" data-test-id="create-session-session-type" formControlName="sessionType" placeholder="Session Type">
+      <mat-option *ngFor="let option of sessionService.filterSessionTypes(sessionClassControl.value.sessionTypes) | orderBy:'displayName'" [value]="option">{{option.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div style="max-width:400px;">
+  <cca-simple-panel id="removed-components-alert" data-test-id="removed-components-alert" color="orange" *ngIf="wizard.model.removedComponentsAlert">
+    <div [innerHTML]="wizard.model.removedComponentsAlert"></div>
+  </cca-simple-panel>
+</div>

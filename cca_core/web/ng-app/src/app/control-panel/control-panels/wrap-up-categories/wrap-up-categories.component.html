@@ -1,0 +1,25 @@
+<cca-card-panel header='Wrap Up Categories'>
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+    <mat-form-field class="default-field-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <button class="user-menu-button" mat-mini-fab color="accent" matTooltip="Add New Category" class="mat-elevation-z2" (click)="openAddCategory()">
+      <fa-icon icon="plus"></fa-icon>
+    </button>
+  </div>
+
+  <div class="table-container" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource?.data?.length">No Results Available</div>
+
+    <cca-spinner #loadingSpinner></cca-spinner>
+
+    <cscore-table class="highlight-rows"
+                  [dataSource]="dataSource"
+                  [columns]="columns"
+                  initialSortColumn="displayName"
+                  initialSortDirection="asc"
+                  (rowClick)="openEditCategory($event)"></cscore-table>
+
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+  </div>
+</cca-card-panel>

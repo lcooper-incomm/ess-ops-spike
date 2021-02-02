@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayoutGap="20px">
+  <div fxLayout="column" fxLayoutGap="15px" fxFlex>
+    <div fxLayout="column">
+      <!-- TODO: use selection-card-information component? -->
+      <h4 class="text-primary">Card Information</h4>
+      <cca-key-value-with-placeholder key="Card Set" [value]="cardsComponentCard.cardSet"></cca-key-value-with-placeholder>
+      <cca-key-value key="Card Type">
+        <cca-select-field controlName="cardType" [form]="wizardForm" [options]="cardTypeOptions"></cca-select-field>
+      </cca-key-value>
+      <cca-key-value key="Status">
+        <cca-card-status class="card-status" [platform]="platform" [status]="status"></cca-card-status>
+      </cca-key-value>
+      <cca-key-value key="Card Number" class="pan-container">
+        <cca-unmaskable-pan [card]="card" [customer]="customer"></cca-unmaskable-pan>
+      </cca-key-value>
+      <cca-key-value-with-placeholder key="Serial Number" [value]="card?.identifiers.serialNumber"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Available Balance" [value]="balance?.displayValue"></cca-key-value-with-placeholder>
+    </div>
+    <div fxLayout="column">
+      <h4 class="text-primary">Case Information</h4>
+      <div *ngIf="selectedCardType === CardType.INACTIVE" fxLayout="row" fxLayoutGap="10px">
+        <cca-currency-field controlName="merchantLoadAmount" [form]="wizardForm" placeholder="Merchant Load Amount"></cca-currency-field>
+        <cca-currency-field controlName="incommLoadAmount" [form]="wizardForm" placeholder="InComm Amount"></cca-currency-field>
+      </div>
+      <cca-currency-field
+        *ngIf="selectedCardType === CardType.ACTIVE"
+        class="default-field-width"
+        controlName="recoveredAmount"
+        [form]="wizardForm"
+        placeholder="Recovered Amount"
+      ></cca-currency-field>
+      <cca-comment-field controlName="comment" [form]="wizardForm" placeholder="Comment"></cca-comment-field>
+    </div>
+  </div>
+  <mat-card>
+    <cca-card-workflow-progress [card]="cardsComponentCard" (expand)="onExpand($event)"></cca-card-workflow-progress>
+  </mat-card>
+</div>

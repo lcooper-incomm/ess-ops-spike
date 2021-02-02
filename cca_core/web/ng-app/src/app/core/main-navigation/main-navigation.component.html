@@ -1,0 +1,114 @@
+<mat-toolbar class="main-navigation" color="primary" fxLayout="row" *ngIf="currentUser">
+  <button id="dashboard-nav-button" data-test-id="dashboard-nav-button" mat-button [routerLink]="RoutePath.DASHBOARD" routerLinkActive="active" [queryParams]="navigationQueryParams" (click)="closeDockAndSession()">Dashboard</button>
+  <button id="case-workspace-nav-button" data-test-id="case-workspace-nav-button" mat-button [routerLink]="RoutePath.CASE_WORKSPACE" routerLinkActive="active" [queryParams]="navigationQueryParams" (click)="closeDockAndSession()" *ngIf="hasCaseWorkspacePermission">Cases</button>
+  <button id="search-nav-button" data-test-id="search-nav-button" class="super-menu-trigger-parent" mat-button [routerLink]="RoutePath.SEARCH" routerLinkActive="active" [queryParams]="navigationQueryParams" *ngIf="hasSearchPermissions" (click)="closeDockAndSession()">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span>Search</span>
+      <fa-icon id="search-menu-trigger" data-test-id="search-menu-trigger" class="super-menu-trigger-button" icon="caret-down" [matMenuTriggerFor]="searchMenu" matTooltip="Search Options" ccaClickSwallower></fa-icon>
+    </div>
+  </button>
+  <button id="detail-panel-nav-button" data-test-id="detail-panel-nav-button" mat-button [routerLink]="RoutePath.DETAIL" routerLinkActive="active" [queryParams]="navigationQueryParams" *ngIf="hasSelection"  (click)="closeDockAndSession()">Detail</button>
+  <button id="reports-nav-button" data-test-id="reports-nav-button" class="super-menu-trigger-parent" mat-button [routerLink]="RoutePath.REPORTS" routerLinkActive="active" *ngIf="hasReportsPermissions" (click)="closeDockAndSession()">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span>Reports</span>
+      <fa-icon id="reports-menu-trigger" data-test-id="reports-menu-trigger" class="super-menu-trigger-button" icon="caret-down" [matMenuTriggerFor]="reportsMenu" matTooltip="Report Options" ccaClickSwallower></fa-icon>
+    </div>
+  </button>
+  <button id="services-nav-button" data-test-id="services-nav-button" class="super-menu-trigger-parent" mat-button [routerLink]="RoutePath.SERVICES" routerLinkActive="active" [queryParams]="navigationQueryParams" *ngIf="hasServicesPermissions" (click)="closeDockAndSession()">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span>Services</span>
+      <fa-icon id="services-menu-trigger" data-test-id="services-menu-trigger" class="super-menu-trigger-button" icon="caret-down" [matMenuTriggerFor]="servicesMenu" matTooltip="Service Options" ccaClickSwallower></fa-icon>
+    </div>
+  </button>
+  <button id="control-panel-nav-button" data-test-id="control-panel-nav-button" class="super-menu-trigger-parent" mat-button [routerLink]="RoutePath.CONTROL_PANEL" routerLinkActive="active" [queryParams]="navigationQueryParams" *ngIf="currentUser.isSystemAdministrator" (click)="closeDockAndSession()">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <span>Control Panel</span>
+      <fa-icon id="control-panel-trigger" data-test-id="control-panel-trigger" class="super-menu-trigger-button" icon="caret-down" [matMenuTriggerFor]="controlPanelMenu" matTooltip="Control Panel Options" ccaClickSwallower></fa-icon>
+    </div>
+  </button>
+  <span fxFlex></span>
+  <cca-user-chip id="profile-nav-button" data-test-id="profile-nav-button" class="clickable" [user]="currentUser" [routerLink]="RoutePath.PROFILE" [queryParams]="navigationQueryParams" (click)="closeDockAndSession()"></cca-user-chip>
+  <button id="create-session-button" data-test-id="create-session-button" class="create-session-button" mat-mini-fab color="accent" matTooltip="Create Session" (click)="openCreateSessionDialog()">
+    <fa-icon icon="clipboard-list"></fa-icon>
+  </button>
+  <button id="user-menu-button" data-test-id="user-menu-button" class="user-menu-button" mat-mini-fab color="accent" [matMenuTriggerFor]="settingsMenu" matTooltip="User Menu">
+    <fa-icon icon="cog"></fa-icon>
+  </button>
+  <mat-menu #settingsMenu="matMenu" [overlapTrigger]="false" class="user-menu">
+    <button (click)="emailSupport()" id="email-support-button" data-test-id="email-support-button" mat-menu-item>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width:30px;">
+          <fa-icon icon="envelope"></fa-icon>
+        </div>
+        <div fxFlex>Support</div>
+      </div>
+    </button>
+    <button (click)="logout()" id="sign-out-button" data-test-id="sign-out-button" mat-menu-item>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div style="width:30px;">
+          <fa-icon icon="sign-out-alt"></fa-icon>
+        </div>
+        <div fxFlex>Sign Out</div>
+      </div>
+    </button>
+  </mat-menu>
+  <!-- Start Search Menu -->
+  <mat-menu class="super-menu search-menu" #searchMenu="matMenu" [overlapTrigger]="false">
+    <div fxLayout="row">
+      <div class="super-menu-column search-type-category" *ngFor="let category of searchTypeCategories | orderBy : 'name'">
+        <div class="super-menu-column-header" id={{category.name}}>{{category.name}}</div>
+        <div *ngFor="let searchType of category.searchTypes | orderBy : 'name'">
+          <a (click)="setSearchType(searchType)" [ngClass]="{'text-bold': searchType.id === selectedSearchType?.searchType.id}" class="super-menu-link" href="javascript:void(0)" id={{searchType.name}}>{{searchType.name}}</a>
+        </div>
+      </div>
+    </div>
+  </mat-menu>
+  <!-- Start Reports Menu -->
+  <mat-menu class="super-menu reports-menu" #reportsMenu="matMenu" [overlapTrigger]="false">
+    <div fxLayout="row">
+      <div class="super-menu-column search-type-category" *ngFor="let reportColumn of reports">
+        <div *ngFor="let reportType of reportColumn | orderBy : 'name'">
+          <a (click)="openReport(reportType)" *ngIf="reportType.isActive && reportType.link"
+             [ngClass]="{'text-bold': reportType.id == currentReportId}" class="super-menu-link"
+             href="javascript:void(0)" id={{reportType.name}}>{{reportType.name}}</a>
+        </div>
+      </div>
+    </div>
+  </mat-menu>
+  <!-- Start Services Menu -->
+  <mat-menu class="super-menu services-menu" #servicesMenu="matMenu" [overlapTrigger]="false">
+    <div fxLayout="row">
+      <div class="super-menu-column search-type-category">
+        <div class="super-menu-column-header">Card Holder Services</div>
+        <div>
+          <a class="super-menu-link" data-test-id="order-new-card-link" href="javascript:void(0)" (click)="openOrderCardWizard()" >Order New Card</a>
+        </div>
+      </div>
+      <div class="super-menu-column search-type-category">
+        <div class="super-menu-column-header">Jobs</div>
+        <div>
+          <a class="super-menu-link" data-test-id="job-queue-link"[ngClass]="{'text-bold': selectedServiceType == 'JOB_QUEUE'}" href="javascript:void(0)" (click)="setServicePanelType('JOB_QUEUE')">Job Queue</a>
+        </div>
+      </div>
+    </div>
+  </mat-menu>
+  <!-- Start Control Panel Menu -->
+  <mat-menu class="super-menu control-panel-menu" #controlPanelMenu="matMenu" [overlapTrigger]="false">
+    <div fxLayout="row">
+      <div *ngFor="let routeGroup of controlPanelRouteGroups" class="super-menu-column search-type-category">
+        <div class="super-menu-column-header">{{ routeGroup.label }}</div>
+        <div *ngFor="let route of routeGroup.routes">
+
+          <a
+            class="super-menu-link"
+            [class.text-bold]="lastVisitedControlPanelPath === route.path"
+            [routerLink]="'/control-panel/' + route.path"
+            href="javascript:void(0)"
+          >
+            {{ route.label }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </mat-menu>
+</mat-toolbar>

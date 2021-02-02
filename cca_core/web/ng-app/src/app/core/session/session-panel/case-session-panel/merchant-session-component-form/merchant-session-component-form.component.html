@@ -1,0 +1,35 @@
+<div class="merchant-component-container">
+  <form [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutGap="15px">
+      <div>
+        <h4 class="session-heading">Merchant</h4>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-text-field id="session-merchant-merchant-name" data-test-id="session-merchant-merchant-name" class="default-field-width" [form]="form" controlName="merchantName" placeholder="Merchant Name"></cca-text-field>
+          <cca-text-field id="session-merchant-location-name" data-test-id="session-merchant-location-name" class="default-field-width" [form]="form" controlName="locationName" placeholder="Location Name"></cca-text-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-text-field id="session-merchant-contact-name" data-test-id="session-merchant-contact-name" class="default-field-width" [form]="form" controlName="contactName" placeholder="Contact Name"></cca-text-field>
+          <cca-text-field id="session-merchant-contact-title" data-test-id="session-merchant-contact-title" class="default-field-width" [form]="form" controlName="contactTitle" placeholder="Contact Title"></cca-text-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-text-field id="session-merchant-contact-phone" data-test-id="session-merchant-contact-phone" class="default-field-width" [form]="form" controlName="contactPhone" placeholder="Contact Phone"></cca-text-field>
+        </div>
+      </div>
+      <div>
+        <h4 class="session-heading">Address</h4>
+        <cca-address-form [form]="form.get('address')"></cca-address-form>
+      </div>
+      <div>
+        <h4 class="session-heading">Indicators</h4>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-datepicker-field id="session-merchant-purchased-date" data-test-id="session-merchant-purchased-date" class="default-field-width" [form]="form" controlName="purchasedDate" placeholder="Purchased Date"></cca-datepicker-field>
+          <cca-datepicker-field id="session-merchant-redemption-attempted-date" data-test-id="session-merchant-redemption-attempted-date" class="default-field-width" [form]="form" controlName="firstRedemptionAttemptedDate" placeholder="Red. Attempted Date" matTooltip="Redemption First Attempted Date"></cca-datepicker-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-datepicker-field id="session-merchant-deactivated-date" data-test-id="session-merchant-deactivated-date" class="default-field-width" [form]="form" controlName="deactivatedDate" placeholder="Deactivated Date"></cca-datepicker-field>
+          <cca-datepicker-field id="session-merchant-last-reloaded-date" data-test-id="session-merchant-last-reloaded-date" class="default-field-width" [form]="form" controlName="lastReloadedDate" placeholder="Last Reloaded Date"></cca-datepicker-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

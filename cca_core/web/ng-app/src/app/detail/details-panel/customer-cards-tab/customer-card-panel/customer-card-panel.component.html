@@ -1,0 +1,27 @@
+<div class="customer-card-panel-container container mat-elevation-z1">
+  <div class="panel-header clickable" [ngClass]="{'selected-card-backlight': isSelectedCard}"
+       (click)="selectCard(); isExpanded = !isExpanded;">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div>
+        <h4 class="text-primary" style="margin:0;">
+          <span *ngIf="maplesCard">{{maplesCard.identifiers?.pan}}</span>
+          <cca-unmaskable-pan *ngIf="isFsapiCard(card)" [card]="card" [customer]="customer"></cca-unmaskable-pan>
+        </h4>
+        <div class="subheader">{{card?.productCategory}}</div>
+        <div class="subheader" *ngIf="card?.isVmsGiftCard">{{card?.productGroup}}</div>
+      </div>
+    <div fxFlex></div>
+    <div style="width:300px" fxLayout="center">
+      <cca-fsapi-status *ngIf="isFsapiCard(card)" [status]="getStatus(card)" [useAbbreviation]="false"
+                        style="flex: 1 1 0%;"></cca-fsapi-status>
+      <cca-serve-card-status *ngIf="maplesCard" [status]="getMaplesStatus()" [useAbbreviation]="false"
+                             style="flex: 1 1 0%;"></cca-serve-card-status>
+    </div>
+  </div>
+  </div>
+  <div class="panel-content" fxLayout="column" *ngIf="isExpanded">
+    <cca-customer-card-fsapi-detail *ngIf="card" [card]="card"
+                                    [customer]="customer"></cca-customer-card-fsapi-detail>
+    <cca-customer-card-serve-detail *ngIf="maplesCard" [card]="maplesCard" [cardHistory]="getCardHistory(maplesCard)"></cca-customer-card-serve-detail>
+  </div>
+</div>

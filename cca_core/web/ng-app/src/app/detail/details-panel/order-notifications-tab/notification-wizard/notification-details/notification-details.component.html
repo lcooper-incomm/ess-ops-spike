@@ -1,0 +1,23 @@
+<div class="notification-details">
+  <h4 class="text-primary">Notification Details</h4>
+  <cca-key-value-with-placeholder key="ID" [value]="this.wizard.model.data.id"></cca-key-value-with-placeholder>
+  <cca-key-value key="Status">
+    <cca-fsapi-status [status]="this.wizard.model.data.status.message"></cca-fsapi-status>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="ECNS ID" [value]="this.wizard.model.data.ecnsId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Template ID" [value]="this.wizard.model.data.templateId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Template Code" [value]="this.wizard.model.data.templateCode"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Template Name" [value]="this.wizard.model.data.templateName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Sent Date" [value]="this.wizard.model.data.sentDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Updated Date" [value]="this.wizard.model.data.updatedDate?.displayValue"></cca-key-value-with-placeholder>
+  <div *ngIf="wizard.model.selection.platform === PlatformType.BOL">
+    <cca-key-value-with-placeholder key="Sent From" [value]="this.wizard.model.data.sender"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Sent To" [value]="this.wizard.model.data.recipient"></cca-key-value-with-placeholder>
+  </div>
+</div>
+<div class="notification-details">
+  <h4 class="text-primary">Notification Contents</h4>
+  <div class="email-template container mat-elevation-z1">
+    <div [innerHTML]="this.emailTemplate"></div>
+  </div>
+</div>

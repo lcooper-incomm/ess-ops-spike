@@ -1,0 +1,11 @@
+<div class="table-container condensed-table expansion-panel-wrapper" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <cca-spinner #spinner></cca-spinner>
+  <cscore-table #reserveAccountsTable
+              [columns]="reserveAccountColumns"
+              initialSortColumn="accountName"
+              initialSortDirection="asc"
+              [dataSource]="dataSource"
+              [hidden]="!dataSource.data?.length">
+  </cscore-table>
+</div>
+

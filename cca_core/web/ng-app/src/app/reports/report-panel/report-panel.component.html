@@ -1,0 +1,13 @@
+<div class="card-container container mat-elevation-z1" fxLayout="column">
+  <div fxLayout="row" class="card-header {{color}}" [ngClass]="{clickable: isCollapsible && !disableCollapse}">
+    <fa-icon [icon]="icon" *ngIf="icon"></fa-icon>
+    <h4>{{header}}</h4>
+    <span fxFlex></span>
+    <button mat-icon-button class="mat-icon-button" (click)="openReportInNewTab( )" matTooltip="Open Report In New Tab">
+      <fa-icon fxFlexAlign="center" icon="external-link-alt"></fa-icon>
+    </button>
+  </div>
+  <div class="card-content" *ngIf="!isCollapsed" fxFlex>
+    <ng-content></ng-content>
+  </div>
+</div>

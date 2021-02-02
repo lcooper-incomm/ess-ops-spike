@@ -1,0 +1,10 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <cca-selection-card-information [card]="card" [selection]="selection"></cca-selection-card-information>
+  <cca-assign-card-set-form [cardSets]="session.cardsComponent.cardSets" [form]="form"></cca-assign-card-set-form>
+  <cca-cards-session-component
+    [component]="session.cardsComponent"
+    header="Current Card Sets"
+    [hideFinancialImpact]="true"
+    [session]="session"
+  ></cca-cards-session-component>
+</div>

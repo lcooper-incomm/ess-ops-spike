@@ -1,0 +1,40 @@
+.wizard-progress-bg {
+  position: relative;
+  height: 30px;
+  top: 0;
+  z-index: 1;
+  background-color: #E4E4E4;
+  margin: -30px;
+}
+
+.wizard-progress-container {
+  position: relative;
+  top: 8px;
+  .wizard-progress-step {
+    z-index: 2;
+
+    .mat-caption {
+      font-weight: bold;
+      margin-top: -6px;
+    }
+    .current-page {
+      position: relative;
+    }
+  }
+}
+
+.icon-error {
+  color: #fff;
+  margin-bottom: 10px;
+  position: relative;
+  top: -14px;
+  left: 24px;
+}
+
+.icon-success {
+  color: #fff;
+  margin-bottom: 10px;
+  position: relative;
+  top: -14px;
+  left: 30px;
+}

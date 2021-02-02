@@ -1,0 +1,22 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px" [formGroup]="form">
+  <div class="text-muted" fxLayout="row" fxLayoutAlign="center center" *ngIf="!changes.length">
+    No valid changes have been made.
+  </div>
+  <cca-key-value-with-placeholder
+    [key]="change.label"
+    [value]="change.displayValue"
+    *ngFor="let change of changes | orderBy : 'label'"
+  ></cca-key-value-with-placeholder>
+  <div *ngIf="changes.length">
+    <cca-select-field
+      *ngIf="isReasonRequired"
+      class="default-field-width"
+      controlName="reason"
+      [form]="form"
+      [options]="reasonOptions"
+      placeholder="Reason"
+    ></cca-select-field>
+    <cca-comment-field [form]="form" controlName="comment" placeholder="Comment"></cca-comment-field>
+  </div>
+</div>
+  

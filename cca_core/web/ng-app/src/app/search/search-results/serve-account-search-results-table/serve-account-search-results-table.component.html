@@ -1,0 +1,26 @@
+<div class="table-container condensed-table serve-account-search-results-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+  <table mat-table [dataSource]="dataSource" matSort [hidden]="!dataSource.data?.length">
+    <ng-container [matColumnDef]="column.key" *ngFor="let column of columns">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.label }}</th>
+      <ng-container *ngIf="column.key === 'cardStatus'">
+        <td mat-cell *matCellDef="let account">
+          <ng-container *ngIf="account.getAccountStatus()?.name === 'ACTIVE'">
+            <cca-serve-card-status [status]="account.getPrimaryCard()?.getPlatformStatus()"></cca-serve-card-status>
+          </ng-container>
+          <ng-container *ngIf="!account.getAccountStatus() || account.getAccountStatus()?.name === 'INACTIVE'">
+            <cca-serve-card-status [status]="account.getAccountStatus()"></cca-serve-card-status>
+          </ng-container>
+        </td>
+      </ng-container>
+      <ng-container *ngIf="column.key !== 'cardStatus'">
+        <td mat-cell *matCellDef="let account" [matTooltip]="getTooltipText(account)" matTooltipClass="multiline-tooltip">
+          {{ column.getValue(account) }}
+        </td>
+      </ng-container>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let account; columns: displayedColumns;" class="clickable" (click)="selectResult(account)"></tr>
+  </table>
+  <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+</div>

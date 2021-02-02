@@ -1,0 +1,14 @@
+<cca-key-value-with-placeholder key="Card Number:" [value]="this.wizard.model.card.identifiers.panMasked"></cca-key-value-with-placeholder>
+<cca-key-value key="Current Status">
+  <cca-fsapi-status [status]="this.wizard.model.currentStatus" style="width:40%"></cca-fsapi-status>
+</cca-key-value>
+<form [formGroup]="wizardForm" fxLayout="column">
+  <cca-select-field
+    class="default-field-width"
+    controlName="value"
+    [form]="wizardForm"
+    [options]="this.wizard.model.allowedStatuses | orderBy:'displayValue'"
+    placeholder="New Status"
+  ></cca-select-field>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</form>

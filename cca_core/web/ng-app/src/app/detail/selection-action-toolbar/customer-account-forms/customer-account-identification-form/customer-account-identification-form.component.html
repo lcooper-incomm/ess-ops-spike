@@ -1,0 +1,43 @@
+<div [formGroup]="form">
+  <div *ngIf="!isCanadian">
+    <cca-identification-field [form]="form" typeControlName="identificationType" numberControlName="identificationNumber"></cca-identification-field>
+  </div>
+  <div *ngIf="isCanadian">
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="default-field-width">
+        <mat-select formControlName="occupation" placeholder="Occupation" [compareWith]="compareOccupations">
+          <mat-option *ngFor="let option of canadianFormOptions?.occupations | orderBy : 'name'" [value]="option">{{option.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field class="default-field-width">
+        <mat-select formControlName="identificationType" placeholder="ID Type" [compareWith]="compareIdentificationTypes">
+          <mat-option *ngFor="let option of canadianFormOptions?.identificationTypes | orderBy : 'description'" [value]="option">{{option.description}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <cca-text-field class="default-field-width" [form]="form" controlName="identificationNumber" placeholder="ID Number"></cca-text-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <cca-text-field class="default-field-width" [form]="form" controlName="identificationCountry" placeholder="Country"></cca-text-field>
+      <cca-state-province-field class="default-field-width" [form]="form" country="CA" controlName="identificationProvince" placeholder="Province"></cca-state-province-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <cca-date-field class="default-field-width" [form]="form" controlName="expirationDate" placeholder="Expiration Date"></cca-date-field>
+      <cca-date-field class="default-field-width" [form]="form" controlName="verificationDate" placeholder="Verification Date"></cca-date-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <cca-text-field class="default-field-width" [form]="form" controlName="taxpayerId" placeholder="Taxpayer ID"></cca-text-field>
+      <mat-form-field class="default-field-width">
+        <mat-select formControlName="noTaxpayerIdReason" placeholder="No Taxpayer ID Reason" [compareWith]="compareNoTaxpayerIdReasons">
+          <mat-option *ngFor="let option of canadianFormOptions?.noTaxpayerIdReasons | orderBy : 'reasonDescription'" [value]="option">{{option.reasonDescription}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <cca-state-province-field class="default-field-width" [form]="form" country="CA" controlName="residence" placeholder="Tax Residence Jurisdiction"></cca-state-province-field>
+      <cca-text-field class="default-field-width" [form]="form" controlName="noTaxpayerIdReasonDescription" placeholder="No Taxpayer ID Explanation" *ngIf="isNoTaxpayerIdReasonDescriptionRequired"></cca-text-field>
+    </div>
+  </div>
+</div>
+  

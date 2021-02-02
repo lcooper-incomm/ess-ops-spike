@@ -1,0 +1,21 @@
+<div class="container" fxLayout="column" [formGroup]="wizardForm">
+  <cca-text-field [form]="wizardForm"
+                  placeholder="File Description"
+                  controlName="fileDescription"></cca-text-field>
+  <mat-slide-toggle disableRipple="true"
+                    formControlName="isRestricted"
+                    fxFlex="9"
+                    class="mb-15">Is Restricted</mat-slide-toggle>
+  <cca-select-field [form]="wizardForm"
+                    [options]="categoryOptions"
+                    placeholder="Type"
+                    class="mb-15"
+                    controlName="category"></cca-select-field>
+  <cca-text-field *ngIf="wizard.model.request.category === 'Other'"
+                  [form]="wizardForm"
+                  placeholder="Other Description"
+                  controlName="categoryDescription"></cca-text-field>
+  <cca-comment-field [form]="wizardForm"
+                     placeholder="Comment"
+                     controlName="comment"></cca-comment-field>
+</div>

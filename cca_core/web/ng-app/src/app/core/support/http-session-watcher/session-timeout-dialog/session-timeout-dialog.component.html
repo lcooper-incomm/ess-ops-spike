@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Session Timeout</h2>
+<mat-dialog-content>
+  <div>You are about to be signed out of CCA due to inactivity. To continue working, click "Continue" before the time runs out.</div>
+  <br/>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
+  <div>
+    <span class="text-muted">Time Remaining: </span>
+    <strong>{{timeRemaining}}</strong>
+  </div>
+  <div fxFlex></div>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">Continue</button>
+  <button mat-raised-button [mat-dialog-close]="false">Log Out</button>
+</mat-dialog-actions>

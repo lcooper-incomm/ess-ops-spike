@@ -1,0 +1,42 @@
+<div class="summary-section card-purchase-location-section container">
+  <cca-key-value class="container" key="Order Number" [hidden]="!card?.activation?.order">
+    <div *ngIf="selection.platform !== PlatformType.VMS">
+      <div *ngIf="card?.activation?.order?.orderId">{{card.activation.order.orderId}}</div>
+      <div class="text-muted" *ngIf="!card?.activation?.order?.orderId">Not Available</div>
+    </div>
+    <div *ngIf="selection.platform === PlatformType.VMS">
+      <div *ngIf="selection.purchaseOrder?.number && !isOrderNumberLinkEnabled">{{selection.purchaseOrder.number}}</div>
+      <div *ngIf="selection.purchaseOrder?.number && isOrderNumberLinkEnabled">
+        <a class="container" href="javascript:void(0)" (click)="linkToOrder()">{{selection.purchaseOrder.number}}</a>
+        <cca-spinner #purchaseOrderLinkSpinner></cca-spinner>
+      </div>
+      <div class="text-muted" *ngIf="!selection.purchaseOrder?.number">Not Available</div>
+    </div>
+    <cca-spinner #purchaseOrderSpinner></cca-spinner>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Purchase Date"
+                                  [value]="card?.activation?.activationDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value key="Purchase Location" alignment="start start">
+    <div fxLayout="column">
+      <div class="default-purchase-location" *ngIf="selection?.purchaseLocation || card?.activation?.pos?.locationName">
+        <a class="container" href="javascript:void(0)"
+           (click)="linkToLocation()">{{selection?.purchaseLocation?.name || card?.activation?.pos?.locationName}}</a>
+        <cca-spinner #purchaseLocationLinkSpinner></cca-spinner>
+      </div>
+      <div class="pos-purchase-location" *ngIf="card?.activation?.pos">
+        <div *ngIf="card.activation.pos.merchantName"
+             matTooltip="Merchant Name">{{card.activation.pos.merchantName}}</div>
+        <div class="text-muted" *ngIf="!selection.purchaseLocation && !card.activation.pos.locationName">Not Available
+        </div>
+      </div>
+      <div class="order-purchase-location" *ngIf="card?.activation?.order?.ipAddress"
+           matTooltip="IP Address">{{card.activation.order.ipAddress}}</div>
+      <div class="text-muted"
+           *ngIf="!selection?.purchaseLocation && !card?.activation?.pos && !card?.activation?.order?.ipAddress">Not
+        Available
+      </div>
+    </div>
+  </cca-key-value>
+  <cca-spinner #purchaseLocationSpinner></cca-spinner>
+</div>
+

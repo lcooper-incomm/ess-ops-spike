@@ -1,0 +1,8 @@
+<div fxLayout="column" [formGroup]="wizardForm" fxLayoutGap="15px">
+  <div fxLayout="row">
+    <mat-checkbox id="override-fraud-checks" formControlName="isOverrideApplied" [matTooltip]="checkboxTooltip">
+      Override Fraud Checks
+    </mat-checkbox>
+  </div>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</div>

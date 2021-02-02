@@ -1,0 +1,18 @@
+<div class="summary-section card-greencard-pan-section container" *ngIf="selection?.platform === PlatformType.GREENCARD">
+  <cca-key-value key="PAN">
+    <div class="text-muted" *ngIf="!selection?.getCard()">Not Available</div>
+    <cca-unmaskable-pan [card]="selection?.getCard()" *ngIf="selection?.getCard()"></cca-unmaskable-pan>
+  </cca-key-value>
+  <cca-key-value key="Replacement PAN" *ngIf="selection?.getCard()?.identifiers.replacementPanMasked">
+    <a href="javascript:void(0)" (click)="searchPan(selection?.getCard()?.identifiers.replacementPan)">{{selection?.getCard()?.identifiers.replacementPanMasked}}</a>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Expiration Date" [value]="selection?.getCard()?.expirationDate?.displayValue"></cca-key-value-with-placeholder>
+</div>
+
+
+
+
+
+
+
+

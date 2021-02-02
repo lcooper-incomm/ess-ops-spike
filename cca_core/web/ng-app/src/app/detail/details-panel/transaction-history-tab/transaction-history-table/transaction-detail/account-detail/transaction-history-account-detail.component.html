@@ -1,0 +1,13 @@
+<div fxLayout="row">
+  <div fxFlex="50">
+    <cca-key-value-with-placeholder key="Merchant Name" [value]="transaction?.nodes?.merchant?.name"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Merchant Ref Number" [value]="transaction?.identifiers.headerId"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Store ID" [value]="transaction?.nodes?.location?.id"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Terminal ID" [value]="transaction?.nodes?.terminal?.id"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex>
+    <cca-key-value-with-placeholder key="Response Code" [value]="transaction?.response?.code"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Response Message" [value]="transaction?.response?.message"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Recommended Action" [value]="transaction?.response?.action"></cca-key-value-with-placeholder>
+  </div>
+</div>

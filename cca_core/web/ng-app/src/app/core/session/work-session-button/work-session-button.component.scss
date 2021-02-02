@@ -1,0 +1,8 @@
+@import '~@angular/material/theming';
+@import '../../../../colors.scss';
+
+:host(:not(.case-session)) {
+  fa-icon {
+    color: mat-color($cca-app-session, A700);
+  }
+}

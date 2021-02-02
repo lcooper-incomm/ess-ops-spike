@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div>
+    <cca-key-value-with-placeholder key="Transfer Amount" [value]="wizard.model.transferAmount?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="From Card" [value]="wizard.model.fromCard.identifiers.pan"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="To Card" [value]="wizard.model.toCard.identifiers.pan"></cca-key-value-with-placeholder>
+  </div>
+  <cca-key-value key="Transfer Fee">
+    <div class="text-error">
+      <strong *ngIf="wizard.model.transferFee">{{wizard.model.transferFee.displayValue}}</strong>
+      <strong *ngIf="!wizard.model.transferFee">Fees may apply.</strong>
+    </div>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.request.comment" alignment="start start"></cca-key-value-with-placeholder>
+</div>

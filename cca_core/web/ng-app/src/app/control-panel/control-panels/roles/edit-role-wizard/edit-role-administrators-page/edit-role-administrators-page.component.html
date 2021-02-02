@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutGap="15px" [formGroup]="wizardForm">
+  <mat-form-field class="default-field-width">
+    <input type="text" placeholder="Add an Administrator" aria-label="Add an Administrator" matInput [formControl]="addAdminControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayNull" (optionSelected)="addAdmin($event)">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.username">
+        {{option.username}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <span fxFlex></span>
+  <mat-form-field class="default-field-width">
+    <input type="text" matInput placeholder="Filter Administrators" aria-label="Filter Administrators" formControlName="adminControl">
+  </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-admin-card #auto *ngFor="let admin of admins | orderBy : 'displayName'" [adminData]="admin" [roleId]="wizard.model.role.id" (updateAdmins)='updateAdmins($event)'></cca-admin-card>
+</div>

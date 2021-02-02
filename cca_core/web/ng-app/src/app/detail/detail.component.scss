@@ -1,0 +1,13 @@
+.detail-container {
+
+  .detail-tabs-outer-container {
+    z-index: 0;
+  }
+
+  .detail-vertical-summary-container {
+    width: 400px;
+    min-width: 400px;
+    z-index: 1;
+    background-color: transparent;
+  }
+}

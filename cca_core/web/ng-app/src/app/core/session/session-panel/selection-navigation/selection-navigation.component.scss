@@ -1,0 +1,10 @@
+.selection-navigation-container {
+  padding: 0 15px;
+  padding-top: 0;
+
+  .selections-container {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 1px;
+  }
+}

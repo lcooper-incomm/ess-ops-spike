@@ -1,0 +1,49 @@
+<h4 class="text-accent clickable" (click)="toggleShowScheduled()">
+  <span *ngIf="!showScheduled"> <fa-icon class="small" fxFlexAlign="center" icon="plus"
+                                         style="margin-right:5px"></fa-icon></span>
+  <span *ngIf="showScheduled"> <fa-icon class="small" fxFlexAlign="center" icon="minus"
+                                        style="margin-right:5px"></fa-icon></span>Scheduled Transactions
+</h4>
+
+<div *ngIf="showScheduled">
+  <div fxLayoutGap="15px">
+    <span fxFlex></span>
+    <cca-datepicker-field [form]="form" controlName="startDate" placeholder="Start Date"></cca-datepicker-field>
+    <cca-datepicker-field [form]="form" controlName="endDate" placeholder="End Date"></cca-datepicker-field>
+    <button id="th-search-button" data-test-id="th-search-button" class="container" mat-mini-fab color="primary" (click)="search()" matTooltip="Search">
+      <fa-icon icon="search"></fa-icon>
+      <cca-spinner color="accent" [on]="searching" [rounded]="true"></cca-spinner>
+    </button>
+  </div>
+
+  <div class="table-container condensed-table transaction-history-table expansion-panel-wrapper"
+       [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No
+      Results Available
+    </div>
+    <cscore-table #scheduledTransactionTable
+                  [columns]="displayedColumns"
+                  initialSortColumn="createdDate"
+                  initialSortDirection="desc"
+                  [dataSource]="dataSource"
+                  [hidden]="!dataSource.data?.length">
+
+      <div *cscoreTableCellDef="let item; key: 'caret'" class="row-caret" style="border-bottom-width: 0;" fxLayout="row" fxLayoutAlign="center center"></div>
+
+      <div *cscoreTableHeaderDef="let item; key: 'selection'">
+      </div>
+      <div *cscoreTableCellDef="let item; key: 'selection'" style="border-bottom-width: 0;" fxLayout="row"
+           fxLayoutAlign="center center">
+      </div>
+
+      <ng-container *cscoreTableExpandedContent="let item">
+        <cca-maples-scheduled-transaction-detail [selection]="selection" [transaction]="item" fxFlex="1 1 auto"></cca-maples-scheduled-transaction-detail>
+      </ng-container>
+
+    </cscore-table>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-paginator fxFlex="100%" [length]="dataSource.data?.length" [pageSize]="10"
+                     [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 10"></mat-paginator>
+    </div>
+  </div>
+</div>

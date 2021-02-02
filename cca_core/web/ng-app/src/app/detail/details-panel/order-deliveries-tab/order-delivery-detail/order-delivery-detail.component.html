@@ -1,0 +1,26 @@
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <div class="detail-column">
+    <cca-key-value-with-placeholder key="Recipient" [value]="shipment?.recipient?.getDisplayName()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Business" [value]="shipment?.recipient?.getAddressByType(CsCoreAddressType.SHIPPING)?.company"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Email Address" [value]="shipment?.recipient?.emailAddress"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Home Number" [value]="shipment?.recipient?.getPhoneNumberByType(CsCorePhoneNumberType.HOME)?.number"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Mobile Number" [value]="shipment?.recipient?.getPhoneNumberByType(CsCorePhoneNumberType.MOBILE)?.number"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Work Number" [value]="shipment?.recipient?.getPhoneNumberByType(CsCorePhoneNumberType.WORK)?.number"></cca-key-value-with-placeholder>
+    <cca-key-value-address key="Shipping Address" [address]="shipment?.recipient?.getAddressByType(CsCoreAddressType.SHIPPING)"></cca-key-value-address>
+  </div>
+  <div class="detail-column">
+    <cca-key-value-with-placeholder key="Shipping Fee" [value]="shipment?.amount?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Shipment Method" [value]="getShippingMethod()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Carrier" [value]="shipment?.tracking?.carrier?.description?.toUpperCase()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Shipment Date" [value]="shipment?.createdDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Delivered Date" [value]="shipment?.deliveredDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value key="Tracking Number">
+      <div fxFlex>
+        <div *ngIf="selection.platform !== PlatformType.ECOMM">{{shipment?.tracking?.trackingNumber}}</div>
+        <div *ngIf="selection.platform === PlatformType.ECOMM">
+          <a href="javascript:void(0)" (click)="linkToFedex(shipment?.tracking?.trackingNumber)" ccaClickSwallower>{{shipment?.tracking?.trackingNumber}}</a>
+        </div>
+      </div>
+    </cca-key-value>
+  </div>
+</div>

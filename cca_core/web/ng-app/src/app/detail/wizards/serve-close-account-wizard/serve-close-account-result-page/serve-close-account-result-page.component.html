@@ -1,0 +1,22 @@
+<div fxLayout="column" class="ml-auto mr-auto" style="width: 75%;">
+  <div *ngIf="wizard.model.success === 0" class="text-accent">
+    All accounts have been successfully closed.
+  </div>
+  <div *ngIf="wizard.model.success === 1" class="text-error">
+    Not all accounts could be closed.
+  </div>
+  <div *ngIf="wizard.model.success === 2" class="text-error">
+    All accounts have been successfully closed, but could not audit or comment the action.
+  </div>
+  <ng-container *ngFor="let accountInfo of wizard.model.accountInfos; index as i;">
+    <div fxLayout="row nowrap" class="mt-15" style="align-items: center;">
+      <div style="min-width: 48px; display: flex; justify-content: center;">
+        <fa-icon *ngIf="accountInfo.status !== 'CLOSED'" icon="exclamation-circle" class="text-error"></fa-icon>
+        <fa-icon *ngIf="accountInfo.status === 'CLOSED'" icon="check" class="text-success"></fa-icon>
+      </div>
+      <div fxFlex="0 0 33%" class="text-muted">{{accountInfo.accountType}}</div>
+      <div fxFlex="0 0 33%" class="truncate-with-ellipsis">{{accountInfo.id}}</div>
+      <cca-serve-account-status [textStatus]="accountInfo.status" [useAbbreviation]="false" fxFlex="0 0 25%"></cca-serve-account-status>
+    </div>
+  </ng-container>
+</div>

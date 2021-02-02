@@ -1,0 +1,14 @@
+<div fxLayout="column" class="ml-auto mr-auto" style="width: 75%;">
+  <div class="text-accent">
+    Close the following accounts
+  </div>
+  <ng-container *ngFor="let accountInfo of wizard.model.accountInfos; index as i;">
+    <div fxLayout="row nowrap" class="mt-15" style="align-items: center;">
+      <div fxFlex="0 0 33%" class="text-muted">{{accountInfo.accountType}}</div>
+      <div fxFlex="0 0 33%" class="truncate-with-ellipsis">{{accountInfo.id}}</div>
+      <cca-serve-account-status [textStatus]="accountInfo.status" [useAbbreviation]="false" fxFlex="0 0 25%"></cca-serve-account-status>
+    </div>
+  </ng-container>
+  <cca-key-value-with-placeholder key="Reason" [value]="wizard.model.reason" class="mt-15"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+</div>

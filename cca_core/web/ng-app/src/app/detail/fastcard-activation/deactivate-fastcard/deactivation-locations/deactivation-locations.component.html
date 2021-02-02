@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+  <div class="activation-location-container">
+    <cca-key-value key="Merchant">
+      <div id="activating-merchant" data-test-id="activating-merchant" [class.strikethrough]="useShortPay">{{location.merchantName}}</div>
+    </cca-key-value>
+    <cca-key-value key="Location">
+      <div id="activating-location" data-test-id="activating-location" [class.strikethrough]="useShortPay">{{location.locationName}}</div>
+    </cca-key-value>
+    <cca-key-value key="Terminal">
+      <div id="activating-terminal" data-test-id="activating-terminal" [class.strikethrough]="useShortPay">{{location.terminalNumber}}</div>
+    </cca-key-value>
+  </div>
+  <div class="activation-location-container" *ngIf="shortPayLocation">
+    <cca-key-value key="Short Pay Merchant">
+      <div id="short-pay-merchant" data-test-id="short-pay-merchant" [class.strikethrough]="!useShortPay">{{shortPayLocation.merchantName}}</div>
+    </cca-key-value>
+    <cca-key-value key="Short Pay Location">
+      <div id="short-pay-location" data-test-id="short-pay-location" [class.strikethrough]="!useShortPay">{{shortPayLocation.locationName}}</div>
+    </cca-key-value>
+    <cca-key-value key="Short Pay Terminal">
+      <div id="short-pay-terminal" data-test-id="short-pay-terminal" [class.strikethrough]="!useShortPay">{{shortPayLocation.terminalNumber}}</div>
+    </cca-key-value>
+  </div>
+  <div class="activation-location-container" *ngIf="useShortPay">
+    <cca-simple-panel color="orange">
+      <strong>Deactivation will be credited to this Short-Pay location</strong>
+    </cca-simple-panel>
+  </div>
+</div>

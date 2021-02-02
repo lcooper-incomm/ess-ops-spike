@@ -1,0 +1,12 @@
+<div class="text-error" *ngIf="!this.wizard.model.success[0]">
+  An error occurred while creating the case.
+</div>
+<div *ngIf="this.wizard.model.success[0]">
+  A new privacy request case was created with the following ID:
+  <a *ngIf="canWorkPrivacySession" href="javascript:void(0)" (click)="gotoSession()">{{wizard.model.privacyRequestSessionId}}</a>
+  <span *ngIf="!canWorkPrivacySession">{{wizard.model.privacyRequestSessionId}}</span>
+</div>
+
+<div *ngIf="!this.wizard.model.success[1]">
+  <h4 class="text-error">An error occurred while sending the email.</h4>
+</div>

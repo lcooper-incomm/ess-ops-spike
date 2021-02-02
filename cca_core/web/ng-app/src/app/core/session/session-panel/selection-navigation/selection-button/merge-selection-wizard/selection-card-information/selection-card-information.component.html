@@ -1,0 +1,6 @@
+<h3 class="text-primary">Card Information</h3>
+<cca-key-value-with-placeholder key="PAN" [value]="card.identifiers.panMasked"></cca-key-value-with-placeholder>
+<cca-key-value key="Status">
+  <cca-card-status class="card-status" [platform]="platform" [status]="status"></cca-card-status>
+</cca-key-value>
+<cca-key-value-with-placeholder key="Balance" [value]="balance?.displayValue"></cca-key-value-with-placeholder>

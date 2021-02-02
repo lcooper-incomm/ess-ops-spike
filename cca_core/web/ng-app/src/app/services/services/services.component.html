@@ -1,0 +1,6 @@
+<cca-simple-panel *ngIf="!servicePanelType">
+  <div class="text-muted">Click a Service in the Services menu above.</div>
+</cca-simple-panel>
+<div [ngSwitch]="servicePanelType" fxLayout="column" style="min-width: 992px">
+  <cca-job-queue *ngSwitchCase="'JOB_QUEUE'"></cca-job-queue>
+</div>

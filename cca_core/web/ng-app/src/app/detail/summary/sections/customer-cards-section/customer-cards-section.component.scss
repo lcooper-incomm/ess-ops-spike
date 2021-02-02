@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+@import '../../../../../colors.scss';
+
+.customer-cards-section {
+
+  .card-option-container {
+    padding: 5px;
+  }
+
+  .card-selection-container {
+    margin-bottom: 15px;
+    padding-right: 5px;
+    transition: .5s linear background-color;
+
+    fa-icon {
+      margin-left: 5px;
+    }
+  }
+}

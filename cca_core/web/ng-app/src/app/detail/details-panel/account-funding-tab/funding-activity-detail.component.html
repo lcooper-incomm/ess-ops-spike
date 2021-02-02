@@ -1,0 +1,25 @@
+<cca-spinner #detailSpinner></cca-spinner>
+<div *ngIf="showDetail" class="container" fxLayout="row">
+  <div fxLayout="column" style="width: 50%;">
+    <cca-key-value-with-placeholder key="Funding Account Number" [value]="fundingActivity['fundingActivityDetail']?.identifiers?.fundingAccountNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Account ID" [value]="fundingActivity['fundingActivityDetail']?.identifiers?.accountId"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Description" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.description"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Discretionary Data" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.discretionaryData"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Addenda Record Indicator" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.addendaRecordIndicator"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Trace Number" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.traceNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Effective Date" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.effectiveDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Originator Status" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.originatorStatus"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Originator Dfi" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.originatorDfi"></cca-key-value-with-placeholder>
+  </div>
+  <div fxLayout="column" style="width: 50%;">
+    <cca-key-value-with-placeholder key="Reject Reason" [value]="getCode('REJECT_REASON')"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Entry Class" [value]="getCode('ENTRY_CLASS')"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Addenda Record Dump" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.addendaRecordDump"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Reference Number" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.referenceNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Processor Status" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.processorStatus"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Processor Reference Number" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.processorReferenceNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Company ID" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.companyId"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Company Date Description" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.companyDateDescription"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Company Description" [value]="fundingActivity['fundingActivityDetail']?.fundingActivityDetail?.companyDescription"></cca-key-value-with-placeholder>
+  </div>
+</div>

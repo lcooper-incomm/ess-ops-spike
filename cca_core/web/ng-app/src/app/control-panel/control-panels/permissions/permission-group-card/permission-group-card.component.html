@@ -1,0 +1,13 @@
+<mat-card class="group-card-container">
+  <mat-card-content fxLayout="row" fxLayoutGap="10px">
+    <div fxLayout="row">
+      {{groupData.displayName}}
+    </div>
+    <span fxFlex></span>
+    <div fxLayout="row" fxFlexAlign="center" fxLayoutGap="10px">
+      <fa-icon class="text-error" icon="times-circle" (click)="removePermission(groupData)" style="cursor: pointer"></fa-icon>
+      <fa-icon class="text-accent" icon="arrow-right"></fa-icon>
+    </div>
+  </mat-card-content>
+</mat-card>
+

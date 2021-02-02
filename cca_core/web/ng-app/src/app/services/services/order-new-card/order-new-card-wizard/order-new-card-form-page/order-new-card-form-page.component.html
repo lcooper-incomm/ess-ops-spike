@@ -1,0 +1,29 @@
+<form [formGroup]="wizardForm">
+  <div fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="partnerSelect" placeholder="Partner" required>
+        <mat-option *ngFor="let option of partners | orderBy: 'name'" [value]="option.type">
+          {{option.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="productCodeSelect" placeholder="Product Code" required>
+        <mat-option *ngFor="let option of products | orderBy: 'name'" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="productTypeSelect" placeholder="Product Type" required>
+        <mat-option *ngFor="let option of types | orderBy: 'name'" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="wizardForm.get('productTypeSelect').value && wizardForm.get('productCodeSelect').value">
+    <h3 class="text-accent" style="margin-bottom: 0">Cardholder Information</h3>
+    <cca-cardholder-information-form [form]="wizardForm"></cca-cardholder-information-form>
+  </div>
+</form>

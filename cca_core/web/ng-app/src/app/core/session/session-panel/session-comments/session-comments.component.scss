@@ -1,0 +1,24 @@
+.comments-component-container {
+  height: 100%;
+  position: relative;
+
+  a {
+    margin-top: 5px;
+  }
+
+  .comment-form-container {
+    width: 49%;
+    display: inline-block;
+    margin-right: 1%;
+  }
+
+  .comment-history-container {
+    width: 49%;
+    display: inline-block;
+
+    .comment-history-scroll-container {
+      max-height: 100px;
+      overflow-y: auto;
+    }
+  }
+}

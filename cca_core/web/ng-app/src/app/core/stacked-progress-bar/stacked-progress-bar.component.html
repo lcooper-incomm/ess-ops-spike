@@ -1,0 +1,12 @@
+<div fxFlex class="stacked-bar-chart mat-elevation-z1 radius-first radius-last">
+  <span
+    [ngClass]="{'radius-first': i===0 || isSingle,'radius-last': isSingle ||i === isLast}"
+    *ngFor="let item of percentages ; index as i"
+    fxFlex="{{percentages[i]}}"
+    fxLayoutAlign="center center"
+    style="height: 20px;color: white;font-size: 12px"
+    [ngStyle]="{'background-color':colors[i]}"
+    matTooltip="{{toolTips[i]}}">
+    <span *ngIf="percentages[i] > 5">{{counts[i]}}</span>
+  </span>
+</div>

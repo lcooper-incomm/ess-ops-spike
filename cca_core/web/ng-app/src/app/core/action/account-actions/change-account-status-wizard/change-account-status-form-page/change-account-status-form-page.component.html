@@ -1,0 +1,10 @@
+<div class="info-container">
+  <cca-key-value key="Account ID" alignment="start start">{{wizard.model.accountId}}</cca-key-value>
+  <cca-key-value key="Account Status" alignment="start start">{{wizard.model.accountChangeStatusRequest.accountStatus}}</cca-key-value>
+</div>
+<div fxLayout="column">
+  <cca-spinner #spinner></cca-spinner>
+  <cca-select-field [form]="wizardForm" [options]="statusOptions" placeholder="New Status" controlName="accountStatus"></cca-select-field>
+  <cca-select-field [form]="wizardForm" [options]="statusReasons" placeholder="Reason" controlName="statusReason"></cca-select-field>
+  <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment"></cca-comment-field>
+</div>

@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div>
+    <h3 class="text-primary">Mobile Wallet</h3>
+    <cca-key-value key="Provisioning Status">
+      <cca-token-provisioning-status
+        [status]="tokenProvisioningStatus"
+        [showTooltip]="!isLocked"
+        [matTooltip]="isLocked ? 'Click to enable provisioning' : null"
+        [class.clickable]="isLocked && canEnableTokenProvisioning"
+        (click)="openEnableProvisioningDialog()"
+        fxFlex
+        class="provisioning-status"
+      ></cca-token-provisioning-status>
+    </cca-key-value>
+    <div class="fraud-override-checkbox-wrapper" *ngIf="isOneTimeFraudOverrideVisible">
+      <mat-checkbox
+        [checked]="oneTimeFraudOverride"
+        [disabled]="!isOneTimeFraudOverrideEnabled"
+        (change)="setOneTimeFraudOverride($event)"
+        class="fraud-override-checkbox"
+      >
+        One-Time Fraud Bypass
+      </mat-checkbox>
+      <cca-spinner [on]="togglingOneTimeFraudOverride" class="spinner"></cca-spinner>
+    </div>
+  </div>
+  <div>
+    <h3 class="text-primary">Devices</h3>
+    <div class="text-muted" *ngIf="tokens.length === 0">
+      No Devices Configured for this Account
+    </div>
+    <cca-mobile-wallet-devices [tokens]="tokens" *ngIf="tokens.length > 0"></cca-mobile-wallet-devices>
+  </div>
+</div>

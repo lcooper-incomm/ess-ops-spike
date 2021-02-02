@@ -1,0 +1,45 @@
+<div class="container" fxLayout="column">
+  <div fxLayout="row nowrap" fxFlex="grow" style="justify-content: space-between; align-items: center;">
+    <h4 class="text-accent">Team Users</h4>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="15px">
+    <mat-card *ngFor="let user of wizard.model.team.members"
+              style="width: 30%;"
+              [style.backgroundColor]="user.isActive ? 'inherit' : 'rgba(255, 0, 0, 0.1)'"
+              class="mb-15" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div *ngIf="user.displayName">
+          {{user.displayName}} <span *ngIf="!user.isActive" style="font-size: 10px;" class="text-error">(inactive)</span>
+        </div>
+        <div *ngIf="!user.displayName">
+          {{user.username}} <span *ngIf="!user.isActive" style="font-size: 10px;" class="text-error">(inactive)</span>
+        </div>
+        <div fxFlex></div>
+        <fa-icon class="text-error" icon="times" (click)="deleteUser(user)"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-card [matMenuTriggerFor]="addMenu"
+              class="mb-15 add-card" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div>
+          Add
+        </div>
+        <div fxFlex></div>
+        <fa-icon icon="plus" class="text-success" style="margin-left: 10px;"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-menu #addMenu="matMenu">
+      <div style="margin-left: 5px; margin-right: 5px;">
+        <cca-text-field [form]="wizardForm"
+                        controlName="userSearch"
+                        placeholder="User Search"
+                        (change)="onUserSearch($event)"
+                        (click)="$event.stopPropagation()"></cca-text-field>
+      </div>
+      <div *ngIf="getUserList().length === 0" style="margin-left: 5px; margin-right: 5px; font-size: 10px; color: red;">
+        No results.  User search must be at least 3 characters.
+      </div>
+      <button *ngFor="let user of getUserList()" mat-menu-item (click)="addUser(user)">{{getMenuName(user)}}</button>
+    </mat-menu>
+  </div>
+</div>

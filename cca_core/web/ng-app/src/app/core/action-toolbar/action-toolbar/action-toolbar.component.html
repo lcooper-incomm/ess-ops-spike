@@ -1,0 +1,5 @@
+<div class="action-toolbar-container container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <cca-action-toolbar-button [action]="action" *ngFor="let action of actions | orderBy : 'label'"></cca-action-toolbar-button>
+  <cca-spinner [on]="buildingActions" class="spinner"></cca-spinner>
+</div>
+  

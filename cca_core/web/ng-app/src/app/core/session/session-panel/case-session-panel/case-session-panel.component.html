@@ -1,0 +1,122 @@
+<script src="../session-panel.component.ts"></script>
+<div class="case-session-panel-container">
+  <mat-tab-group class="case-tabs" [@.disabled]="true">
+    <mat-tab>
+      <div *matTabLabel class="container">
+        General
+        <cca-case-tab-badge *ngIf="!isGeneralComponentValid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content" fxFlex="row nowrap">
+        <div fxFlex="1 1 50%">
+          <cca-general-session-component-form [form]="form.get('generalComponent')"></cca-general-session-component-form>
+        </div>
+        <cca-session-comments
+          [form]="form.get('commentsComponent')"
+          [session]="session"
+          (commentAdded)="onCommentAdded($event)"
+          (commentChange)="onCommentChanged($event)"
+          fxFlex="1 1 50%"
+          class="max-width-50"
+        ></cca-session-comments>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('cardsComponent')">
+      <div *matTabLabel class="container">
+        Cards
+        <cca-case-tab-badge *ngIf="!form.get('cardsComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-cards-session-component-form [form]="form.get('cardsComponent') && !session.isInClosedStatus()"></cca-cards-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('customerComponent')">
+      <div *matTabLabel class="container">
+        Customer
+        <cca-case-tab-badge *ngIf="!form.get('customerComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-customer-session-component-form [form]="form.get('customerComponent')"></cca-customer-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('complaintComponent')">
+      <div *matTabLabel class="container">
+        Complaint
+        <cca-case-tab-badge *ngIf="!form.get('complaintComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-complaint-session-component-form [form]="form.get('complaintComponent')"></cca-complaint-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="session.disputeComponent">
+      <div *matTabLabel class="container">
+        Dispute
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-dispute-session-component-form [disputeComponent]="session.disputeComponent"></cca-dispute-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('documentsComponent')">
+      <div *matTabLabel class="container">
+        Documents
+        <cca-case-tab-badge *ngIf="!form.get('documentsComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-documents-session-component-form></cca-documents-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('encorComponent')">
+      <div *matTabLabel class="container">
+        Encor
+        <cca-case-tab-badge *ngIf="!form.get('encorComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-encor-session-component-form [form]="form.get('encorComponent')"></cca-encor-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('lawEnforcementComponent')">
+      <div *matTabLabel class="container">
+        Law Enforcement
+        <cca-case-tab-badge *ngIf="!form.get('lawEnforcementComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-law-enforcement-session-component-form [form]="form.get('lawEnforcementComponent')"></cca-law-enforcement-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('merchantComponent')">
+      <div *matTabLabel class="container">
+        Merchant
+        <cca-case-tab-badge *ngIf="!form.get('merchantComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-merchant-session-component-form [form]="form.get('merchantComponent')"></cca-merchant-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('privacyRequestComponent')">
+      <div *matTabLabel class="container">
+        Personal Info
+        <cca-case-tab-badge *ngIf="!form.get('privacyRequestComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-privacy-request-session-component-form [form]="form.get('privacyRequestComponent')"></cca-privacy-request-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('receiptComponent')">
+      <div *matTabLabel class="container">
+        Receipt
+        <cca-case-tab-badge *ngIf="!form.get('receiptComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-receipt-session-component-form [form]="form.get('receiptComponent')"></cca-receipt-session-component-form>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.get('refundRequestComponent')">
+      <div *matTabLabel class="container">
+        Refund Request
+        <cca-case-tab-badge *ngIf="!form.get('refundRequestComponent').valid && !session.isInClosedStatus()"></cca-case-tab-badge>
+      </div>
+      <div *matTabContent class="case-tab-content">
+        <cca-refund-request-session-component-form [form]="form.get('refundRequestComponent')"></cca-refund-request-session-component-form>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

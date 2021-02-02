@@ -1,0 +1,28 @@
+<div class="summary-section customer-customer-section">
+  <cca-key-value-with-placeholder key="Customer ID" [value]="selection?.getCustomer()?.id" *ngIf="isSystemAdministrator"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Customer Name" [value]="selection?.getCustomer()?.getDisplayName()" *ngIf="selection?.platform !== PlatformType.CCL"></cca-key-value-with-placeholder>
+  <br/>
+  <cca-key-value-with-placeholder key="Account Number" [value]="selection?.getCustomer()?.identifiers.accountNumber"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Proxy Number" [value]="selection?.getCustomer()?.identifiers.proxyNumber"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Routing Number" [value]="selection?.getCustomer()?.accounts.spending.routingNumber" *ngIf="selection?.platform !== PlatformType.CCL"></cca-key-value-with-placeholder>
+  <br/>
+  <div *ngIf="selection?.platform === PlatformType.CCL">
+    <cca-key-value-with-placeholder key="Card Type" [value]="selection?.getCustomer()?.cardType"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Program ID" [value]="selection?.getCustomer()?.programId"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Program Description" [value]="selection?.getCustomer()?.programDescription"></cca-key-value-with-placeholder>
+    <cca-key-value key="Velocity Counts" alignment="start start">
+      <div>
+        <div *ngFor="let velocity of selection?.getCustomer()?.velocities | orderBy : 'type'">
+          <div fxLayout="row" style="width:200px">
+            <div fxFlex="30">{{velocity.type}}</div>
+            <div fxFlex>
+              <span matTooltip="Remaining">{{velocity.remaining}}</span>
+              <span>/</span>
+              <span matTooltip="Total">{{velocity.total}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </cca-key-value>
+  </div>
+</div>

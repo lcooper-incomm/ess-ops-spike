@@ -1,0 +1,29 @@
+<div class="privacy-request-component-container">
+  <form [formGroup]="form" fxLayout="column">
+    <div *ngIf="session?.summary" fxLayout="row nowrap" fxLayoutGap="15px" class="mb-15 text-muted">
+      {{session?.summary}}
+    </div>
+    <div *ngIf="!session?.summary" fxLayout="row nowrap" fxLayoutGap="15px" class="mb-15 text-muted">
+      No Summary
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="15px">
+      <cca-select-field class="default-field-width" [form]="form" [options]="priorityOptions" controlName="priority" placeholder="Priority"></cca-select-field>
+      <cca-text-field class="default-field-width" [form]="form" controlName="customerId" placeholder="Customer ID"></cca-text-field>
+      <cca-text-field class="default-field-width" [form]="form" controlName="orderId" placeholder="Order ID"></cca-text-field>
+    </div>
+      <cca-select-field [form]="form"
+                        controlName="issueType"
+                        placeholder="Issue Type"
+                        dictionary="com.incomm.cca.model.dictionary.EncorTypes"
+                        dictionaryType="ISSUE"
+                        class="default-field-width-ex-long"
+                        [typeAhead]="true"></cca-select-field>
+      <cca-select-field [form]="form"
+                        controlName="complaintType"
+                        placeholder="Complaint Type"
+                        dictionary="com.incomm.cca.model.dictionary.EncorTypes"
+                        dictionaryType="COMPLAINT"
+                        class="default-field-width-ex-long"
+                        [typeAhead]="true"></cca-select-field>
+  </form>
+</div>

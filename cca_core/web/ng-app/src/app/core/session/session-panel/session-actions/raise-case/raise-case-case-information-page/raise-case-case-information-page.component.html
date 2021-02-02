@@ -1,0 +1,13 @@
+<div fxLayout="row wrap" fxLayoutGap="10px" [formGroup]="wizardForm">
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="sessionType" placeholder="Case Type" (selectionChange)="loadQueues()" [compareWith]="compareSessionTypes">
+      <mat-option *ngFor="let option of sessionTypeOptions | orderBy : 'displayName'" [value]="option">{{option.displayName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="default-field-width container">
+    <mat-select formControlName="queue" placeholder="Queue" [compareWith]="compareQueues">
+      <mat-option *ngFor="let option of queueOptions | orderBy : 'displayName';" [value]="option">{{option.displayName}}</mat-option>
+    </mat-select>
+    <cca-spinner #raiseCaseQueueSpinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+  </mat-form-field>
+</div>

@@ -1,0 +1,10 @@
+<div class="raise-case-results-page-container container">
+  <div class="case-id-link-container container" *ngIf="wizard.model.newCase">
+    <cca-key-value key="Case ID">
+      <div>{{wizard.model.newCase.id}}</div>
+    </cca-key-value>
+  </div>
+  <div class="error-container container text-error" *ngIf="!wizard.model.newCase">
+    An unexpected error occurred while raising the Case.
+  </div>
+</div>

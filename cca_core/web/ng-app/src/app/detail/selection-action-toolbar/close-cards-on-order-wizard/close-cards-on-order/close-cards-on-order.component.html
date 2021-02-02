@@ -1,0 +1,10 @@
+<cca-order-item-display [cards]="wizard.model.cards"></cca-order-item-display>
+<form [formGroup]="wizardForm" style="margin-top:10px">
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="reasonSelect" placeholder="Reason" required>
+      <mat-option [value]="option.reasonDescription" *ngFor="let option of reasons | orderBy: 'reasonDescription'">
+        {{option.reasonDescription}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

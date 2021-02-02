@@ -1,0 +1,122 @@
+<div fxLayout="column" fxLayoutAlign="start center">
+  <cca-card-panel header="Case Search" style="width:100%">
+    <form [formGroup]="workspaceForm" (ngSubmit)="search()">
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+        <cca-numeric-text-field class="default-field-width" [form]="workspaceForm" controlName="sid" placeholder="Case ID (SID)"></cca-numeric-text-field>
+        <cca-numeric-text-field class="default-field-width" [form]="workspaceForm" controlName="serialNumber" placeholder="Serial Number"></cca-numeric-text-field>
+        <cca-numeric-text-field class="default-field-width" [form]="workspaceForm" controlName="van" placeholder="VAN"></cca-numeric-text-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+        <mat-form-field class="default-field-width">
+          <mat-select formControlName="caseType" placeholder="Case Type">
+            <mat-option [value]="ANY_PLACEHOLDER">Any</mat-option>
+            <mat-option *ngFor="let option of sessionTypes | orderBy : 'displayName'" [value]="option.name">{{option.displayName}}</mat-option>
+          </mat-select>
+          <cca-spinner #caseTypeSpinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+        </mat-form-field>
+        <mat-form-field class="default-field-width">
+          <mat-select formControlName="queue" placeholder="Queue">
+            <mat-option [value]="ANY_PLACEHOLDER">Any</mat-option>
+            <mat-option *ngFor="let option of queues | orderBy : 'displayName'" [value]="option.id">{{option.displayName}}</mat-option>
+          </mat-select>
+          <cca-spinner #queueSpinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+        </mat-form-field>
+        <mat-form-field class="default-field-width">
+          <mat-select formControlName="status" placeholder="Status">
+            <mat-option [value]="ANY_PLACEHOLDER">Any</mat-option>
+            <mat-option *ngFor="let option of statuses | orderBy : 'displayValue'" [value]="option.value">{{option.displayValue}}</mat-option>
+          </mat-select>
+          <cca-spinner #statusSpinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+        </mat-form-field>
+        <mat-form-field class="default-field-width">
+          <mat-select formControlName="team" placeholder="Team">
+            <mat-option [value]="ANY_PLACEHOLDER">Any</mat-option>
+            <mat-option *ngFor="let option of teams | orderBy : 'displayName'" [value]="option.id">{{option.displayName}}</mat-option>
+          </mat-select>
+          <cca-spinner #teamSpinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+        </mat-form-field>
+        <mat-form-field class="default-field-width">
+          <input matInput placeholder="Assignee" [matAutocomplete]="auto" formControlName="assignee" *ngIf="workspaceForm.get('team').value === ANY_PLACEHOLDER"/>
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="userDisplay">
+            <mat-option *ngFor="let option of users | orderBy : 'username'" [value]="option">{{option.username}} <span *ngIf="option.displayName">({{option.displayName}})</span></mat-option>
+          </mat-autocomplete>
+          <mat-select formControlName="assignee" placeholder="Assignee" [compareWith]="compareById" *ngIf="workspaceForm.get('team').value !== ANY_PLACEHOLDER">
+            <mat-option [value]="ANY_PLACEHOLDER">Any</mat-option>
+            <mat-option *ngFor="let option of users | orderBy : 'username'" [value]="option">{{option.username}} <span *ngIf="option.displayName">({{option.displayName}})</span></mat-option>
+          </mat-select>
+          <cca-spinner #assigneeSpinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <button class="container" mat-raised-button color="primary" type="submit" [disabled]="workspaceForm.invalid">
+          <span>Search</span>
+          <cca-spinner #searchSpinner [size]="SpinnerSize.EXTRA_SMALL" color="accent"></cca-spinner>
+        </button>
+        <button type="button" mat-raised-button (click)="clearForm()">
+          Clear
+        </button>
+      </div>
+    </form>
+  </cca-card-panel>
+  <cca-card-panel class="no-content-padding" [header]="(results?.totalElements || 0) + ' Results'" style="width:100%" [hidden]="!results">
+    <div class="table-container condensed-table case-workspace-results-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+      <table mat-table [dataSource]="dataSource" matSort [hidden]="!dataSource.data?.length">
+        <ng-container matColumnDef="sid">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Case ID (SID)</th>
+          <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
+          <td mat-cell *matCellDef="let element">{{element.createdDate?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="modifiedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Modified Date</th>
+          <td mat-cell *matCellDef="let element">{{element.modifiedDate?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+          <td mat-cell *matCellDef="let element">{{element.sessionType?.displayName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="queue">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Queue</th>
+          <td mat-cell *matCellDef="let element">{{element.queue?.displayName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <cca-session-status [status]="element.status" *ngIf="element.status"></cca-session-status>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Team</th>
+          <td mat-cell *matCellDef="let element">{{element.team?.displayName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="assignee">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Assignee</th>
+          <td mat-cell *matCellDef="let element">
+            <cca-user-chip [user]="element.user" *ngIf="element.user"></cca-user-chip>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td class="column-right" mat-cell *matCellDef="let element">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end center" ccaClickSwallower *ngIf="element.isWorkable">
+              <fa-icon class="assign-session-icon-button text-accent clickable" icon="user-edit" (click)="openAssignSessionDialog(element)" matTooltip="Edit Case"></fa-icon>
+              <cca-work-session-button class="case-session" [session]="element" [canWork]="true" ccaClickSwallower></cca-work-session-button>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="balance">
+          <th class="text-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Balance</th>
+          <td class="text-right" mat-cell *matCellDef="let element">{{element.customer.accounts.spending.availableBalance?.displayValue}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable" (click)="openViewSessionDialog(row)"></tr>
+      </table>
+      <mat-paginator [pageSize]="50" [hidden]="!results?.totalElements || results?.totalElements <= 50"></mat-paginator>
+      <cca-spinner #resultsSpinner [size]="SpinnerSize.MEDIUM"></cca-spinner>
+    </div>
+  </cca-card-panel>
+</div>
+

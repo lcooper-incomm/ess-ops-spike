@@ -1,0 +1,22 @@
+<cca-card-panel header='Application Properties'>
+  <div class="table-container" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}" style="overflow: hidden">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource?.data?.length">No Results Available</div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort matSortActive="displayName" matSortDirection="asc" [hidden]="!dataSource.data?.length">
+    
+    <ng-container matColumnDef="displayName" style="min-width:300px;">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width:300px;">Name</th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.description"> {{element.displayName}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.description"> {{element.value}}</td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable" (click)="openEditProperty(row)"></tr>
+  </table>
+  <cca-spinner #loadingSpinner></cca-spinner>
+  <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+</div>
+</cca-card-panel>

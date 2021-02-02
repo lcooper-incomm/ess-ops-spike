@@ -1,0 +1,19 @@
+<div class="session-panel-container mat-elevation-z1" [ngClass]="{'dock-pinned': isDockPinned}" [hidden]="isCollapsed">
+  <cca-session-panel-header (click)="toggleIsCollapsed()"></cca-session-panel-header>
+  <div class="session-panel-content" [hidden]="isCollapsed">
+    <div fxLayout="row" *ngIf="sessionForm">
+      <div fxFlex>
+        <form [formGroup]="sessionForm">
+          <cca-default-session-panel [form]="sessionForm" *ngIf="session.sessionClassType !== SessionClassType.CASE"></cca-default-session-panel>
+          <cca-case-session-panel [form]="sessionForm" *ngIf="session.sessionClassType === SessionClassType.CASE"></cca-case-session-panel>
+        </form>
+      </div>
+      <cca-session-actions [form]="sessionForm"></cca-session-actions>
+    </div>
+    <cca-selection-navigation
+      *ngIf="session.selections.length && session.sessionClassType !== SessionClassType.CASE"
+      [selections]="session.selections"
+    ></cca-selection-navigation>
+    <cca-auto-save-feedback></cca-auto-save-feedback>
+  </div>
+</div>

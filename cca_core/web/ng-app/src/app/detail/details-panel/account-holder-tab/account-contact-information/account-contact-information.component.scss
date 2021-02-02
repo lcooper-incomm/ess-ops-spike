@@ -1,0 +1,57 @@
+@import '../../../../../colors';
+
+h4, h5 {
+  margin: 0;
+}
+
+.contact-content {
+  margin: 5px 30px 15px 0;
+}
+
+.contact-icon {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.edit-btn {
+  margin-right: 10px;
+}
+
+.phone-container {
+  width: 15px;
+  height: 15px;
+}
+
+.primary-container {
+  line-height: 14px;
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+.add-container {
+  color: mat-color($cca-app-session);
+}
+
+.submit-add-button {
+  color: mat-color($cca-app-primary);
+}
+
+.delete-button {
+  color: mat-color($cca-app-warn);
+}
+
+.popover-confirmation {
+  $width: 100%;
+  width: calc(100% + 30px);
+  height: 30px;
+  background-color: mat-color($cca-app-warn);
+  margin-left: -15px;
+  margin-bottom: -15px;
+  border-radius: 0 0 6px 6px;
+  padding: 5px;
+  color: #fff;
+}
+
+.popover-button {
+  height: 20px;
+}

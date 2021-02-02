@@ -1,0 +1,14 @@
+<div class="law-enforcement-component-container">
+  <form [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutGap="15px">
+      <div>
+        <h4 class="session-heading">Requester</h4>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-text-field id="session-law-enforcement-agency" data-test-id="session-law-enforcement-agency" class="default-field-width" [form]="form" controlName="agency" placeholder="Agency"></cca-text-field>
+          <cca-text-field id="session-law-enforcement-badge-number" data-test-id="session-law-enforcement-badge-number" class="default-field-width" [form]="form" controlName="badgeNumber" placeholder="Badge Number"></cca-text-field>
+          <cca-text-field id="session-law-enforcement-case-number" data-test-id="session-law-enforcement-case-number" class="default-field-width" [form]="form" controlName="caseNumber" placeholder="Case Number"></cca-text-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

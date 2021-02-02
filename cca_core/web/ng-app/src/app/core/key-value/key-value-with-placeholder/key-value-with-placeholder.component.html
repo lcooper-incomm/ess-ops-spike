@@ -1,0 +1,4 @@
+<cca-key-value [key]="key" [alignment]="alignment" [keyWidthPercent]="keyWidthPercent">
+  <div *ngIf="!isUndefined" [class]="valueClass">{{dictionary ? displayValue : value}}</div>
+  <div class="text-muted" *ngIf="isUndefined">{{naValue}}</div>
+</cca-key-value>

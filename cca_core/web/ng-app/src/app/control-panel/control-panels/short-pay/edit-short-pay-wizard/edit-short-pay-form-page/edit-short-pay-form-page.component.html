@@ -1,0 +1,18 @@
+<h4>Short Pay</h4>
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder key="ID"
+                                  [value]="wizard.model.shortPay.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="row" fxFlex="grow" style="justify-content: space-between;">
+    <div fxLayout="column" fxFlex="0 0 48%">
+      <cca-text-field [form]="wizardForm" controlName="merchantId" placeholder="Merchant ID"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="locationId" placeholder="Location ID"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="terminalId" placeholder="Terminal ID"></cca-text-field>
+    </div>
+    <div fxLayout="column" fxFlex="0 0 48%">
+      <cca-text-field [form]="wizardForm" controlName="merchantName" placeholder="Merchant Name"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="locationName" placeholder="Location Name"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="terminalNumber" placeholder="Terminal Number"></cca-text-field>
+    </div>
+  </div>
+</form>

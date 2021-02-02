@@ -1,0 +1,24 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+  <div>
+    <cca-key-value-with-placeholder key="From Card" [value]="wizard.model.fromCard.identifiers.pan"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Available Balance" [value]="wizard.model.selection.getCustomer().accounts.spending.availableBalance?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value key="Transfer Fee">
+      <div class="text-error">
+        <strong *ngIf="wizard.model.transferFee">{{wizard.model.transferFee.displayValue}}</strong>
+        <strong *ngIf="!wizard.model.transferFee">Fees may apply. See Fee Plan for details.</strong>
+      </div>
+    </cca-key-value>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <cca-numeric-text-field [form]="wizardForm" controlName="toCard" placeholder="To Card"></cca-numeric-text-field>
+    <button class="container" mat-mini-fab color="primary" [disabled]="isValidated" (click)="validateToCard()">
+      <fa-icon [icon]="isValidated ? 'check' : 'search'"></fa-icon>
+      <cca-spinner #validateSpinner [rounded]="true" [size]="SpinnerSize.EXTRA_SMALL" color="accent"></cca-spinner>
+    </button>
+  </div>
+  <cca-simple-panel color="orange" *ngIf="validationError">
+    {{validationError}}
+  </cca-simple-panel>
+  <cca-currency-field class="default-field-width-short" [form]="wizardForm" placeholder="Transfer Amount" controlName="amount" *ngIf="isValidated"></cca-currency-field>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment" *ngIf="isValidated"></cca-comment-field>
+</div>

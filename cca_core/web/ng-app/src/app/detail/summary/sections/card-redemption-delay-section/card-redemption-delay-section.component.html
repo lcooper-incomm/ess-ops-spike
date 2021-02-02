@@ -1,0 +1,10 @@
+<div class="summary-section card-redemption-delay-section container">
+  <cca-key-value key="Redemption Delay">
+    <div *ngIf="selection?.getCard()?.redemption?.redemptionDelay">{{selection.getCard().redemption.redemptionDelay}} {{selection.getCard().redemption.redemptionDelay === 1 ? 'Minute' : 'Minutes'}}</div>
+    <div class="text-muted" *ngIf="!selection?.getCard()?.redemption?.redemptionDelay">None</div>
+  </cca-key-value>
+  <cca-key-value key="Funds Available In" *ngIf="allFundsAvailableDate">
+    <span class="text-muted" *ngIf="!isFundsAvailableDateInFuture">Now</span>
+    <cca-running-timer [start]="allFundsAvailableDate" *ngIf="isFundsAvailableDateInFuture"></cca-running-timer>
+  </cca-key-value>
+</div>

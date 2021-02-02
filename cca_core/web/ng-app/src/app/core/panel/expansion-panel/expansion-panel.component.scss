@@ -1,0 +1,49 @@
+.mat-expansion-panel {
+  border-radius: 0 !important;
+
+  .mat-expansion-panel-header {
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    border-radius: 0;
+    border: 1px solid #D9DCF0;
+    height: 100%;
+    min-height: 40px;
+
+    &:before {
+      display: flex;
+      width: 40px;
+      background: #D9DCF0;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-size: 1.2em;
+      justify-content: center;
+      align-items: center;
+      content: "\f105";
+    }
+
+    .title-header {
+      margin-bottom: 0;
+    }
+
+    .mat-expansion-panel-header-title {
+      align-items: center;
+      padding-left: 10px;
+    }
+  }
+
+  .mat-expansion-panel-header.mat-expanded {
+    &:before {
+      content: "\f107";
+    }
+  }
+
+  .mat-action-row {
+    border-top-style: none;
+    padding: 0;
+
+    .action-toolbar {
+      width: 100%;
+    }
+  }
+}

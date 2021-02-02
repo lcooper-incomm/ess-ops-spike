@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="cca-dev-chrome-regression" verbose="1" parallel="classes" thread-count="2">
+
+    <test name="Regression">
+
+        <!-- WebDriver Configuration -->
+        <parameter name="browser" value="chrome"/>
+        <parameter name="browserVersion" value=""/>
+        <parameter name="testType" value="regression"/>
+        <parameter name="platform" value="WINDOWS"/>
+
+        <!-- Test Package Configuration -->
+        <packages>
+            <package name="com.incomm.cca.qa.functional.*"/>
+            <package name="com.incomm.cca.qa.acceptance.*"/>
+            <package name="com.incomm.cca.qa.integration.*"/>
+        </packages>
+
+    </test>
+
+</suite>

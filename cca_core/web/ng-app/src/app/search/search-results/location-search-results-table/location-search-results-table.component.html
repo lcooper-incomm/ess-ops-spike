@@ -1,0 +1,46 @@
+<div class="table-container condensed-table location-search-results-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+  <table mat-table [dataSource]="dataSource" matSort [hidden]="!dataSource.data?.length">
+    <ng-container matColumnDef="locationId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let element">{{element.legacyId}}</td>
+    </ng-container>
+    <ng-container matColumnDef="locationName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="merchantName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Merchant</th>
+      <td mat-cell *matCellDef="let element">{{element.merchant.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let element">{{element.getPhoneNumberByType('WORK')?.number}}</td>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+      <td mat-cell *matCellDef="let element">{{element.getAddressByType('PHYSICAL')?.line1}}</td>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+      <td mat-cell *matCellDef="let element">{{element.getAddressByType('PHYSICAL')?.city}}</td>
+    </ng-container>
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+      <td mat-cell *matCellDef="let element">{{element.getAddressByType('PHYSICAL')?.state}}</td>
+    </ng-container>
+    <ng-container matColumnDef="postalCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Postal Code</th>
+      <td mat-cell *matCellDef="let element">{{element.getAddressByType('PHYSICAL')?.postalCode}}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element">
+        <cca-location-status [status]="element.getStatusByPlatform('MDM')"></cca-location-status>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable" (click)="selectResult(row)"></tr>
+  </table>
+  <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+</div>

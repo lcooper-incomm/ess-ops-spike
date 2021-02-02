@@ -1,0 +1,10 @@
+<div class="address-component" [formGroup]="form" fxLayout="column">
+  <cca-text-field class="address-line-1" [form]="form" controlName="line1" placeholder="Line 1"></cca-text-field>
+  <cca-text-field class="address-line-2" [form]="form" controlName="line2" placeholder="Line 2"></cca-text-field>
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <cca-postal-code-field [form]="form" style="width:80px;"></cca-postal-code-field>
+    <cca-text-field class="address-city default-field-width" [form]="form" controlName="city" placeholder="City"></cca-text-field>
+    <cca-state-province-field [form]="form" style="width:140px;"></cca-state-province-field>
+  </div>
+  <cca-text-field class="address-country" [form]="form" controlName="country" placeholder="Country" hidden></cca-text-field>
+</div>

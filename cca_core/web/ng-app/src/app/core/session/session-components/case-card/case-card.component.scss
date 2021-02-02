@@ -1,0 +1,40 @@
+.card {
+  width: 170px;
+  font-size: 12px;
+  position: relative;
+  height: 40px;
+
+  &.highlight {
+    background-color: rgba(33, 150, 243, .2);
+  }
+
+  .selection-data-container {
+    padding: 5px;
+
+    .card-status-container {
+      margin-top: 5px;
+    }
+
+    .information-container {
+      height: auto;
+      line-height: 12px;
+    }
+  }
+
+  .status-container {
+    height: 100%;
+    width: 40px;
+    background-color: transparent;
+
+    &.warning {
+
+      fa-icon {
+        color: darkorange;
+      }
+    }
+
+    fa-icon {
+      color: green;
+    }
+  }
+}

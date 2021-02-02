@@ -1,0 +1,11 @@
+<cca-key-value key="Case ID" *ngIf="wizard.model.returnedSession">
+  <a href="javascript:void(0)" (click)="openViewSessionDialog()">{{wizard.model.returnedSession.id}}</a>
+</cca-key-value>
+<br/>
+<div *ngIf="!wizard.model.isTransactionsDisputed">
+  <span>CCA was unable to formally dispute the transaction(s) in SERVE due to an unexpected error.</span>
+</div>
+<div *ngIf="!wizard.model.isTransactionsDisputed">
+  <br/>
+  <span>Despite this error having occurred, please be advised that the Dispute Case <strong>IS</strong> open, and will still be worked by the Dispute Team. <strong>Please DO NOT attempt to raise another Dispute Case for these transactions!</strong></span>
+</div>

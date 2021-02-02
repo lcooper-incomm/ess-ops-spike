@@ -1,0 +1,36 @@
+<div class="details-panel-container container mat-elevation-z1" fxLayout="column">
+  <mat-toolbar class="details-panel-navigation" fxLayout="row wrap">
+    <button mat-button [ngClass]="{active: selection?.selectedTab === tab.value}" (click)="selectTab(tab)" *ngFor="let tab of tabs">{{tab.displayValue}}</button>
+  </mat-toolbar>
+  <div class="details-panel-content" fxFlex [ngSwitch]="selection?.selectedTab">
+    <cca-transaction-history-tab *ngSwitchCase="'TRANSACTION_HISTORY'"></cca-transaction-history-tab>
+    <cca-maples-transaction-history-tab *ngSwitchCase="'MAPLES_TRANSACTION_HISTORY'"></cca-maples-transaction-history-tab>
+    <cca-order-items-tab *ngSwitchCase="'ORDER_ITEMS'"></cca-order-items-tab>
+    <cca-order-configurations-tab *ngSwitchCase="'ORDER_CONFIGURATIONS'"></cca-order-configurations-tab>
+    <cca-comments-tab *ngSwitchCase="'COMMENTS'"></cca-comments-tab>
+    <cca-account-documents-tab *ngSwitchCase="'ACCOUNT_DOCUMENTS'"></cca-account-documents-tab>
+    <cca-account-fees-tab *ngSwitchCase="'ACCOUNT_FEES'"></cca-account-fees-tab>
+    <cca-account-funding-tab *ngSwitchCase="'ACCOUNT_FUNDING'"></cca-account-funding-tab>
+    <cca-account-history-tab *ngSwitchCase="'ACCOUNT_HISTORY'"></cca-account-history-tab>
+    <cca-account-holder-tab *ngSwitchCase="'ACCOUNT_HOLDER'"></cca-account-holder-tab>
+    <cca-account-limits-tab *ngSwitchCase="'ACCOUNT_LIMITS'"></cca-account-limits-tab>
+    <cca-account-notifications-tab *ngSwitchCase="'ACCOUNT_NOTIFICATIONS'"></cca-account-notifications-tab>
+    <cca-account-status-codes-tab *ngSwitchCase="'ACCOUNT_STATUS_CODES'"></cca-account-status-codes-tab>
+    <cca-customer-alerts-tab *ngSwitchCase="'ALERTS'"></cca-customer-alerts-tab>
+    <cca-account-alerts-tab *ngSwitchCase="'ACCOUNT_ALERTS'"></cca-account-alerts-tab>
+    <cca-customer-cards-tab *ngSwitchCase="'CARDS'"></cca-customer-cards-tab>
+    <cca-related-accounts-tab *ngSwitchCase="'RELATED_ACCOUNTS'"></cca-related-accounts-tab>
+    <cca-location-contacts-tab *ngSwitchCase="'CONTACTS'"></cca-location-contacts-tab>
+    <cca-customer-orders-tab *ngSwitchCase="'CUSTOMER_ORDERS'"></cca-customer-orders-tab>
+    <cca-order-deliveries-tab *ngSwitchCase="'ORDER_DELIVERIES'"></cca-order-deliveries-tab>
+    <cca-customer-documents-tab *ngSwitchCase="'DOCUMENTS'"></cca-customer-documents-tab>
+    <cca-customer-fees-tab *ngSwitchCase="'FEES'"></cca-customer-fees-tab>
+    <cca-related-cases-tab *ngSwitchCase="'RELATED_CASES'"></cca-related-cases-tab>
+    <cca-order-related-jobs-tab *ngSwitchCase="'RELATED_JOBS'"></cca-order-related-jobs-tab>
+    <cca-customer-limits-tab *ngSwitchCase="'LIMITS'"></cca-customer-limits-tab>
+    <cca-order-notifications-tab *ngSwitchCase="'ORDER_NOTIFICATIONS'"></cca-order-notifications-tab>
+    <cca-order-processing-history-tab *ngSwitchCase="'ORDER_PROCESSING_HISTORY'"></cca-order-processing-history-tab>
+    <cca-location-terminals-tab *ngSwitchCase="'LOCATION_TERMINALS'"></cca-location-terminals-tab>
+    <cca-mobile-wallet-tab *ngSwitchCase="'MOBILE_WALLET'"></cca-mobile-wallet-tab>
+  </div>
+</div>

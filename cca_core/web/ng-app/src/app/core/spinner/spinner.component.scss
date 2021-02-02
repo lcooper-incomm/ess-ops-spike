@@ -1,0 +1,14 @@
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(119, 120, 123, 0.1); //Incomm-grey-2 with transparency
+  cursor: default;
+  z-index: 10;
+
+  &.rounded {
+    border-radius: 50%;
+  }
+}

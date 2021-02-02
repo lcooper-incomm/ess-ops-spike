@@ -1,0 +1,27 @@
+<cca-card-panel header='Features'>
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+    <mat-form-field class="default-field-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div class="table-container" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource?.data?.length">No Results Available</div>
+
+    <cca-spinner #loadingSpinner></cca-spinner>
+
+    <cscore-table *ngIf="dataSource?.data?.length > 0"
+                  class="highlight-rows"
+                  [dataSource]="dataSource"
+                  [columns]="columns"
+                  initialSortColumn="name"
+                  initialSortDirection="asc">
+
+      <div *cscoreTableCellDef="let item; key: 'isActive'" fxLayout="row" fxLayoutAlign="center center">
+        <mat-slide-toggle [checked]="item.isActive" (change)="setState($event, item)"></mat-slide-toggle>
+      </div>
+    </cscore-table>
+
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="25" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 25"></mat-paginator>
+  </div>
+</cca-card-panel>

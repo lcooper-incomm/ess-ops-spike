@@ -1,0 +1,27 @@
+<cca-expansion-panel
+  class="alt-expansion-panel "
+  title="Account Features"
+  [expanded]="true"
+  [hasActionRow]="false"
+  [buildingActions]="buildingActions">
+  <div fxFlex fxLayout="row nowrap" fxLayoutGap="10px" class="alt-panel-container">
+    <div class="column" fxFlex fxLayout="column">
+      <mat-slide-toggle [checked]="features?.isRemoteDepositEnabled" [disabled]="disableToggle" name="remoteDeposit" (change)="toggleFeature($event)">Is Remote Deposit Enabled</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.isDirectDepositEnabled" [disabled]="disableToggle" name="directDeposit" (change)="toggleFeature($event)">Is Direct Deposit Enabled</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.isPdaEnabled" [disabled]="disableToggle" name="pda" (change)="toggleFeature($event)">Is PDA Enabled</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.isStarterCard" [disabled]="readOnly">Is Starter Card</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.isNegotiationEnabled" [disabled]="readOnly">Is Negotiation Enabled</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.isPermanent" [disabled]="readOnly">Is Permanent</mat-slide-toggle>
+    </div>
+    <div class="column" fxFlex fxLayout="column">
+      <mat-slide-toggle [checked]="features?.isEligibleForCashTransfer" [disabled]="readOnly">Is Eligible For Cash Transfer</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.allowCrossBinTransfer" [disabled]="readOnly">Allow Cross Bin Transfer</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.hasMultipleAccounts" [disabled]="readOnly">Has Multiple Accounts</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.hasEmailVerified" [disabled]="readOnly">Has Email Verified</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.hasCardActivated" [disabled]="readOnly">Has Card Activated</mat-slide-toggle>
+      <mat-slide-toggle [checked]="features?.isUpgradeEligible" [disabled]="readOnly">Is Upgrade Eligible</mat-slide-toggle>
+    </div>
+    <cca-spinner #toggleSpinner></cca-spinner>
+  </div>
+</cca-expansion-panel>
+

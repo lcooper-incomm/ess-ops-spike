@@ -1,0 +1,16 @@
+<div class="summary-section order-shipments-section container">
+  <cca-key-value key="Shipment Date" alignment="start start">
+    <div fxFlex *ngIf="shipments.length">
+      <div class="shipment-preview" *ngFor="let shipment of shipments | limit : 0 : 5">
+        <a href="javascript:void(0)" (click)="openShipmentsTab(shipment)" fxLayout="row" fxLayoutGap="3px">
+          <div>{{shipment.createdDate?.displayValue || 'PENDING'}}</div>
+          <div>{{shipment.shippingMethod}}</div>
+        </a>
+      </div>
+      <div *ngIf="shipments.length > 5">
+        <a id="order-shipments-show-all-link" data-test-id="order-shipments-show-all-link" href="javascript:void(0)" (click)="openShipmentsTab()">Show All ({{shipments.length}})</a>
+      </div>
+    </div>
+    <div class="text-muted" *ngIf="!shipments.length">Pending</div>
+  </cca-key-value>
+</div>

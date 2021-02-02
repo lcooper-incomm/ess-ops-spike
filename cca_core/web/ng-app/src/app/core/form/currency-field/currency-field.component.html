@@ -1,0 +1,14 @@
+<div [formGroup]="form">
+  <mat-form-field>
+    <input class="currency-field form-field" type="text" matInput [formControlName]="controlName" [ccaCurrencyFormat]="form.get(controlName)" [placeholder]="placeholder" [required]="isControlRequired(form.get(controlName))"/>
+    <mat-error *ngIf="form.get(controlName).hasError('required')">
+      <i>This field is required</i>
+    </mat-error>
+    <mat-error *ngIf="form.get(controlName).hasError('min')">
+      <i>Must be at least {{form.get(controlName).getError('min').min}}</i>
+    </mat-error>
+    <mat-error *ngIf="form.get(controlName).hasError('max')">
+      <i>Must not be greater than {{form.get(controlName).getError('max').max}}</i>
+    </mat-error>
+  </mat-form-field>
+</div>

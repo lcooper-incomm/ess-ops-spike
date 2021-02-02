@@ -1,0 +1,56 @@
+<div class="wizard-progress-bg"></div>
+<div class="wizard-progress-container" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="wizard-progress-step"
+       [ngStyle]="{width:page.stepperWidth}"
+       [ngClass]="{active: wizard.currentPageKey === page.key}"
+       *ngFor="let page of getPages(); index as i">
+    <div fxLayout="column" fxLayoutAlign="center center">
+
+      <ng-container *ngIf="!page.isFailed">
+        <div class="current-page"
+             *ngIf="wizard.currentPageKey === page.key && (i+1) != getPages().length">
+          <svg height="42" width="42">
+            <circle cx="21" cy="21" r="18" stroke="white" stroke-width="3" fill="#2196f3"/>
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".35em" font-size="18px">{{i+1}}</text>
+          </svg>
+        </div>
+
+        <div *ngIf="page.isVisited && wizard.currentPageKey != page.key && (i+1) !== getPages().length">
+          <svg height="36" width="36">
+            <circle cx="18" cy="18" r="15" stroke="white" stroke-width="3" fill="#999"/>
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".35em">{{i+1}}</text>
+          </svg>
+        </div>
+
+        <div *ngIf="(i+1) === getPages().length && page.isVisited">
+          <fa-icon class="icon-success" fxFlexAlign="center" icon="check"></fa-icon>
+          <svg height="42" width="42">
+            <circle cx="21" cy="21" r="18" stroke="white" stroke-width="3" fill="green"/>
+          </svg>
+        </div>
+
+        <div *ngIf="!page.isVisited">
+          <svg height="36" width="36">
+            <circle cx="18" cy="18" r="15" stroke="white" stroke-width="3" fill="#e4e4e4"/>
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".35em">{{i+1}}</text>
+          </svg>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="page.isFailed">
+        <div *ngIf="!page.isVisited">
+          <svg height="36" width="36">
+            <circle cx="18" cy="18" r="15" stroke="white" stroke-width="3" fill="#e4e4e4"/>
+            <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".35em">{{i+1}}</text>
+          </svg>
+        </div>
+        <div *ngIf="page.isVisited">
+          <fa-icon class="icon-error" fxFlexAlign="center" icon="exclamation"></fa-icon>
+          <svg height="42" width="42">
+            <circle cx="21" cy="21" r="18" stroke="white" stroke-width="3" fill="red"/>
+          </svg>
+        </div>
+      </ng-container>
+      <div class="mat-caption">{{page.navigationTitle}}</div>
+    </div>
+  </div>
+</div>

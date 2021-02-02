@@ -1,0 +1,23 @@
+<div fxLayout="row" fxLayoutGap="10px">
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Product Category" [value]="card.productCategory"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Product Group" [value]="card.productGroup" *ngIf="card.isVmsGiftCard"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Product Type" [value]="customer.productType"></cca-key-value-with-placeholder>
+    <br/>
+    <cca-key-value-with-placeholder key="Fulfillment Status" [value]="shippedStatus"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Activation Date" [value]="card.activation?.activationDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Expiration Date" [value]="card.expirationDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Inventory Date" [value]="card.inventoryDate?.displayValue"></cca-key-value-with-placeholder>
+    <br/>
+    <cca-card-purchase-location-section [card]="card" [useGivenCard]="true"></cca-card-purchase-location-section>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Package ID" [value]="card.identifiers.packId"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Serial Number" [value]="card.identifiers.serialNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="VAN" [value]="card.identifiers.van"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Is PIN Set?" [value]="card.getIsPinSetDisplayValue()"></cca-key-value-with-placeholder>
+  </div>
+</div>
+<cca-customer-card-panel-toolbar [card]="card"></cca-customer-card-panel-toolbar>

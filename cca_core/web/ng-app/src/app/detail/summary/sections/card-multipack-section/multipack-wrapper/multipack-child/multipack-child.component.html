@@ -1,0 +1,7 @@
+<div class="multipack-child-container">
+  <a class="container" href="javascript:void(0)" (click)="linkToCard()" *ngIf="child.serialNumber !== selection?.getCard()?.identifiers.serialNumber">
+    {{child.serialNumber}}
+    <cca-spinner #multipackChildSpinner></cca-spinner>
+  </a>
+  <div *ngIf="child.serialNumber === selection?.getCard()?.identifiers.serialNumber">{{child.serialNumber}}</div>
+</div>

@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="cca-uat-chrome-smoke" verbose="1" parallel="classes" thread-count="2">
+
+    <test name="Smoke">
+
+        <!-- WebDriver Configuration -->
+        <parameter name="browser" value="chrome"/>
+        <parameter name="browserVersion" value=""/>
+        <parameter name="testType" value="smoke"/>
+        <parameter name="platform" value="WINDOWS"/>
+
+        <!-- Test Group Configuration -->
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+
+        <!-- Test Package Configuration -->
+        <packages>
+            <package name="com.incomm.cca.qa.functional.*"/>
+            <package name="com.incomm.cca.qa.acceptance.*"/>
+        </packages>
+
+    </test>
+
+</suite>

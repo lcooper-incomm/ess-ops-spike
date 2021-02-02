@@ -1,0 +1,24 @@
+<form [formGroup]="wizardForm" fxLayout="column">
+  <div class="info-container">
+    <cca-key-value-with-placeholder key="Account Number" [value]="accountNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Available Balance" [value]="availableBalance"></cca-key-value-with-placeholder>
+  </div>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <cca-currency-field [form]="wizardForm" controlName="amount" placeholder="Amount"></cca-currency-field>
+    <cca-select-field
+      class="default-width"
+      controlName="adjustmentType"
+      [form]="wizardForm"
+      [options]="adjustmentTypes"
+      placeholder="Adjustment Type"
+    ></cca-select-field>
+  </div>
+  <cca-select-field
+    class="default-width"
+    controlName="reason"
+    [form]="wizardForm"
+    [options]="reasons"
+    placeholder="Reason"
+  ></cca-select-field>
+  <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment"></cca-comment-field>
+</form>

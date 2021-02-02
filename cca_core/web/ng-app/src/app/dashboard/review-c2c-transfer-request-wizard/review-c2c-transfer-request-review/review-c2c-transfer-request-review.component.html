@@ -1,0 +1,39 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+  
+  <div fxLayout="column" fxFlex="40">
+    <cca-simple-panel>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="column">
+          <h4><strong>{{this.wizard.model.response?.fromCardholder}}</strong></h4>
+          <h5><strong>{{this.wizard.model.response?.fromPan}}</strong></h5>
+        </div>
+        <h5 class="text-error" fxLayoutAlign="end end"><strong>-{{this.wizard.model?.transactionTotal}}</strong></h5>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="end end" style="margin-top: 20px">
+        <h5 class="text-error">Transfer Amount: <strong>-{{this.wizard.model.response?.amount?.displayValue}}</strong></h5>
+        <h5 class="text-error">Transfer Fee: <strong>-{{this.wizard.model.response?.transferFee?.displayValue}}</strong></h5>
+      </div>
+    </cca-simple-panel>
+  
+  </div>
+  
+  <fa-icon *ngIf="wizard.model.isApproved" class="align-icon text-success" icon="arrow-alt-circle-right"></fa-icon>
+  <fa-icon *ngIf="!wizard.model.isApproved" class="align-icon text-error" icon="ban"></fa-icon>
+  
+  <div fxLayout="column" fxFlex="40">
+    <cca-simple-panel>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="column">
+          <h4><strong>{{this.wizard.model.response?.toCardholder}}</strong></h4>
+          <h5><strong>{{this.wizard.model.response?.toPan}}</strong></h5>
+        </div>
+        <h5 class="text-success" fxLayoutAlign="end end"><strong>+{{this.wizard.model?.transactionTotal}}</strong></h5>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="end end" style="margin-top: 20px; margin-bottom: 20px">
+        <h5 class="text-success">Transfer Amount: <strong>+{{this.wizard.model.response?.amount?.displayValue}}</strong></h5>
+      </div>
+    </cca-simple-panel>
+  
+  </div>
+
+</div>

@@ -1,0 +1,60 @@
+<form [formGroup]="wizardForm" fxLayout="column">
+  <div *ngIf="wizard.model.cards?.length > 0" fxLayout="column" class="text-accent mb-15">
+    Individual Line Items to Refund:
+    <div *ngFor="let card of wizard.model.cards" style="margin-left: 15px;">
+      {{card.id}}
+      <span style="margin-left: 10px; margin-right: 10px;">-</span>
+      {{card.parentItem.name}}
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div fxLayout="column">
+      <mat-checkbox formControlName="isSubTotalRefunded">Refund Subtotal</mat-checkbox>
+      <mat-checkbox formControlName="isPurchaseFeesRefunded">Refund Purchase Fees</mat-checkbox>
+      <mat-checkbox *ngIf="wizard.model.selection.platform !== 'BOL'
+         || (wizard.model.selection.platform === 'BOL' && isPhysical && !isItemRefund)" formControlName="isShippingFeesRefunded">Refund Shipping Fees</mat-checkbox>
+      <div *ngIf="wizard.model.selection.platform === PlatformType.BOL && !isItemRefund">
+        <mat-checkbox formControlName="isCustomAmountRefunded">Refund Custom Amount</mat-checkbox>
+        <cca-currency-field class="default-field-width" [form]="wizardForm" controlName="customRefund"
+                            placeholder="Custom Refund Amount" [hidden]="!isCustomAmountRefunded"></cca-currency-field>
+      </div>
+    </div>
+
+    <span fxFlex></span>
+
+    <div fxLayout="column">
+      <cca-key-value class="row-align" key="Subtotal" [keyWidthPercent]="0">
+        <div class="currency-field">{{wizard.model.subtotalAmount}}</div>
+      </cca-key-value>
+      <cca-key-value class="row-align" key="Total Purchase Fees" [keyWidthPercent]="0">
+        <div class="currency-field">{{wizard.model.purchasingFeeAmount}}</div>
+      </cca-key-value>
+      <cca-key-value *ngIf="wizard.model.selection.platform !== 'BOL'
+         || (wizard.model.selection.platform === 'BOL' && isPhysical && !isItemRefund)" class="row-align" key="Total Shipping Fees" [keyWidthPercent]="0">
+        <div class="currency-field">{{wizard.model.shippingFeeAmount}}</div>
+      </cca-key-value>
+      <cca-key-value class="row-align" key="Total Discounts" [keyWidthPercent]="0">
+        <div class="currency-field">{{wizard.model.discountFeeAmount}}</div>
+      </cca-key-value>
+      <cca-key-value class="row-align" key="Grand Total" [keyWidthPercent]="0" style="margin-top: 20px">
+        <div class="currency-field">{{wizard.model.grandTotalAmount}}</div>
+      </cca-key-value>
+      <cca-key-value class="row-align" key="Refund Amount" [keyWidthPercent]="0">
+        <div class="currency-field">{{wizard.model.refundDisplayAmount}}</div>
+      </cca-key-value>
+  </div>
+
+  </div>
+  <div style="margin-top: 15px">
+    <cca-simple-panel color="red" *ngIf="calculateRefundError">
+      The Refund Amount could not be auto calculated.  Use the custom amount or try the wizard again.
+    </cca-simple-panel>
+    <cca-simple-panel color="red" *ngIf="wizardForm.get('refundAmount').hasError('max')">
+      The Refund Amount cannot exceed the Grand Total. Please adjust the Refund Amount.
+    </cca-simple-panel>
+    <cca-simple-panel color="red" *ngIf="wizardForm.get('refundAmount').hasError('min')">
+      The Refund Amount must be greater than $0.00. Please adjust the Refund Amount.
+    </cca-simple-panel>
+  </div>
+  <cca-comment-field controlName="comment" [form]="wizardForm" placeholder="Comment" *ngIf="wizard.model.selection.platform === PlatformType.BOL"></cca-comment-field>
+</form>

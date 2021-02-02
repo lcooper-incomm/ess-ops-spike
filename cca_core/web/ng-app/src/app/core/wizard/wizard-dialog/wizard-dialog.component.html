@@ -1,0 +1,113 @@
+<div class="wizard-container container" fxLayout="row">
+  <!-- The sidebar -->
+  <div class="sidebar-container mat-elevation-z1" *ngIf="currentPage?.isSidebarPopulated() && isSidebarOpen">
+    <h3 class="text-primary" *ngIf="currentPage?.sidebarHeader">{{currentPage?.sidebarHeader}}</h3>
+
+    <cca-simple-panel color="orange" *ngIf="currentPage?.sidebarAlert1">
+      <div [innerHTML]="currentPage?.sidebarAlert1"></div>
+    </cca-simple-panel>
+
+    <div *ngIf="currentPage?.sidebarBody" [innerHTML]="currentPage?.sidebarBody"></div>
+
+    <cca-simple-panel color="orange" *ngIf="currentPage?.sidebarAlert2">
+      <div [innerHTML]="currentPage?.sidebarAlert2"></div>
+    </cca-simple-panel>
+
+  </div>
+
+  <div
+    class="main-container {{wizard.isInitialized ? currentPage?.width : WizardWidth.SMALL}} {{currentPage?.isSidebarPopulated() ? 'sidebar-present' : null}}">
+
+    <div class="header-container" *ngIf="wizard.isInitialized" fxLayout="row" fxLayoutAlign="start center">
+      <h2 mat-dialog-title>{{currentPage?.title}}</h2>
+      <span fxFlex></span>
+      <button class="sidebar-control" mat-icon-button *ngIf="currentPage?.isSidebarPopulated()"
+              (click)="isSidebarOpen = !isSidebarOpen" matTooltip="Toggle Sidebar">
+        <fa-icon icon="question-circle"></fa-icon>
+      </button>
+    </div>
+
+    <mat-dialog-content>
+      <div class="content-container" [ngClass]="{initialized: wizard.isInitialized}">
+
+        <!-- The loading indicator -->
+        <div class="loading-container" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="!wizard.isInitialized || isLoading">
+          <img class="loader-image" src="/assets/images/loader.gif" alt="Loading Indicator" height="80"/>
+        </div>
+
+        <div fxLayout="column" [hidden]="!wizard.isInitialized || isLoading">
+
+          <cca-wizard-progress [pages]="wizard.pages" [wizard]="wizard"
+                               *ngIf="wizard.isInitialized && wizard.displayStepper && !isLoading"></cca-wizard-progress>
+
+          <h3 class="text-primary" *ngIf="!isLoading && currentPage?.mainHeader">{{currentPage?.mainHeader}}</h3>
+
+          <cca-simple-panel color="orange" *ngIf="!isLoading && currentPage?.mainAlert1">
+            <div [innerHTML]="currentPage?.mainAlert1"></div>
+          </cca-simple-panel>
+
+          <div *ngIf="!isLoading && currentPage?.mainBody1" [innerHTML]="currentPage?.mainBody1"
+               id="instruction-text"
+               data-test-id="instruction-text"
+               style="margin-bottom:10px;"></div>
+
+          <form class="form-container">
+            <div #page></div>
+          </form>
+
+          <div *ngIf="!isLoading && currentPage?.mainBody2" [innerHTML]="currentPage?.mainBody2"></div>
+
+          <cca-simple-panel color="orange" *ngIf="!isLoading && currentPage?.mainAlert2">
+            <div [innerHTML]="currentPage?.mainAlert2"></div>
+          </cca-simple-panel>
+
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="actions-container" fxLayout="row" fxLayoutGap="5px" *ngIf="wizard.isInitialized">
+      <div style="max-width: 40%">
+        <div class="footer" *ngIf="currentPage?.footer" [innerHTML]="currentPage?.footer"></div>
+      </div>
+
+      <span fxFlex></span>
+
+      <div fxLayout="row" fxLayoutGap="15px">
+        <cca-confirmable-button color="warn" [label]="currentPage?.deleteButtonText" (onConfirm)="delete()"
+                                *ngIf="currentPage?.isDeletable"></cca-confirmable-button>
+
+        <div [ccaFormFieldToucher]="currentPage?.wizardForm" [hidden]="!currentPage?.isNextable">
+          <button id="next-button" data-test-id="next-button" mat-raised-button color="primary" (click)="next()"
+                  [disabled]="currentPage?.wizardForm && currentPage?.wizardForm.invalid">
+            <span>{{currentPage?.nextButtonText}}</span>
+            <cca-spinner color="accent" #nextSpinner></cca-spinner>
+          </button>
+        </div>
+
+        <div [ccaFormFieldToucher]="currentPage?.wizardForm" [hidden]="!currentPage?.isActionable">
+          <button id="action-button" data-test-id="action-button" mat-raised-button (click)="action()">
+            <span>{{currentPage?.actionButtonText}}</span>
+            <cca-spinner color="accent" #actionSpinner></cca-spinner>
+          </button>
+        </div>
+
+        <div [hidden]="!currentPage?.isBackable">
+          <button id="back-button" data-test-id="back-button" mat-raised-button (click)="back()">
+            <span>{{currentPage?.backButtonText}}</span>
+            <cca-spinner color="primary" #backSpinner></cca-spinner>
+          </button>
+        </div>
+
+        <div [hidden]="!currentPage?.isCloseable">
+          <button id="close-button" data-test-id="close-button" mat-raised-button (click)="close()">
+            <span>{{currentPage?.closeButtonText}}</span>
+            <cca-spinner color="primary" #closeSpinner></cca-spinner>
+          </button>
+        </div>
+
+      </div>
+
+    </mat-dialog-actions>
+  </div>
+
+</div>

@@ -1,0 +1,4 @@
+<cca-spinner [size]="spinnerSize" style="margin-left: auto; margin-right: auto;"></cca-spinner>
+<div *ngIf="notificationPreview && !loadingSpinner.on"
+     class="form-preview"
+     [innerHTML]="notificationPreview?.template"></div>

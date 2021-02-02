@@ -1,0 +1,7 @@
+<cca-customer-account-identification-form
+  [form]="wizardForm"
+  [isCanadian]="wizard.model.selection.getCustomer().isCanadian"
+  [canadianFormOptions]="canadianFormOptions"
+  [platform]="wizard.model.selection.platform"
+  (formChange)="onFormChange()"
+></cca-customer-account-identification-form>

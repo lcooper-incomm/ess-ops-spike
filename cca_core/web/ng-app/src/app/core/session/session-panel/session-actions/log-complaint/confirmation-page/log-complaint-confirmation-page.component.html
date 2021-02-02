@@ -1,0 +1,25 @@
+<div class="container">
+  <cca-key-value-with-placeholder key="First Name" [value]="wizard.model.complaintComponent.firstName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Last Name" [value]="wizard.model.complaintComponent.lastName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Postal Code" [value]="wizard.model.complaintComponent.postalCode" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+  <br/>
+  <cca-key-value-with-placeholder key="Category" [value]="wizard.model.complaintComponent.category?.name"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Source" [value]="wizard.model.complaintComponent.source?.name"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Cause" [value]="wizard.model.complaintComponent.cause?.name" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Priority" [value]="priority" *ngIf="isBankType(BankType.MASTERCARD)"></cca-key-value-with-placeholder>
+  <br/>
+  <cca-key-value-with-placeholder [key]="isBankType(BankType.MASTERCARD) ? 'Account Number/Order Number' : 'Account Number'" [value]="wizard.model.complaintComponent.accountNumber" alignment="start start"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Summary Complaint" [value]="wizard.model.complaintComponent.summary" alignment="start start" *ngIf="isBankType(BankType.MASTERCARD)"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Complaint" [value]="wizard.model.complaintComponent.complaint" alignment="start start"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Resolution" [value]="wizard.model.complaintComponent.resolution" alignment="start start"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Enhancements Needed" [value]="wizard.model.complaintComponent.enhancementsNeeded" alignment="start start" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+  <br/>
+  <div *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)">
+    <cca-key-value-with-placeholder key="Department" [value]="wizard.model.complaintComponent.department?.name"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Type" [value]="wizard.model.complaintComponent.type?.name"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder *ngIf="isBankType(BankType.AMERICAN_EXPRESS)" key="Discrimination Type" [value]="wizard.model.complaintComponent.discriminationType?.name"></cca-key-value-with-placeholder>
+    <br/>
+  </div>
+  <cca-key-value-with-placeholder key="Regulatory?" [value]="wizard.model.complaintComponent.isRegulatory ? 'Yes' : 'No'" *ngIf="isBankType(BankType.AMERICAN_EXPRESS, BankType.BANCORP)"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Financial Compensation" [value]="wizard.model.complaintComponent.compensation" *ngIf="isBankType(BankType.MASTERCARD, BankType.METABANK)"></cca-key-value-with-placeholder>
+</div>

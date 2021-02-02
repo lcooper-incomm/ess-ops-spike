@@ -1,0 +1,1 @@
+EXECUTE add_permission 'CCL_REVERSE_FEE', 'CCL Reverse Fee', 'Ability to reverse a fee on a CCL transaction.';

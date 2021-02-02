@@ -1,0 +1,27 @@
+<h4 class="text-accent">Contact Information</h4>
+<form [formGroup]="wizardForm">
+  <div fxLayout="row" fxLayoutGap="15px">
+    <cca-select-field id="session-privacy-request-product"
+                      data-test-id="session-privacy-request-product"
+                      class="default-field-width"
+                      [form]="wizardForm"
+                      controlName="productId"
+                      [typeAhead]="true"
+                      dictionary="com.incomm.cca.model.dictionary.BankProductDictionary"
+                      placeholder="Product"></cca-select-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <cca-text-field class="default-field-width" [form]="wizardForm" controlName="firstName" placeholder="First Name"></cca-text-field>
+    <cca-text-field class="default-field-width" [form]="wizardForm" controlName="lastName" placeholder="Last Name"></cca-text-field>
+  </div>
+  <cca-address-form [form]="addressForm"></cca-address-form>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <cca-phone-number-field placeholder="Phone Number" controlName="phoneNumber" [form]="wizardForm" class="default-field-width"></cca-phone-number-field>
+    <cca-text-field class="default-field-width" [form]="wizardForm" controlName="email" placeholder="Email"></cca-text-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <cca-text-field class="default-field-width" [form]="wizardForm" controlName="jobTitle" placeholder="Job Title"></cca-text-field>
+    <cca-text-field class="default-field-width" [form]="wizardForm" controlName="account" placeholder="Employee/Account number"></cca-text-field>
+  </div>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</form>

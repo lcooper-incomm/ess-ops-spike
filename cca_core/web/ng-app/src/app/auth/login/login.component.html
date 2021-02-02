@@ -1,0 +1,38 @@
+<div id="login-container" class="login-container container" fxLayout="row" fxLayoutAlign="center start">
+  <div class="login-panel mat-elevation-z2">
+    <img class="incomm-logo" src="/assets/images/incomm-logo.png"/>
+    <div class="login-header-container text-center">
+      <h3 class="text-primary">CCA</h3>
+      <h4 class="text-muted">Customer Care Application</h4>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field id="login-username">
+        <input type="text" matInput formControlName="username" placeholder="Username" required autofocus>
+      </mat-form-field>
+      <mat-form-field id="login-password">
+        <input type="password" matInput formControlName="password" placeholder="Password" required>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="end start" [ccaFormFieldToucher]="loginForm">
+        <button id="login-button" mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+          Sign In
+          <cca-spinner color="accent"></cca-spinner>
+        </button>
+      </div>
+      <cca-simple-panel id="session-timeout-error-panel" color="red" *ngIf="logoutType === LogoutType.INACTIVITY && !showErrorPanel">
+        <div class="text-center" fxLayout="row" fxLayoutAlign="center center">
+          You were signed out due to inactivity.
+        </div>
+      </cca-simple-panel>
+      <cca-simple-panel id="server-reset-error-panel" color="red" *ngIf="logoutType === LogoutType.SERVER_RESTART && !showErrorPanel">
+        <div class="text-center" fxLayout="row" fxLayoutAlign="center center">
+          You were signed out, likely due to system updates.
+        </div>
+      </cca-simple-panel>
+      <cca-simple-panel id="login-error-panel" color="red" *ngIf="showErrorPanel">
+        <div class="text-center" fxLayout="row" fxLayoutAlign="center center">
+          Please check your username and password.
+        </div>
+      </cca-simple-panel>
+    </form>
+  </div>
+</div>

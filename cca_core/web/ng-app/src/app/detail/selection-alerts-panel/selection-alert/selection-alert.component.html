@@ -1,0 +1,9 @@
+<div class="selection-alert-container mat-elevation-z1 clickable" [ngClass]="{clickable: alert.isClickable}" fxLayout="row" [matTooltip]="alert.isClickable ? 'Click for Details' : null">
+  <div class="icon-container {{color}}" fxLayout="row" fxLayoutAlign="center center">
+    <fa-icon [icon]="icon"></fa-icon>
+  </div>
+  <div class="text-container {{color}}" fxFlex>
+    <h4>{{title}}</h4>
+    <div class="body-container">{{body}}</div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div class="instructions-container" fxLayout="column" fxLayoutGap="10px">
+    <div *ngFor="let step of steps; let i = index" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <svg height="18" width="18">
+        <circle cx="9" cy="9" r="9" stroke="white" stroke-width="3" fill="rgba(0, 0, 0, 0.5)"/>
+        <text x="50%" y="50%" text-anchor="middle" fill="white" dy=".35em" font-size="10px">{{ i+1 }}</text>
+      </svg>
+      <div>{{ step }}</div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <cscore-key-value key="Transaction ID" [keyWidthPercent]="undefined" alignment="space-between" fxFlex>{{ wizard.model.transaction.sourceRefNum }}</cscore-key-value>
+    <cscore-key-value key="Transaction Amount" [keyWidthPercent]="undefined" alignment="space-between" fxFlex>{{ wizard.model.transaction.amounts?.authorizedAmount?.displayValue }}</cscore-key-value>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <cca-currency-field [form]="wizardForm" controlName="amount" placeholder="Amount" fxFlex></cca-currency-field>
+    <div fxFlex></div>
+  </div>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment" appearance="outline"></cca-comment-field>
+</div>

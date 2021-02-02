@@ -1,0 +1,20 @@
+<h5 class="text-error">Both fields are required to Add a User to a Role with a Type*</h5>
+<div [formGroup]="wizardForm" fxLayout="row" fxLayoutGap="15px">
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="roleControl" placeholder="Add User to Role*">
+      <mat-option [value]="option.id" *ngFor="let option of masterRoles | orderBy: 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="typeControl" placeholder="...as Type">
+      <mat-option [value]="option.type" *ngFor="let option of typeSelect | orderBy: 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-user-role-card #auto *ngFor="let role of roles| orderBy : 'displayName'" [roleData]="role" [userId]="wizard.model.user.id" (updateRoles)='updateRoles($event)'></cca-user-role-card>
+</div>

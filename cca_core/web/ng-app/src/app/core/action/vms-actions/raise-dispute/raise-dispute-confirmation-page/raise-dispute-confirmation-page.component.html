@@ -1,0 +1,32 @@
+<div class="transactions-container">
+  <h3 class="text-primary">Disputed Transactions</h3>
+  <cca-simple-transaction-table [transactions]="wizard.model.transactions"></cca-simple-transaction-table>
+</div>
+<div>
+  <h3 class="text-primary">Dispute Details</h3>
+  <cca-key-value-with-placeholder key="Type" [value]="wizard.model.disputeType.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Queue" [value]="wizard.model.queue.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Reason" [value]="wizard.model.reason.displayValue"></cca-key-value-with-placeholder>
+  <ng-container *ngIf="customer?.isVmsGiftCard || wizard.model.isGreenCard">
+    <cca-key-value-with-placeholder key="First Name" [value]="wizard.model.firstName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Last Name" [value]="wizard.model.lastName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Date of Birth" [value]="wizard.model.dateOfBirth"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Mobile Phone" [value]="wizard.model.mobilePhone?.number"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Home Phone" [value]="wizard.model.homePhone?.number"></cca-key-value-with-placeholder>
+  </ng-container>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Delivery Method" [value]="wizard.model.deliveryMethod.displayValue"></cca-key-value-with-placeholder>
+  <ng-container [ngSwitch]="wizard.model.deliveryMethod.code">
+    <cca-key-value-with-placeholder *ngSwitchCase="DeliveryMethod.EMAIL" key="Email Address" [value]="wizard.model.email"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder *ngSwitchCase="DeliveryMethod.FAX" key="Fax Number" [value]="wizard.model.fax"></cca-key-value-with-placeholder>
+    <cca-key-value-address *ngSwitchCase="DeliveryMethod.MAIL" key="Mailing Address" [address]="wizard.model.address"></cca-key-value-address>
+  </ng-container>
+</div>
+<div *ngIf="wizard.model.probingQuestions?.length" fxLayout="column" fxLayoutGap="5px" style="margin-bottom:10px;">
+  <h3 class="text-primary">Probing Questions</h3>
+  <div *ngFor="let question of wizard.model.probingQuestions" fxLayout="column">
+    <div><i>{{question.question}}</i></div>
+    <div>{{question.answer}}</div>
+  </div>
+</div>
+

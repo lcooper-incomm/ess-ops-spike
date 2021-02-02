@@ -1,0 +1,14 @@
+<div
+  class="selection-child-button container mat-elevation-z1"
+  [class.active]="isActive"
+>
+  <div fxLayout="row" fxLayoutGap="3px" fxLayoutAlign="start center">
+    <fa-icon class="extra-small" icon="credit-card"></fa-icon>
+    <div [matTooltip]="identifierTooltipText">{{ cardIdentifier }}</div>
+    <div class="status-icon-container">
+      <cca-fsapi-status *ngIf="isFsapiCard" [status]="getStatus()" [useAbbreviation]="true"></cca-fsapi-status>
+      <cca-serve-card-status *ngIf="isServeCard" [status]="card.getPlatformStatus()" [useAbbreviation]="true"></cca-serve-card-status>
+    </div>
+  </div>
+  <cca-spinner [on]="isSearching" [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+</div>

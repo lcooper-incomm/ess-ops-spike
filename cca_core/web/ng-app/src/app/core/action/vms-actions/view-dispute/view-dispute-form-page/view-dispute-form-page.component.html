@@ -1,0 +1,52 @@
+<div fxLayout="column" fxLayoutGap="15px">
+  <div>
+    <h3 class="text-primary">Dispute Information</h3>
+    <cca-key-value-with-placeholder key="Case Number" [value]="wizard.model.dispute.caseNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Raised Date" [value]="wizard.model.dispute.initiatedDate.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Raised By" [value]="wizard.model.dispute.callAgentUserName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Reason" [value]="wizard.model.dispute.comment"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Status" [value]="wizard.model.dispute.status"></cca-key-value-with-placeholder>
+  </div>
+  <div>
+    <h3 class="text-primary">Documents</h3>
+    <div *ngIf="!wizard.model.dispute.documents.length">
+      <strong class="text-muted">No Documents Available</strong>
+    </div>
+    <mat-card *ngIf="wizard.model.dispute.documents.length" fxLayout="row">
+      <table fxFlex class="cs-table" mat-table [dataSource]="wizard.model.dispute.documents">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let document"> {{ document.id }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="fileName">
+          <th mat-header-cell *matHeaderCellDef>File Name</th>
+          <td mat-cell *matCellDef="let document"> {{ document.file }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="fileDate">
+          <th mat-header-cell *matHeaderCellDef>File Date</th>
+          <td mat-cell *matCellDef="let document"> {{ document.date?.displayValue }}</td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+  <div fxLayout="column" *ngIf="canResendDisputeDocuments()">
+    <h3 class="text-primary">Resend Dispute Documents</h3>
+    <div *ngIf="!wizard.model.dispute.canResendDocuments">
+      <strong class="text-muted">Cannot resend documents. Dispute was not raised in CCA.</strong>
+    </div>
+    <ng-container *ngIf="wizard.model.dispute.canResendDocuments">
+      <cca-delivery-method-form [form]="wizardForm" [email]="customer?.emailAddress" [address]="customer?.getPreferredAddress()"></cca-delivery-method-form>
+      <div fxLayout="row" class="resend-button-container">
+        <button mat-raised-button (click)="resendDocuments()" [disabled]="wizardForm.invalid">
+          Resend Documents
+          <cca-spinner [on]="sending"></cca-spinner>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

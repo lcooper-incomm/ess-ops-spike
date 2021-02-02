@@ -1,0 +1,31 @@
+<div class="container" fxLayout="column">
+  <div fxLayout="row nowrap" fxFlex="grow" style="justify-content: space-between; align-items: center;">
+    <h4 class="text-accent">Session Types</h4>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="15px">
+    <mat-card *ngFor="let sessionType of wizard.model.queue.sessionTypes"
+              style="width: 30%;"
+              class="mb-15" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div>
+          {{sessionType}}
+        </div>
+        <div fxFlex></div>
+        <fa-icon class="text-error" icon="times" (click)="deleteSessionType(sessionType)"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-card [matMenuTriggerFor]="addMenu"
+              class="mb-15 add-card" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div>
+          Add
+        </div>
+        <div fxFlex></div>
+        <fa-icon icon="plus" class="text-success" style="margin-left: 10px;"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-menu #addMenu="matMenu">
+      <button *ngFor="let sessionType of getSessionTypeList()" mat-menu-item (click)="addSessionType(sessionType)">{{sessionType }}</button>
+    </mat-menu>
+  </div>
+</div>

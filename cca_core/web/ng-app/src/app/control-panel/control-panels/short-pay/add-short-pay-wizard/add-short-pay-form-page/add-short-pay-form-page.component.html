@@ -1,0 +1,37 @@
+<div fxLayout="column">
+  <div fxLayout="row">
+    <cca-text-field [form]="wizardForm" controlName="locationId" placeholder="Location ID" class="mr-15"></cca-text-field>
+    <button mat-mini-fab (click)="search()">
+      <fa-icon icon="search"></fa-icon>
+    </button>
+    <span fxFlex="grow"></span>
+    <mat-form-field class="default-field-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <div class="table-container" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource?.data?.length">No Results Available</div>
+
+    <cca-spinner #loadingSpinner></cca-spinner>
+
+    <cscore-table [dataSource]="dataSource"
+                  [columns]="columns"
+                  initialSortColumn="locationName"
+                  initialSortDirection="asc"
+                  [rowClassFunction]="highlightInvalid"
+                  [hidden]="dataSource?.data?.length === 0">
+
+      <div *cscoreTableCellDef="let item; key: 'selection'" style="border-bottom-width: 0;" fxLayout="row"
+           fxLayoutAlign="center center">
+        <mat-checkbox *ngIf="item.valid"
+                      class="small-checkbox"
+                      [disableRipple]="true"
+                      (change)="toggleSelect(item)"
+                      [checked]="item.selected"></mat-checkbox>
+      </div>
+
+    </cscore-table>
+
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="10" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 10"></mat-paginator>
+  </div>
+</div>

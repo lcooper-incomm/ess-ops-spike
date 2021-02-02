@@ -1,0 +1,6 @@
+<cca-key-value key="Send Card To">{{wizard.model.selection.getCustomer().getDisplayName()}}</cca-key-value>
+<cca-key-value *ngIf="wizard.model.request.isFeeWaived" key="Replacement Fee"><h4>$0.00</h4></cca-key-value>
+<cca-key-value *ngIf="!wizard.model.request.isFeeWaived" key="Replacement Fee"><h4 class="text-error">{{feeDisplayValue || 'Fees may apply. See Fee Plan for details.'}}</h4></cca-key-value>
+<mat-checkbox [checked]="wizard.model.request.isFeeWaived" [disableRipple]="true" [disabled]="true">
+  <label>Waive Fee</label>
+</mat-checkbox>

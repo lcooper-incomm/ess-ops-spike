@@ -1,0 +1,14 @@
+<div class="multipack-wrapper-container">
+  <cca-key-value key="Multi-Pack Wrapper">
+    <a class="container" href="javascript:void(0)" (click)="linkToCard()" *ngIf="multipack.serialNumber !== selection?.getCard()?.identifiers.serialNumber">
+      {{multipack.serialNumber}}
+      <cca-spinner #multipackWrapperSpinner></cca-spinner>
+    </a>
+    <div *ngIf="multipack.serialNumber === selection?.getCard()?.identifiers.serialNumber">{{multipack.serialNumber}}</div>
+  </cca-key-value>
+  <cca-key-value key="Multi-Pack Cards" alignment="start start">
+    <div fxLayout="column">
+      <cca-multipack-child [child]="child" *ngFor="let child of multipack.children"></cca-multipack-child>
+    </div>
+  </cca-key-value>
+</div>

@@ -1,0 +1,69 @@
+<div class="greencard-transaction-history-detail-container container" fxLayout="row wrap" fxLayoutGap="10px">
+  <div style="width:300px;">
+    <cca-key-value-with-placeholder key="Location" [value]="transaction.nodes.acquirer?.name"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Acquirer ID" [value]="transaction.nodes.acquirer?.financialId"></cca-key-value-with-placeholder>
+    <cca-key-value-address key="Address" [address]="transaction.nodes.acquirer?.getAddressByNodeTypeName(AddressType.ACQUIRER)"></cca-key-value-address>
+  </div>
+  <div style="width:300px;">
+    <cca-key-value-butterfly-align key="Currency Code">{{transaction.amounts.authorizedAmount?.descriptor?.description}}</cca-key-value-butterfly-align>
+    <cca-key-value-butterfly-align key="Requested">{{transaction.amounts.requestedAmount?.displayValue}}</cca-key-value-butterfly-align>
+    <cca-key-value-butterfly-align key="Authorized">
+      <div fxLayout="row" fxLayoutGap="3px" style="width:100%;">
+        <span *ngIf="transaction.flags.isPartial">(Partial)</span>
+        <span fxFlex></span>
+        <span>{{transaction.amounts.authorizedAmount?.displayValue}}</span>
+      </div>
+    </cca-key-value-butterfly-align>
+    <cca-key-value-butterfly-align key="FX Surcharge">
+      <div fxLayout="row" fxLayoutGap="3px" style="width:100%;">
+        <span *ngIf="transaction.response?.isInternational">(International)</span>
+        <span fxFlex></span>
+        <span>{{transaction.amounts.fxSurchargeAmount?.displayValue}}</span>
+      </div>
+    </cca-key-value-butterfly-align>
+    <cca-key-value-butterfly-align key="Balance">{{transaction.amounts.balance?.displayValue}}</cca-key-value-butterfly-align>
+    <cca-key-value-butterfly-align key="On Hold">
+      <div fxLayout="row" fxLayoutGap="3px" style="width:100%;">
+        <span *ngIf="transaction.flags.isPending">(Pending)</span>
+        <span fxFlex></span>
+        <span>{{transaction.amounts.pendingAmount?.displayValue}}</span>
+      </div>
+    </cca-key-value-butterfly-align>
+    <cca-key-value-butterfly-align key="Available Balance">{{transaction.amounts.availableBalance?.displayValue}}</cca-key-value-butterfly-align>
+  </div>
+  <div style="width:500px;">
+    <cca-key-value key="Response" alignment="start start">
+      <div class="text-muted" *ngIf="!transaction.response?.description">Not Available</div>
+      <div fxLayout="row" fxLayoutGap="3px" *ngIf="transaction.response?.description">
+        <span>{{transaction.response?.description}}</span>
+        <span *ngIf="transaction.response?.code">({{transaction.response?.code}})</span>
+      </div>
+    </cca-key-value>
+    <cca-key-value-with-placeholder key="Settlement Date" [value]="transaction.settlement?.settlementDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Expiration Date" [value]="transaction.settlement?.expirationDate"></cca-key-value-with-placeholder>
+    <cca-key-value key="X95 Message Code" alignment="start start">
+      <div class="text-muted" *ngIf="!transaction.settlement?.x95?.code">Not Available</div>
+      <div fxLayout="row" fxLayoutGap="3px" *ngIf="transaction.settlement?.x95?.code">
+        <span>{{transaction.settlement?.x95?.code}}</span>
+        <span *ngIf="transaction.settlement?.x95?.description">({{transaction.settlement?.x95?.description}})</span>
+      </div>
+    </cca-key-value>
+    <cca-key-value key="X95 Process Code" alignment="start start">
+      <div class="text-muted" *ngIf="!transaction.request?.code">Not Available</div>
+      <div fxLayout="row" fxLayoutGap="3px" *ngIf="transaction.request?.code">
+        <span>{{transaction.request?.code}}</span>
+        <span *ngIf="transaction.settlement?.x95?.description">({{transaction.settlement?.x95?.description}})</span>
+      </div>
+    </cca-key-value>
+    <cca-key-value key="SIC Code" alignment="start start">
+      <div class="text-muted" *ngIf="!transaction.settlement?.sic?.code">Not Available</div>
+      <div fxLayout="row" fxLayoutGap="3px" *ngIf="transaction.settlement?.sic?.code">
+        <span>{{transaction.settlement?.sic?.code}}</span>
+        <span *ngIf="transaction.settlement?.sic?.description">({{transaction.settlement?.sic?.description}})</span>
+      </div>
+    </cca-key-value>
+    <cca-key-value key="PIN Transaction">{{transaction.response?.isPin ? 'Yes' : 'No'}}</cca-key-value>
+    <cca-key-value-with-placeholder key="ANI" [value]="transaction.identifiers.ani"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="PreAuth Release Date" [value]="transaction?.settlement?.preAuthReleaseDate?.displayValue"></cca-key-value-with-placeholder>
+  </div>
+</div>

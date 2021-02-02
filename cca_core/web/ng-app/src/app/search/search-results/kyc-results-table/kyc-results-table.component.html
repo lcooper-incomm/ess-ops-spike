@@ -1,0 +1,52 @@
+<div class="table-container condensed-table bottomless-table">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">
+    No Results Available
+  </div>
+  <table mat-table matSort [dataSource]="dataSource" [hidden]="!dataSource.data?.length">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let result">{{ result.firstName }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+      <td mat-cell *matCellDef="let result">{{ getAddress(result)?.line1 }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="dateOfBirth">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Birth</th>
+      <td mat-cell *matCellDef="let result">{{ formatDate(result.dateOfBirth) }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="ssn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>SSN</th>
+      <td mat-cell *matCellDef="let result">{{ result.identification?.number }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="starterCard">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Starter Card</th>
+      <td mat-cell *matCellDef="let result" [class.text-muted]="!getCard(result)?.identifiers?.pan">{{ getCard(result)?.identifiers?.pan || 'Not Available' }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="kycStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>KYC Status</th>
+      <td mat-cell *matCellDef="let result">{{ result.kyc?.status }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reason</th>
+      <td mat-cell *matCellDef="let result">{{ result.kyc?.code }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="retry">
+      <th mat-header-cell *matHeaderCellDef class="text-right">Actions</th>
+      <td mat-cell *matCellDef="let result" class="text-right">
+        <fa-icon *ngIf="getCard(result)?.identifiers?.pan" class="clickable retry-icon" icon="redo-alt" matTooltip="Retry" (click)="retry(result)"></fa-icon>
+      </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [length]="dataSource.data?.length" [pageSize]="pageSize" [hidden]="dataSource.data?.length <= pageSize"></mat-paginator>
+</div>

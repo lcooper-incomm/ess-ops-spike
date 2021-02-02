@@ -1,0 +1,32 @@
+<div class="container" fxLayout="column">
+  <div fxLayout="row nowrap" fxFlex="grow" style="justify-content: space-between; align-items: center;">
+    <h4 class="text-accent">Wrap Up Categories</h4>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="15px">
+    <mat-card *ngFor="let category of wizard.model.queue.categories"
+              style="width: 30%;"
+              [style.backgroundColor]="category.isActive ? 'inherit' : 'rgba(255, 0, 0, 0.1)'"
+              class="mb-15" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div>
+          {{category.displayName}} <span *ngIf="!category.isActive" style="font-size: 10px;" class="text-error">(inactive)</span>
+        </div>
+        <div fxFlex></div>
+        <fa-icon class="text-error" icon="times" (click)="deleteCategory(category)"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-card [matMenuTriggerFor]="addMenu"
+              class="mb-15 add-card" fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-content fxFlex>
+        <div>
+          Add
+        </div>
+        <div fxFlex></div>
+        <fa-icon icon="plus" class="text-success" style="margin-left: 10px;"></fa-icon>
+      </mat-card-content>
+    </mat-card>
+    <mat-menu #addMenu="matMenu">
+      <button *ngFor="let category of getCategoryList()" mat-menu-item (click)="addCategory(category)">{{ category.displayName }}</button>
+    </mat-menu>
+  </div>
+</div>

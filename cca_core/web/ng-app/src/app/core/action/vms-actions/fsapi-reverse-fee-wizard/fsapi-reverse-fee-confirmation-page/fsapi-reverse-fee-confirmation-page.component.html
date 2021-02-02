@@ -1,0 +1,11 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div>
+    <h3>Transaction Summary</h3>
+    <cca-transaction-summary [transaction]="transaction"></cca-transaction-summary>
+  </div>
+  <div>
+    <cca-key-value-with-placeholder key="Reason" [value]="wizard.model.reason?.reasonDescription"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+  </div>
+</div>
+  

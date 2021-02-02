@@ -1,0 +1,19 @@
+<div [ngSwitch]="wizard.model.selectedComponent" fxLayout="column">
+  <ng-container *ngSwitchCase="SessionComponentType.CUSTOMER">
+    <h3 class="text-primary">Customer Information</h3>
+    <cca-customer-session-component [component]="wizard.model.component"></cca-customer-session-component>
+  </ng-container>
+  <div *ngSwitchCase="SessionComponentType.CARDS" fxLayout="column" fxLayoutGap="20px">
+    <cca-selection-card-information [card]="wizard.model.selectedCard" [selection]="wizard.model.selection"></cca-selection-card-information>
+    <cca-cards-session-component
+      [component]="cardsComponent"
+      header="Updated Card Sets"
+      [hideFinancialImpact]="true"
+      [session]="wizard.model.session"
+    ></cca-cards-session-component>
+  </div>
+  <ng-container *ngSwitchCase="SessionComponentType.MERCHANT">
+    <h3 class="text-primary">Merchant Information</h3>
+    <cca-merchant-session-component [component]="wizard.model.component"></cca-merchant-session-component>
+  </ng-container>
+</div>

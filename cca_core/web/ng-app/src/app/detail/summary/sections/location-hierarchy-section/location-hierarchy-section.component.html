@@ -1,0 +1,9 @@
+<div class="summary-section location-hierarchy-section container">
+  <cca-key-value-with-placeholder key="Business Unit" [value]="businessUnit"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Merchant" [value]="null" *ngIf="!merchants.length"></cca-key-value-with-placeholder>
+  <div *ngIf="merchants.length">
+    <cca-key-value-with-placeholder key="Merchant" [value]="merchant" *ngFor="let merchant of merchants | reverse"></cca-key-value-with-placeholder>
+  </div>
+  <cca-key-value-with-placeholder key="Location" [value]="location"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Legal Name" [value]="selection?.getLocation()?.legalName"></cca-key-value-with-placeholder>
+</div>

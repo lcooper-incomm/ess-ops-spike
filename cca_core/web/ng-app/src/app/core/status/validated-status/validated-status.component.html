@@ -1,0 +1,13 @@
+<div fxLayoutAlign="center center" style="padding-right: 14px">
+  <div *ngIf="status === 'none'">
+    <svg width="20" height="20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy=10 r="8" stroke="#90A4AE" fill="transparent" stroke-width="1"/>
+    </svg>
+  </div>
+  <div *ngIf="status === 'valid'" style="color: #4CAF50">
+    <fa-icon icon="check-circle"></fa-icon>
+  </div>
+  <div *ngIf="status === 'invalid'" style="color: red">
+    <fa-icon icon="exclamation-circle"></fa-icon>
+  </div>
+</div>

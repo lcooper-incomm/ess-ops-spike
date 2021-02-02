@@ -1,0 +1,33 @@
+<div class="summary-section customer-cards-section">
+  <h5 class="text-primary" style="margin-bottom:0;">{{cards.length}} {{cards.length === 1 ? 'Card' : 'Cards'}} on Account</h5>
+  <div class="card-selection-container" [ngClass]="{'selected-card-backlight': isOnCardsTab()}" fxLayout="row" fxLayoutAlign="start center">
+    <button mat-icon-button color="primary" matTooltip="Select another Card" style="margin-left:-10px;" [matMenuTriggerFor]="customerCardMenu">
+      <fa-icon icon="ellipsis-h"></fa-icon>
+    </button>
+    <div class="selected-card-container" fxFlex>
+      <cca-customer-card [selection]="selection" class="clickable" [card]="card" [allowUnmask]="isFsapiPlatform" *ngIf="card" (click)="navigateToCard()"></cca-customer-card>
+      <div class="text-muted text-center" *ngIf="!card">No Card Selected</div>
+    </div>
+    <mat-menu class="customer-card-menu" #customerCardMenu="matMenu" [overlapTrigger]="false">
+      <div class="clickable" style="padding:0 5px; margin-bottom:5px; width:100%;" *ngFor="let card of cards" (click)="selectCard(card)">
+        <cca-customer-card [selection]="selection" [card]="card" [enableHighlight]="true" fxFlex></cca-customer-card>
+      </div>
+    </mat-menu>
+  </div>
+  <div class="card-details-container" *ngIf="card">
+    <div style="margin-bottom:15px;">
+      <cca-key-value *ngIf="isFsapiPlatform" [key]="card.platform + ' Status'">
+        <cca-fsapi-status [status]="card.getStatusByPlatform(card.platform)" fxFlex></cca-fsapi-status>
+      </cca-key-value>
+      <cca-key-value *ngIf="isServePlatform" key="Card Status">
+        <cca-serve-card-status [status]="selection?.getMaplesCardStatus(card)" fxFlex></cca-serve-card-status>
+      </cca-key-value>
+    </div>
+    <cca-key-value-with-placeholder key="Serial Number" [value]="card.identifiers?.serialNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Activation Date" [value]="card.activation?.activationDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Expiration Date" [value]="isServePlatform ? card.expirationDate : card.expirationDate?.displayValue" *ngIf="selection?.platform !== PlatformType.CCL"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Order Type" [value]="card.activation?.order?.type" *ngIf="selection?.platform === PlatformType.CCL"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Product Category" [value]="card.productCategory"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Tracking Number" [value]="card.activation?.order?.trackingNumber" *ngIf="selection?.platform === PlatformType.CCL"></cca-key-value-with-placeholder>
+  </div>
+</div>

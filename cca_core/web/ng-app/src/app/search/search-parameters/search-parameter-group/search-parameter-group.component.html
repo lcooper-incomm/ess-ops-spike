@@ -1,0 +1,13 @@
+<div class="search-parameter-group-container" *ngIf="group.isVisible && (!group.isAdvanced() || form.get('showAdvanced')?.value)">
+  <h4 class="text-primary">{{group.name}}</h4>
+  <div class="parameter-container" fxLayout="row wrap">
+    <ng-container *ngFor="let parameter of group.parameters | orderBy : 'priority'">
+      <cca-dynamic-search-field-container
+        *ngIf="parameter.isVisible && (!parameter.isAdvanced || form.get('showAdvanced')?.value)"
+        [form]="form"
+        [parameter]="parameter.parameter"
+        [highlightedParameters]="highlightedParameters"
+      ></cca-dynamic-search-field-container>
+    </ng-container>
+  </div>
+</div>

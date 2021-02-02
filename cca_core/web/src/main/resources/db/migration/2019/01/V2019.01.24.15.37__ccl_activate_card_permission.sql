@@ -1,0 +1,1 @@
+EXECUTE add_permission 'CCL_ACTIVATE_CARD', 'CCL Activate Card', 'Ability to activate CCL Cards.';

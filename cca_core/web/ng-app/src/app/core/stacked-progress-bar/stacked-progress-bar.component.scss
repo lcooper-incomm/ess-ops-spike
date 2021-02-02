@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+@import '../../../colors.scss';
+
+.stacked-bar-chart {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  &.blue {
+    //background-color: mat-color($cca-app-primary, A400);
+    background-color: #337ab7;
+  }
+
+  &.green {
+    //background-color: mat-color($cca-app-session, A700);
+    background-color: #5cb85c;
+  }
+
+  &.red {
+    background-color: mat-color($cca-app-warn);
+  }
+}
+
+.radius-first {
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+}
+
+.radius-last {
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+}

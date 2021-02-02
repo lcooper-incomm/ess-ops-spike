@@ -1,0 +1,11 @@
+<div class="selection-navigation-container">
+  <h4 class="session-heading">Selections</h4>
+  <div class="selections-container" fxLayout="row wrap" fxLayoutGap="5px">
+    <cca-selection-button
+      class="clickable"
+      *ngFor="let selection of selections"
+      [selection]="selection"
+      (click)="select(selection)"
+    ></cca-selection-button>
+  </div>
+</div>

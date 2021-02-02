@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+@import './colors.scss';
+@import '~@cscore/components/theming';
+
+// NOTE: only import this file in styles.scss. Anywhere you import this will duplicate all the Angular Material css
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Create the theme object (a Sass map containing all of the palettes).
+$cca-app-theme: mat-light-theme($cca-app-primary, $cca-app-accent, $cca-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($cca-app-theme);
+
+// CS-CORE Components theme
+@include cscore-components-theme($cca-app-theme);
+
+//Custom typography config
+$cca-typography: mat-typography-config(
+  $button: mat-typography-level(14px, 16px, 500),
+  $subheading-2: mat-typography-level(16px, 28px, 700),
+  $subheading-1: mat-typography-level(15px, 24px, 500)
+);
+
+@include mat-core($cca-typography);

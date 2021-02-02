@@ -1,0 +1,52 @@
+<h4 class="text-primary" fxLayout="row" fxLayoutGap="3px">
+  <span>Card Details</span>
+</h4>
+<div fxLayout="row" fxLayoutGap="10px">
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Product Category"
+                                    [value]="card.productCategory"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Product Description"
+                                    [value]="card.productDescription"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Product Group" [value]="card.productGroup"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Product Owner" [value]="card.productOwner"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Product Type" [value]="card.productType"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Activation Date" [value]="card.activation?.activationDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Expiration Date"
+                                    [value]="card?.expirationDate"></cca-key-value-with-placeholder>
+    <br/>
+    <cca-card-purchase-location-section [card]="card" [useGivenCard]="true"></cca-card-purchase-location-section>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Card ID" [value]="card.id"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Serial Number" [value]="card.identifiers.serialNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="PAN" [value]="card.identifiers.pan"></cca-key-value-with-placeholder>
+    <!--TODO: Add isPinSet-->
+  </div>
+</div>
+<ng-container  *ngIf="cardHistory">
+  <h4 class="text-primary" fxLayout="row" fxLayoutGap="3px"
+      style="margin-top: 10px; margin-bottom: 5px; border-top: grey 1px solid; padding-top: 10px;">
+    <span>Card History</span>
+  </h4>
+  <div fxLayout="row" fxLayoutGap="10px" class="mb-15">
+    <div fxFlex="33">
+      <cca-key-value-with-placeholder key="Old Card Number" [value]="cardHistory.previousCardNumber"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="New Card Number" [value]="cardHistory.newCardNumber"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Reason" [value]="cardHistory.reason"></cca-key-value-with-placeholder>
+    </div>
+    <div fxFlex="33">
+      <cca-key-value-with-placeholder key="Tracking Number" [value]="cardHistory.trackingNumber"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Tracking URI" [value]="cardHistory.trackingUri"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Shipping Method" [value]="cardHistory.shipmentMethod"></cca-key-value-with-placeholder>
+    </div>
+    <div fxFlex="33">
+      <cca-key-value-with-placeholder key="Issued By" [value]="cardHistory.issuedBy"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Issued Date" [value]="cardHistory.issuedDate?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Requested Date" [value]="cardHistory.requestedDate?.displayValue"></cca-key-value-with-placeholder>
+    </div>
+  </div>
+</ng-container>
+<cca-customer-card-serve-toolbar [card]="card"></cca-customer-card-serve-toolbar>
+

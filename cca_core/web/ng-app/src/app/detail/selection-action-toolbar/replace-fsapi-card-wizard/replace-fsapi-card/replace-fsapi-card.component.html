@@ -1,0 +1,18 @@
+<form [formGroup]="wizardForm">
+  <div fxLayout="row" fxLayoutGap="15px">
+    <cca-text-field class="default-field-width" [form]="wizardForm" controlName="firstName" placeholder="First Name"></cca-text-field>
+    <cca-text-field class="default-field-width" [form]="wizardForm" controlName="lastName" placeholder="Last Name"></cca-text-field>
+  </div>
+  <cca-address-form [form]="addressForm"></cca-address-form>
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="isExpedited">
+    <mat-option *ngFor="let option of deliveryChoices | orderBy:'displayName'" [value]="option.value">{{option.displayName}}</mat-option>
+  </mat-select>
+  </mat-form-field>
+  <cca-key-value *ngIf="this.wizardForm.get ( 'isFeeWaived' ).value" key="Replacement Fee"><span>$0.00</span></cca-key-value>
+  <cca-key-value *ngIf="!this.wizardForm.get ( 'isFeeWaived' ).value" key="Replacement Fee"><span class="text-error">Fees may apply. See Fee Plan for details.</span></cca-key-value>
+  <mat-checkbox formControlName="isFeeWaived" [disableRipple]="true">
+    <label>Waive Fee</label>
+  </mat-checkbox>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</form>

@@ -1,0 +1,28 @@
+<div class="content-container container">
+  <div *ngIf="dataSource.data?.length > 0" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+    <mat-form-field class="default-field-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <div class="table-container condensed-table bottomless-table expansion-panel-wrapper"
+       [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">
+      No Results Available
+    </div>
+    <cscore-table [columns]="columns"
+                  [dataSource]="dataSource"
+                  initialSortColumn="date"
+                  initialSortDirection="desc"
+                  [hidden]="!dataSource.data?.length">
+
+      <div *cscoreTableCellDef="let item; key: 'caret'" class="row-caret" style="border-bottom-width: 0;" fxLayout="row" fxLayoutAlign="center center"></div>
+
+      <cca-customer-orders-detail *cscoreTableExpandedContent="let row"
+                                        [session]="session"
+                                        [selection]="selection"
+                                        [order]="row"
+                                        fxFlex="1 1 auto"></cca-customer-orders-detail>
+    </cscore-table>
+    <mat-paginator [length]="dataSource.data?.length" [pageSize]="50"></mat-paginator>
+  </div>
+</div>

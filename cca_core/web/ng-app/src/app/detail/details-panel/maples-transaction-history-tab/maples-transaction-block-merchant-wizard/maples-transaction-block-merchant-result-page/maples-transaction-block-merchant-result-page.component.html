@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Merchant Blocked successfully!
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: Merchant Block could not be processed.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Balance Merchant Block successful! , but a comment could not be registered.
+</div>

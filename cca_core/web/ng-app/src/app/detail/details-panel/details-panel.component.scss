@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import '../../../colors.scss';
+
+.details-panel-container {
+  margin-bottom: 15px;
+  width: 100%;
+
+  .details-panel-content {
+    background-color: white;
+    padding: 15px;
+  }
+
+  .details-panel-navigation {
+    //height: 40px;
+    height: auto;
+    background-color: mat-color($cca-app-primary);
+    color: white;
+    padding: 0;
+
+    .mat-button {
+      height: 40px;
+
+      &.active {
+        background-color: mat-color($cca-app-primary, A400);
+      }
+    }
+  }
+}

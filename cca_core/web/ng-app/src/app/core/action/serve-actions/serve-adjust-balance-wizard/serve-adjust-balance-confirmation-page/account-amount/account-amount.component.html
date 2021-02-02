@@ -1,0 +1,8 @@
+<mat-card>
+  <mat-card-content>
+    <div fxLayout="column">
+      <strong>{{ label }}</strong>
+      <div [ngClass]="amount?.value < 0 ? 'negative' : 'positive'">{{ amount?.displayValue }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

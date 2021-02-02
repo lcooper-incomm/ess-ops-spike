@@ -1,0 +1,32 @@
+.footer-container {
+  margin-top: 50px;
+  margin-bottom: 40px;
+
+  &.adjusted-for-vertical-summary {
+    padding-left: 430px;
+  }
+
+  .copyright-container {
+    margin-top: 5px;
+  }
+
+  .environment-container {
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5px;
+
+    &.blue {
+      background-color: dodgerblue;
+      color: white;
+    }
+
+    &.green {
+      background-color: green;
+      color: white;
+    }
+  }
+
+  .incomm-logo {
+    height: 50px;
+  }
+}

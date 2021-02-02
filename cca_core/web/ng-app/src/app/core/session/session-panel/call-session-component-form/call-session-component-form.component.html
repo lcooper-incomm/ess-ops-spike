@@ -1,0 +1,24 @@
+<div class="call-session-component-container">
+  <form [formGroup]="form" fxLayout="column wrap" fxLayoutGap="5px">
+    <div class="container" *ngIf="form.get('callerName')">
+      <mat-form-field id="session-caller-name" class="default-width">
+        <input type="text" matInput formControlName="callerName" placeholder="Caller Name" required>
+      </mat-form-field>
+    </div>
+    <div class="container" *ngIf="form.get('callbackNumber')">
+      <mat-form-field id="session-callback-number" class="default-width">
+        <input type="text" matInput formControlName="callbackNumber" [ccaNumericFormat]="form.get('callbackNumber')" placeholder="Callback Number">
+      </mat-form-field>
+    </div>
+    <div class="container" *ngIf="form.get('ani')">
+      <mat-form-field id="session-ani" class="default-width">
+        <input type="text" matInput formControlName="ani" placeholder="ANI">
+      </mat-form-field>
+    </div>
+    <div class="container" *ngIf="form.get('dnis')">
+      <mat-form-field id="session-dnis" class="default-width">
+        <input type="text" matInput formControlName="dnis" placeholder="DNIS" [required]="isControlRequired(form.get('dnis'))">
+      </mat-form-field>
+    </div>
+  </form>
+</div>

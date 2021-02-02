@@ -1,0 +1,18 @@
+<cca-key-value-with-placeholder key="Receipt ID" [value]="component.receiptId"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Txn Date" [value]="component.transactionDate?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Txn Time" [value]="component.transactionTime"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Txn Amount" [value]="component.transactionAmount?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Receipt Total" [value]="component.totalAmount?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Payment Method" [value]="component.paymentMethod"></cca-key-value-with-placeholder>
+<br/>
+<cca-key-value key="Cards">
+  <div fxFlex *ngIf="component.cards.length">
+    <div class="receipt-card" *ngFor="let card of component.cards | orderBy : 'id' | limit: 0:3" matTooltip="getTooltipText(card)">
+      <span>**{{card.van.slice(-4)}}</span>
+      <span> - </span>
+      <span>{{card.initialLoadAmount.displayValue}}</span>
+    </div>
+    <div class="text-muted" *ngIf="component.cards.length > 3">{{component.cards.length - 3}} more...</div>
+  </div>
+  <div class="text-muted" fxFlex *ngIf="!component.cards.length">No Cards Entered</div>
+</cca-key-value>

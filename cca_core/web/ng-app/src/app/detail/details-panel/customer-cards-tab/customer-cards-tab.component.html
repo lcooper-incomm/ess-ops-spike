@@ -1,0 +1,14 @@
+<div class="customer-cards-tab-container container">
+  <h3 class="text-primary" fxLayout="row" fxLayoutGap="3px">
+    <span>{{selection?.getCustomer()?.cards.length}}</span>
+    <span>{{selection?.getCustomer()?.cards.length === 1 ? 'Card' : 'Cards'}}</span>
+  </h3>
+  <div *ngIf="selection.getMaplesPlatform() !== 'SERVE' && selection?.getCustomer()?.cards.length" class="content-container container" fxLayout="column"
+       fxLayoutGap="10px">
+    <cca-customer-card-panel #cards [card]="card" *ngFor="let card of selection?.getCustomer()?.cards" (onSelect)="handleCardSelection(card)"></cca-customer-card-panel>
+  </div>
+  <div *ngIf="selection.getMaplesPlatform() === 'SERVE' && selection?.getCustomerAccount()?.cards.length" class="content-container container" fxLayout="column"
+       fxLayoutGap="10px">
+    <cca-customer-card-panel #cards [maplesCard]="card" *ngFor="let card of getCards()" (onSelect)="handleCardSelection(card)"></cca-customer-card-panel>
+  </div>
+</div>

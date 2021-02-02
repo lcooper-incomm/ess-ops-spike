@@ -1,0 +1,17 @@
+<mat-card class="role-card-container">
+  <mat-card-content fxLayout="row" fxLayoutGap="10px">
+    <div fxLayout="column">
+      <div fxLayout="row">
+        {{roleData.displayName}}
+      </div>
+      <div fxLayout="row" [ngClass]="!roleData.isActive ? 'text-error':'text-muted'">
+        <h5>{{roleData.membershipType}}</h5>
+      </div>
+    </div>
+    <span fxFlex></span>
+    <div fxLayout="row" fxFlexAlign="center" fxLayoutGap="10px">
+      <fa-icon class="text-error" icon="times-circle" (click)="removePermission(roleData)" style="cursor: pointer"></fa-icon>
+      <fa-icon class="text-accent" icon="arrow-right"></fa-icon>
+    </div>
+  </mat-card-content>
+</mat-card>

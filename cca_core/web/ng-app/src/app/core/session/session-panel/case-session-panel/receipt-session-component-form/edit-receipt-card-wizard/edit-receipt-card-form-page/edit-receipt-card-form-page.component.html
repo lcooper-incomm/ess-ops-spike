@@ -1,0 +1,13 @@
+<form [formGroup]="wizardForm" fxLayout="column">
+  <div fxLayout="row" fxLayoutGap="5px">
+    <cca-text-field id="add-receipt-card-last-four" data-test-id="add-receipt-card-last-four" class="default-field-width" [form]="wizardForm" controlName="van" placeholder="Last Four"></cca-text-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <cca-text-field id="add-receipt-card-serial-number" data-test-id="add-receipt-card-serial-number" class="default-field-width" [form]="wizardForm" controlName="serialNumber" placeholder="Serial Number"></cca-text-field>
+    <cca-text-field id="add-receipt-card-package-van" data-test-id="add-receipt-card-package-van" class="default-field-width" [form]="wizardForm" controlName="packageVan" placeholder="Package VAN"></cca-text-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <cca-currency-field id="add-receipt-card-initial-load-amount" data-test-id="add-receipt-card-initial-load-amount" class="default-field-width" [form]="wizardForm" controlName="initialLoadAmount" placeholder="Initial Load Amount"></cca-currency-field>
+    <cca-text-field id="add-receipt-card-product-type" data-test-id="add-receipt-card-product-type" class="default-field-width" [form]="wizardForm" controlName="productType" placeholder="Product Type"></cca-text-field>
+  </div>
+</form>

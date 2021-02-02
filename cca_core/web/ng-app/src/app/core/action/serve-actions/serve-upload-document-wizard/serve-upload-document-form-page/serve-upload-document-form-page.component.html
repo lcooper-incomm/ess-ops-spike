@@ -1,0 +1,13 @@
+<form [formGroup]="wizardForm" fxLayout="column">
+  <mat-form-field class="default-width">
+    <mat-select formControlName="reason" placeholder="Reason" required>
+      <mat-option [value]="option" *ngFor="let option of reasons | orderBy: 'label'">
+        {{ option.displayValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="text-muted">
+    <i>* File size cannot exceed 10MB</i>
+  </div>
+  <cca-file-input [uploader]="wizard.model.fileUploader" (selectFile)="onSelectFile()"></cca-file-input>
+</form>

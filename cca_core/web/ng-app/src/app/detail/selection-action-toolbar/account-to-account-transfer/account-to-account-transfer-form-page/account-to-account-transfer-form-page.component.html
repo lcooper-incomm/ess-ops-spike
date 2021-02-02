@@ -1,0 +1,86 @@
+<form [formGroup]="wizardForm" fxLayout="column" class="my-panels">
+
+  <!-- Template for account info formatting -->
+  <ng-template #accountInfo let-account="account" let-selected="selected">
+    <div *ngIf="account" fxLayout="column" fxFlex="grow" [class.text-accent]="selected && selected.id === account.id">
+      <ng-container *ngIf="account.id !== 'ANOTHER'">
+        <div>{{account.accountType}}</div>
+        <div style="font-size: 0.75rem;">
+          {{account.id}}
+          <span style="padding-left: 1rem;">Balance =</span>
+          {{account.availableBalance.displayValue || "Not Available"}}
+        </div>
+      </ng-container>
+      <ng-container *ngIf="account.id === 'ANOTHER'">
+        Add Another SERVE Account
+      </ng-container>
+    </div>
+    <div *ngIf="!account" fxLayout="column" fxFlex="grow">
+      Select Account
+    </div>
+  </ng-template>
+
+  <div style="font-weight: bold;">
+    From
+  </div>
+  <div fxLayout="row"
+       class="mb-15"
+       style="border: 1px black solid; padding: 2px 6px;"
+       [cscorePopoverAnchor]="fromPopover"
+       (click)="fromPopover.open()">
+    <ng-template *ngTemplateOutlet="accountInfo; context: {account: wizard.model.fromAccount}"></ng-template>
+    <cca-icon-button class="edit-btn" [isDisabled]="false" color="primary" icon="caret-down" color="black"></cca-icon-button>
+  </div>
+
+  <cscore-popover
+      #fromPopover
+      color="#fff"
+      panelClass="cscore-popover-compact">
+    <div fxLayout="column" style="min-width: 250px;">
+      <ng-container *ngFor="let account of wizard.model.accounts">
+        <div fxLayout="column"
+             style="border-bottom: 1px solid lightgray; padding: 5px 0px;"
+             (click)="fromPopover.close(); setFromAccount(account)">
+          <ng-template *ngTemplateOutlet="accountInfo; context: {account: account, selected: wizard.model.fromAccount}"></ng-template>
+        </div>
+      </ng-container>
+    </div>
+  </cscore-popover>
+
+  <div style="font-weight: bold;">
+    To
+  </div>
+  <div fxLayout="row"
+       class="mb-15"
+       style="border: 1px black solid; padding: 2px 6px;"
+       [cscorePopoverAnchor]="toPopover"
+       (click)="toPopover.open()">
+    <ng-template *ngTemplateOutlet="accountInfo; context: {account: wizard.model.toAccount}"></ng-template>
+    <cca-icon-button class="edit-btn" [isDisabled]="false" color="primary" icon="caret-down" color="black"></cca-icon-button>
+  </div>
+
+  <cscore-popover
+    #toPopover
+    color="#fff"
+    panelClass="cscore-popover-compact">
+    <div fxLayout="column" style="min-width: 250px;">
+      <ng-container *ngFor="let account of wizard.model.accounts | excludeAccount: wizard.model.fromAccount">
+        <div fxLayout="column"
+             style="border-bottom: 1px solid lightgray; padding: 5px 0px;"
+             (click)="toPopover.close(); setToAccount(account);">
+          <ng-template *ngTemplateOutlet="accountInfo; context: {account: account, selected: wizard.model.toAccount}"></ng-template>
+        </div>
+      </ng-container>
+      <div fxLayout="column"
+           style="border-bottom: 1px solid lightgray; padding: 5px 0px;"
+           fxFlex="grow" [class.text-accent]="wizard.model.toAccount && wizard.model.toAccount.id === 'ANOTHER'"
+           (click)="toPopover.close(); setToAnotherAccount();">
+        Add Another SERVE Account
+      </div>
+    </div>
+  </cscore-popover>
+
+  <cca-currency-field  class="select-width" [form]="wizardForm" controlName="amount" placeholder="Amount"></cca-currency-field>
+
+</form>
+

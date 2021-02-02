@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Document updated.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: Document could not be updated.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Document updated, but an audit could not be registered.
+</div>

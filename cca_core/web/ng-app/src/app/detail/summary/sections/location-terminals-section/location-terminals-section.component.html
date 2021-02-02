@@ -1,0 +1,12 @@
+<div class="summary-section location-terminals-section container">
+  <cca-key-value key="Terminals" alignment="start start">
+    <div class="text-muted" *ngIf="!selection.terminals.length">Not Available</div>
+    <div *ngIf="selection.terminals.length">
+      <div class="terminal" *ngFor="let terminal of selection.terminals | limit : 0 : 5">{{terminal.terminalNumber}}</div>
+      <div *ngIf="selection.terminals.length > 5">
+        <a id="location-terminals-show-all-link" data-test-id="location-terminals-show-all-link" href="javascript:void(0)" (click)="openTerminalsTab()">Show All ({{selection.terminals.length}})</a>
+      </div>
+    </div>
+  </cca-key-value>
+  <cca-spinner #terminalsSpinner></cca-spinner>
+</div>

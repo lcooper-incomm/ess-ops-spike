@@ -1,0 +1,11 @@
+<div class="summary-section customer-redemption-delay-section">
+  <cca-key-value key="Redemption Delay(s)">
+    <div class="text-muted" *ngIf="!selection?.getCustomer()?.redemptionDelays.length">None</div>
+    <div *ngIf="selection?.getCustomer()?.redemptionDelays.length">
+      <a href="javascript:void(0)" (click)="openDialog()">{{selection?.getCustomer().redemptionDelays.length}} (Details)</a>
+    </div>
+  </cca-key-value>
+  <cca-key-value key="Funds Available In" *ngIf="selection?.getCustomer()?.redemptionDelays.length">
+    <cca-running-timer [start]="allFundsAvailableDate"></cca-running-timer>
+  </cca-key-value>
+</div>

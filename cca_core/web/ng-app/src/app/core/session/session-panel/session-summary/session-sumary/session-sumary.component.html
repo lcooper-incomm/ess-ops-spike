@@ -1,0 +1,34 @@
+<cca-key-value key="ID">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div>{{session.id}}</div>
+    <fa-icon class="clickable text-primary" icon="search" (click)="clickSessionId.emit()" matTooltip="Search for this Case" *ngIf="sessionIdClickable"></fa-icon>
+  </div>
+</cca-key-value>
+<br/>
+<cca-key-value key="Status">
+  <cca-session-status [status]="session.status" fxFlex class="session-status"></cca-session-status>
+</cca-key-value>
+<cca-key-value-with-placeholder key="Summary" [value]="session.summary"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Type" [value]="session.sessionType?.displayName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Class" [value]="session.sessionClass?.displayName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Queue" [value]="session.queue?.displayName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Wrap-Up Category" [value]="session.wrapUpCodeCategory?.displayName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Wrap-Up Code" [value]="session.wrapUpCode?.displayName"></cca-key-value-with-placeholder>
+<br/>
+<cca-key-value-with-placeholder key="Assigned Team" [value]="session.team?.displayName"></cca-key-value-with-placeholder>
+<cca-key-value key="Assignee">
+  <cca-user-chip *ngIf="session.user" [user]="session.user"></cca-user-chip>
+  <ng-container *ngIf="!session.user">Not Available</ng-container>
+</cca-key-value>
+<br/>
+<cca-key-value-with-placeholder key="Created Date" [value]="session.createdDate?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value key="Created By">
+  <cca-user-chip *ngIf="session.createdBy" [user]="session.createdBy"></cca-user-chip>
+  <ng-container *ngIf="!session.createdBy">Not Available</ng-container>
+</cca-key-value>
+<cca-key-value-with-placeholder key="Modified Date" [value]="session.modifiedDate?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value key="Modified By">
+  <cca-user-chip *ngIf="session.modifiedBy" [user]="session.modifiedBy"></cca-user-chip>
+  <ng-container *ngIf="!session.modifiedBy">Not Available</ng-container>
+</cca-key-value>
+<cca-key-value-with-placeholder key="Closed Date" [value]="session.closedDate?.displayValue"></cca-key-value-with-placeholder>

@@ -1,0 +1,47 @@
+.selection-alert-container {
+  margin-bottom: 5px;
+  height: 60px;
+  width: 250px;
+
+  .icon-container {
+    width: 50px;
+    background-color: darkorange;
+    color: white;
+
+    &.red {
+      background-color: red;
+    }
+
+    &.grey {
+      background-color: grey;
+    }
+
+    fa-icon {
+      font-size: 24px;
+      line-height: 24px;
+    }
+  }
+
+  .text-container {
+    padding: 5px;
+    color: darkorange;
+
+    h4 {
+      margin-bottom: 0px;
+    }
+
+    &.red {
+      color: red;
+    }
+
+    &.grey {
+      color: grey;
+    }
+
+    .body-container {
+      font-size: 12px;
+      line-height: 12px;
+      color: black;
+    }
+  }
+}

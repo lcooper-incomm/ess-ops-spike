@@ -1,0 +1,21 @@
+<form [formGroup]="wizardForm" fxLayout="row" fxLayoutGap="15px">
+  <cca-select-field
+    class="default-field-width"
+    controlName="componentType"
+    [form]="wizardForm"
+    [options]="wizard.model.componentOptions"
+    placeholder="Component"
+  ></cca-select-field>
+  <mat-form-field id="merge-selection-card" data-test-id="merge-selection-card" class="default-field-width" *ngIf="shouldShowCardSelector">
+    <mat-select formControlName="card" placeholder="Card" (opened)="isCardMenuOpen = true;" (closed)="isCardMenuOpen = false;">
+      <mat-option *ngFor="let card of cardOptions" [value]="card">
+        <div class="card-option">
+          <div class="card-option-row">{{card.identifiers.pan}}</div>
+          <div class="card-option-row" *ngIf="isCardMenuOpen">
+            <cca-fsapi-status [status]="card.getStatusByPlatform(card.platform)"></cca-fsapi-status>
+          </div>
+        </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

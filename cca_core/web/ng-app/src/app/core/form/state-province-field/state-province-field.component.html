@@ -1,0 +1,13 @@
+<div [formGroup]="form">
+  <mat-form-field>
+    <mat-select class="state-province-field form-field" [formControlName]="controlName" [placeholder]="placeholder">
+      <mat-option>None</mat-option>
+      <mat-optgroup *ngFor="let group of countries | specifiedCountry : country | orderBy : 'priority'" [label]="group.displayName">
+        <mat-option *ngFor="let child of group.children | orderBy : 'displayName'" [value]="child.abbreviation">{{child.name}} ({{child.abbreviation}})</mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-error *ngIf="form.get(controlName).hasError('required')">
+      <i>This field is required</i>
+    </mat-error>
+  </mat-form-field>
+</div>

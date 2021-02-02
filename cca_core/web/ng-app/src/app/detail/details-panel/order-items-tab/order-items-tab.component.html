@@ -1,0 +1,165 @@
+<div class="container">
+  <cca-order-items-table [orderItems]="orderItems" [platform]="platform" [selection]="selection" [selectedOrderFlag]="selectedOrderFlag" (filterCardItems)='filterCardItems($event)'></cca-order-items-table>
+
+  <div fxLayout="row" fxLayoutAlign="start center" style="margin-top:10px; margin-bottom:10px">
+    <h4 class="text-primary" style="margin: 0" *ngIf="loadingSpinner.on">Loading Order Cards...</h4>
+    <h4 class="text-primary" style="margin: 0" *ngIf="!loadingSpinner.on">{{dataSource.data.length}} Order Card<span
+      *ngIf="dataSource.data.length > 1 || dataSource.data.length ==0">s</span></h4>
+    <span fxFlex></span>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" *ngIf="dataSource.data?.length">
+      <!-- Start Bulk Action Menu--->
+      <div [matTooltip]="bulkActionsButtonTooltip" style="margin-top: 20px">
+        <button class="actions-button" mat-raised-button [matMenuTriggerFor]="actionsMenu" [disabled]="!isCardsSelected || !isBulkActionsAllowed">
+          Actions
+        </button>
+        <mat-menu #actionsMenu="matMenu" [overlapTrigger]="false">
+          <div [matTooltip]="bulkCloseCardsButtonTooltip" style="margin-top: 20px">
+            <button class="condensed-menu-option" mat-menu-item (click)="openCloseCardWizard()"
+                    [disabled]="isMissingSerialNumbers || !isCloseCardsEnabled || cancellationJobRunningForSelectedCards">
+              Close Cards
+            </button>
+          </div>
+          <div [matTooltip]="bulkChangeStatusButtonTooltip">
+            <button class="condensed-menu-option" mat-menu-item (click)="openBulkChangeStatusWizard()"
+                    [disabled]="isMissingSerialNumbers || !isChangeStatusEnabled || cancellationJobRunningForSelectedCards">
+              Change Status
+            </button>
+          </div>
+          <!-- Disable refund order item until next BOL release
+          <div [matTooltip]="refundOrderButtonTooltip">
+            <button class="condensed-menu-option" mat-menu-item (click)="openRefundOrderWizard()"
+                    [disabled]="isAlreadyRefunded">
+              Refund Cards
+            </button>
+          </div>
+          -->
+        </mat-menu>
+      </div>
+      <!-- Start Filter--->
+      <cca-clear-item-filter *ngIf="selectedOrderFlag" (click)="clearFilter( )"></cca-clear-item-filter>
+      <mat-form-field class="default-field-width no-bottom-padding">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" [formControl]="filterControl"/>
+      </mat-form-field>
+    </div>
+  </div>
+
+    <cca-spinner #loadingSpinner color="primary"></cca-spinner>
+    <div class="table-container condensed-table bottomless-table" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No
+        Card Information Available
+      </div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort matSortActive="serialNumber"
+             matSortDirection="asc" [hidden]="!dataSource.data?.length">
+
+      <ng-container matColumnDef="isSelected">
+        <th mat-header-cell *matHeaderCellDef ccaClickSwallower [preventDefault]="false">
+          <mat-checkbox class="small-checkbox" [disableRipple]="true" (change)="toggleSelectAll()"
+                        [matTooltip]="setSelectAllTooltip()" [checked]="isSelectAllChecked"
+                        [disabled]="isMissingSerialNumbers">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let card" ccaClickSwallower [preventDefault]="false">
+          <mat-checkbox class="small-checkbox" [disableRipple]="true" (change)="toggleSelectedCard(card)"
+                        [matTooltip]="setTooltip(card)"
+                        [checked]="card.isSelected || isSelectAllChecked"
+                        [disabled]="this.isSelectAllChecked"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="serialNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial Number</th>
+        <td class="container" mat-cell *matCellDef="let card">
+          <div *ngIf="!hasVMSPermission">{{card?.serialNumber}}</div>
+          <div *ngIf="hasVMSPermission && card?.serialNumber">
+            <a href="javascript:void(0)" (click)="linkToSerialNumber(card.serialNumber)" ccaClickSwallower>{{card?.serialNumber}}</a>
+            <cca-spinner [id]="card.serialNumber" #serialNumberSpinner color="primary"></cca-spinner>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="proxyNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Proxy Number</th>
+        <td class="container" mat-cell *matCellDef="let card">
+          <div *ngIf="!hasVMSPermission">{{card?.cardNumber}}</div>
+          <div *ngIf="hasVMSPermission">
+            <a href="javascript:void(0)" (click)="linkToProxyNumber(card.cardNumber)" ccaClickSwallower>{{card?.cardNumber}}</a>
+            <cca-spinner [id]="card.cardNumber" #proxyNumberSpinner color="primary"></cca-spinner>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Card Name</th>
+        <td mat-cell *matCellDef="let card"> {{card?.parentItem?.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let card">
+          <ng-container *ngIf="card?.parentItem?.productType?.toLowerCase().includes('digital')">
+            {{card?.shipment?.recipient?.emailAddress}}
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Card Status</th>
+        <td class="container" mat-cell *matCellDef="let card">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <cca-fsapi-status [status]="card?.status"></cca-fsapi-status>
+            <div>
+              <div *ngIf="card.serialNumber">
+                <fa-icon icon="redo" (click)="findStatus(card)" matTooltip="Update Status"></fa-icon>
+              </div>
+              <cca-spinner [id]="card.serialNumber" #orderItemSpinner color="primary"></cca-spinner>
+            </div>
+            <div>
+              <div *ngIf="!card.serialNumber && card.cardNumber">
+                <fa-icon icon="redo" (click)="findStatusByProxy(card)" matTooltip="Update Status"></fa-icon>
+              </div>
+              <cca-spinner [id]="card.cardNumber" #orderItemProxySpinner color="primary"></cca-spinner>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right"
+            arrowPosition="before">Card Value
+        </th>
+        <td class="column-right" mat-cell *matCellDef="let card"
+            style="text-align: right"> {{card?.parentItem?.initialValue?.displayValue}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="purchaseFee">
+        <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right"
+            arrowPosition="before">Purchase Fee
+        </th>
+        <td class="column-right" mat-cell *matCellDef="let card"
+            style="text-align: right"> {{card?.parentItem?.purchaseFee?.displayValue}}</td>
+      </ng-container>
+
+        <ng-container matColumnDef="handlingFee">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right"
+              arrowPosition="before">Handling Fee
+          </th>
+          <td class="column-right" mat-cell *matCellDef="let card"
+              style="text-align: right"> {{card?.parentItem?.handlingFee?.displayValue}}</td>
+        </ng-container>
+      <ng-container matColumnDef="balance">
+        <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right"
+            arrowPosition="before">Available Balance
+        </th>
+        <td class="column-right" mat-cell
+            *matCellDef="let card"> {{card?.availableBalance?.displayValue || '---'}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+
+      </tr>
+    </table>
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+  </div>
+</div>

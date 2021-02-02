@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutGap="15px">
+  <mat-form-field class="default-field-width" [formGroup]="selectForm">
+    <mat-select formControlName="addToGroupControl" placeholder="Add as Owner of Group">
+      <mat-option [value]="option.id" *ngFor="let option of masterGroups | orderBy: 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <span fxFlex></span>
+  <div class="default-field-width" [formGroup]="wizardForm">
+    <cca-text-field [form]="wizardForm" placeholder="Filter Groups" aria-label="Filter Groups" controlName="filterGroupControl" *ngIf="ownerGroups?.length"></cca-text-field>
+  </div>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-group-card #auto *ngFor="let group of ownerGroups | orderBy : 'displayName'" [groupData]="group" [userId]="wizard.model.user.id" (updateGroups)='updateGroups($event)'></cca-group-card>
+</div>

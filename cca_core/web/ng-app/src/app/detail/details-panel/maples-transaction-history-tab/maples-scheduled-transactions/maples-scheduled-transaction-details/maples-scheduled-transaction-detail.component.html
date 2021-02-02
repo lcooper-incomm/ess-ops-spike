@@ -1,0 +1,12 @@
+<div fxLayout="row" style="justify-content: space-around; padding: 2px 6px;">
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Event Type" [value]="transaction?.schedule?.eventType"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Notification Method" [value]="transaction?.schedule?.notificationMethod"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Event ID" [value]="transaction?.schedule?.accountEventId"></cca-key-value-with-placeholder>
+  </div>
+</div>
+<cca-maples-transaction-action-toolbar [transaction]="transaction"></cca-maples-transaction-action-toolbar>

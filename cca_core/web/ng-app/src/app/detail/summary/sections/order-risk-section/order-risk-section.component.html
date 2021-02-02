@@ -1,0 +1,11 @@
+<div class="summary-section order-risk-section container">
+  <cca-key-value key="Risk Score">
+    <div *ngIf="selection?.getOrder()?.payment?.risk?.finalScore">
+      <div *ngIf="!hasPermission">{{selection.getOrder().payment.risk.finalScore}}</div>
+      <div *ngIf="hasPermission">
+        <a href="javascript:void(0)" (click)="openRiskDetails(selection.getOrder().payment.risk)">{{selection.getOrder().payment.risk.finalScore}}</a>
+      </div>
+    </div>
+    <div class="text-muted" *ngIf="!selection?.getOrder()?.payment?.risk?.finalScore">Not Available</div>
+  </cca-key-value>
+</div>

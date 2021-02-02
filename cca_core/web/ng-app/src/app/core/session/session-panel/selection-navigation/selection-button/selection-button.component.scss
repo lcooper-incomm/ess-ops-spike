@@ -1,0 +1,52 @@
+@import '~@angular/material/theming';
+@import '../../../../../../colors.scss';
+
+.selection-button {
+  width: 220px;
+  margin-bottom: 5px;
+  background-color: white;
+  color: black;
+
+  &.active,
+  &:hover {
+    outline: 1px solid;
+    outline-color: mat-color($cca-app-primary);
+
+    fa-icon {
+      color: mat-color($cca-app-primary);
+    }
+  }
+
+  .description-container {
+    font-size: 12px;
+    padding: 0 5px;
+
+    .description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .sub-description-container {
+      font-size: 10px;
+      line-height: 10px;
+      height: 10px;
+    }
+  }
+
+  .icon-container {
+    height: 40px;
+    width: 40px;
+
+    &.active {
+      color: gold;
+    }
+  }
+
+  .menu-button-container {
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .05);
+    }
+  }
+}

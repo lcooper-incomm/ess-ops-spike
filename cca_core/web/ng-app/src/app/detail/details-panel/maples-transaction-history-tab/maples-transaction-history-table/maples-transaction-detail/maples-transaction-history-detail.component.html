@@ -1,0 +1,7 @@
+<div *ngIf="showTransactionDetail" class="maples-transaction-detail-container container">
+  <div [ngSwitch]="selection.platform" class="expansion-panel-content">
+    <cca-transaction-serve-detail *ngSwitchCase="'SERVE'" [selection]="selection" [transaction]="transaction"></cca-transaction-serve-detail>
+  </div>
+  <cca-maples-transaction-action-toolbar [transaction]="transaction" [preauthTransaction]="preauthTransaction"></cca-maples-transaction-action-toolbar>
+</div>
+<cca-spinner #detailSpinner></cca-spinner>

@@ -1,0 +1,32 @@
+<!-- Part of the fix for the flash of open panels bug. -->
+<div [@.disabled]="disableAnimation">
+  <div #divs *ngFor="let comment of comments; index as i" [id]="'item-'+i">
+    <mat-expansion-panel hideToggle [expanded]="comment.id === isSelected"
+                         (opened)="openGroup(i)">
+
+  <mat-expansion-panel-header [expandedHeight]="expandedHeight" [collapsedHeight]="collapsedHeight">
+    <mat-panel-title style="padding: 10px;" fxLayout="column">
+      <div><strong>{{comment.createdBy?.username}}<span
+        style="margin-left: 15px">{{comment.createdDate.displayValue}}</span></strong></div>
+      <div class="text-muted">{{comment?.content | ellipsis : 100}}</div>
+
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div class="dynamic-expansion-panel-content" fxLayout="column">
+    <div class="divider" fxLayout="column">
+      <cca-key-value-with-placeholder key="Created Date"
+                                      [value]="comment.createdDate.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value class="text-primary" key="Created By">{{comment.createdBy.displayName}}</cca-key-value>
+    </div>
+    <div class="divider" fxLayout="column">
+      <cca-key-value-with-placeholder key="Modified Date"
+                                      [value]="comment.modifiedDate.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value class="text-primary" key="Modified By">{{comment.modifiedBy.displayName}}</cca-key-value>
+    </div>
+    <div style="padding: 10px;">{{comment?.content}}</div>
+  </div>
+</mat-expansion-panel>
+  </div>
+</div>
+

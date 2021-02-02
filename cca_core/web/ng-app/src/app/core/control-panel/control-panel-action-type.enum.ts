@@ -1,0 +1,3 @@
+export enum ControlPanelActionType {
+  SELECT_CONTROL_PANEL_CHILD_ROUTE = 'SELECT_CONTROL_PANEL_CHILD_ROUTE',
+}

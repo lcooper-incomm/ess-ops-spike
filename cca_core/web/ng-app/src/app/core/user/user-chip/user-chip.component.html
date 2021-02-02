@@ -1,0 +1,5 @@
+<div class="user-chip mat-elevation-z1 container" [ngClass]="{clickable: isClickable}" fxLayout="row" fxLayoutAlign="center center" [matTooltip]="tooltipText" matTooltipClass="multiline-tooltip" (click)="search()">
+  <fa-icon icon="user"></fa-icon>
+  <span class="mat-body-2">{{user.displayName || user.username}}</span>
+  <cca-spinner #userSpinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+</div>

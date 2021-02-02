@@ -1,0 +1,10 @@
+<mat-slide-toggle [checked]="user?.isActive" (change)="toggleActive(user?.isActive)">
+  <span [ngClass]="user?.isActive ? 'text-success' : 'text-error'"><strong>{{user?.isActive ? 'Active' : 'Inactive'}}</strong></span>
+</mat-slide-toggle>
+<div [formGroup]="wizardForm">
+  <cca-text-field [form]="wizardForm" controlName="firstName" placeholder="First Name" value="user?.firstName"></cca-text-field>
+  <cca-text-field [form]="wizardForm" controlName="lastName" placeholder="Last Name" value="user?.lastName"></cca-text-field>
+  <cca-text-field [form]="wizardForm" controlName="email" placeholder="Email" value="user?.email"></cca-text-field>
+</div>
+<cca-key-value-with-placeholder key="Username" [value]="user?.username"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Id" [value]="user?.id"></cca-key-value-with-placeholder>

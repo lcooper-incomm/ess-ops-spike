@@ -1,0 +1,18 @@
+<div class="info-container">
+  <h3>Replace Card: {{wizard.model.pan}}</h3>
+</div>
+<div>
+  <cca-key-value-with-placeholder key="Is Fraud"
+                                  [value]="wizard.model.request.isFraud ? 'Yes' : 'No'"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Reason"
+                                  [value]="getReasonDisplayValue(wizard.model.request.reason)"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Shipping Method"
+                                  [value]="getShippingDisplayValue(wizard.model.request.shippingMethod)"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Waive Fee" [value]="wizard.model.request.isFeeWaived ? 'Yes' : 'No'"
+                                  *ngIf="hasShippingFee(wizard.model.request.shippingMethod)"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.request.comment"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Use Primary Address"
+                                  [value]="wizard.model.request.isPrimaryAddressValid ? 'Yes' : 'No'"></cca-key-value-with-placeholder>
+  <cca-key-value-address key="Address"
+                         [address]="wizard.model.request.address"></cca-key-value-address>
+</div>

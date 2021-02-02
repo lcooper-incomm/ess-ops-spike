@@ -1,0 +1,17 @@
+<div id="validate-pin-row-container">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <span class="text-muted">PIN Status: </span>
+    <strong [ngClass]="{'text-success': !wizard.model.validating && wizard.model.selection.selectedCard.alerts.isPinSet, 'text-danger': !wizard.model.validating && !wizard.model.selection.selectedCard.alerts.isPinSet, 'text-muted': wizard.model.validating}">
+      &nbsp;
+      <span *ngIf="!wizard.model.validating">{{wizard.model.selection.selectedCard.alerts.isPinSet ? 'PIN Set' : 'PIN Not Set'}}</span>
+      <span *ngIf="wizard.model.validating">Validating...</span>
+    </strong>
+  </div>
+  <div id="validate-pin-btn-container">
+    <button id="validate-card" class="container" mat-raised-button color="primary" *ngIf="!wizard.model.selection.selectedCard.alerts.isPinSet" (click)="validate()">
+      <span>Validate</span>
+      <cca-spinner [size]="SpinnerSize.EXTRA_SMALL" [on]="wizard.model.validating"></cca-spinner>
+    </button>
+  </div>
+</div>
+

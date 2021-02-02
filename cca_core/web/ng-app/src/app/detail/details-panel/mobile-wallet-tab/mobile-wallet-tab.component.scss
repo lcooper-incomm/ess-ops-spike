@@ -1,0 +1,20 @@
+.provisioning-status {
+  max-width: 220px;
+}
+
+.fraud-override-checkbox-wrapper {
+  position: relative;
+  margin-top: 15px;
+
+  .fraud-override-checkbox {
+    margin: 5px;
+  }
+}
+
+.vms-mobile-wallet-devices-container {
+  flex-grow: 1;
+}
+
+.spinner {
+  position: relative;
+}

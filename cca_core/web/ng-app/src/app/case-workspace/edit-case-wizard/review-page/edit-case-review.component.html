@@ -1,0 +1,12 @@
+<div>
+  <cca-key-value-with-placeholder key="Assigned Team" [value]="wizard.model?.assignedTeam?.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="SID" [value]="wizard.model.session?.id"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Queue" [value]="wizard.model.session?.queue?.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value *ngIf="wizard.model.assignedUser" key="Assignee">
+    <cca-user-chip [user]="wizard.model?.assignedUser" fxFlex="40" style="margin-top: 4px; margin-bottom: 6px"></cca-user-chip>
+  </cca-key-value>
+  <cca-key-value-with-placeholder *ngIf="!wizard.model.assignedUser" key="Assignee" [value]="wizard.model.assignedUser"></cca-key-value-with-placeholder>
+  <cca-key-value key="Status">
+    <cca-session-status [status]="wizard.model.session?.status" fxFlex="40"></cca-session-status>
+  </cca-key-value>
+</div>

@@ -1,0 +1,22 @@
+<div fxLayout="column" class="ml-auto mr-auto" style="width: 75%;">
+  <div class="text-bold">
+    Close all of the following accounts
+  </div>
+  <div *ngIf="!zeroBalance" class="mb-15 text-error">
+    There are accounts with non-zero balances so you can not proceed with this wizard.
+  </div>
+  <ng-container *ngFor="let accountInfo of wizard.model.accountInfos">
+    <div fxLayout="row nowrap" class="mt-15" style="justify-content: space-between;">
+      <div fxFlex="0 0 37%" class="text-muted">{{accountInfo.accountType}}</div>
+      <div fxFlex="0 0 37%" class="truncate-with-ellipsis">{{accountInfo.id}}</div>
+      <cca-serve-account-status [textStatus]="accountInfo.status" [useAbbreviation]="false" fxFlex="0 0 25%"></cca-serve-account-status>
+    </div>
+    <div *ngIf="!accountInfo.zeroBalance" style="display: block; margin-left: 15px; font-size: 10px;" class="text-error">
+      This account has a non-zero balance.
+    </div>
+  </ng-container>
+</div>
+<div *ngIf="zeroBalance" fxLayout="column" class="mt-15">
+  <cca-select-field [form]="wizardForm" [options]="reasons" placeholder="Reason" controlName="reason"></cca-select-field>
+  <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment"></cca-comment-field>
+</div>

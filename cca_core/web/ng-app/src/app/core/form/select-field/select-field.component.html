@@ -1,0 +1,44 @@
+<mat-form-field fxLayout="column">
+  <mat-select [formControl]="formControl"
+              [placeholder]="placeholder"
+              [required]="required || isControlRequired(formControl)"
+              [panelClass]="panelClass">
+    <ng-container *ngIf="typeAhead">
+      <input #searchInput
+             [value]="search"
+             placeholder="Search..."
+             (keydown)="stop($event)"
+             (keypress)="stop($event)"
+             (keyup)="updateSearch($event)"
+             class="search">
+    </ng-container>
+    <mat-select-trigger>{{ displayValue }}</mat-select-trigger>
+
+    <mat-option *ngIf="!isControlRequired" [value]="null">
+    </mat-option>
+
+    <!-- Iterate groups then group options if groups exist -->
+    <ng-container *ngIf="groups">
+      <ng-container *ngFor="let group of groupKeys">
+        <mat-optgroup *ngIf="filteredGroups[group].length > 0" [label]="group">
+          <mat-option *ngFor="let option of filteredGroups[group]" [value]="option.value">
+            <div class="container" [class.tall]="option.description">
+              <div>{{ group + ' - ' + option.displayValue }}</div>
+              <div *ngIf="option.description" class="subscript text-muted">{{ option.description }}</div>
+            </div>
+          </mat-option>
+        </mat-optgroup>
+      </ng-container>
+    </ng-container>
+    <!-- Iterate over options if there are no groups -->
+    <ng-container *ngIf="!groups">
+      <mat-option [value]="option.value" *ngFor="let option of filteredOptions">
+        <div class="container" [class.tall]="option.description">
+          <div>{{ option.displayValue }}</div>
+          <div *ngIf="option.description" class="subscript text-muted">{{ option.description }}</div>
+        </div>
+      </mat-option>
+    </ng-container>
+  </mat-select>
+  <mat-error *ngIf="formControl?.hasError('required')">This field is required</mat-error>
+</mat-form-field>

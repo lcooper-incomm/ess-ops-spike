@@ -1,0 +1,38 @@
+<div fxLayout="row">
+  <cca-key-value-with-placeholder key="Final Score" [value]="this.wizard.model.risk.finalScore"></cca-key-value-with-placeholder>
+</div>
+
+<!--row containing filter-->
+<div fxLayout="row" fxLayoutAlign="start center" style="margin-top: 15px; margin-left: 15px">
+  <h4 style="margin: 0; color: #2196f3">Tripped Risk Rules</h4>
+  <div fxFlex></div>
+  <mat-form-field class="default-field-width">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" [formControl]="filterControl">
+  </mat-form-field>
+</div>
+
+<!--table goes here-->
+<div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort [hidden]="!dataSource.data?.length" matSortActive="id" matSortDirection="desc">
+    
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let element"> {{element?.id}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Score</th>
+      <td mat-cell *matCellDef="let element"> {{element?.score}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reason</th>
+      <td mat-cell *matCellDef="let element"> {{element?.reason}}</td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+</div>

@@ -1,0 +1,21 @@
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.editMode"
+                                  key="ID"
+                                  [value]="wizard.model.queue.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="row" fxFlex="grow" style="justify-content: space-between;">
+    <div fxLayout="column" fxFlex="0 0 48%">
+      <mat-checkbox formControlName="isActive" class="mb-15">Is Active</mat-checkbox>
+      <cca-text-field [form]="wizardForm" controlName="systemName" placeholder="System Name"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="i3Name" placeholder="I3 Name"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="displayName" placeholder="Display Name"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="permissionDisplayName" placeholder="Permission Display Name"></cca-text-field>
+    </div>
+    <div fxLayout="column" fxFlex="0 0 48%">
+      <mat-checkbox formControlName="isLocked" class="mb-15">Is Locked</mat-checkbox>
+      <cca-select-field [form]="wizardForm" controlName="type" placeholder="Type" [options]="selectionTypeOptions"></cca-select-field>
+      <cca-text-field [form]="wizardForm" controlName="locale" placeholder="Locale"></cca-text-field>
+      <cca-text-field [form]="wizardForm" controlName="defaultNote" placeholder="Default Note"></cca-text-field>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<mat-slide-toggle [checked]="permission?.isActive" (change)="toggleActive(permission?.isActive)">
+  <span [ngClass]="permission?.isActive ? 'text-success' : 'text-error'"><strong>{{permission?.isActive ? 'Active' : 'Inactive'}}</strong></span>
+</mat-slide-toggle>
+<div [formGroup]="wizardForm">
+  <cca-text-field [form]="wizardForm" controlName="displayName" placeholder="Display Name" value="permission?.displayName"></cca-text-field>
+  <mat-form-field>
+    <textarea formControlName="description" matInput placeholder="Description" [value]="permission?.description" rows="3" resize="false"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="category" placeholder="Category">
+      <mat-option [value]="option.id" *ngFor="let option of categories | orderBy:'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<cca-key-value-with-placeholder key="System Name" [value]="permission?.systemName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="ID" [value]="permission?.id"></cca-key-value-with-placeholder>

@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutGap="15px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <div fxFlex="calc(50% - 10px)" fxLayout="row" fxLayoutAlign="start center">
+      <h3 class="text-primary column-header" fxFlex>Selection Information</h3>
+      <button mat-raised-button (click)="mergeAll()" [disabled]="!canMergeAll">Merge All</button>
+    </div>
+    <div fxFlex="calc(50% - 10px)">
+      <h3 class="text-primary column-header">{{ componentLabel }}</h3>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <cca-merge-field
+      *ngFor="let field of fields"
+      [field]="field"
+      [form]="form"
+      (merge)="merge(field)"
+      (unmerge)="unmerge(field)"
+    ></cca-merge-field>
+  </div>
+</div>

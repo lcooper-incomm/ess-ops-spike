@@ -1,0 +1,17 @@
+<div fxLayout="column" class="ml-auto mr-auto" style="width: 75%;">
+  <div class="text-accent">
+    Closing the following accounts...
+  </div>
+  <ng-container *ngFor="let accountInfo of wizard.model.accountInfos; index as i;">
+    <div fxLayout="row nowrap" class="mt-15" style="align-items: center;">
+      <div style="min-width: 48px; display: flex; justify-content: center;">
+        <cca-spinner *ngIf="progress[i] === 1" [on]="progress[i] === 1" style="position: absolute;"></cca-spinner>
+        <fa-icon *ngIf="progress[i] === 2" icon="exclamation-circle" class="text-error"></fa-icon>
+        <fa-icon *ngIf="progress[i] === 3" icon="check" class="text-success"></fa-icon>
+      </div>
+      <div fxFlex="0 0 33%" class="text-muted">{{accountInfo.accountType}}</div>
+      <div fxFlex="0 0 33%" class="truncate-with-ellipsis">{{accountInfo.id}}</div>
+      <cca-serve-account-status [textStatus]="accountInfo.status" [useAbbreviation]="false" fxFlex="0 0 25%"></cca-serve-account-status>
+    </div>
+  </ng-container>
+</div>

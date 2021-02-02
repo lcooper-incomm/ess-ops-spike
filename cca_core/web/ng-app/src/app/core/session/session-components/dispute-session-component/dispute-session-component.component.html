@@ -1,0 +1,21 @@
+<div fxLayout="row">
+  <div class="dispute-component-container" fxLayout="row wrap" fxLayoutGap="10px" fxFlex="40">
+  <div style="width:400px" fxLayout="column" fxLayoutGap="10px">
+    <h4 class="session-heading">Dispute Details</h4>
+    <cca-key-value-with-placeholder key="Delivery Method" [value]="disputeComponent.deliveryMethod"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder *ngIf="!disputeComponent.externalReasonCode" key="Reason" [value]="disputeComponent.reasonCode?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder *ngIf="disputeComponent.externalReasonCode" key="Reason" [value]="disputeComponent.externalReasonCode"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Probing Questions"
+                                    [value]="(disputeComponent.probingQuestions && disputeComponent.probingQuestions.length > 0) ? 'View Details' : 'Not Available'"
+                                    [valueClass]="(disputeComponent.probingQuestions && disputeComponent.probingQuestions.length > 0) ? 'text-accent cursor' : 'text-muted'"
+                                    (click)="openProbingQuestionsWizard()">
+    </cca-key-value-with-placeholder>
+  </div>
+</div>
+  <div class="transactions-container" fxFlex="60">
+    <h4 class="text-primary">Disputed Transactions</h4>
+    <mat-card>
+      <cca-simple-disputed-transaction-table [transactions]="transactions" [identifier]="disputeComponent.identifier"></cca-simple-disputed-transaction-table>
+    </mat-card>
+  </div>
+</div>

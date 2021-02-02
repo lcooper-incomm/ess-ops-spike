@@ -1,0 +1,23 @@
+.session-comment {
+  position: relative;
+  padding: 0 5px 5px 5px;
+  line-height: 16px;
+
+  &:hover,
+  &.selected {
+    background-color: #eee;
+  }
+
+  &.selected {
+    font-weight: bold;
+  }
+
+  .selected-indicator {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    background-color: #eee;
+  }
+}

@@ -1,0 +1,52 @@
+<div class="customer-fees-tab-container container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <h3 class="text-primary">Current Fee Plan Summary</h3>
+    <div fxFlex></div>
+    <button *ngIf="selection.platform === PlatformType.VMS && this.securityService.hasPermission ( Permission.VMS_CHANGE_FEE_PLAN )" mat-mini-fab color="primary" (click)="openChangeFeePlanDialog()" matTooltip="Change Fee Plan">
+      <fa-icon icon="cog"></fa-icon>
+    </button>
+    <form [formGroup]="filterForm" style="margin:0;" [hidden]="!dataSource.data?.length">
+      <cca-text-field controlName="filter" [form]="filterForm" placeholder="Filter"></cca-text-field>
+    </form>
+  </div>
+  <div class="text-muted" fxLayout="row" fxLayoutAlign="center center" *ngIf="!feePlan">No Active Fee Plan Available</div>
+  <div class="summary-column" *ngIf="feePlan">
+    <cca-key-value-with-placeholder key="Current Fee Plan" [value]="feePlan.description"></cca-key-value-with-placeholder>
+    <div *ngIf="selection?.platform === PlatformType.VMS">
+      <cca-key-value-with-placeholder key="Last Monthly Fee" [value]="selection?.getCustomer()?.lastMonthlyFeeDate?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Next Monthly Fee" [value]="selection?.getCustomer()?.nextMonthlyFeeDate?.displayValue"></cca-key-value-with-placeholder>
+    </div>
+  </div>
+  <div class="content-container container">
+    <div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="feePlan && !dataSource.data?.length">No Fee Plan Details Available</div>
+      <table mat-table [dataSource]="dataSource" matSort matSortActive="description" matSortDirection="asc" [hidden]="!dataSource.data?.length">
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+          <td mat-cell *matCellDef="let element">{{element.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.amount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="percentage">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Percentage</th>
+          <td mat-cell *matCellDef="let element">{{element.percentage}}%</td>
+        </ng-container>
+        <ng-container matColumnDef="min">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Min Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.minAmount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="clawback">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Claw Back</th>
+          <td mat-cell *matCellDef="let element">{{element.isClawbackEnabled | boolean}} </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource.data?.length <= 50"></mat-paginator>
+    </div>
+    <cca-spinner #feePlanSpinner></cca-spinner>
+  </div>
+</div>

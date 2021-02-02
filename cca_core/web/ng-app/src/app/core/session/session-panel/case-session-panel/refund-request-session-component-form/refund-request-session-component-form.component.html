@@ -1,0 +1,24 @@
+<div class="refund-request-component-container">
+  <form [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutGap="15px">
+      <div>
+        <h4 class="session-heading">Refund</h4>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-currency-field id="session-refund-request-amount" data-test-id="session-refund-request-amount" class="default-field-width" [form]="form" controlName="amount" placeholder="Amount"></cca-currency-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-text-field id="session-refund-request-name" data-test-id="session-refund-request-name" class="default-field-width" [form]="form" controlName="name" placeholder="Name"></cca-text-field>
+          <cca-text-field id="session-refund-request-ani" data-test-id="session-refund-request-ani" class="default-field-width" [form]="form" controlName="ani" placeholder="ANI"></cca-text-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-datepicker-field id="session-refund-request-requested-date" data-test-id="session-refund-request-requested-date" class="default-field-width" [form]="form" controlName="requestedDate" placeholder="Requested Date"></cca-datepicker-field>
+          <cca-datepicker-field id="session-refund-request-approved-date" data-test-id="session-refund-request-approved-date" class="default-field-width" [form]="form" controlName="approvedDate" placeholder="Approved Date"></cca-datepicker-field>
+        </div>
+      </div>
+      <div>
+        <h4 class="session-heading">Address</h4>
+        <cca-address-form [form]="form.get('address')"></cca-address-form>
+      </div>
+    </div>
+  </form>
+</div>

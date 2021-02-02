@@ -1,0 +1,64 @@
+<div class="selection-button mat-elevation-z1" [class.active]="isActiveSelection">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="icon-container" fxLayout="row" fxLayoutAlign="center center">
+      <fa-icon [icon]="selection.iconName"></fa-icon>
+    </div>
+    <div class="description-container" fxFlex="1 0 140px">
+      <div class="description" [matTooltip]="selection.description + ((selection.selectedCard && selection.selectedCard.identifiers && selection.selectedCard.identifiers.pan) ? (' (**' + selection.selectedCard.identifiers.pan.slice(-4) + ')') : '')">
+        {{description}}
+      </div>
+      <div class="sub-description-container">
+        <div class="sub-description-placeholder text-muted" *ngIf="!selection.data">
+          <i>(Click to load additional info)</i>
+        </div>
+        <div class="sub-description" [ngSwitch]="selection.type" *ngIf="selection.data">
+          <div *ngSwitchCase="'ACCOUNT'">
+            <cca-vanilla-direct-status [status]="selection.getAccount().status"></cca-vanilla-direct-status>
+          </div>
+          <div *ngSwitchCase="'CUSTOMER_ACCOUNT'">
+            <cca-serve-account-status *ngIf="selection.platform === 'SERVE'" [status]="selection.getCustomerAccount().getAccountStatus()"></cca-serve-account-status>
+          </div>
+          <div *ngSwitchCase="'CUSTOMER'">
+            <cca-fsapi-status [status]="selection.selectedCard.getStatusByPlatform(selection.platform)" *ngIf="selection.selectedCard"></cca-fsapi-status>
+          </div>
+          <div *ngSwitchCase="'LOCATION'">
+            <cca-location-status [status]="selection.getLocation().getStatusByPlatform('MDM')"></cca-location-status>
+          </div>
+          <div *ngSwitchCase="'ORDER'">
+            <cca-ecomm-order-state [status]="selection.getOrder().status.current"></cca-ecomm-order-state>
+          </div>
+          <div *ngSwitchCase="'CARD'">
+            <div [ngSwitch]="selection.platform">
+              <div *ngSwitchCase="'DDP'">
+                <cca-ddp-status [status]="selection.getCard().getStatusByPlatform('DDP')"></cca-ddp-status>
+              </div>
+              <div *ngSwitchCase="'GREENCARD'">
+                <cca-greencard-status [status]="selection.getCard().getStatusByPlatform('GREENCARD')"></cca-greencard-status>
+              </div>
+              <div *ngSwitchCase="'SRL'">
+                <cca-status [status]="selection.getCard().srlData.getStatusByPlatform('SRL')"></cca-status>
+              </div>
+              <div *ngSwitchDefault>
+                <cca-incomm-status [status]="selection.getCard().getStatusByPlatform('INCOMM')"></cca-incomm-status>
+              </div>
+            </div>
+          </div>
+          <div class="text-muted" *ngSwitchDefault>
+            --
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-button-container" *ngIf="isEnabled && hasRemoveSelectionPermission">
+      <button mat-icon-button ccaClickSwallower class="selection-options-button" [mat-menu-trigger-for]="selectionOptionsMenu" matTooltip="Options">
+        <fa-icon icon="ellipsis-h"></fa-icon>
+      </button>
+      <mat-menu #selectionOptionsMenu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item (click)="openRemoveSelection()" *ngIf="hasRemoveSelectionPermission">
+          <fa-icon icon="times-circle"></fa-icon>
+          Remove Selection
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>

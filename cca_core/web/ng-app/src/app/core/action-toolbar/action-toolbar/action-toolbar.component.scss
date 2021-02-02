@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+@import '~@angular/material/theming';
+@import '../../../../colors.scss';
+
+.action-toolbar-container {
+  background-color: mat-color($cca-app-action, 0.2);
+  height: 40px;
+  padding: 8px 10px;
+}
+
+// Center the spinner vertically
+.spinner {
+  position: relative;
+  height: 100%;
+}

@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Balance Adjustment was successful!
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: Balance Adjustment could not be processed.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Balance Adjustment was successful! , but a comment could not be registered.
+</div>

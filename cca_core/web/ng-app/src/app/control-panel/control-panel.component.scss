@@ -1,0 +1,53 @@
+@import '../../../node_modules/@angular/material/theming';
+@import '../../themes';
+
+.card-container {
+  width: 100%;
+
+  mat-dialog-content {
+    padding: 10px 24px;
+  }
+
+  .card-header {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: -24px -24px 0 -24px;
+    padding: 10px 24px;
+    font-size: 16px;
+    background-color: mat-color($cca-app-primary);
+    color: #fff;
+
+    &.primary {
+      background-color: mat-color($cca-app-primary);
+      color: white;
+    }
+
+    &.warn {
+      background-color: mat-color($cca-app-warn);
+      color: white;
+    }
+
+    h4 {
+      margin: 0;
+    }
+  }
+
+  .card-content {
+    background-color: white;
+  }
+  .card-actions {
+    background-color: #e0e0e0;
+    margin-left: -24px;
+    margin-right: -24px;
+    padding: 10px 24px
+  }
+}
+
+.active {
+  color: green;
+}
+
+.warn {
+  color: #f44336;
+}

@@ -1,0 +1,22 @@
+<div class="table-container condensed-table expansion-panel-wrapper" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <cca-spinner #spinner></cca-spinner>
+  <cscore-table [columns]="columns"
+                initialSortColumn="id"
+                initialSortDirection="desc"
+                (rowClick)="openViewSessionDialog($event)"
+                [dataSource]="dataSource"
+                [hidden]="!dataSource.data?.length">
+    <div *cscoreTableCellDef="let row; key: 'status'" ccaClickSwallower fxLayoutAlign="center center" class="text-primary">
+      <cca-session-status [status]="row.status" *ngIf="row.status"></cca-session-status>
+    </div>
+    <div *cscoreTableCellDef="let row; key: 'assignee'" ccaClickSwallower fxLayoutAlign="center center" class="text-primary">
+      <cca-user-chip [user]="row.user" *ngIf="row.user"></cca-user-chip>
+    </div>
+    <div *cscoreTableCellDef="let row; key: 'actions'" ccaClickSwallower fxLayoutAlign="center center" class="text-primary">
+      <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end center" ccaClickSwallower *ngIf="row.isWorkable">
+        <fa-icon class="assign-session-icon-button text-accent clickable" icon="user-edit" (click)="openAssignSessionDialog(row)" matTooltip="Edit Case"></fa-icon>
+        <fa-icon class="work-session-icon-button text-primary clickable" icon="clipboard-list" (click)="workSession(row)" matTooltip="Work Case"></fa-icon>
+      </div>
+    </div>
+  </cscore-table>
+</div>

@@ -1,0 +1,3 @@
+UPDATE cca_session
+SET status = 'REPLACEMENT_REQUESTED'
+WHERE status = 'REPLACEMENT';

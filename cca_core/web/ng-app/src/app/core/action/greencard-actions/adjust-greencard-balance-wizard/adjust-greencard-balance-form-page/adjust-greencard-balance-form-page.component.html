@@ -1,0 +1,28 @@
+<form [formGroup]="wizardForm">
+  <div fxLayout="row">
+    <cca-currency-field
+      id="activate-fastcard-initial-balance"
+      class="default-field-width"
+      [form]="wizardForm"
+      controlName="amount"
+      placeholder="Amount"
+    ></cca-currency-field>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="adjustmentType" placeholder="Type" required>
+        <mat-option [value]="option" *ngFor="let option of adjustmentTypes">
+          {{option.displayValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="default-width" fxFlex="1 1 auto">
+      <mat-select formControlName="reason" placeholder="Reason" required>
+        <mat-option [value]="option" *ngFor="let option of reasons | orderBy: 'label'">
+          {{option.displayValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</form>

@@ -1,0 +1,27 @@
+<div fxLayout="row">
+  <div fxLayout="column">
+    <button mat-raised-button [matMenuTriggerFor]="menu">Downloads</button>
+  </div>
+  <div fxLayout="column" style="margin-left: 10px">
+    <div class="text-muted" *ngIf="downloadedFileName">Downloaded: <span style="color: #5cb85c; margin-left: 10px">{{downloadedFileName}}</span></div>
+    <div class="text-muted" *ngIf="filePassword">Password: <span style="color: black; padding-left:26px">{{filePassword}}</span></div>
+  </div>
+</div>
+<mat-menu #menu="matMenu">
+  <div *ngFor="let jobFile of jobFiles | orderBy : 'name'">
+    <div *ngIf="jobFile.isEncrypted ">
+      <button mat-menu-item (click)="manageDownload( jobFile, jobFile.isEncrypted )">{{jobFile.name}}</button>
+      <span fxFlex></span>
+      <div fxLayoutAlign="center center" style="padding-right: 15px">
+        <fa-icon class="text-accent" icon="lock" matTooltip="Password will be provided after downloading the file"></fa-icon>
+      </div>
+    </div>
+    <div *ngIf="!jobFile.isEncrypted">
+      <button mat-menu-item (click)="manageDownload( jobFile, jobFile.isEncrypted )">{{jobFile.name}}</button>
+    </div>
+    <a fxLayoutAlign="end center" href="javascript:void(0)" (click)="export(jobFile.id)" style="padding-right: 15px">
+      Export
+    </a>
+  
+  </div>
+</mat-menu>

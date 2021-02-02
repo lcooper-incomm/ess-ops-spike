@@ -1,0 +1,29 @@
+<div class="summary-section container" fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value key="Status">
+    <cca-alder-order-status [statusString]="selection?.getOrder()?.status?.current?.state | uppercase" fxFlex></cca-alder-order-status>
+  </cca-key-value>
+  <cca-key-value key="Payment Status">
+    <cca-alder-order-status [statusString]="selection?.getOrder()?.payment?.status?.description" fxFlex></cca-alder-order-status>
+  </cca-key-value>
+</div>
+<div class="summary-section container" fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value-with-placeholder key="Order ID" [value]="selection?.getOrder()?.id"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Checkout ID" [value]="selection?.getOrder()?.correlationId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Order Date" [value]="selection?.getOrder()?.createdDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Total card Quantity" [value]="selection?.getOrder()?.getTotalCardQuantity()"></cca-key-value-with-placeholder>
+</div>
+<div class="summary-section container" fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value-with-placeholder key="Payment Amount" [value]="selection?.getOrder()?.totals?.grandTotal?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Authorization Code" [value]="selection?.getOrder()?.payment?.authorizationCode"></cca-key-value-with-placeholder>
+  <!-- Purchase Data? -->
+</div>
+<div class="summary-section container" fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value-with-placeholder key="Purchaser Name"
+                                  [value]="selection?.getOrder()?.customer?.getDisplayName()"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Purchaser Email"
+                                  [value]="selection?.getOrder()?.customer?.emailAddress"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Program Name"
+                                  [value]="selection?.getOrder()?.program?.name"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Catalog Name"
+                                  [value]="selection?.getOrder()?.catalogName"></cca-key-value-with-placeholder>
+</div>

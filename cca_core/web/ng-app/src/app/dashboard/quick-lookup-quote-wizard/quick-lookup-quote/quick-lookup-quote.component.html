@@ -1,0 +1,39 @@
+<div style="width:75%;">
+  <h4 class="text-accent">Quote Information</h4>
+  <cca-key-value key="Order ID" [ngClass]="{'text-muted': !quote?.reservedOrderId}">{{quote?.reservedOrderId || 'Pending'}}</cca-key-value>
+  <cca-key-value-with-placeholder key="Total Card Quantity" [value]="quote.getTotalCardQuantity()"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Total Purchase Price" [value]="transactionTotal"></cca-key-value-with-placeholder>
+</div>
+<div style="margin-top: 20px">
+  <cca-order-items-table [orderItems]="quote?.items" [isFilterable]="false" [viewDeliveries]="false"></cca-order-items-table>
+</div>
+<div style="width:75%;">
+  <h4 class="text-accent" style="margin-top: 15px">Other Information</h4>
+  <cca-key-value key="Active">{{quote.isActive ? 'Yes' : 'No'}}</cca-key-value>
+  <cca-key-value-with-placeholder key="Authorization Code"></cca-key-value-with-placeholder>
+  <cca-key-value-address key="Billing Address" [address]="billingAddress"></cca-key-value-address>
+  <cca-key-value-with-placeholder key="CC Last Four" [value]="quote.payment?.ccLastFour"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="CC Type" [value]="quote.payment?.ccType"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Created Date" [value]="quote.createdDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Customer Email" [value]="quote.customer?.emailAddress"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Customer Name" [value]="quote.customer?.getDisplayName()"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Customer Phone" [value]="mobilePhone"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Guest?" [value]="quote.isGuest ? 'Yes' : 'No'"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="IP Address" [value]="quote.customer?.clientIpAddress"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Issuer Declined Message" [value]="quote.payment?.reason"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Note" [value]="quote.note"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Original Order ID" [value]="quote?.originalOrderId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Payment Method" [value]="quote.payment?.method"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Payment Status" [value]="quote.payment?.status?.description"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Payment Status Code" [value]="quote.payment?.status?.code"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Payment Status Message" [value]="quote.payment?.status?.message"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Quote ID" [value]="quote.id"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Recipient Email" [value]="quote.recipients[0]?.emailAddress"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Recipient Name" [value]="quote.recipients[0]?.getDisplayName()"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Recipient Phone" [value]="mobilePhone"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Reserved Order ID" [value]="quote?.reservedOrderId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Risk Score" [value]="quote.payment?.risk?.finalScore"></cca-key-value-with-placeholder>
+  <cca-key-value-address key="Shipping Address" [address]="shippingAddress"></cca-key-value-address>
+  <cca-key-value-with-placeholder key="Updated Date" [value]=""></cca-key-value-with-placeholder>
+  <cca-key-value key="Virtual?">{{quote.isVirtual ? 'Yes' : 'No'}}</cca-key-value>
+</div>

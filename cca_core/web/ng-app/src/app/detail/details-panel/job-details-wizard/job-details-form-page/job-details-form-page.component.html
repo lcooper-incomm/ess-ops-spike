@@ -1,0 +1,33 @@
+<div fxLayout="row" fxLayoutAlign="end center" style="margin-bottom: 10px">
+  <cca-count-down-toggle-timer [refreshTime]="30" displayText="Enable Auto-Refresh" (timerComplete)="onTimerComplete($event)"></cca-count-down-toggle-timer>
+</div>
+<cca-key-value-with-placeholder key="ID" [value]="job?.id"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Status" [value]="job?.status.type"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Name" [value]="job?.name"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Requester" [value]="job?.owner.name"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Queued Date" [value]="queuedDate?.displayValue || 'Not Started'"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Started Date" [value]="startedDate?.displayValue  || 'Not Started'"></cca-key-value-with-placeholder>
+<!--reason-->
+<h4 class="text-accent" style="margin-top: 10px">Progress</h4>
+<cca-stacked-progress-bar *ngIf="this.job?.failedPercent || this.job?.completePercent || this.job?.pendingPercent"
+                          [percentages]="[this.job?.failedPercent,this.job?.completePercent,this.job?.pendingPercent]"
+                          [colors]="['red','#5cb85c','#ccc']"
+                          [toolTips]="['Failed Task(s)','Completed Task(s)','Pending Task(s)']"
+                          [counts]="[this.job.failedCount,this.job.completeCount,this.job.pendingCount]">
+</cca-stacked-progress-bar>
+<div style="margin-top: 10px">
+  <div fxLayout="row">
+    <h4 class="text-accent">Status History {{job?.statusHistory.length}}</h4>
+    <span fxFlex></span>
+    <div>
+      <a *ngIf="!showHistory" href="javascript:void(0)" (click)="showHistory = !showHistory">Show History</a>
+      <a *ngIf="showHistory" href="javascript:void(0)" (click)="showHistory = !showHistory">Hide History</a>
+    </div>
+  </div>
+  <cca-jobs-status-history-table *ngIf="showHistory && job?.statusHistory.length" [statusHistory]="job?.statusHistory"></cca-jobs-status-history-table>
+</div>
+<div *ngIf="job?.tasks.length" style="margin-top: 10px; margin-bottom: 10px">
+  <h4 class="text-accent">Tasks ({{job?.tasks.length}})</h4>
+  <cca-jobs-task-table [jobTasks]="job?.tasks"></cca-jobs-task-table>
+</div>
+<cca-file-download *ngIf="job?.files.length" [jobFiles]="job?.files"></cca-file-download>

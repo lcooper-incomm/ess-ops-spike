@@ -1,0 +1,10 @@
+<div *ngIf="showTransactionDetail" class="transaction-detail-container container">
+  <div [ngSwitch]="selection.type" class="expansion-panel-content">
+    <cca-transaction-history-account-detail *ngSwitchCase="'ACCOUNT'" [selection]="selection" [transaction]="transaction"></cca-transaction-history-account-detail>
+    <cca-transaction-history-customer-detail *ngSwitchCase="'CUSTOMER'" [selection]="selection" [transaction]="transaction"></cca-transaction-history-customer-detail>
+    <cca-transaction-history-location-detail *ngSwitchCase="'LOCATION'" [selection]="selection" [transaction]="transaction"></cca-transaction-history-location-detail>
+    <cca-transaction-history-product-detail *ngSwitchCase="'CARD'" [selection]="selection"
+                                            [transaction]="transaction"></cca-transaction-history-product-detail>
+  </div>
+  <cca-transaction-action-toolbar [transaction]="transaction"></cca-transaction-action-toolbar>
+</div>

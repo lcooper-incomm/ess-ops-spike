@@ -1,0 +1,9 @@
+<div [formGroup]="wizardForm">
+  <mat-form-field *ngFor="let question of wizard.model.challengeInfo.questions | orderBy : 'id'">
+    <mat-select [formControlName]="getQuestionControlName(question)" [placeholder]="question.question" required>
+      <mat-option [value]="answer" *ngFor="let answer of question.answers | orderBy : 'id'">
+        {{ answer.answer }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

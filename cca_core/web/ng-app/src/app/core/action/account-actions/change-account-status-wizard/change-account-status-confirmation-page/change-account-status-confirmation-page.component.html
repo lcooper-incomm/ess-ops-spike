@@ -1,0 +1,10 @@
+<div class="info-container">
+  <cca-key-value key="Account ID" alignment="start start">{{wizard.model.accountId}}</cca-key-value>
+  <cca-key-value key="Account Status" alignment="start start">{{wizard.model.accountChangeStatusRequest.accountStatus}}</cca-key-value>
+</div>
+<div fxLayout="column">
+  <cca-key-value-with-placeholder alignment="start start" key="New Status" [value]="wizard.model.accountChangeStatusRequest.accountStatus"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder alignment="start start" key="Status Reason" [value]="wizard.model.accountChangeStatusRequest.statusReason"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder alignment="start start" key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+</div>
+

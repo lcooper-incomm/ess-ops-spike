@@ -1,0 +1,13 @@
+<div class="container" fxLayout="column">
+  <cca-key-value-with-placeholder key="Mode" [value]="wizard.model.mode"></cca-key-value-with-placeholder>
+  <ng-container *ngIf="wizard.model.showEmail">
+    <cca-key-value-with-placeholder key="Name" [value]="wizard.model.request.displayName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Email" [value]="wizard.model.request.emailAddress"></cca-key-value-with-placeholder>
+  </ng-container>
+  <ng-container *ngIf="!wizard.model.showEmail">
+    <!-- Get recipient from selection if original -->
+    <cca-key-value-with-placeholder key="Name" [value]="wizard.model.selection?.getOrder()?.customer?.getDisplayName()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Email" [value]="wizard.model.selection?.getOrder()?.customer?.emailAddress"></cca-key-value-with-placeholder>
+  </ng-container>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+</div>

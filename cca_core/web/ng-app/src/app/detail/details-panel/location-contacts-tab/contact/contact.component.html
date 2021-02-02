@@ -1,0 +1,21 @@
+<div class="contact-container mat-elevation-z1" fxLayout="row">
+  <div class="icon-container" fxLayout="row" fxLayoutAlign="center center">
+    <fa-icon icon="user"></fa-icon>
+  </div>
+  <div class="contact-information-container" fxFlex fxLayout="column">
+    <h4>{{contact.name}}</h4>
+    <div class="content-container" fxFlex>
+      <cca-key-value [key]="contact.phoneNumbers.length > 1 ? 'Phone Numbers' : 'Phone Number'" alignment="start start">
+        <div class="text-muted" *ngIf="!contact.phoneNumbers.length">Not Available</div>
+        <div *ngIf="contact.phoneNumbers.length">
+          <div *ngFor="let phoneNumber of contact.phoneNumbers">{{phoneNumber.number}}</div>
+        </div>
+      </cca-key-value>
+      <cca-key-value-with-placeholder key="Email Address" [value]="email"></cca-key-value-with-placeholder>
+      <cca-key-value key="Address" alignment="start start">
+        <div class="text-muted" *ngIf="!address">Not Available</div>
+        <cca-address [address]="address" *ngIf="address"></cca-address>
+      </cca-key-value>
+    </div>
+  </div>
+</div>

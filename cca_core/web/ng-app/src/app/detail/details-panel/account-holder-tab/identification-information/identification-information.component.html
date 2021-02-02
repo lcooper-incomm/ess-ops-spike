@@ -1,0 +1,35 @@
+<mat-expansion-panel hideToggle [expanded]="true" class="account-holder-expansion-panel">
+  <mat-expansion-panel-header expandedHeight="48px">
+    <mat-panel-title>
+      <h3 class="text-primary title-header">Identification Information</h3>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="panel-content" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="canadian-identification" *ngIf="selection?.getCustomer()?.isCanadian" fxLayout="row wrap" fxLayoutGap="10px">
+      <div class="summary-column">
+        <cca-key-value-with-placeholder key="Country" [value]="selection?.getCustomer()?.identification?.country"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Expiration Date" [value]="selection?.getCustomer()?.identification?.expirationDate?.displayValue"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="ID Number" [value]="selection?.getCustomer()?.identification?.number"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="ID Type" [value]="selection?.getCustomer()?.identification?.type"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Occupation" [value]="selection?.getCustomer()?.occupation?.name"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Province" [value]="selection?.getCustomer()?.identification?.stateProvince"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Verification Date" [value]="selection?.getCustomer()?.identification?.verificationDate?.displayValue"></cca-key-value-with-placeholder>
+      </div>
+      <div class="summary-column">
+        <cca-key-value-with-placeholder key="Taxpayer ID" [value]="selection?.getCustomer()?.tax?.payerId"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="No Tax ID Reason" [value]="selection?.getCustomer()?.tax.noTaxIdReasonCode" *ngIf="!selection?.getCustomer()?.tax?.payerId"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Tax Resident of Canada?" value="{{selection?.getCustomer()?.tax?.isTaxResidentofCanada | boolean}}"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Tax Residence Jurisdiction" [value]="selection?.getCustomer()?.tax?.taxJurisdictionResidence"></cca-key-value-with-placeholder>
+      </div>
+    </div>
+    <div class="non-canadian-identification summary-column" *ngIf="!selection?.getCustomer()?.isCanadian">
+      <cca-key-value-with-placeholder key="ID Number" [value]="selection?.getCustomer()?.identification?.number"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="ID Type" [value]="selection?.getCustomer()?.identification?.type"></cca-key-value-with-placeholder>
+    </div>
+    <cca-spinner #identificationSpinner></cca-spinner>
+  </div>
+  <mat-action-row>
+    <cca-action-toolbar class="action-toolbar" [actions]="actions"
+                        [buildingActions]="buildingActions"></cca-action-toolbar>
+  </mat-action-row>
+</mat-expansion-panel>

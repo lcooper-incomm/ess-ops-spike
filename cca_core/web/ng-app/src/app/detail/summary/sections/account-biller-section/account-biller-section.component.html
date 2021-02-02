@@ -1,0 +1,4 @@
+<div class="summary-section account-biller-section">
+  <cca-key-value-with-placeholder key="Biller" [value]="selection?.getAccount()?.nodes?.biller?.name"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Address" [value]="selection?.getAccount()?.nodes?.biller?.getAddressByType(AddressType.MAILING)?.line1"></cca-key-value-with-placeholder>
+</div>

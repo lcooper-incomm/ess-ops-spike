@@ -1,0 +1,31 @@
+<cca-select-field
+  [controlName]="deliveryMethodControlName"
+  [form]="form"
+  [options]="deliveryMethodOptions"
+  placeholder="Delivery Method"
+  [required]="true"
+></cca-select-field>
+<ng-container [ngSwitch]="deliveryMethod?.code">
+  <ng-container *ngSwitchCase="DeliveryMethod.EMAIL">
+    <cca-email-address-field
+      *ngIf="isVmsGiftCard || isGreenCard"
+      [controlName]="emailControlName"
+      [form]="form"
+      placeholder="Email"
+      class="default-field-width"
+    ></cca-email-address-field>
+    <cca-key-value key="Email" *ngIf="!isVmsGiftCard && !isGreenCard"><strong>{{email || 'Not Available'}}</strong></cca-key-value>
+    <h4 class="text-primary">Please reconfirm customer's email address before proceeding</h4>
+  </ng-container>
+  <ng-container *ngSwitchCase="DeliveryMethod.FAX">
+    <cca-phone-number-field
+      [controlName]="faxControlName"
+      [form]="form"
+      placeholder="Fax Number"
+      class="default-field-width"
+    ></cca-phone-number-field>
+  </ng-container>
+  <ng-container *ngSwitchCase="DeliveryMethod.MAIL">
+    <cca-key-value-address *ngIf="address" key="Mailing Address" [address]="address"></cca-key-value-address>
+  </ng-container>
+</ng-container>

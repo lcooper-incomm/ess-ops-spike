@@ -1,0 +1,10 @@
+<div class="selection-alerts-container" *ngIf="isAlertAwareSelectionType">
+  <cca-card-panel color="warn" icon="exclamation-triangle" [header]="header" *ngIf="alerts.length">
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <cca-selection-alert [alert]="alert" *ngFor="let alert of alerts | orderBy : 'priority'" (click)="alertClicked(alert)"></cca-selection-alert>
+    </div>
+  </cca-card-panel>
+  <div class="loading-container container mat-elevation-z1" *ngIf="isLoading && !alerts.length" fxLayout="row" fxLayoutAlign="center center">
+    <cca-spinner [on]="true" [size]="SpinnerSize.EXTRA_SMALL" color="warn"></cca-spinner>
+  </div>
+</div>

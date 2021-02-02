@@ -1,0 +1,15 @@
+<div>
+  <h3 class="text-primary section-heading">Personal</h3>
+  <cca-key-value-with-placeholder key="First Name" [value]="wizard.model.request.accountHolder.firstName" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Last Name" [value]="wizard.model.request.accountHolder.lastName" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Date of Birth" [value]="wizard.model.request.accountHolder.dateOfBirth" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Mother's Maiden Name" [value]="wizard.model.request.accountHolder.mothersMaidenName" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+</div>
+<div>
+  <h3 class="text-primary section-heading">Contact</h3>
+  <cca-key-value-with-placeholder key="Email Address" [value]="wizard.model.request.accountHolder.email" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Mobile Phone" [value]="mobilePhone" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Home Phone" [value]="homePhone" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+  <cca-key-value-address key="Physical Address" [address]="physicalAddress" [keyWidthPercent]="50"></cca-key-value-address>
+  <cca-key-value-address key="Mailing Address" [address]="mailingAddress" [keyWidthPercent]="50"></cca-key-value-address>
+</div>

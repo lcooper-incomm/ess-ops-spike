@@ -1,0 +1,15 @@
+<div class="app-container">
+  <cca-main-navigation *ngIf="isAuthenticated" data-test-id="cca-main-navigation"></cca-main-navigation>
+  <cca-dock *ngIf="isAuthenticated"></cca-dock>
+  <div class="router-outlet-container" [ngClass]="{'login-layout': !isAuthenticated, 'dock-pinned': isAuthenticated && isDockPinned, 'session-collapsed': isAuthenticated && (sessionState$ | async)?.session && (sessionState$ | async)?.isCollapsed, 'details-view': isOnDetailsPage}">
+    <cca-auto-scroll-session-header-container></cca-auto-scroll-session-header-container>
+    <cca-session-panel *ngIf="(sessionState$ | async)?.session"></cca-session-panel>
+    <router-outlet *ngIf="isAuthenticated || isOnLoginPage"></router-outlet>
+    <cca-footer *ngIf="isAuthenticated"></cca-footer>
+  </div>
+  <cca-http-session-watcher></cca-http-session-watcher>
+  <cca-session-event-listener *ngIf="isAuthenticated"></cca-session-event-listener>
+  <cca-toast-manager></cca-toast-manager>
+  <cca-transition></cca-transition>
+  <cca-dynamic-jira-portal></cca-dynamic-jira-portal>
+</div>

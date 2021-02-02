@@ -1,0 +1,11 @@
+<h4>Greencard Response Mapping</h4>
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.editMode"
+                                  key="ID"
+                                  [value]="wizard.model.response.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="column" fxFlex="grow">
+    <cca-text-field [form]="wizardForm" controlName="responseCode" placeholder="Response Code"></cca-text-field>
+    <cca-text-field [form]="wizardForm" controlName="responseValue" placeholder="Response Value"></cca-text-field>
+  </div>
+</form>

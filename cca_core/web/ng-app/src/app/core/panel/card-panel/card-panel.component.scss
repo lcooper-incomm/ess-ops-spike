@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+@import '../../../../colors.scss';
+
+.card-container {
+  margin-bottom: 15px;
+  width: 100%;
+
+  .card-header {
+    padding: 8px 15px;
+
+    &.primary {
+      background-color: mat-color($cca-app-primary);
+      color: white;
+    }
+
+    &.warn {
+      background-color: mat-color($cca-app-warn);
+      color: white;
+    }
+
+    h4 {
+      margin: 0;
+    }
+  }
+
+  .card-content {
+    background-color: white;
+    padding: 15px;
+  }
+}

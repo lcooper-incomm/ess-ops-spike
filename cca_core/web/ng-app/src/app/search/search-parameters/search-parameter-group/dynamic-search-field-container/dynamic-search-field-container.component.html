@@ -1,0 +1,28 @@
+<div class="dynamic-search-field-container default-field-width" [ngClass]="{highlighted: isHighlighted()}" [ngSwitch]="parameter.type" [attr.qa-field-name]="parameter.getType()">
+  <cca-account-number-field *ngSwitchCase="'ACCOUNT_NUMBER'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-account-number-field>
+  <cca-numeric-text-field *ngSwitchCase="'BOL_CARD_NUMBER'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-can-field *ngSwitchCase="'CAN'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-can-field>
+  <cca-card-id-field *ngSwitchCase="'CARD_ID'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-card-id-field>
+  <cca-phone-number-field *ngSwitchCase="'CUSTOMER_PHONE'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-phone-number-field>
+  <cca-date-field *ngSwitchCase="'DATE_OF_BIRTH'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-date-field>
+  <cca-email-address-field *ngSwitchCase="'EMAIL_ADDRESS'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-email-address-field>
+  <cca-date-field *ngSwitchCase="'END_DATE'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-date-field>
+  <cca-identification-field *ngSwitchCase="'IDENTIFICATION'" [form]="form"></cca-identification-field>
+  <cca-numeric-text-field *ngSwitchCase="'ISSUE_ID'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-last-four-field *ngSwitchCase="'LAST_FOUR'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-last-four-field>
+  <cca-numeric-text-field *ngSwitchCase="'ORDER_ID'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-text-field *ngSwitchCase="'ORDER_NUMBER'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-text-field>
+  <cca-numeric-text-field *ngSwitchCase="'PAN_VMS'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-numeric-text-field *ngSwitchCase="'PAN'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-phone-number-field *ngSwitchCase="'PHONE_NUMBER'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-phone-number-field>
+  <cca-pre-auth-key-field *ngSwitchCase="'PRE_AUTH_KEY'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-pre-auth-key-field>
+  <cca-serial-number-field *ngSwitchCase="'SERIAL_NUMBER'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-serial-number-field>
+  <cca-numeric-text-field *ngSwitchCase="'SHIPMENT_NUMBER'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-numeric-text-field *ngSwitchCase="'SESSION_ID'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-numeric-text-field *ngSwitchCase="'SSN'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-numeric-text-field>
+  <cca-date-field *ngSwitchCase="'START_DATE'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-date-field>
+  <cca-state-province-field *ngSwitchCase="'STATE_PROVINCE'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-state-province-field>
+  <cca-transaction-id-field *ngSwitchCase="'TRANSACTION_ID'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-transaction-id-field>
+  <cca-van-field *ngSwitchCase="'VAN'" [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-van-field>
+  <cca-text-field *ngSwitchDefault [form]="form" [controlName]="parameter.value" [placeholder]="parameter.name"></cca-text-field>
+</div>

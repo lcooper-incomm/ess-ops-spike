@@ -1,0 +1,6 @@
+<cca-key-value key="Case ID" *ngIf="!wizard.model.isFailed && wizard.model.raisedCase">
+  <div fxLayout="row" fxLayoutGap="20px">    
+    <a href="javascript:void(0)" (click)="openViewSession()">{{this.wizard.model.raisedCase.id}}</a>
+    <cca-work-session-button [session]="wizard.model.raisedCase" [canWork]="true" (click)="doClose()"></cca-work-session-button>
+  </div>
+</cca-key-value>

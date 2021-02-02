@@ -1,0 +1,8 @@
+<div class="container" fxLayout="column">
+  <div class="mb-15">
+    Archiving document
+    <span style="font-weight: bold;">{{wizard.model.document.fileDescription}}</span>
+    (ID = {{wizard.model.document.id}}).
+  </div>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+</div>

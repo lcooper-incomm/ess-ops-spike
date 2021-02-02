@@ -1,0 +1,25 @@
+<cca-card-panel header='Credit Location Short Pay List'>
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+    <mat-form-field class="default-field-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <button class="user-menu-button" mat-mini-fab color="accent" matTooltip="Add New Short Pay" class="mat-elevation-z2" (click)="openAddShortPay()">
+      <fa-icon icon="plus"></fa-icon>
+    </button>
+  </div>
+
+  <div class="table-container" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource?.data?.length">No Results Available</div>
+
+    <cca-spinner #loadingSpinner></cca-spinner>
+
+    <cscore-table [dataSource]="dataSource"
+                  [columns]="columns"
+                  initialSortColumn="merchantName"
+                  initialSortDirection="asc"
+                  [hidden]="dataSource?.data?.length === 0"
+                  (rowClick)="openEditShortPay($event)"></cscore-table>
+
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+  </div>
+</cca-card-panel>

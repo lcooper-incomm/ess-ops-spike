@@ -1,0 +1,66 @@
+.cards-component {
+  .grid-container {
+
+    mat-card.mat-card.table-card {
+      padding: 5px 0;
+    }
+    
+    th {
+      cursor: default;
+      text-align: center;
+      padding: 5px;
+
+      &:hover {
+        background-color: white;
+      }
+
+      &:not(:first-child) {
+        min-width: 170px;
+      }
+    }
+
+    tr {
+
+      &:hover {
+        background-color: white;
+      }
+
+      td {
+        padding: 5px;
+        text-align: center;
+      }
+    }
+  }
+
+  .financial-impact-container {
+    width: 250px;
+
+    .currency-column {
+      width: 50px;
+      text-align: left;
+
+      &.red {
+        color: red;
+      }
+    }
+  }
+}
+
+::ng-deep .set-header {
+  min-width: 50px;
+}
+
+// Hide the border on the last row
+::ng-deep table tr:nth-last-of-type(1) td {
+  border-bottom-width: 0;
+}
+
+::ng-deep .mat-card .mat-divider-horizontal {
+  position: relative;
+  margin: 10px 0;
+}
+
+// Normally we would use *ngIf, but the table rows are rendered dynamically, so this is the simplest workaround
+::ng-deep tr.hidden {
+  display: none;
+}

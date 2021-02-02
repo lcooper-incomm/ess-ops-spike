@@ -1,0 +1,19 @@
+<div class="info-container" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.cardChangeStatusRequest.cardStatus !== 'Activate'"
+                                  alignment="start start"
+                                  key="Current Status"
+                                  [value]="wizard.model.currentStatus"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder *ngIf="wizard.model.cardChangeStatusRequest.cardStatus !== 'Activate'"
+                                  alignment="start start"
+                                  key="New Status"
+                                  [value]="wizard.model.cardChangeStatusRequest.cardStatus"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder *ngIf="wizard.model.cardChangeStatusRequest.cardStatus !== 'Activate'"
+                                  alignment="start start"
+                                  key="Status Reason"
+                                  [value]="wizard.model.cardChangeStatusRequest.statusReason"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder *ngIf="wizard.model.cardChangeStatusRequest.cardStatus === 'Activate'"
+                                  alignment="start start"
+                                  key="CVV"
+                                  [value]="wizard.model.cardChangeStatusRequest.cvvCode"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder alignment="start start" key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+</div>

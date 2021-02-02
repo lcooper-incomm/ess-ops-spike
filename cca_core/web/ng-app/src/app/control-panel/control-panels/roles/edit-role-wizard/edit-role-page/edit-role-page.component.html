@@ -1,0 +1,13 @@
+<mat-slide-toggle [checked]="role?.isActive" [disabled]="role?.isLocked" (change)="toggleActive(role?.isActive)">
+  <span [ngClass]="role?.isActive ? 'text-success' : 'text-error'"><strong>{{role?.isActive ? 'Active' : 'Inactive'}}</strong></span>
+</mat-slide-toggle>
+<div [formGroup]="wizardForm">
+  <cca-text-field [form]="wizardForm" controlName="displayName" placeholder="Display Name" value="role?.displayName"></cca-text-field>
+  <mat-form-field>
+    <textarea formControlName="description" matInput placeholder="Description" [value]="role?.description" rows="3" resize="false"></textarea>
+  </mat-form-field>
+</div>
+<cca-key-value-with-placeholder key="System Name" [value]="role?.systemName"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="ID" [value]="role?.id"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Group" [value]="role?.group?.displayName"></cca-key-value-with-placeholder>
+

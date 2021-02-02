@@ -1,0 +1,54 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="end center" style="margin-top: 15px">
+    <h4 style="margin: 0; color: #2196f3">{{dataSource.data.length}} Notifications</h4>
+    <span fxFlex></span>
+    <mat-form-field class="default-field-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" [formControl]="filterControl">
+    </mat-form-field>
+  </div>
+  
+  <div class="table-container" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Data Available</div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort matSortActive="sentDate" matSortDirection="desc" [hidden]="!dataSource.data?.length">
+  
+      <ng-container matColumnDef="templateName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td class="container" [ngClass]="{'text-muted': !element?.templateName}" mat-cell *matCellDef="let element" (mouseenter)="setTooltipText(element)" [matTooltip]="tooltipText" matTooltipClass="multiline-tooltip"> {{element?.templateName || 'Not Available'}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="sentDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sent Date</th>
+        <td mat-cell *matCellDef="let element"> {{element?.sentDate?.displayValue}}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="updatedDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated Date</th>
+        <td mat-cell *matCellDef="let element"> {{element?.updatedDate?.displayValue}}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">
+          <cca-fsapi-status [status]="element?.status.message"></cca-fsapi-status>
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="resend">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td class="btn-active container" mat-cell *matCellDef="let element" style="text-align: right">
+          <button class="container" mat-flat-button color="warn" *ngIf="hasPermission" (click)="resendNotification(element?.id)" matTooltip="Resend Notification" ccaClickSwallower>
+            <fa-icon icon="paper-plane" style="color: white"></fa-icon>
+            <cca-spinner [id]="element.id" #resendSpinners color="primary"></cca-spinner>
+          </button>
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr class="clickable" mat-row (click)="openNotificationDetails(row)" *matRowDef="let row; columns: displayedColumns;">
+      
+      </tr>
+    </table>
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+  </div>
+</div>
+

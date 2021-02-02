@@ -1,0 +1,23 @@
+@import '../../../../themes';
+
+.btn-active {
+  color: mat-color($cca-app-primary);
+  &:hover {
+    text-decoration: underline !important;
+    cursor: pointer;
+  }
+}
+
+cca-fsapi-status {
+  width: 80%;
+  margin-right: 5px;
+}
+
+fa-icon {
+  font-size: 14px;
+  color: mat-color($cca-app-primary);
+  &:hover {
+    cursor: pointer;
+  }
+}
+

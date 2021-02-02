@@ -1,0 +1,7 @@
+export enum MinionDisputedTransactionType {
+
+  ATM_WITHDRAWAL = 'ATM_WITHDRAWAL',
+  ONLINE_TRANSACTION = 'ONLINE_TRANSACTION',
+  POINT_OF_SALE = 'POINT_OF_SALE'
+
+}

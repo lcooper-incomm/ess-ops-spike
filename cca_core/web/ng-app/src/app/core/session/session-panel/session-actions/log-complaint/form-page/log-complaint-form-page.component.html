@@ -1,0 +1,22 @@
+<div [formGroup]="wizardForm">
+  <div class="bank-container container">
+    <h3 class="text-primary">Bank</h3>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field id="complaint-bank" data-test-id="complaint-bank" class="default-width">
+        <mat-select formControlName="bank" [compareWith]="compareBanks" (selectionChange)="handleBankChanged()" placeholder="Bank">
+          <mat-option *ngFor="let option of wizard.model.banks | orderBy : 'displayValue'" [value]="option">{{option.displayValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="isMastercard" id="complaint-priority" data-test-id="complaint-priority" class="default-width">
+        <mat-select formControlName="priority" data-test-id="priority" placeholder="Complaint Priority" required>
+          <mat-option *ngFor="let option of priorityOptions" [value]="option.value">{{option.displayValue}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="wizardForm.get('priority').hasError('required')">This field is required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="complaint-container container" *ngIf="wizard.model.bank">
+    <h3 class="text-primary">Complaint</h3>
+    <cca-complaint-form [bank]="wizard.model.bank" [form]="wizardForm" [inWizard]="true"></cca-complaint-form>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="detail-container container" *ngIf="selection?.data">
+  <cca-selection-alerts-panel></cca-selection-alerts-panel>
+  <cca-horizontal-detail-summary *ngIf="summaryMode === SummaryModeType.TOP"></cca-horizontal-detail-summary>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <div class="detail-vertical-summary-container container" *ngIf="summaryMode === SummaryModeType.LEFT">
+      <cca-vertical-detail-summary></cca-vertical-detail-summary>
+    </div>
+    <div class="detail-tabs-outer-container container" fxFlex>
+      <cca-details-panel></cca-details-panel>
+    </div>
+  </div>
+</div>
+<cca-simple-panel color="red" *ngIf="selection?.isFailedToLoad">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex>
+      <div>CCA was unable to load important data for your current Selection. Most likely, the system that owns this data did not respond properly.</div>
+      <div>If the problem continues, contact a System Administrator for assistance.</div>
+    </div>
+    <button color="warn" mat-raised-button (click)="reloadSelection()">Try Again</button>
+  </div>
+</cca-simple-panel>
+<cca-selection-action-toolbar></cca-selection-action-toolbar>

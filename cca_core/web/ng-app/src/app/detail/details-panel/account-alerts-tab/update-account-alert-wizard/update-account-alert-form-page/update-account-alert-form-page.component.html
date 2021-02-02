@@ -1,0 +1,14 @@
+<form [formGroup]="wizardForm" fxLayout="column">
+  <cca-currency-field id="alert-value" data-test-id="alert-value" class="default-field-width" [form]="wizardForm" controlName="value" placeholder="Value" *ngIf="isValuedAlert"></cca-currency-field>
+  <mat-form-field class="default-field-width">
+    <mat-select class="form-field" formControlName="type" placeholder="Delivery">
+      <mat-option value="EMAIL">Email</mat-option>
+      <mat-option value="MOBILE">Mobile</mat-option>
+      <mat-option value="BOTH">Mobile & Email</mat-option>
+      <mat-option value="OFF">Off</mat-option>
+    </mat-select>
+    <mat-error *ngIf="wizardForm.get('type').hasError('required')">
+      <i>This field is required</i>
+    </mat-error>
+  </mat-form-field>
+</form>

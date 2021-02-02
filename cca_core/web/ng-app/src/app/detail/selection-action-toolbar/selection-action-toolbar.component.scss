@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+@import '../../../colors';
+
+.selection-action-toolbar-outer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: white;
+}

@@ -1,0 +1,10 @@
+<div fxLayout="column">
+  <div class="text-accent mb-15">List of merchants to unblock</div>
+  <ng-container *ngFor="let merchant of wizard.model.unblockMerchants">
+    <div fxLayout="row" style="margin-left: 15px;" style="justify-content: space-between;">
+      <span>{{merchant.name}}</span>
+      <span>{{merchant.merchantId}}</span>
+      <span>{{merchant.createDate?.displayValue}}</span>
+    </div>
+  </ng-container>
+</div>

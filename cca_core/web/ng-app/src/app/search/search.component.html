@@ -1,0 +1,8 @@
+<div id="search-container" data-test-id="search-container" class="search-container">
+  <cca-card-panel #parametersCard [header]="selectedSearchTypeContainer?.searchType.name + ' Search'" id="search-parameters" data-test-id="search-parameters">
+    <cca-search-parameters></cca-search-parameters>
+  </cca-card-panel>
+  <cca-card-panel #resultsCard [hidden]="!selectedSearchTypeContainer?.isSearchComplete" header="Search Results" id="search-results" data-test-id="search-results">
+    <cca-search-results></cca-search-results>
+  </cca-card-panel>
+</div>

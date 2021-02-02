@@ -1,0 +1,25 @@
+<form [formGroup]="searchForm" (ngSubmit)="search()">
+  <div class="core-parameter-container" fxLayout="row" fxLayoutGap="15px">
+    <cca-bol-partner-field id="search-bol-partner" data-test-id="search-bol-partner" class="default-field-width" [form]="searchForm" *ngIf="searchForm.get('bolPartner')"></cca-bol-partner-field>
+    <cca-partner-field id="search-partner" data-test-id="search-partner" class="default-field-width" [form]="searchForm" [partnerOptions]="partnerOptions | async" *ngIf="searchForm.get('partner')"></cca-partner-field>
+    <cca-session-class-search-field id="search-session-class" data-test-id="search-session-class" class="default-field-width" [form]="searchForm" *ngIf="searchForm.get('sessionClass')"></cca-session-class-search-field>
+    <cca-alder-search-type-field id="search-alder-type" data-test-id="search-alder-type" [form]="searchForm" *ngIf="searchForm.get('alderSearchType')"></cca-alder-search-type-field>
+    <cca-encor-program-field id="search-encor-program" data-test-id="search-encor-program" [form]="searchForm" *ngIf="searchForm.get('encorProgram')"></cca-encor-program-field>
+    <mat-slide-toggle id="search-show-advanced" data-test-id="search-show-advanced" class="inline-slide" formControlName="showAdvanced" *ngIf="searchForm.get('showAdvanced')">Advanced</mat-slide-toggle>
+  </div>
+  <div class="search-type-parameter-container" *ngIf="selectedSearchTypeContainer">
+    <cca-search-parameter-group [form]="searchForm" [group]="group" [highlightedParameters]="highlightedParameters" *ngFor="let group of selectedSearchTypeContainer.searchType.parameterGroups | orderBy : 'priority'"></cca-search-parameter-group>
+  </div>
+  <div class="search-toolbar-container" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+    <div [ccaFormFieldToucher]="searchForm">
+      <button id="search-search-button" data-test-id="search-search-button" type="submit" mat-raised-button color="primary" [disabled]="!searchForm.valid || !hasAtLeastOneParameter() || isValidationInProgress">
+        Search
+        <cca-spinner color="accent" [on]="searching"></cca-spinner>
+      </button>
+    </div>
+    <button type="button" id="search-clear-button" data-test-id="search-clear-button" mat-raised-button (click)="clear()">
+      Clear
+    </button>
+    <mat-checkbox id="search-recent-activity-only" data-test-id="search-recent-activity-only" formControlName="recentActivity" *ngIf="searchForm.get('recentActivity')" matTooltip="Only return products having recent transaction activity within the past 60 days">Recent Activity Only</mat-checkbox>
+  </div>
+</form>

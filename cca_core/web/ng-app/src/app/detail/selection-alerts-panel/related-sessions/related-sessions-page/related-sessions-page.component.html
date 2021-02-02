@@ -1,0 +1,25 @@
+<div class="related-sessions-page-container" fxLayout="row" fxLayoutGap="10px">
+  <div class="related-sessions-list-container">
+    <div class="related-sessions-scroll-container">
+      <cca-session-workspace-card
+        [session]="session"
+        [isSelected]="isSelected(session)"
+        [isViewOnly]="true"
+        (click)="selectSession(session)"
+        *ngFor="let session of wizard.model.sessions | orderBy : 'id'"
+        class="clickable"
+      ></cca-session-workspace-card>
+    </div>
+  </div>
+  <div class="related-sessions-detail-container" fxFlex="grow">
+    <div class="session-detail-container" *ngIf="wizard.model.selectedSession as session">
+      <div class="mat-elevation-z1 detail-card">
+        <h4 class="text-primary">Session Details</h4>
+        <cca-session-summary [session]="session" [sessionIdClickable]="isSessionSearchable" (clickSessionId)="searchForSession(session)"></cca-session-summary>
+      </div>
+    </div>
+    <div class="text-muted" *ngIf="!wizard.model.selectedSession" fxLayout="column" fxLayoutAlign="center center" fxFill>
+      Select a Session
+    </div>
+  </div>
+</div>

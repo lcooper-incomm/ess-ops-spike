@@ -1,0 +1,10 @@
+<div fxLayout="column" *ngIf="wizard.model.result">
+  <h4>Merchandise Release Successful</h4>
+  <cca-key-value-with-placeholder key="Available Balance" [value]="wizard.model.result.availableBalance?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Overall Limit" [value]="wizard.model.result.overallLimit?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Daily Limit" [value]="wizard.model.result.dailyLimit?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Transaction Limit" [value]="wizard.model.result.transactionLimit?.displayValue"></cca-key-value-with-placeholder>
+</div>
+<div *ngIf="!wizard.model.result">
+  An error occurred while completing the action.
+</div>

@@ -1,0 +1,2 @@
+EXECUTE add_permission 'GC_CARD_TRANSFER_STATUS_OVERRIDE', 'Greencard Card Transfer (Status Override)',
+                       'Ability to perform Greencard C2C Transfers, ignoring the card''s status';

@@ -1,0 +1,30 @@
+<div class="container" fxLayout="row">
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Transaction ID" [value]="transaction?.id"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Merchant ID" [value]="transaction?.nodes?.merchant?.id"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Location" [value]="transaction?.nodes?.merchant?.name"></cca-key-value-with-placeholder>
+    <cca-key-value key="Address" alignment="start start">
+      <div class="text-muted" *ngIf="!transaction.nodes?.merchant?.getAddressByType(AddressType.MERCHANT)">Not Available</div>
+      <cca-address [address]="transaction.nodes?.merchant?.getAddressByType(AddressType.MERCHANT)" *ngIf="transaction.nodes?.merchant?.getAddressByType(AddressType.MERCHANT)"></cca-address>
+    </cca-key-value>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Currency Code" [value]="transaction?.amounts?.authorizedAmount?.descriptor?.description"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="International" [value]="transaction?.response?.isInternational || 'No'"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Credit/Debit" [value]="transaction?.amounts?.crdrFlag"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Original Trans Date" [value]="transaction?.originalTransaction?.date?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Original Trans ID" [value]="transaction?.originalTransaction?.id"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Original Trans Terminal ID" [value]="transaction?.originalTransaction?.terminalId"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Request" [value]="transaction?.getRequestDisplayValue()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Response" [value]="transaction?.getResponseDisplayValue()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="MCC Code" [value]="getMccCodeDisplayValue()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Settlement Date" [value]="transaction?.settlement?.settlementDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="PreAuth Release Date" [value]="transaction?.settlement?.preAuthReleaseDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Authentication Type" [value]="transaction?.settlement?.authenticationType"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="ANI" [value]="transaction?.identifiers.ani"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Cashier ID" [value]="transaction?.identifiers.cashierId" *ngIf="selection?.platform === PlatformType.CCL"></cca-key-value-with-placeholder>
+  </div>
+  <cca-spinner #detailSpinner></cca-spinner>
+</div>

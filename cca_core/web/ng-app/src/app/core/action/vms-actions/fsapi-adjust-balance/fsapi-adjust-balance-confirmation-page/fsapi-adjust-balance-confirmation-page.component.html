@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <cca-key-value-with-placeholder key="Account Number" [value]="accountNumber"></cca-key-value-with-placeholder>
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+    <cca-amount-card [amount]="availableBalance" label="Available Balance" fxFlex="0"></cca-amount-card>
+    <fa-icon icon="plus"></fa-icon>
+    <cca-amount-card [amount]="amount" label="Amount" fxFlex="0"></cca-amount-card>
+    <fa-icon icon="equals"></fa-icon>
+    <cca-amount-card [amount]="newBalance" label="New Balance" fxFlex="0"></cca-amount-card>
+  </div>
+  <div>
+    <cca-key-value-with-placeholder key="Reason" [value]="reason.reasonDescription"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Comment" [value]="comment"></cca-key-value-with-placeholder>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div fxLayout="row">
+  <span fxFlex></span>
+  <div [hidden]="group?.roles.length || wizardForm.value.rolesControl?.length"><em class="text-muted">No Roles are associated to this Group..</em></div>
+  <div [formGroup]="wizardForm">
+    <mat-form-field class="default-field-width" *ngIf="group?.roles.length|| wizardForm.value.rolesControl?.length">
+      <input type="text" matInput placeholder="Filter Roles" aria-label="Filter Roles" formControlName="rolesControl">
+    </mat-form-field>
+  </div>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-roles-card *ngFor="let role of group?.roles | orderBy : 'displayName'" [roleData]="role"></cca-roles-card>
+</div>

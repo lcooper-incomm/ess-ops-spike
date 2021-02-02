@@ -1,0 +1,1 @@
+EXECUTE add_permission 'ADMIN_SCHEDULED_TASKS', 'Admin Scheduled Tasks', 'Permission to manually run scheduled tasks';

@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="platform">
+  <cca-incomm-status [status]="status" *ngSwitchCase="PlatformType.INCOMM"></cca-incomm-status>
+  <cca-greencard-status [status]="status" *ngSwitchCase="PlatformType.GREENCARD"></cca-greencard-status>
+  <cca-fsapi-status [status]="status" *ngSwitchCase="PlatformType.VMS"></cca-fsapi-status>
+  <cca-fsapi-status [status]="status" *ngSwitchCase="PlatformType.CCL"></cca-fsapi-status>
+</ng-container>

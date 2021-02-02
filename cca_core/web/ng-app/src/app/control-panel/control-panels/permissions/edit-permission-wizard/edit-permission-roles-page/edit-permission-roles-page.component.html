@@ -1,0 +1,16 @@
+<div>
+  <mat-form-field class="default-field-width" [formGroup]="wizardForm">
+    <mat-select formControlName="roleControl" placeholder="Select Role" aria-label="Select Role">
+      <mat-option [value]="option.id" *ngFor="let option of masterRoles | orderBy: 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <span fxFlex></span>
+  <mat-form-field class="default-field-width" [formGroup]="filterForm">
+    <input type="text" matInput placeholder="Filter Roles" aria-label="Filter Roles" formControlName="roleFilter">
+  </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-permission-role-card #auto *ngFor="let role of roles| orderBy : 'displayName'" [roleData]="role" [permissionId]="wizard.model.permission.id" (updateRoles)='updateRole($event)'></cca-permission-role-card>
+</div>

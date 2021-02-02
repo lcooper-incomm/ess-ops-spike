@@ -1,0 +1,48 @@
+h5, h6 {
+  margin: 0;
+}
+
+.sub-text {
+  position: relative;
+  top: -6px;
+}
+
+.authenticate-header {
+  border-bottom: 1px solid #bbb;
+  padding: 10px 20px;
+}
+
+.authenticate-body {
+  padding: 0 15px;
+}
+
+.origin-zero {
+  margin: -30px;
+}
+
+.element-height {
+  height: 44px;
+}
+
+.align-text-up {
+  position: relative;
+  top: -22px;
+}
+
+.action-buttons-container {
+  background-color: #E4E4E4;
+  padding: 3px;
+
+  button.mat-raised-button {
+    background-color: #0575B5;
+    color: white;
+
+    $height: 24px;
+    height: $height;
+    line-height: $height;
+  }
+}
+
+.comment-container {
+  padding: 20px 20px 24px 20px;
+}

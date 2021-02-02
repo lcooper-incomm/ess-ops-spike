@@ -1,0 +1,80 @@
+<div class="maples-transaction-history-toolbar-container container" fxLayout="row" fxLayoutGap="10px" [formGroup]="form" [hidden]="!selection">
+  <div [matTooltip]="bulkActionsButtonTooltip">
+    <button id="th-actions-button" data-test-id="th-actions-button" class="actions-button" mat-raised-button [matMenuTriggerFor]="actionsMenu">
+      Actions
+    </button>
+    <mat-menu #actionsMenu="matMenu" [overlapTrigger]="false">
+      <button id="th-load-dispute" data-test-id="th-load-dispute" class="condensed-menu-option" mat-menu-item (click)="loadDispute()"
+              [disabled]="nSelectedTransactions !== '0'"
+              *ngIf="isLoadDisputeAllowed">
+        Create Load Dispute
+      </button>
+      <button id="th-dispute" data-test-id="th-dispute" class="condensed-menu-option" mat-menu-item (click)="dispute()"
+              [disabled]="nSelectedTransactions === '0'"
+              *ngIf="isDisputeAllowed">
+        Dispute {{nSelectedTransactions}} Transactions
+      </button>
+      <button id="th-export-to-csv" data-test-id="th-export-to-csv" class="condensed-menu-option" mat-menu-item (click)="export(ExportType.CSV)"
+              [disabled]="nSelectedTransactions === '0'"
+              *ngIf="isExportToCsvAllowed">
+        Export {{nSelectedTransactions}} Transactions to CSV
+      </button>
+      <button id="th-export-to-xlsx" data-test-id="th-export-to-xlsx" class="condensed-menu-option" mat-menu-item (click)="export(ExportType.XLSX)"
+              [disabled]="nSelectedTransactions === '0'"
+              *ngIf="isExportToXlsxAllowed">
+        Export {{nSelectedTransactions}} Transactions to XLSX
+      </button>
+    </mat-menu>
+  </div>
+  <div fxFlex></div>
+  <cca-datepicker-field id="th-start-date" data-test-id="th-start-date" [form]="form" controlName="startDate" placeholder="Start Date"></cca-datepicker-field>
+  <cca-datepicker-field id="th-end-date" data-test-id="th-end-date" [form]="form" controlName="endDate" placeholder="End Date"></cca-datepicker-field>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <!-- Statement based date range -->
+    <button id="th-statement-ranges-button" data-test-id="th-statement-ranges-button" class="ranges-button muted" mat-mini-fab [matMenuTriggerFor]="statementRangesMenu" matTooltip="Statement Presets">
+      <fa-icon [icon]="['fas', 'calendar-week']"></fa-icon>
+    </button>
+    <mat-menu #statementRangesMenu="matMenu" [overlapTrigger]="false">
+      <div *ngIf="statementDateRangeOptions.length === 0" style="padding-left: 5px; padding-right: 5px;">
+        No Statements Available
+      </div>
+      <button class="condensed-menu-option" mat-menu-item (click)="applyStatementDateRange(option.value)" *ngFor="let option of statementDateRangeOptions">
+        {{option.displayValue}}
+      </button>
+    </mat-menu>
+
+    <!-- Pre defined date range -->
+    <button id="th-ranges-button" data-test-id="th-ranges-button" class="ranges-button muted" mat-mini-fab [matMenuTriggerFor]="rangesMenu" matTooltip="Date Range Presets">
+      <fa-icon [icon]="['far', 'calendar-alt']"></fa-icon>
+    </button>
+    <mat-menu #rangesMenu="matMenu" [overlapTrigger]="false">
+      <button class="condensed-menu-option" mat-menu-item (click)="applyDateRange(option.value)" *ngFor="let option of dateRangeOptions">
+        {{option.displayValue}}
+      </button>
+    </mat-menu>
+    <button id="th-search-button" data-test-id="th-search-button" class="container" mat-mini-fab color="primary" (click)="search()" matTooltip="Search">
+      <fa-icon icon="search"></fa-icon>
+      <cca-spinner color="accent" [on]="searching" [rounded]="true"></cca-spinner>
+    </button>
+  </div>
+  <cca-text-field [form]="form" controlName="filter" placeholder="Filter"></cca-text-field>
+  <div [matTooltip]="isAnyFilterEnabled ? 'Filters' : 'No Filters Available'">
+    <button id="th-filters-button" data-test-id="th-filters-button" class="filters-button muted" mat-mini-fab [matMenuTriggerFor]="filtersMenu" [disabled]="!isAnyFilterEnabled">
+      <fa-icon icon="filter"></fa-icon>
+    </button>
+    <mat-menu #filtersMenu="matMenu" [overlapTrigger]="false">
+      <div mat-menu-item ccaClickSwallower *ngIf="isTransactionTypeFilterEnabled">
+        <mat-form-field id="th-filter-transaction-type" data-test-id="th-filter-transaction-type" class="default-field-width">
+          <mat-select formControlName="transactionType" placeholder="Transaction Type">
+            <mat-option *ngFor="let option of transactionTypeOptions | orderBy : 'sortOrder'" [value]="option.value" ccaClickSwallower>{{option.displayValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div mat-menu-item>
+        <button mat-raised-button color="primary" style="width:100%;" (click)="search()">
+          Apply Filters
+        </button>
+      </div>
+    </mat-menu>
+  </div>
+</div>

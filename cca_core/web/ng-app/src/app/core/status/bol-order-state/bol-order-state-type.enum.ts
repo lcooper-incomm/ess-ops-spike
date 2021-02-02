@@ -1,0 +1,9 @@
+export enum BolOrderStateType {
+  CANCELLED          = 'CANCELLED',
+  CLOSED             = 'CLOSED',
+  COMPLETE           = 'COMPLETE',
+  PARTIAL_COMPLETE   = 'PARTIAL_COMPLETE',
+  PARTIALLY_REFUNDED = 'PARTIALLY_REFUNDED',
+  PROCESSING         = 'PROCESSING',
+  RECEIVED           = 'RECEIVED'
+}

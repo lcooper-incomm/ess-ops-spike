@@ -1,0 +1,15 @@
+<div *ngIf="dateTimeForm.get('dateTimeControl')" [formGroup]="dateTimeForm">
+  <mat-form-field>
+    <input class="date-field form-field" type="text" matInput formControlName="dateTimeControl" [placeholder]="placeholder" [required]="isControlRequired(dateTimeForm.get('dateTimeControl'))"/>
+    <mat-hint *ngIf="!dateTimeForm.get('dateTimeControl').value"><i>Format: mm/dd/yyyy hh:mm AM</i></mat-hint>
+    <mat-error *ngIf="dateTimeForm.get('dateTimeControl').hasError('pattern') && !dateTimeForm.get('dateTimeControl').hasError('required')">
+      <i>Format: mm/dd/yyyy hh:mm AM, is datetime valid?</i>
+    </mat-error>
+    <mat-error *ngIf="dateTimeForm.get('dateTimeControl').hasError('date') && !dateTimeForm.get('dateTimeControl').hasError('required')">
+      <i>Format: mm/dd/yyyy hh:mm AM, is datetime valid?</i>
+    </mat-error>
+    <mat-error *ngIf="dateTimeForm.get('dateTimeControl').hasError('required')">
+      <i>This field is required</i>
+    </mat-error>
+  </mat-form-field>
+</div>

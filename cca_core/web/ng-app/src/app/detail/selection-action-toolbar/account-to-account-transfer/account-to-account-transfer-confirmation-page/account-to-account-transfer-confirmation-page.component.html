@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutGap="5px" >
+  <div fxLayout="row">
+    <cca-key-value-with-placeholder fxFlex="90" key="From Account" [value]="this.wizard.model?.fromAccount"></cca-key-value-with-placeholder>
+    <cca-validated-status [status]="this.wizard.model.success[0] ? 'valid' : 'invalid'"></cca-validated-status>
+  </div>
+  <div fxLayout="row">
+    <cca-key-value-with-placeholder fxFlex="90" key="To Account" [value]="this.wizard.model?.toAccount"></cca-key-value-with-placeholder>
+    <cca-validated-status [status]="this.wizard.model.success[1]? 'valid' : 'invalid'"></cca-validated-status>
+  </div>
+  <div fxLayout="row">
+    <div  *ngIf="!this.wizard.model.success[0]">
+      <h4 class="text-error">An error occurred while debiting From Account</h4>
+    </div>
+    <div *ngIf="!this.wizard.model.success[1]">
+      <h4 class="text-error">An error occurred while crediting To Account</h4>
+    </div>
+    <div *ngIf="this.wizard.model.success[1]">
+      <h4 class="text-success">Account to Account transfer was successful!</h4>
+    </div>
+  </div>
+</div>

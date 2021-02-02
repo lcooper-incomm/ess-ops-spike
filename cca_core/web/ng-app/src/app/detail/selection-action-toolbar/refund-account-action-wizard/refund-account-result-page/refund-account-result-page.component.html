@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Account refunded.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: Account could not be refunded.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Account refunded changed, but an audit could not be registered.
+</div>

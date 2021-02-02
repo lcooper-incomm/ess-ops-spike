@@ -1,0 +1,27 @@
+@import '../../../../../../node_modules/@angular/material/theming';
+@import '../../../../../themes';
+
+.contact-container {
+  height: 155px;
+  width: 350px;
+  margin-bottom: 5px;
+
+  .contact-information-container {
+    padding: 5px;
+
+    h4 {
+      margin-bottom: 0;
+    }
+
+    .content-container {
+      font-size: 12px;
+      overflow-y: auto;
+    }
+  }
+
+  .icon-container {
+    width: 50px;
+    background-color: mat-color($cca-app-muted, 700);
+    color: white;
+  }
+}

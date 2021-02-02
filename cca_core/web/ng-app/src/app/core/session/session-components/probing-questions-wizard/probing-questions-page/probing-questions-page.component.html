@@ -1,0 +1,10 @@
+<div class="probing-questions-section">
+  <h4 class="session-heading">Probing Questions</h4>
+  <div class="text-muted" *ngIf="!wizard.model.probingQuestions.length">No Questions/Answers Collected</div>
+  <div class="probing-questions-container container" *ngIf="wizard.model.probingQuestions.length" fxLayout="column" fxLayoutGap="10px">
+    <div class="probing-question" *ngFor="let question of wizard.model.probingQuestions">
+      <div><strong>{{question.question}}</strong></div>
+      <div>{{question.answer}}</div>
+    </div>
+  </div>
+</div>

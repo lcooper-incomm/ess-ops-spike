@@ -1,0 +1,13 @@
+<h4>Greencard Request Mapping</h4>
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.editMode"
+                                  key="ID"
+                                  [value]="wizard.model.request.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="column" fxFlex="grow">
+    <cca-text-field [form]="wizardForm" controlName="x95Code" placeholder="X95 Code"></cca-text-field>
+    <cca-text-field [form]="wizardForm" controlName="requestCode" placeholder="Request Code"></cca-text-field>
+    <cca-text-field [form]="wizardForm" controlName="requestValue" placeholder="Request Value"></cca-text-field>
+    <cca-select-field [form]="wizardForm" controlName="transactionType" placeholder="Transaction Type" [options]="transactionTypeOptions"></cca-select-field>
+  </div>
+</form>

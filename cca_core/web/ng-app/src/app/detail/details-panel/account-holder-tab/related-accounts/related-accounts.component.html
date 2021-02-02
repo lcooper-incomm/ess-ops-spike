@@ -1,0 +1,10 @@
+<mat-expansion-panel hideToggle [expanded]="true" class="account-holder-expansion-panel">
+  <mat-expansion-panel-header expandedHeight="48px">
+    <mat-panel-title>
+      <h3 class="text-primary title-header">Related Accounts</h3>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div *ngFor="let account of relatedAccounts">
+    <cca-key-value key="Related Account"><a href="javascript:void(0)" (click)="openRelatedAccount(account.accountNumber)">{{account.accountNumber}}</a></cca-key-value>
+  </div>
+</mat-expansion-panel>

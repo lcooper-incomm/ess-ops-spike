@@ -1,0 +1,12 @@
+<h4>Wrap Up Category</h4>
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.editMode"
+                                  key="ID"
+                                  [value]="wizard.model.category.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="column" fxFlex="grow">
+    <mat-checkbox formControlName="isActive" class="mb-15">Is Active</mat-checkbox>
+    <cca-text-field [form]="wizardForm" controlName="i3Name" placeholder="I3 Name"></cca-text-field>
+    <cca-text-field [form]="wizardForm" controlName="displayName" placeholder="Display Name"></cca-text-field>
+  </div>
+</form>

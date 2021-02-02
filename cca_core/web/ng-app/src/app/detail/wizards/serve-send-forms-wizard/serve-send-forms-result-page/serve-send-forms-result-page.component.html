@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-success">
+  You have successfully sent the form.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: form could not be sent.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Form sent, but an audit could not be registered.
+</div>

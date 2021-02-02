@@ -1,0 +1,8 @@
+<div class="dock-button" [ngClass]="{active: isActive, 'case-button': isCaseButton}" [matTooltip]="name" matTooltipPosition="right">
+  <button mat-icon-button (click)="setSelectedTab()" ccaClickSwallower>
+    <fa-icon [icon]="icon"></fa-icon>
+  </button>
+  <div class="dock-button-badge" *ngIf="badgeCount">
+    {{badgeCount}}
+  </div>
+</div>

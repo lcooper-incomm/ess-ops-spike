@@ -1,0 +1,32 @@
+<div class="dock-container mat-elevation-z1" [ngClass]="{open: isOpen, pinned: isPinned, detail: isOnDetailsPage, wide: selectedTab === DockTab.QUEUE || selectedTab === DockTab.SERVICES || selectedTab === DockTab.LINKS || selectedTab === DockTab.DIRECTORY}" fxLayout="row">
+  <div class="dock-content" fxFlex [ngSwitch]="selectedTab">
+    <cca-session-workspace *ngSwitchCase="DockTab.WORKSPACE"></cca-session-workspace>
+    <cca-help-tab *ngSwitchCase="DockTab.HELP"></cca-help-tab>
+    <cca-queue-tab *ngSwitchCase="DockTab.QUEUE"></cca-queue-tab>
+    <cca-services-tab *ngSwitchCase="DockTab.SERVICES"></cca-services-tab>
+    <cca-links-tab *ngSwitchCase="DockTab.LINKS"></cca-links-tab>
+    <cca-directory-tab *ngSwitchCase="DockTab.DIRECTORY"></cca-directory-tab>
+    <cca-selections-tab *ngSwitchCase="DockTab.SELECTIONS"></cca-selections-tab>
+    <cca-session-history-tab *ngSwitchCase="DockTab.SESSION_HISTORY"></cca-session-history-tab>
+  </div>
+  <div class="dock-bar clickable mat-elevation-z1" fxLayout="column" (click)="toggle()">
+    <div class="session-tab-container" *ngIf="showSessionTabs">
+      <cca-dock-button [isCaseButton]="true" [tab]="DockTab.SELECTIONS" icon="briefcase" id="session-selections-button" name="Selections"></cca-dock-button>
+      <cca-dock-button [isCaseButton]="true" [tab]="DockTab.SESSION_HISTORY" icon="history" id="session-history-button" name="Session History"></cca-dock-button>
+    </div>
+    <cca-dock-button [badgeCount]="workspaceTotalCount" [tab]="DockTab.WORKSPACE" icon="inbox" id="dock-workspace-button" name="Workspace"></cca-dock-button>
+    <cca-dock-button [tab]="DockTab.HELP" icon="question-circle" id="dock-help-button" name="Help"></cca-dock-button>
+    <div class="queue-help-tab-container" *ngIf="showQueueHelpTabs">
+      <cca-dock-button [tab]="DockTab.QUEUE" icon="phone" id="queue-phone-button" name="Queue"></cca-dock-button>
+      <cca-dock-button [tab]="DockTab.SERVICES" icon="toolbox" id="queue-services-button" name="Services"></cca-dock-button>
+      <cca-dock-button [tab]="DockTab.LINKS" icon="link" id="queue-links-button" name="Links"></cca-dock-button>
+      <cca-dock-button [tab]="DockTab.DIRECTORY" icon="address-card" id="queue-directory-button" name="Directory"></cca-dock-button>
+    </div>
+    <div fxFlex></div>
+    <div class="pin-button" [ngClass]="{active: isPinned}">
+      <button (click)="togglePinned()" ccaClickSwallower id="dock-pin-button" mat-icon-button>
+        <fa-icon icon="thumbtack"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

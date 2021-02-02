@@ -1,0 +1,32 @@
+<div>
+  <mat-divider></mat-divider>
+  <div class="center-form">
+    <form [formGroup]="wizardForm" fxLayout="column">
+      <div  class="info-container" fxLayout="row" fxLayoutGap="25px">
+        <cca-key-value-with-placeholder class="field-width" key="Account Number" [value]="accountNumber" keyWidthPercent="55"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder class="field-width" key="Available Balance" [value]="availableBalance" keyWidthPercent="55"></cca-key-value-with-placeholder>
+      </div>
+      <div fxLayout="row" fxLayoutGap="60px">
+        <cca-currency-field  class="select-width" [form]="wizardForm" controlName="amount" placeholder="Amount"></cca-currency-field>
+        <cca-select-field
+          class="select-width"
+          controlName="adjustmentType"
+          [form]="wizardForm"
+          [options]="adjustmentTypes"
+          placeholder="Adjustment Type"
+        ></cca-select-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="25px">
+        <cca-select-field
+          class="select-width"
+          controlName="reason"
+          [form]="wizardForm"
+          [options]="reasons"
+          placeholder="Reason"
+        ></cca-select-field>
+      </div>
+      <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment" appearance="outline"></cca-comment-field>
+    </form>
+  </div>
+
+</div>

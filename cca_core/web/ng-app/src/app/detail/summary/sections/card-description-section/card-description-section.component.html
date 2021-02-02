@@ -1,0 +1,6 @@
+<div class="summary-section card-description-section container">
+  <cca-key-value-with-placeholder key="Product Type" [value]="selection?.getCard()?.productType"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Card Group" [value]="selection?.getCard()?.productGroup" *ngIf="selection?.platform === PlatformType.INCOMM"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Description" [value]="selection?.getCard()?.productDescription"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Customer Name" [value]="selection?.getCard()?.customer?.getDisplayName()" *ngIf="selection?.platform === PlatformType.GREENCARD"></cca-key-value-with-placeholder>
+</div>

@@ -1,0 +1,9 @@
+<div [formGroup]="wizardForm">
+  <div *ngIf="wizard.model.selection.getCustomer().isActiveUnregistered">
+    <cca-postal-code-field class="default-field-width" [form]="wizardForm"></cca-postal-code-field>
+  </div>
+  <div *ngIf="!wizard.model.selection.getCustomer().isActiveUnregistered">
+    <cca-customer-account-contact-form [form]="wizardForm"></cca-customer-account-contact-form>
+  </div>
+</div>
+  

@@ -1,0 +1,157 @@
+<form [formGroup]="preferenceForm">
+  <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="column">
+      <div><strong>Show Billable Only (Merchant Manager)</strong></div>
+      <div class="text-muted">Show only Billable transactions by default when viewing Transaction History</div>
+    </div>
+    <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+      <button id="billable-button" class="col-right-content" [color]="currentUser.prefShowBillableOnly ? 'primary' : 'warn'" mat-raised-button (click)="manageBillable()">
+        {{currentUser.prefShowBillableOnly ? 'ON' : 'OFF'}}
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="column">
+      <div><strong>Default Data Source</strong></div>
+      <div class="text-muted">The version of Merchant Manager that CCA will use by default. This will affect the results of your searches.</div>
+    </div>
+    <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+      <mat-form-field class="no-padding col-right-content">
+        <mat-select formControlName="defaultDataCtrl" placeholder="Default Data Source">
+          <mat-option [value]="option.value" *ngFor="let option of defaultPlatformOptions | orderBy: 'displayValue'">{{option.displayValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="column">
+      <div><strong>Default Landing Page</strong></div>
+      <div class="text-muted">The page that CCA will use as your default landing page.</div>
+    </div>
+    <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+      <mat-form-field class="no-padding col-right-content">
+        <mat-select formControlName="defaultLandingPageCtrl" placeholder="Default Landing Page">
+          <mat-option [value]="option.value" *ngFor="let option of landingPageOptions | orderBy: 'displayValue'">{{option.displayValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="space-between start" class="preference-row">
+    <div fxLayout="column">
+      <div><strong>Default Search Type</strong></div>
+      <div class="text-muted">The Search Type you want selected by default when you navigate to the Search page.</div>
+    </div>
+    <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+      <mat-form-field class="no-padding col-right-content">
+        <mat-select formControlName="defaultSearchCtrl" placeholder="Default Search Type">
+          <mat-option [value]="option.id" *ngFor="let option of searchTypes | orderBy : 'name'">{{option.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div *ngIf="bolPartners.length">
+    <mat-divider></mat-divider>
+    <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+      <div fxLayout="column">
+        <div><strong>Default BOL Partner</strong></div>
+        <div class="text-muted">The Partner you want selected by default when performing BOL searches.</div>
+      </div>
+      <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+        <mat-form-field class="no-padding col-right-content">
+          <mat-select formControlName="defaultBolPartnerCtrl" placeholder="Default BOL Partner">
+            <mat-option [value]="option.value" *ngFor="let option of bolPartners | orderBy: 'displayValue'">
+              {{option.displayValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="hasCclSearchPermission">
+    <mat-divider></mat-divider>
+    <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+      <div fxLayout="column">
+        <div><strong>Default CCL Partner</strong></div>
+        <div class="text-muted">The Partner you want selected by default when performing CCL searches.</div>
+      </div>
+      <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+        <mat-form-field class="no-padding col-right-content">
+          <mat-select formControlName="defaultCclPartnerCtrl" placeholder="Default CCL Partner">
+            <mat-option [value]="option.id" *ngFor="let option of cclPartners | orderBy: 'name'">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="hasVmsSearchPermission">
+    <mat-divider></mat-divider>
+    <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+      <div fxLayout="column">
+        <div><strong>Default GPR Partner</strong></div>
+        <div class="text-muted">The Partner you want selected by default when performing GPR searches.</div>
+      </div>
+      <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+        <mat-form-field class="no-padding col-right-content">
+          <mat-select formControlName="defaultPartnerCtrl" placeholder="Default GPR Partner">
+            <mat-option [value]="option.id" *ngFor="let option of vmsPartners | orderBy: 'name'">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  
+  <mat-divider></mat-divider>
+  <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="column">
+      <div><strong>Default Session Type</strong></div>
+      <div class="text-muted">The type of Session you want CCA to create by default, when it creates a Session for you automatically.</div>
+    </div>
+    <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+      <mat-form-field class="no-padding col-right-content">
+        <mat-select formControlName="defaultSessionCtrl" placeholder="Default Session Type">
+          <mat-option [value]="option.name" *ngFor="let option of sessionDefinitions | orderBy: 'displayName'">{{option.displayName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <mat-divider></mat-divider>
+  <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="column">
+      <div><strong>Default Dock Mode</strong></div>
+      <div class="text-muted">The Unpinned Dock functions like a drawer, while the Pinned Dock typically stays open at all times</div>
+    </div>
+    <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+      <mat-form-field class="no-padding col-right-content">
+        <mat-select formControlName="defaultDockCtrl" placeholder="Default Dock Mode">
+          <mat-option [value]="option.value" *ngFor="let option of dockModeOptions | orderBy: 'displayValue'">{{option.displayValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="preference-row" fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="column">
+      <div><strong>Default Summary Mode</strong></div>
+      <div class="text-muted">The Summary can appear to the Left or Top of Transaction History.</div>
+    </div>
+    <div class="col-right" fxLayout="column" fxLayoutAlign="start">
+      <mat-form-field class="no-padding col-right-content">
+        <mat-select formControlName="defaultSummaryCtrl" placeholder="Default Summary Mode">
+          <mat-option [value]="option.value" *ngFor="let option of summaryModeOptions | orderBy: 'displayValue'">{{option.displayValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+</form>

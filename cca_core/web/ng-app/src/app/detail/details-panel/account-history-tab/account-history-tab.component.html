@@ -1,0 +1,48 @@
+<div class="comments-tab-container container">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h3 class="text-primary" fxLayout="row" fxLayoutGap="3px">
+      <span>{{selection?.getCard()?.accountHistories.length || 0}}</span>
+      <span>{{selection?.getCard()?.accountHistories.length === 1 ? 'Account History Transaction' : 'Account History Transactions'}}</span>
+    </h3>
+    <div fxFlex></div>
+    <form [formGroup]="filterForm" style="margin:0;">
+      <cca-text-field controlName="filter" [form]="filterForm" placeholder="Filter"></cca-text-field>
+    </form>
+  </div>
+  <div class="content-container container">
+    <div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+      <table mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc" [hidden]="!dataSource.data?.length">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+          <td mat-cell *matCellDef="let element">{{element.date?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+          <td mat-cell *matCellDef="let element">{{element.username}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Update Type</th>
+          <td mat-cell *matCellDef="let element">{{element.updateType}}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+          <td mat-cell *matCellDef="let element">{{element.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="note">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Note</th>
+          <td mat-cell *matCellDef="let element">{{element.note}}</td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource.data?.length <= 50"></mat-paginator>
+    </div>
+    <cca-spinner #historySpinner></cca-spinner>
+  </div>
+</div>

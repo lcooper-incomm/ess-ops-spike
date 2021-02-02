@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import '../../../../../../../colors.scss';
+
+.workspace-card-selection-count-container {
+  color: mat-color($cca-app-muted, 700);
+  margin-left: 5px;
+
+  .badge {
+    font-size: 8px;
+  }
+
+  fa-icon {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}

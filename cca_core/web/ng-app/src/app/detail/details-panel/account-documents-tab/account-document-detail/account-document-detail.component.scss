@@ -1,0 +1,14 @@
+.account-detail-container {
+  width: 100%;
+  padding: 10px
+}
+
+::ng-deep .account-detail-column {
+  cca-key-value-with-placeholder .value-container {
+    max-width: 220px;
+  }
+}
+
+.archive-status {
+  width: 220px;
+}

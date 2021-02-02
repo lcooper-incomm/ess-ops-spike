@@ -1,0 +1,65 @@
+<div class="session-component cards-component" fxLayout="{{ stackedView ? 'column' : 'row wrap' }}" fxLayoutGap="16px">
+  <div class="grid-container">
+    <h4 class="text-primary">{{ header }}</h4>
+    <mat-card class="table-card">
+      <table mat-table [dataSource]="cardSets" fxFlex>
+        <ng-container matColumnDef="set">
+          <th mat-header-cell *matHeaderCellDef class="set-header">Set</th>
+          <td mat-cell *matCellDef="let set">{{ set.id }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="inactive">
+          <th mat-header-cell *matHeaderCellDef matTooltip="Card in Hand">Inactive</th>
+          <td mat-cell *matCellDef="let set">
+            <cca-case-card *ngIf="set.inactiveCard" [card]="set.inactiveCard" [editable]="editable" [session]="session"></cca-case-card>
+          </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef matTooltip="Fraudulent Card">Active</th>
+          <td mat-cell *matCellDef="let set">
+            <cca-case-card *ngIf="set.activeCard" [card]="set.activeCard" [editable]="editable" [session]="session"></cca-case-card>
+          </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="replacement">
+          <th mat-header-cell *matHeaderCellDef>Replacement</th>
+          <td mat-cell *matCellDef="let set">
+            <cca-case-card *ngIf="set.replacementCard" [card]="set.replacementCard" [editable]="editable" [session]="session"></cca-case-card>
+          </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="noSets">
+          <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length" style="text-align:center;">
+            <strong class="text-muted">No Card Sets Added</strong>
+          </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="['noSets']" class="no-cards-added" [class.hidden]="cardSets.length"></tr>
+      </table>
+    </mat-card>
+  </div>
+  <div class="financial-impact-container" [class.stacked]="stackedView" *ngIf="!hideFinancialImpact">
+    <h4 class="text-primary">Financial Impact</h4>
+    <div class="total-merchant-loads-container" fxLayout="row">
+      <div class="text-muted" fxFlex>Total Merchant Loads</div>
+      <div class="currency-column"> {{ totalMerchantLoads?.displayValue }}</div>
+    </div>
+    <br/>
+    <div class="total-incomm-loads-container" fxLayout="row">
+      <div class="text-muted" fxFlex>Total InComm Loads</div>
+      <div class="currency-column"> {{ totalInCommLoads?.displayValue }}</div>
+    </div>
+    <div class="total-recovered-container" fxLayout="row">
+      <div class="text-muted" fxFlex>Total Recovered Amount</div>
+      <div class="currency-column"> {{ totalRecoveredAmount?.displayValue }}</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="total-loss-container" fxLayout="row">
+      <div class="text-muted" fxFlex>Total Cost to InComm</div>
+      <div class="currency-column" [class.red]="totalLoss > 0"> {{ totalLoss?.displayValue }}</div>
+    </div>
+  </div>
+</div>

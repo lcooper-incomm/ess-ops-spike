@@ -1,0 +1,6 @@
+@import '~@angular/material/theming';
+@import '../../../../themes.scss';
+
+.retry-icon {
+  color: mat-color($cca-app-primary);
+}

@@ -1,0 +1,67 @@
+<div class="comments-component-container" fxLayout="row" fxLayoutGap="10px">
+  <mat-tab-group style="flex: 1 1 100%;" [@.disabled]="true">
+    <mat-tab>
+      <div *matTabLabel>
+        Comment
+      </div>
+      <div *matTabContent fxFlex="row nowrap">
+        <form [formGroup]="form">
+          <cca-comment-field id="session-comment" data-test-id="session-comment" [form]="form" controlName="comment"></cca-comment-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <mat-checkbox formControlName="isPrivate" *ngIf="isPrivateCommentEnabled">Private</mat-checkbox>
+            <div class="container" [ccaFormFieldToucher]="form">
+              <button id="session-add-comment-button" data-test-id="session-add-comment-button" mat-raised-button color="primary" (click)="saveComment()" [disabled]="!isAddButtonEnabled()">
+                Add Comment
+                <cca-spinner color="accent" #addCommentSpinner></cca-spinner>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <div *matTabLabel>
+        Comment History ({{comments.length}})
+      </div>
+      <div *matTabContent fxFlex="row nowrap">
+        <div class="comment-history-scroll-container">
+          <cca-session-comment [comment]="comment" [isOnlyComment]="comments.length === 1" *ngFor="let comment of comments | orderBy : 'id' : true" (click)="openCommentsDialog(comment)"></cca-session-comment>
+          <div class="no-results-container text-muted" *ngIf="!comments.length" fxLayout="row" fxLayoutAlign="center center">
+            At least one Comment is required...
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end start" *ngIf="comments.length">
+          <a id="view-comments-link" href="javascript:void(0)" (click)="openCommentsDialog()">View All</a>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+<!--
+  <div class="comment-form-container" fxFlex="50">
+    <h4 class="session-heading">Comment</h4>
+    <form [formGroup]="form">
+      <cca-comment-field id="session-comment" [form]="form" controlName="comment"></cca-comment-field>
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <mat-checkbox formControlName="isPrivate" *ngIf="isPrivateCommentEnabled">Private</mat-checkbox>
+        <div class="container" [ccaFormFieldToucher]="form">
+          <button id="session-add-comment-button" mat-raised-button color="primary" (click)="saveComment()" [disabled]="!isAddButtonEnabled()">
+            Add Comment
+            <cca-spinner color="accent" #addCommentSpinner></cca-spinner>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="comment-history-container" fxFlex>
+    <h4 class="session-heading">Comment History</h4>
+    <div class="comment-history-scroll-container">
+      <cca-session-comment [comment]="comment" [isOnlyComment]="comments.length === 1" *ngFor="let comment of comments | orderBy : 'id' : true" (click)="openCommentsDialog(comment)"></cca-session-comment>
+      <div class="no-results-container text-muted" *ngIf="!comments.length" fxLayout="row" fxLayoutAlign="center center">
+        At least one Comment is required...
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end start" *ngIf="comments.length">
+      <a id="view-comments-link" href="javascript:void(0)" (click)="openCommentsDialog()">View All</a>
+    </div>
+  </div>-->
+</div>

@@ -1,0 +1,10 @@
+<div class="summary-section card-status-section container" fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value [key]="getPlatformTypeDisplayValue(status.platform)" *ngFor="let status of selection?.getCard()?.statuses | statusPriority" [ngSwitch]="status.platform">
+    <cca-ddp-status [status]="selection?.getCard()?.getStatusByPlatform(selection.platform)" *ngSwitchCase="PlatformType.DDP" fxFlex></cca-ddp-status>
+    <cca-greencard-status [status]="selection?.getCard()?.getStatusByPlatform(selection.platform)" *ngSwitchCase="PlatformType.GREENCARD" fxFlex></cca-greencard-status>
+    <cca-incomm-status [status]="selection?.getCard()?.getStatusByPlatform(PlatformType.INCOMM)" *ngSwitchDefault fxFlex></cca-incomm-status>
+  </cca-key-value>
+  <cca-key-value key="VRN Status" *ngIf="selection?.platform === PlatformType.SRL">
+    <cca-status [status]="selection?.getCard()?.srlData?.getStatusByPlatform(PlatformType.SRL)" fxFlex></cca-status>
+  </cca-key-value>
+</div>

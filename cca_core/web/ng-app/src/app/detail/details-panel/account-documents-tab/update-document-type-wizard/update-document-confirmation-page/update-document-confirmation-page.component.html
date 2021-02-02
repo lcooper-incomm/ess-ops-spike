@@ -1,0 +1,23 @@
+<div class="container" fxLayout="column">
+  <div *ngIf="wizard.model.document.fileDescription !== wizard.model.request.fileDescription"
+       fxLayout="row" class="mb-15" style="justify-content: space-between;">
+    <cca-key-value-with-placeholder key="Current Description" [value]="wizard.model.document.fileDescription" style="width: 50%;"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="New Description" [value]="wizard.model.request.fileDescription" style="width: 50%;"></cca-key-value-with-placeholder>
+  </div>
+  <div *ngIf="wizard.model.document.fileType?.name !== wizard.model.request.category"
+       fxLayout="row" class="mb-15" style="justify-content: space-between;">
+    <cca-key-value-with-placeholder key="Current Type" [value]="wizard.model.document.fileType?.name" style="width: 50%;"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="New Type" [value]="wizard.model.request.category" style="width: 50%;"></cca-key-value-with-placeholder>
+  </div>
+  <div *ngIf="wizard.model.request.category === 'Other' && wizard.model.document.fileType?.description !== wizard.model.request.description"
+       fxLayout="row" class="mb-15" style="justify-content: space-between;">
+    <cca-key-value-with-placeholder key="Current Type Description" [value]="wizard.model.document.fileType?.description" style="width: 50%;"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="New Type Description" [value]="wizard.model.request.description" style="width: 50%;"></cca-key-value-with-placeholder>
+  </div>
+  <div *ngIf="!!wizard.model.document.restrictedCode !== wizard.model.request.isRestricted"
+       fxLayout="row" class="mb-15" style="justify-content: space-between;">
+    <cca-key-value-with-placeholder key="Current Is Restricted" [value]="!!wizard.model.document.restrictedCode" style="width: 50%;"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="New Is Restricted" [value]="wizard.model.request.isRestricted" style="width: 50%;"></cca-key-value-with-placeholder>
+  </div>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+</div>

@@ -1,0 +1,6 @@
+<div [innerHTML]="confirmationText"></div>
+<div style="max-width:400px;">
+  <cca-simple-panel id="removed-components-alert" data-test-id="removed-components-alert" color="orange" *ngIf="wizard.model.removedComponentsAlert">
+    <div [innerHTML]="wizard.model.removedComponentsAlert"></div>
+  </cca-simple-panel>
+</div>

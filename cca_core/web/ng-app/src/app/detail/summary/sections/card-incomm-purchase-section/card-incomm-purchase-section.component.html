@@ -1,0 +1,4 @@
+<div class="summary-section card-incomm-purchase-section container" *ngIf="selection?.platform === PlatformType.INCOMM">
+  <cca-card-purchase-location-section></cca-card-purchase-location-section>
+  <cca-key-value-with-placeholder key="Initial Value" [value]="selection?.getCard()?.amounts.denomination?.displayValue"></cca-key-value-with-placeholder>
+</div>

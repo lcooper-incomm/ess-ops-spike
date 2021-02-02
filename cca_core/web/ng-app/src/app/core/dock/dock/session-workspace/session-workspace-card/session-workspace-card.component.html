@@ -1,0 +1,31 @@
+<div class="session-workspace-card mat-elevation-z1" [ngClass]="{active: isActive, clickable: !isViewOnly, queued: isQueued, selected: isSelected}" fxLayout="row" (click)="loadSession()">
+  <div class="highlight" fxLayout="row" fxLayoutAlign="center center" [matTooltip]="tooltipText">
+    <fa-icon [icon]="icon"></fa-icon>
+  </div>
+  <div class="card-content" fxFlex>
+    <div fxLayout="row">
+      <div>
+        <div *ngIf="session.summary" class="summary" [matTooltip]="session.summary">
+          {{session.summary}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="3px">
+          <strong>{{session.id}}</strong>
+          <div [ngClass]="{'text-muted': !session.queue}">{{session.queue?.displayName || 'No Queue Selected'}}</div>
+        </div>
+        <div class="caller-section text-muted" *ngIf="session.callComponent?.uid" fxLayout="row" fxLayoutAlign="start center">
+          <fa-icon icon="user"></fa-icon>
+          <i>{{session.callComponent.callerName || 'No Caller Name Entered'}}</i>
+        </div>
+        <div class="text-muted"><i style="font-size:10px;">Created {{session.createdDate.displayValue}}</i></div>
+      </div>
+    </div>
+    <div class="selection-count-container" fxLayout="row" fxLayoutAlign="end start">
+      <cca-selection-count [session]="session" [type]="SelectionType.ACCOUNT"></cca-selection-count>
+      <cca-selection-count [session]="session" [type]="SelectionType.CUSTOMER"></cca-selection-count>
+      <cca-selection-count [session]="session" [type]="SelectionType.CUSTOMER_ACCOUNT"></cca-selection-count>
+      <cca-selection-count [session]="session" [type]="SelectionType.LOCATION"></cca-selection-count>
+      <cca-selection-count [session]="session" [type]="SelectionType.ORDER"></cca-selection-count>
+      <cca-selection-count [session]="session" [type]="SelectionType.CARD"></cca-selection-count>
+    </div>
+  </div>
+</div>

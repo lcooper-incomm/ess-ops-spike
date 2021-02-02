@@ -1,0 +1,9 @@
+
+<cscore-table [columns]="columns"
+              initialSortColumn="createdDate"
+              initialSortDirection="desc"
+              [dataSource]="dataSource">
+</cscore-table>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <mat-paginator fxFlex="100%" [length]="dataSource?.data?.length" [pageSize]="10" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 10"></mat-paginator>
+</div>

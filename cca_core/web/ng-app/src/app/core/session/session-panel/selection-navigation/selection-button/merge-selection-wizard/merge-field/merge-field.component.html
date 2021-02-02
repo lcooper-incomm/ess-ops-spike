@@ -1,0 +1,35 @@
+<div fxLayout="row" fxLayoutGap="20px">
+  <mat-card fxFlex="calc(50% - 10px)" class="merge-card">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="column">
+        <div class="merge-value-label text-muted">{{ field.label }}</div>
+        <cca-address *ngIf="isAddress" [address]="field.mergeValue"></cca-address>
+        <div *ngIf="!isAddress">{{ field.mergeValue }}</div>
+      </div>
+      <button *ngIf="!field.isMerged" mat-button (click)="merge.emit()" matTooltip="Copy Field" [disabled]="!canMerge">
+        <fa-icon icon="arrow-right"></fa-icon>
+      </button>
+      <button *ngIf="field.isMerged" mat-button (click)="unmerge.emit()" matTooltip="Undo">
+        <fa-icon icon="undo"></fa-icon>
+      </button>
+    </div>
+  </mat-card>
+  <div fxFlex="calc(50% - 10px)" [ngSwitch]="field.type">
+    <cca-address-form
+      *ngSwitchCase="FieldType.ADDRESS"
+      [form]="form.get(field.controlName)"
+    ></cca-address-form>
+    <cca-date-field
+      *ngSwitchCase="FieldType.DATE"
+      [controlName]="field.controlName"
+      [form]="form"
+      [placeholder]="field.label"
+    ></cca-date-field>
+    <cca-text-field
+      *ngSwitchCase="FieldType.TEXT"
+      [controlName]="field.controlName"
+      [form]="form"
+      [placeholder]="field.label"
+    ></cca-text-field>
+  </div>
+</div>

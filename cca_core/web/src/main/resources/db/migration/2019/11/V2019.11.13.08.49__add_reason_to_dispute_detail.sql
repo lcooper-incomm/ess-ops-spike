@@ -1,0 +1,2 @@
+ALTER TABLE detail_dispute ADD reason_code_id BIGINT;
+ALTER TABLE detail_dispute ADD CONSTRAINT fk_detail_dispute_reason_code_id FOREIGN KEY (reason_code_id) REFERENCES action_reason_code_mapping (id);

@@ -1,0 +1,13 @@
+<div class="summary-section card-product-owner-section container">
+  <cca-key-value key="Product Owner">
+    <a class="container" href="javascript:void(0)" (click)="linkToMerchant()" *ngIf="productOwner">
+      {{productOwner}}
+      <cca-spinner #productOwnerSpinner></cca-spinner>
+    </a>
+    <div class="text-muted" *ngIf="!productOwner">Not Available</div>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Inventory date" [value]="selection?.getCard()?.inventoryDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="UPC" [value]="selection?.getCard()?.identifiers?.upc"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="DCMS ID" [value]="selection?.getCard()?.identifiers?.dcmsId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Shipped?" [value]="selection?.getCard()?.alerts.isShipped? 'Yes' : 'No'"></cca-key-value-with-placeholder>
+</div>

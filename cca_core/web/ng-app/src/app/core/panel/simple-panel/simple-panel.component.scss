@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import '../../../../colors.scss';
+
+.simple-panel {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  &.blue {
+    background-color: #3F51B5;
+    color: white;
+  }
+
+  &.green {
+    background-color: green;
+    color: white;
+  }
+
+  &.orange {
+    background-color: #FF9800;
+    color: white;
+  }
+
+  &.red {
+    background-color: mat-color($cca-app-warn);
+    color: white;
+  }
+}

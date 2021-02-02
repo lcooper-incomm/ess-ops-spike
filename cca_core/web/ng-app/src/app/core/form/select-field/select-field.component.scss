@@ -1,0 +1,26 @@
+.tall {
+  height: 50px;
+}
+
+.subscript {
+  font-size: 9px;
+  position: absolute;
+  top: 14px;
+}
+
+.search {
+  margin: 5px;
+  margin-left: 10px;
+  padding: 5px;
+  background-color: white;
+  z-index: 10;
+  height: 25px;
+  width: 90%;
+  position: sticky;
+  top: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid blue;
+  font-size: 16px;
+}

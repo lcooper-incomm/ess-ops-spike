@@ -1,0 +1,25 @@
+<div class="summary-section" fxLayout="column">
+  <cca-key-value-with-placeholder key="Total Balance" [value]="totalBalance?.amount?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value key="On Hold">
+    <div class="text-bold" [class.text-error]="pendingBalance?.amount?.value > 0">{{ pendingBalance?.amount.displayValue || 'Not Available' }}</div>
+  </cca-key-value>
+  <cca-key-value key="Available">
+    <div class="text-bold"
+      [class.text-error]="availableBalance?.amount?.value < 0"
+      [class.text-success]="availableBalance?.amount?.value >= 0">
+      {{ availableBalance?.amount?.displayValue || 'Not Available' }}
+    </div>
+  </cca-key-value>
+  <cca-key-value key="Current">
+    <div class="text-bold" [class.text-error]="currentBalance?.amount?.value > 0">{{ currentBalance?.amount.displayValue || 'Not Available' }}</div>
+  </cca-key-value>
+  <cca-key-value key="Total Reserve Balance" class="mt-15">
+    <ng-container *ngIf="totalReserveBalance">
+      <a href="javascript:void(0)" (click)="openRelatedAccountsTab()" fxLayout="row" fxLayoutGap="3px">
+        {{ totalReserveBalance?.amount?.displayValue }}</a>
+    </ng-container>
+    <div *ngIf="!totalReserveBalance" class="text-muted">None</div>
+  </cca-key-value>
+  <cca-key-value *ngIf="cashbackEarnedBalance" key="Cashback Earned" class="mt-15">{{cashbackEarnedBalance}}</cca-key-value>
+  <cca-key-value *ngIf="cashbackRedeemedBalance" key="Cashback Redeemed">{{cashbackRedeemedBalance}}</cca-key-value>
+</div>

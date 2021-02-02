@@ -1,0 +1,14 @@
+<div class="account-holder-tab-container container" fxLayout="column" fxLayoutGap="10px">
+  <ng-container *ngIf="!isServePlatform">
+    <cca-account-holder-summary></cca-account-holder-summary>
+    <cca-contact-information></cca-contact-information>
+    <cca-identification-information *ngIf="selection?.platform === PlatformType.VMS && !selection?.getCustomer()?.isVmsGiftCard"></cca-identification-information>
+    <cca-related-accounts [relatedAccounts]="relatedAccounts" *ngIf="relatedAccounts.length"></cca-related-accounts>
+  </ng-container>
+  <ng-container *ngIf="isServePlatform">
+    <cca-account-personal-info></cca-account-personal-info>
+    <cca-account-contact-information></cca-account-contact-information>
+    <cca-serve-identification-information></cca-serve-identification-information>
+    <cca-account-features></cca-account-features>
+  </ng-container>
+</div>

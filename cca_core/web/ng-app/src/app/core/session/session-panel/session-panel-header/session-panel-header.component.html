@@ -1,0 +1,20 @@
+<div id="session-panel-header" data-test-id="session-panel-header" class="session-panel-header container clickable" fxLayout="row" fxLayoutAlign="start center" *ngIf="session">
+  <fa-icon class="header-section" icon="clipboard-list"></fa-icon>
+  <h4 class="header-section" matTooltip="Session ID">{{session?.id}}</h4>
+  <h4 id="session-header-session-type" data-test-id="session-header-session-type" class="header-section" matTooltip="Session Type">({{session?.sessionType?.displayName || 'No Session Type Selected'}})</h4>
+  <div fxLayout="row" fxLayoutAlign="start center" matTooltip="Queue">
+    <fa-icon class="header-section" icon="phone"></fa-icon>
+    <h4 class="header-section">{{session?.queue?.displayName || 'No Queue Selected'}}</h4>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" matTooltip="Caller Name" *ngIf="session.callComponent">
+    <fa-icon class="header-section" icon="user"></fa-icon>
+    <h4 class="header-section">{{session?.callComponent?.callerName || 'No Caller Name Entered'}}</h4>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" matTooltip="Call Duration" *ngIf="session?.callComponent?.connectedDate">
+    <fa-icon class="header-section" icon="stopwatch"></fa-icon>
+    <cca-call-timer [startTime]="session?.callComponent.connectedDate.value"></cca-call-timer>
+  </div>
+  <div class="auto-wrap-progress-container" *ngIf="isInAutoWrapPeriod">
+    <mat-progress-bar color="warn" [mode]="progressBarMode" [value]="autoWrapPercentRemaining" matTooltip="Call has ended and will Wrap-Up automatically..."></mat-progress-bar>
+  </div>
+</div>

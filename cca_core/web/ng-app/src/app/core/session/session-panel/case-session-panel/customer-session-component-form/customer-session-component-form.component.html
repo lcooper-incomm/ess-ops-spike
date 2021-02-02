@@ -1,0 +1,40 @@
+<div class="customer-component-container">
+  <form [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutGap="15px">
+      <div>
+        <h4 class="session-heading">Customer</h4>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-text-field id="session-customer-first-name" class="default-field-width" [form]="form" controlName="firstName" placeholder="First Name"></cca-text-field>
+          <cca-text-field id="session-customer-last-name" class="default-field-width" [form]="form" controlName="lastName" placeholder="Last Name"></cca-text-field>
+          <cca-date-field id="session-customer-date-of-birth" [form]="form" controlName="dateOfBirth" placeholder="Date of Birth"></cca-date-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-email-address-field id="session-customer-email-address" [form]="form"></cca-email-address-field>
+          <cca-text-field id="session-customer-phone-number" class="default-field-width" [form]="form" controlName="phoneNumber" placeholder="Phone Number"></cca-text-field>
+          <cca-text-field id="session-customer-ani" class="default-field-width" [form]="form" controlName="ani" placeholder="ANI"></cca-text-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <mat-form-field class="default-width">
+            <mat-select id="session-customer-contact-method" formControlName="contactMethod" placeholder="Contact Method" [required]="isControlRequired(form.get('contactMethod'))">
+              <mat-option *ngFor="let option of contactMethodOptions" [value]="option">{{option}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="default-width">
+            <mat-select id="session-customer-callback-time" formControlName="callbackTime" placeholder="Callback Time" [required]="isControlRequired(form.get('callbackTime'))">
+              <mat-option *ngFor="let option of callbackTimeOptions" [value]="option">{{option}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="default-width">
+            <mat-select id="session-customer-language" formControlName="language" placeholder="Language" [required]="isControlRequired(form.get('language'))">
+              <mat-option *ngFor="let option of languageOptions" [value]="option">{{option}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <h4 class="session-heading">Address</h4>
+        <cca-address-form [form]="form.get('address')"></cca-address-form>
+      </div>
+    </div>
+  </form>
+</div>

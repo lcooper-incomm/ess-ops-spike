@@ -1,0 +1,9 @@
+<div class="customer-card-container mat-elevation-z1" [ngClass]="{'text-primary': enableHighlight && card.identifiers.pan?.slice(-4) === currentLastFour}" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <fa-icon icon="credit-card"></fa-icon>
+  <div fxFlex>
+    <div *ngIf="!allowUnmask">{{card.identifiers.pan}}</div>
+    <cca-unmaskable-pan [card]="card" [customer]="customer" *ngIf="allowUnmask"></cca-unmaskable-pan>
+  </div>
+  <cca-serve-card-status *ngIf="isServeCard" [status]="selection.getMaplesCardStatus(card)" [useAbbreviation]="true" style="min-width:50px;"></cca-serve-card-status>
+  <cca-fsapi-status *ngIf="isFsapiCard" [status]="card.getStatusByPlatform(card.platform)" [useAbbreviation]="true" style="min-width:50px;"></cca-fsapi-status>
+</div>

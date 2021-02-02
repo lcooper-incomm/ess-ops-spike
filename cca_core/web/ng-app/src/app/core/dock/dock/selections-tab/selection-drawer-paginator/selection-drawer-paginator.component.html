@@ -1,0 +1,13 @@
+<div class="selection-drawer-paginator" fxLayout="row" fxLayoutAlign="start center">
+  <div class="paginator-button" [class.clickable]="!selectionGroupItem.isOnFirstPage()" (click)="previous()">
+    <fa-icon class="small" [class.disabled]="selectionGroupItem.isOnFirstPage()" icon="caret-left"></fa-icon>
+  </div>
+  <div fxFlex>
+    <div class="paginator-status text-muted" fxLayout="row" fxLayoutAlign="center center">
+      Page {{selectionGroupItem.getCurrentPageNumber()}} of {{selectionGroupItem.getMaxPageNumber()}}
+    </div>
+  </div>
+  <div class="paginator-button" [class.clickable]="!selectionGroupItem.isOnLastPage()" (click)="next()">
+    <fa-icon class="small" [class.disabled]="selectionGroupItem.isOnLastPage()" icon="caret-right"></fa-icon>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutGap="15px">
+  <cca-key-value-with-placeholder key="Card Number" [value]="card.identifiers.pan"></cca-key-value-with-placeholder>
+  <div [formGroup]="wizardForm">
+    <mat-form-field class="default-width">
+      <mat-select formControlName="enrollmentType" placeholder="Enrollment Type" required>
+        <mat-option [value]="option" *ngFor="let option of enrollmentTypes | orderBy: 'description'">
+          {{ option.description }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" *ngIf="enrollmentType?.code === EnrollmentTypeCode.SPEND_DOWN">
+      <cca-postal-code-field [form]="wizardForm" class="default-width"></cca-postal-code-field>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="table-container condensed-table transaction-history-table mat-elevation-z1">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!transactions.length">No Transactions Available</div>
+  <table mat-table [dataSource]="transactions">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let transaction">{{transaction.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let transaction">{{getDate(transaction)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="request">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Request</th>
+      <td mat-cell *matCellDef="let transaction">{{getRequest(transaction)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="response">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Response</th>
+      <td mat-cell *matCellDef="let transaction">{{getResponse(transaction)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="authorizedAmount">
+      <th class="text-right" mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Authorized Amount" arrowPosition="before">Amount</th>
+      <td class="text-right" mat-cell *matCellDef="let transaction"><span *ngIf="transaction.isDebit">-</span>{{transaction.amounts.authorizedAmount?.displayValue}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let transaction; columns: displayedColumns;"></tr>
+  </table>
+</div>

@@ -1,0 +1,79 @@
+<form [formGroup]="wizardForm">
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="cardIdentifierType" placeholder="Card Type" required>
+        <mat-option [value]="option" *ngFor="let option of cardTypes" (change)="onOption<IdentifierType>Change()">
+          {{option.displayValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="default-field-width">
+      <input
+        type="text"
+        matInput
+        [placeholder]="identifierPlaceholder"
+        aria-label="Card Identifier"
+        formControlName="cardIdentifier"
+        [minlength]="identifierRange?.min"
+        [maxlength]="identifierRange?.max"
+        required
+      >
+      <mat-error *ngIf="hasRangeError">
+        Must be between {{ identifierRange.min }} and {{ identifierRange.max }} digits.
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-mini-fab
+      color="primary"
+      [matTooltip]="isCardValid ? null : 'Validate'"
+      [disabled]="!searchEnabled"
+      (click)="validateCard()"
+    >
+      <fa-icon [icon]="isCardValid ? 'check' : 'search'"></fa-icon>
+      <cca-spinner [on]="searching" [rounded]="true"></cca-spinner>
+    </button>
+  </div>
+  <ng-container *ngIf="isCardValid">
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+      <mat-form-field class="default-field-width">
+        <mat-select formControlName="activationType" placeholder="Type" required>
+          <mat-option [value]="option" *ngFor="let option of activationTypes">
+            {{option.displayValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="default-width" fxFlex="1 1 auto">
+        <mat-select formControlName="reason" placeholder="Reason" required>
+          <mat-option [value]="option" *ngFor="let option of reasons">
+            {{option}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" *ngIf="isVariable">
+      <cca-currency-field
+        id="activate-fastcard-initial-balance"
+        data-test-id="activate-fastcard-initial-balance"
+        class="default-field-width"
+        [form]="wizardForm"
+        controlName="amount"
+        placeholder="Initial Balance"
+      ></cca-currency-field>
+    </div>
+    <div fxLayout="row" *ngIf="isCardValid">
+      <mat-form-field hintLabel="Max 500 characters">
+        <textarea
+          matInput
+          formControlName="comment"
+          placeholder="Comment"
+          aria-label="Comment"
+          minlength="5"
+          maxlength="500"
+          rows="5"
+          required
+        ></textarea>
+        <mat-hint align="end">{{wizardForm.get('comment').value?.length || 0}}/500</mat-hint>
+      </mat-form-field>
+    </div>
+  </ng-container>
+</form>

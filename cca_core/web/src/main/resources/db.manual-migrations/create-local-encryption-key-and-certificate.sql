@@ -1,0 +1,8 @@
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'CCA';
+
+CREATE CERTIFICATE CcaEncryptionCertificate
+    WITH SUBJECT = 'CcaEncryptionCertificate';
+
+CREATE SYMMETRIC KEY CCAEncryptionSymmetricKey
+    WITH ALGORITHM = AES_256
+    ENCRYPTION BY CERTIFICATE CcaEncryptionCertificate;

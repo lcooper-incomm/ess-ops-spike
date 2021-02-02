@@ -1,0 +1,38 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h3 class="text-primary" fxLayout="row" fxLayoutGap="3px">
+      {{ headerText }}
+    </h3>
+    <div fxFlex></div>
+    <button mat-mini-fab (click)="openUploadDocumentDialog()" color="primary" matTooltip="Upload">
+      <fa-icon icon="file-upload"></fa-icon>
+    </button>
+    <form [formGroup]="filterForm" style="margin:10px;">
+      <cca-text-field controlName="filter" [form]="filterForm" placeholder="Filter"></cca-text-field>
+    </form>
+  </div>
+  <div class="content-container container">
+    <div class="table-container condensed-table bottomless-table"
+         [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No
+        Results Available
+      </div>
+      <cca-spinner #downloadSpinner></cca-spinner>
+      <cscore-table [columns]="columns" [dataSource]="dataSource" [hidden]="!dataSource.data?.length">
+        <div *cscoreTableCellDef="let item; key: 'view'" ccaClickSwallower fxLayoutAlign="center center" class="text-primary">
+          <fa-icon *ngIf="canView" (click)="viewDocument(item)" [icon]="['fas', 'file-alt']"></fa-icon>
+        </div>
+        <div *cscoreTableCellDef="let item; key: 'download'" ccaClickSwallower fxLayoutAlign="center center" class="text-primary">
+          <fa-icon *ngIf="canDownload" (click)="downloadDocument(item)" [icon]="['fas', 'file-download']"></fa-icon>
+        </div>
+
+        <cca-account-document-detail class="expanded-content" *cscoreTableExpandedContent="let document"
+                                     [accountId]="selection.getCustomerAccount().id"
+                                     [platform]="selection.getMaplesPlatform()"
+                                     [document]="document"></cca-account-document-detail>
+      </cscore-table>
+      <mat-paginator [length]="dataSource.data?.length" [pageSize]="50"
+                     [hidden]="!dataSource.data?.length || dataSource.data?.length <= 50"></mat-paginator>
+    </div>
+  </div>
+</div>

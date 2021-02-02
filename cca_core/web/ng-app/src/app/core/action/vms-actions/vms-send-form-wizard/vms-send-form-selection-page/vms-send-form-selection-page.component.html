@@ -1,0 +1,59 @@
+<div [formGroup]="wizardForm">
+  <mat-form-field id="form-type-select" class="default-field-width">
+    <mat-select formControlName="formType" placeholder="Form Type" [required]="true">
+      <mat-option [value]="formOption.value" *ngFor="let formOption of formTypeOptions | orderBy: 'displayValue' ">
+        {{formOption.displayValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div id="greater-container" [hidden]="!wizard.model.selectedFormType">
+    <div id="account-statement-form-container" *ngIf="wizard.model.selectedFormType === 'Account Statement'">
+      <h3>Statement Information</h3>
+      <div fxLayout="row" fxLayoutGap="5px" class="month-year-row">
+        <mat-form-field id="month-select" class="month-select" fxFlex="60">
+          <mat-select formControlName="monthSelect" placeholder="Month">
+            <mat-option
+              *ngFor="let month of monthOptions"
+              [value]="month.value"
+              [disabled]="isMonthDisabled(month.value)"
+              [matTooltip]="isMonthDisabled(month.value) ? 'Date cannot be in the future' : null"
+            >
+              {{month.displayValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div fxFlex></div>
+        <mat-form-field id="year-select" class="year" fxFlex="40">
+          <mat-select formControlName="yearSelect" placeholder="Year">
+            <mat-option [value]="year.value" *ngFor="let year of yearOptions">
+              {{year.displayValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" class="fees-section">
+        <cca-key-value-fee key="Statement Fee" [value]="wizard.model.statementFee"></cca-key-value-fee>
+        <mat-checkbox formControlName="waiveFee" [disableRipple]="true">
+          <label>Waive Fee</label>
+        </mat-checkbox>
+      </div>
+    </div>
+    <h3 id="send-form-delivery-info">Delivery Information</h3>
+    <cca-delivery-method-form
+      [address]="wizard.model.confirmedAddress"
+      [email]="wizard.model.email"
+      [form]="wizardForm.get('deliveryMethod')"
+      [isVmsGiftCard]="wizard.model.selection.getCustomer().isVmsGiftCard"
+    ></cca-delivery-method-form>
+    <div id="gift-card-info-container" *ngIf="wizard.model.selection.getCustomer().isVmsGiftCard">
+      <div id="missing-names-container" fxLayout="row" fxLayoutGap="10px">
+        <cca-text-field id="missing-first-name" class="default-field-width" [form]="wizardForm" controlName="missingFirstName" placeholder="First Name"></cca-text-field>
+        <cca-text-field id="missing-last-name" class="default-field-width" [form]="wizardForm" controlName="missingLastName" placeholder="Last Name"></cca-text-field>
+      </div>
+      <div id="missing-address-container" *ngIf="addressForm">
+        <cca-address-form [form]="addressForm"></cca-address-form>
+      </div>
+    </div>
+
+  </div>
+</div>

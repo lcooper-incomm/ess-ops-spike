@@ -1,0 +1,70 @@
+<form [formGroup]="form">
+  <div #content>
+    <ng-content></ng-content>
+  </div>
+  <ng-container *ngIf="!content || !content.innerHTML">
+    <div fxLayout="row nowrap" fxLayoutGap="15px" style="max-width: 450px;">
+      <mat-form-field fxFlex="1 1 auto">
+        <input class="text-field form-field" type="text" matInput formControlName="summary" placeholder="Summary" maxlength="64" />
+      </mat-form-field>
+    </div>
+    <h4 class="session-heading">Case Information</h4>
+  </ng-container>
+  <div class="general-session-component-container" fxLayout="column wrap" fxLayoutGap="5px">
+    <div fxLayout="row nowrap">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <div class="container" *ngIf="form.get('queue')">
+            <mat-form-field id="session-queue" data-test-id="session-queue" class="default-width">
+              <mat-select formControlName="queue" placeholder="Queue" [compareWith]="compareById" (selectionChange)="handleQueueSelection()" required>
+                <mat-option *ngFor="let option of queueOptions | orderBy : 'displayName'" [value]="option">{{option.displayName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <cca-spinner size="EXTRA_SMALL" color="background" #queueSpinner></cca-spinner>
+          </div>
+          <mat-form-field id="session-status" data-test-id="session-status" class="default-width" *ngIf="form.get('status')">
+            <mat-select formControlName="status" placeholder="Status" (selectionChange)="statusChanged()" required>
+              <mat-option *ngFor="let option of statusOptions | orderBy : 'displayName'" [value]="option.systemName" [disabled]="option.systemName ==='CLOSED' && missingComponentsForClosure.length > 0">{{option.displayName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <div class="container" *ngIf="form.get('category')">
+            <mat-form-field id="session-category" data-test-id="session-category" class="default-width">
+              <mat-select formControlName="category" placeholder="Category" [compareWith]="compareById" (selectionChange)="handleCategorySelection()" required>
+                <mat-option *ngFor="let option of categoryOptions | orderBy : 'displayName'" [value]="option">{{option.displayName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <cca-spinner size="EXTRA_SMALL" color="background" #categorySpinner></cca-spinner>
+          </div>
+          <mat-form-field id="session-team" data-test-id="session-team" class="default-width" *ngIf="form.get('team')">
+            <mat-select formControlName="team" placeholder="Assigned Team" [compareWith]="compareById" (selectionChange)="saveSession()">
+              <mat-option [attr.selected]="!session?.team" [value]="null">Unassigned</mat-option>
+              <mat-option *ngFor="let option of teamOptions | orderBy : 'displayName'" [value]="option">{{option.displayName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <div class="container" *ngIf="form.get('wrapUpCode')">
+            <mat-form-field id="session-wrap-up-code" data-test-id="session-wrap-up-code" class="default-width">
+              <mat-select formControlName="wrapUpCode" placeholder="Wrap-Up Code" [compareWith]="compareById" (selectionChange)="saveSession()" required>
+                <mat-option *ngFor="let option of wrapUpCodeOptions | orderBy : 'displayName'" [value]="option">{{option.displayName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <cca-spinner size="EXTRA_SMALL" color="background" #wrapUpCodeSpinner></cca-spinner>
+          </div>
+          <mat-form-field id="session-assignee" data-test-id="session-assignee" class="default-width" *ngIf="form.get('assignee')">
+            <mat-select formControlName="assignee" placeholder="Assignee" [compareWith]="compareById" (selectionChange)="saveSession()" required>
+              <mat-option [attr.selected]="!isAssignedToCurrentUser" value="ASSIGN_TO_ME">Assign to me</mat-option>
+              <mat-option [attr.selected]="!session?.team" [value]="null">Unassigned</mat-option>
+              <mat-option *ngFor="let option of assigneeOptions | orderBy : 'displayName'" [value]="option">{{option.displayName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <cca-simple-panel color="red" *ngIf="this.session?.callComponent?.disconnectedDate && !this.session?.wrapUpCode">
+          Select a Wrap-Up Code before the timer expires.
+        </cca-simple-panel>
+      </div>
+    </div>
+  </div>
+</form>

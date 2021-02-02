@@ -1,0 +1,10 @@
+<div *ngIf="wizard.model.cards?.length > 0" fxLayout="column" class="text-accent mb-15">
+  Individual Items to Refund:
+  <div *ngFor="let card of wizard.model.cards" style="margin-left: 15px;">
+    {{card.id}}
+    <span style="margin-left: 10px; margin-right: 10px;">-</span>
+    {{card.parentItem.name}}
+  </div>
+</div>
+<cca-key-value-with-placeholder key="Refund Amount" [value]="wizard.model.refundDisplayAmount"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Comment" [value]="wizard.model.request.comment" *ngIf="wizard.model.selection.platform === PlatformType.BOL"></cca-key-value-with-placeholder>

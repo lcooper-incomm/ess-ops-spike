@@ -1,0 +1,23 @@
+<div class="summary-section card-srl-section container" *ngIf="selection?.getCard()?.srlData">
+  <cca-key-value-with-placeholder key="VRN: Header ID" [value]="selection?.getCard()?.srlData.identifiers.headerId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="VRN: Control Number" [value]="selection?.getCard()?.srlData.identifiers.controlNumber"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="VRN: Amount" [value]="selection?.getCard()?.srlData.amounts.denomination?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="VRN: Date" [value]="selection?.getCard()?.srlData.activation?.activationDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value key="VRN: Status">
+    <div fxLayout="row" style="width:100%;">
+      <cca-status [status]="selection.getCard().srlData.getStatusByPlatform(PlatformType.SRL)" *ngIf="selection?.getCard()?.srlData.getStatusByPlatform(PlatformType.SRL)" style="width:100%;"></cca-status>
+      <div class="text-muted" *ngIf="!selection?.getCard()?.srlData.getStatusByPlatform(PlatformType.SRL)">Not Available</div>
+    </div>
+  </cca-key-value>
+  <cca-key-value key="VRN: Owner">
+    <a class="container" href="javascript:void(0)" (click)="linkToMerchant()" *ngIf="selection?.getCard().srlData.productOwner">
+      {{selection.getCard().srlData.productOwner}}
+      <cca-spinner #srlOwnerSpinner></cca-spinner>
+    </a>
+    <div class="text-muted" *ngIf="!selection?.getCard()?.srlData.productOwner">Not Available</div>
+  </cca-key-value>
+  <cca-key-value key="VRN: PAN">
+    <cca-unmaskable-pan [card]="selection.getCard()" *ngIf="selection?.getCard()"></cca-unmaskable-pan>
+    <div class="text-muted" *ngIf="!selection?.getCard()?.srlData.identifiers.pan">Not Available</div>
+  </cca-key-value>
+</div>

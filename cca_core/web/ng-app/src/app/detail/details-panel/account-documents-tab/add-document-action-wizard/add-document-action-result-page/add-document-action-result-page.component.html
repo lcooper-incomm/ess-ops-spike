@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Document action added.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: Document action could not be added.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Document action added, but an audit could not be registered.
+</div>

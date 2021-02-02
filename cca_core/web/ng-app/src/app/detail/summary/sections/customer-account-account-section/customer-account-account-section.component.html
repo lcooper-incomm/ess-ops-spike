@@ -1,0 +1,22 @@
+<ng-container *ngIf="account">
+  <div class="summary-section" fxLayout="column">
+    <cca-key-value key="Account Status">
+      <cca-serve-account-status [status]="account?.getAccountStatus()" fxFlex></cca-serve-account-status>
+    </cca-key-value>
+    <cca-key-value-with-placeholder key="Reason" [value]="account?.getAccountStatus()?.description"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Account ID" [value]="account?.id"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Customer Name" [value]="account?.customer.getDisplayName()"></cca-key-value-with-placeholder>
+  </div>
+  <div class="summary-section" fxLayout="column">
+    <cca-key-value-with-placeholder key="Bank" [value]="account?.issuer"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Brand" [value]="account?.product?.item"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Program" [value]="account?.program?.description"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Level" [value]="account?.getLevel()?.description"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Account Open Date" [value]="account?.getAccountOpenDate()?.displayValue"></cca-key-value-with-placeholder>
+  </div>
+  <div class="summary-section" fxLayout="column">
+    <cca-key-value-with-placeholder key="DD Routing" [value]="account?.directDeposit?.routingNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="DD Acct. Number" [value]="account?.directDeposit?.accountNumber"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Bill Pay DDA" [value]="account?.directDeposit?.billPayDda"></cca-key-value-with-placeholder>
+  </div>
+</ng-container>

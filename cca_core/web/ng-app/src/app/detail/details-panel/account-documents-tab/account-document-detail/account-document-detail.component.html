@@ -1,0 +1,21 @@
+<div class="account-detail-container" fxLayout="row" fxLayoutGap="20px">
+  <div fxFlex>
+    <cca-key-value key="Archive Status">
+      <cca-status [status]="document.archiveStatus" class="archive-status"></cca-status>
+    </cca-key-value>
+    <cca-key-value-with-placeholder key="Category" [value]="document.category"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Document URI" [value]="document.documentUri"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Handling Queue" [value]="document.handlingQueue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Restricted Code" [value]="document.restrictedCode"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="User Session ID" [value]="document.userSessionId"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex>
+    <cca-key-value-with-placeholder key="File" [value]="document.file"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="File Key" [value]="document.fileKey"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="File Mime Type" [value]="document.fileMimeType"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="File Name" [value]="document.fileName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="File Path" [value]="document.filePath"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="File Type Description" [value]="document.fileType?.description"></cca-key-value-with-placeholder>
+  </div>
+</div>
+<cca-action-toolbar [actions]="actions"></cca-action-toolbar>

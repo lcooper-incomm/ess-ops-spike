@@ -1,0 +1,51 @@
+<div class="transaction-history-table-summary-container" *ngIf="selection?.transactions" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="3px">
+  <h4 class="transaction-history-summary-header text-primary" fxLayout="row" fxLayoutGap="3px">
+    <span *ngIf="dataSource.filter">{{dataSource.filteredData?.length}} of</span>
+    <span>{{selection.transactions.transactions.length}} Transactions</span>
+    <span *ngIf="dataSource.filter">(Filtered)</span>
+  </h4>
+  <div class="transaction-history-filter-summary text-muted">{{filterSummary}}</div>
+</div>
+<div class="table-container condensed-table transaction-history-table expansion-panel-wrapper" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+
+  <cscore-table #transactionTable
+                [columns]="displayedColumns"
+                initialSortColumn="date"
+                initialSortDirection="desc"
+                [dataSource]="dataSource"
+                [hidden]="!dataSource.data?.length"
+                [trackBy]="trackBy"
+                (rowClick)="rowClick($event)"
+                [rowClassFunction]="highlightDisputed">
+
+    <div *cscoreTableCellDef="let item; key: 'caret'" class="row-caret" style="border-bottom-width: 0;" fxLayout="row" fxLayoutAlign="center center"></div>
+
+    <div *cscoreTableHeaderDef="let item; key: 'selection'">
+      <mat-checkbox class="small-checkbox"
+                    [disableRipple]="true"
+                    (change)="toggleSelectAll()"
+                    ccaClickSwallower
+                    [preventDefault]="false"
+                    [checked]="selection.transactionRequests?.isSelectAllChecked"></mat-checkbox>
+    </div>
+    <div *cscoreTableCellDef="let item; key: 'selection'" style="border-bottom-width: 0;" fxLayout="row"
+         fxLayoutAlign="center center">
+      <mat-checkbox class="small-checkbox"
+                    [disableRipple]="true"
+                    (change)="toggleSelectTransaction(item)"
+                    ccaClickSwallower
+                    [preventDefault]="false"
+                    [checked]="item.isSelected || selection.transactionRequests?.isSelectAllChecked"
+                    [disabled]="selection.transactionRequests?.isSelectAllChecked"></mat-checkbox>
+    </div>
+
+    <ng-container *cscoreTableExpandedContent="let item">
+      <cca-maples-transaction-detail [selection]="selection" [transaction]="item" [expanded]="transactionTable._isExpanded(item)" fxFlex="1 1 auto"></cca-maples-transaction-detail>
+    </ng-container>
+  </cscore-table>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-paginator fxFlex="100%" [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+  </div>
+</div>

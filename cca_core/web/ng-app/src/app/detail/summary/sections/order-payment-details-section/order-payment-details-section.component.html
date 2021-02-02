@@ -1,0 +1,28 @@
+<h4 class="text-accent clickable" (click)="showPayments = !showPayments">
+  <span *ngIf="!showPayments"> <fa-icon class="small" fxFlexAlign="center" icon="plus"
+                                         style="margin-right: 5px;"></fa-icon></span>
+  <span *ngIf="showPayments"> <fa-icon class="small" fxFlexAlign="center" icon="minus"
+                                        style="margin-right: 5px;"></fa-icon></span>
+  Payment Details
+</h4>
+
+<div *ngIf="showPayments">
+  <div *ngFor="let payment of paymentTransactions" fxLayout="row nowrap">
+    <span>
+      {{payment['transaction']?.createdDate?.displayValue}}
+    </span>
+      <span fxFlex="1 1 auto"></span>
+      <span *ngIf="payment['transaction']?.refundAmount">
+      {{payment['transaction']?.refundAmount?.displayValue}}
+    </span>
+      <span *ngIf="!payment['transaction']?.refundAmount && payment['transaction']?.settlementAmount">
+      {{payment['transaction']?.settlementAmount?.displayValue}}
+    </span>
+      <span *ngIf="!payment['transaction']?.refundAmount && !payment['transaction']?.settlementAmount && payment['transaction']?.amount">
+      {{payment['transaction']?.amount?.displayValue}}
+    </span>
+    <span style="margin-left: 10px;">
+      <a href="javascript:void(0)" (click)="openPaymentDetails(payment)">View Details</a>
+    </span>
+  </div>
+</div>

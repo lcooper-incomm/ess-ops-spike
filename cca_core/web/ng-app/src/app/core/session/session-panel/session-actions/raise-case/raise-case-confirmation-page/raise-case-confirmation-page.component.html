@@ -1,0 +1,45 @@
+<div fxLayout="column" fxLayoutGap="10px" [formGroup]="wizardForm">
+  <div class="column">
+    <h3 class="text-primary">Case Information</h3>
+    <cca-key-value-with-placeholder key="Case Type" [value]="wizard.model.sessionType.displayName"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Queue" [value]="wizard.model.queue.displayName"></cca-key-value-with-placeholder>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="column" *ngIf="wizard.model.customerComponent">
+      <h3 class="text-primary">Customer Information</h3>
+      <cca-key-value-with-placeholder key="First Name" [value]="wizard.model.customerComponent.firstName"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Last Name" [value]="wizard.model.customerComponent.lastName"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Date of Birth" [value]="wizard.model.customerComponent.dateOfBirth"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Email Address" [value]="wizard.model.customerComponent.emailAddress"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Phone Number" [value]="wizard.model.customerComponent.phoneNumber"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="ANI" [value]="wizard.model.customerComponent.ani"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Contact Method" [value]="wizard.model.customerComponent.contactMethod"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Callback Time" [value]="wizard.model.customerComponent.callbackTime"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Language" [value]="wizard.model.customerComponent.language"></cca-key-value-with-placeholder>
+      <cca-key-value key="Address" alignment="start start">
+        <cca-address [address]="wizard.model.customerComponent.address"></cca-address>
+      </cca-key-value>
+    </div>
+    <div class="column" *ngIf="wizard.model.merchantComponent">
+      <h3 class="text-primary">Merchant Information</h3>
+      <cca-key-value-with-placeholder key="Merchant Name" [value]="wizard.model.merchantComponent.merchantName"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Location Name" [value]="wizard.model.merchantComponent.locationName"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Phone Number" [value]="wizard.model.merchantComponent.contactPhone"></cca-key-value-with-placeholder>
+      <cca-key-value key="Address" alignment="start start">
+        <cca-address [address]="wizard.model.merchantComponent.address"></cca-address>
+      </cca-key-value>
+    </div>
+    <div class="column" *ngIf="wizard.model.receiptComponent">
+      <h3 class="text-primary">Receipt Information</h3>
+      <cca-key-value-with-placeholder key="Receipt ID" [value]="wizard.model.receiptComponent.receiptId"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Txn Date" [value]="wizard.model.receiptComponent.transactionDate?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Txn Time" [value]="wizard.model.receiptComponent.transactionTime"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Txn Amount" [value]="wizard.model.receiptComponent.transactionAmount?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Total Amount" [value]="wizard.model.receiptComponent.totalAmount?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Payment Method" [value]="wizard.model.receiptComponent.paymentMethod"></cca-key-value-with-placeholder>
+    </div>
+  </div>
+  <div>
+    <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+  </div>
+</div>

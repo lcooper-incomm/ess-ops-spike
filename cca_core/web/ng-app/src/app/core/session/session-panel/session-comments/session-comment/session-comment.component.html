@@ -1,0 +1,14 @@
+<div class="session-comment clickable" fxLayout="column" [ngClass]="{selected: isSelected}">
+  <div class="session-comment-header text-muted" fxLayout="row" fxLayoutGap="5px">
+    <strong>{{comment.createdBy.username}}</strong>
+    <strong>{{comment.createdDate.displayValue}}</strong>
+    <strong *ngIf="comment.isPrivate">(Private)</strong>
+  </div>
+  <div class="session-comment-body">
+    <div *ngIf="isOnlyComment">{{comment.content}}</div>
+    <div *ngIf="!isOnlyComment">{{comment.content | ellipsis : 100}}</div>
+  </div>
+  <div class="selected-indicator text-muted" *ngIf="isSelected" fxLayout="row" fxLayoutAlign="center center">
+    <fa-icon icon="arrow-alt-circle-right"></fa-icon>
+  </div>
+</div>

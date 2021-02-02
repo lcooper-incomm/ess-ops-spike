@@ -1,0 +1,20 @@
+<mat-card class="member-card-container ">
+  <mat-card-content fxLayout="row" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <fa-icon fxFlexAlign="center center" icon="user"></fa-icon>
+    </div>
+    <div fxLayout="column">
+      <div fxLayout="row">
+        <strong>{{memberData.username}}</strong>
+      </div>
+      <div fxLayout="row" class="text-muted">
+        {{memberData.displayName}}
+      </div>
+    </div>
+    <span fxFlex></span>
+    <div fxLayout="row" fxFlexAlign="center" fxLayoutGap="10px">
+      <fa-icon class="text-error" icon="times-circle" (click)="removeMember(memberData)" style="cursor: pointer"></fa-icon>
+      <fa-icon class="text-accent" icon="arrow-right"></fa-icon>
+    </div>
+  </mat-card-content>
+</mat-card>

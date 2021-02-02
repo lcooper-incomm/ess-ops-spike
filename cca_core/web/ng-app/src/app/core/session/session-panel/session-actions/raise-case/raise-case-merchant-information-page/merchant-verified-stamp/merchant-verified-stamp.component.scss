@@ -1,0 +1,14 @@
+.merchant-verified-stamp-container {
+  margin-top: 20px;
+  padding: 5px 20px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid darkorange;
+  color: darkorange;
+
+  &.verified {
+    border: 1px solid green;
+    color: green;
+  }
+}

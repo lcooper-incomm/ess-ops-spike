@@ -1,0 +1,3 @@
+<div class="auto-scroll-session-header-container container" [ngClass]="{'dock-pinned': isDockPinned}" *ngIf="isSessionActive && isSessionHeaderScrolledOutOfView">
+  <cca-session-panel-header (click)="toggleIsCollapsed()" *ngIf="isSessionActive"></cca-session-panel-header>
+</div>

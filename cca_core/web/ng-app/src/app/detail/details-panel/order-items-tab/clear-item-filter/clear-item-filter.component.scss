@@ -1,0 +1,22 @@
+@import '../../../../../colors.scss';
+
+.close-selected-order {
+  &:hover {
+    cursor: pointer;
+  }
+  margin-right: 10px;
+  padding: 9px 10px 9px 10px;
+  background-color: mat-color($cca-app-primary);
+  fa-icon {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: white;
+    margin-right: 10px;
+  }
+  h6 {
+    margin: 0;
+    line-height: 12px;
+    color: white;
+  }
+}

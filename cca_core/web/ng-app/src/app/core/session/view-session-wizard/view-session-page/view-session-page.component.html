@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row">
+    <cca-session-summary [session]="wizard.model.session" fxFlex="30%"></cca-session-summary>
+    <mat-card fxFlex="calc(70% - 20px)" class="components-card" *ngIf="wizard.model.session.sessionClassType === SessionClassType.CASE">
+      <cca-session-components [session]="wizard.model.session" [stackedView]="true"></cca-session-components>
+    </mat-card>
+  </div>
+  <cca-session-comments [form]="wizardForm" [session]="wizard.model.session" (commentAdded)="onCommentAdded()"></cca-session-comments>
+</div>

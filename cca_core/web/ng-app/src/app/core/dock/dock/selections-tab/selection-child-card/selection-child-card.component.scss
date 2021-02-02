@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+@import '../../../../../../colors.scss';
+
+.selection-child-button {
+  padding: 3px;
+  font-size: 11px;
+  line-height: 11px;
+  margin-bottom: 5px;
+  height: 10.4px;
+  background-color: mat-color($cca-app-muted, 600);
+
+  &.active,
+  &:hover {
+    outline: 1px solid mat-color($cca-app-primary);
+
+    fa-icon {
+      color: mat-color($cca-app-primary);
+    }
+  }
+
+  .status-icon-container {
+    width: 20px;
+  }
+}

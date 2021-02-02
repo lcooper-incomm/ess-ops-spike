@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Email successfully resent.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: Email could not be resent.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Email successfully resent, but an audit/comment could not be registered.
+</div>

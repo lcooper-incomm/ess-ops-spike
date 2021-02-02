@@ -1,0 +1,36 @@
+<mat-expansion-panel hideToggle [expanded]="true" class="account-holder-expansion-panel">
+  <mat-expansion-panel-header expandedHeight="48px">
+    <mat-panel-title>
+      <h3 class="text-primary title-header">Personal Information</h3>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-key-value-with-placeholder key="Account Number" [value]="selection?.getCustomer()?.identifiers.accountNumber"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Business Name" [value]="selection?.getCustomer()?.businessName"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Customer Name" [value]="selection?.getCustomer()?.getDisplayName()"></cca-key-value-with-placeholder>
+    </div>
+    <div class="summary-column">
+      <cca-key-value-with-placeholder key="Date of Birth" [value]="dateOfBirth"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Online Username" [value]="selection?.getCustomer()?.identifiers.onlineUserId"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Mother's Maiden" [value]="selection?.getCustomer()?.mothersMaidenName"></cca-key-value-with-placeholder>
+    </div>
+    <div class="summary-column">
+      <cca-key-value-with-placeholder key="Registration Date" [value]="selection?.getCustomer()?.registrationDate?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Activation Date" [value]="selection?.selectedCard?.activation?.activationDate?.displayValue"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="KYC Source" [value]="selection?.getCustomer()?.kyc?.registrationSource"></cca-key-value-with-placeholder>
+      <cca-key-value key="KYC Status">
+        <div class="text-muted" *ngIf="!kycStatus">Not Available</div>
+        <div *ngIf="kycStatus">
+          <div class="text-success" *ngIf="kycStatus.indexOf('SUCCESS') !== -1">SUCCESS</div>
+          <div style="color:goldenrod;" *ngIf="kycStatus.indexOf('PENDING') !== -1">PENDING</div>
+          <a href="javascript:void(0)" class="text-error" *ngIf="showKycFailureLink" (click)="openKycDialog()">FAILED</a>
+        </div>
+      </cca-key-value>
+    </div>
+  </div>
+  <mat-action-row>
+    <cca-action-toolbar class="action-toolbar" [actions]="actions"
+                        [buildingActions]="buildingActions"></cca-action-toolbar>
+  </mat-action-row>
+</mat-expansion-panel>

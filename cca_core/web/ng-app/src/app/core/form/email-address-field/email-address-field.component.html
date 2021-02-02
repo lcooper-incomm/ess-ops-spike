@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+  <mat-form-field>
+    <input class="email-address-field form-field" type="email" matInput [formControlName]="controlName"
+           [placeholder]="placeholder" [required]="isControlRequired(form.get(controlName))"/>
+    <mat-error *ngIf="form.get(controlName).hasError('email') && !form.get(controlName).hasError('required')">
+      <i>Must be a valid email address</i>
+    </mat-error>
+    <mat-error *ngIf="form.get(controlName).hasError('required')">
+      <i>This field is required</i>
+    </mat-error>
+  </mat-form-field>
+</div>

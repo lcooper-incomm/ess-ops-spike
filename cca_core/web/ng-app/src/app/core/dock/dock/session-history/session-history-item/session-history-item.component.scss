@@ -1,0 +1,27 @@
+.history-item {
+  width: 100%;
+
+  .history-item-main-content {
+    padding: 5px;
+    background-color: #797979;
+
+    .description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: orange;
+    }
+
+    .date {
+      font-size: 10px;
+      line-height: 10px;
+      height: 10px;
+    }
+  }
+
+  .history-item-secondary-content {
+    padding: 5px;
+    background-color: #666666;
+    font-size: 12px;
+  }
+}

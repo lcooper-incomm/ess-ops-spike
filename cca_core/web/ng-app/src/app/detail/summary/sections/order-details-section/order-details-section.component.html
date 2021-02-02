@@ -1,0 +1,8 @@
+<div class="summary-section order-details-section container">
+  <cca-key-value-with-placeholder key="Order ID" [value]="selection?.getOrder()?.id" *ngIf="isSystemAdministrator"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Order Date" [value]="selection?.getOrder()?.createdDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Order Number" [value]="selection?.getOrder()?.number"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Order Type" [value]="selection?.getOrder()?.type"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Order Platform" [value]="platform"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Total Card Quantity" [value]="quantity"></cca-key-value-with-placeholder>
+</div>

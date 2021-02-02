@@ -1,0 +1,71 @@
+<cca-card-panel
+  class="detail-summary-container vertical-summary vertical container"
+  [ngClass]="{pinned: isPinned, 'dock-pinned': isDockPinned, 'session-collapsed': isSessionCollapsed}"
+  [disableCollapse]="true"
+  [icon]="selection?.iconName"
+  [header]="description"
+  [ngSwitch]="selection?.type">
+  <cca-summary-mode-toggle></cca-summary-mode-toggle>
+  <div *ngSwitchCase="SelectionType.ACCOUNT">
+    <cca-account-status-section></cca-account-status-section>
+    <cca-account-description-section></cca-account-description-section>
+    <cca-account-biller-section></cca-account-biller-section>
+    <cca-account-fee-section></cca-account-fee-section>
+  </div>
+  <div *ngSwitchCase="SelectionType.CARD">
+    <cca-card-status-section></cca-card-status-section>
+    <cca-card-description-section></cca-card-description-section>
+    <cca-card-greencard-pan-section></cca-card-greencard-pan-section>
+    <cca-card-incomm-purchase-section></cca-card-incomm-purchase-section>
+    <cca-card-greencard-balance-section></cca-card-greencard-balance-section>
+    <cca-card-greencard-purchase-section></cca-card-greencard-purchase-section>
+    <cca-card-identifiers-section></cca-card-identifiers-section>
+    <cca-card-srl-section></cca-card-srl-section>
+    <cca-card-multipack-section></cca-card-multipack-section>
+    <cca-card-redemption-section></cca-card-redemption-section>
+    <cca-card-redemption-delay-section></cca-card-redemption-delay-section>
+    <cca-card-product-owner-section></cca-card-product-owner-section>
+  </div>
+  <div *ngSwitchCase="SelectionType.CUSTOMER">
+    <cca-customer-customer-section></cca-customer-customer-section>
+    <cca-customer-balance-section></cca-customer-balance-section>
+    <cca-customer-redemption-delay-section *ngIf="selection?.platform !== PlatformType.CCL"></cca-customer-redemption-delay-section>
+    <cca-customer-fee-section *ngIf="selection?.platform !== PlatformType.CCL"></cca-customer-fee-section>
+    <mat-divider></mat-divider>
+    <cca-customer-cards-section></cca-customer-cards-section>
+  </div>
+  <div *ngSwitchCase="SelectionType.CUSTOMER_ACCOUNT">
+    <cca-customer-account-account-section></cca-customer-account-account-section>
+    <cca-customer-account-balance-section></cca-customer-account-balance-section>
+    <mat-divider></mat-divider>
+    <cca-customer-cards-section></cca-customer-cards-section>
+  </div>
+  <div *ngSwitchCase="SelectionType.LOCATION">
+    <cca-location-status-section></cca-location-status-section>
+    <cca-location-hierarchy-section></cca-location-hierarchy-section>
+    <cca-location-address-section></cca-location-address-section>
+    <cca-location-contact-section></cca-location-contact-section>
+    <cca-location-terminals-section></cca-location-terminals-section>
+    <cca-location-misc-section></cca-location-misc-section>
+  </div>
+  <div *ngSwitchCase="SelectionType.MAPLES_CUSTOMER">
+    <cca-encor-customer-section [selection]="selection"></cca-encor-customer-section>
+    <cca-encor-program-section [selection]="selection"></cca-encor-program-section>
+    <cca-encor-products-section [selection]="selection"></cca-encor-products-section>
+  </div>
+  <div *ngSwitchCase="SelectionType.ORDER">
+    <ng-container *ngIf="selection.platform !== PlatformType.ALDER">
+      <cca-order-status-section></cca-order-status-section>
+      <cca-order-details-section></cca-order-details-section>
+      <cca-order-purchaser-section></cca-order-purchaser-section>
+      <cca-order-shipments-section *ngIf="selection.platform !== PlatformType.BOL"></cca-order-shipments-section>
+      <cca-order-amounts-section></cca-order-amounts-section>
+      <cca-order-purchase-section></cca-order-purchase-section>
+      <cca-order-risk-section></cca-order-risk-section>
+      <cca-order-payment-details-section [selection]="selection"></cca-order-payment-details-section>
+    </ng-container>
+    <ng-container *ngIf="selection.platform === PlatformType.ALDER">
+      <cca-order-alder-summary [selection]="selection"></cca-order-alder-summary>
+    </ng-container>
+  </div>
+</cca-card-panel>

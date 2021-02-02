@@ -1,0 +1,20 @@
+<h4>VMS Partner</h4>
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.editMode"
+                                  key="ID"
+                                  [value]="wizard.model.partner.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="column" fxFlex="grow">
+    <ng-container *ngIf="!wizard.model.editMode">
+      <cca-text-field [form]="wizardForm" controlName="name" placeholder="Name" class="mb-15"></cca-text-field>
+      <cca-select-field [form]="wizardForm" controlName="platform" placeholder="Platform" [options]="platforms" class="mb-15"></cca-select-field>
+      <cca-text-field [form]="wizardForm" controlName="type" placeholder="Type" class="mb-15"></cca-text-field>
+    </ng-container>
+    <ng-container *ngIf="wizard.model.editMode">
+      <cca-key-value-with-placeholder key="Name" [value]="wizard.model.partner.name" class="mb-15"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Platform" [value]="wizard.model.partner.platform" class="mb-15"></cca-key-value-with-placeholder>
+      <cca-key-value-with-placeholder key="Type" [value]="wizard.model.partner.type" class="mb-15"></cca-key-value-with-placeholder>
+    </ng-container>
+    <cca-comment-field [form]="wizardForm" controlName="ivrDnis" placeholder="ivrDnis" class="mb-15"></cca-comment-field>
+  </div>
+</form>

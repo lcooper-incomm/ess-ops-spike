@@ -1,0 +1,25 @@
+<div class="profile-container" fxLayout="column" style="min-width: 992px">
+  <div fxLayout="row" fxLayoutGap="15px">
+    <div fxFlex="33" fxLayoutAlign="start stretch">
+      <cca-card-panel id="profile-panel" data-test-id="profile-panel" header="Profile" class="profile-user-container no-padding-card" fxFlexFill fxLayoutAlign="start stretch">
+        <cca-user-profile></cca-user-profile>
+      </cca-card-panel>
+    </div>
+    <cca-card-panel id="preferences-panel" data-test-id="preferences-panel" header="Preferences" class="profile-preferences-container no-padding-card" fxFlex>
+      <cca-profile-preferences></cca-profile-preferences>
+    </cca-card-panel>
+  </div>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <cca-card-panel id="groups-panel" data-test-id="groups-panel" header="Groups ({{filteredGroups}}{{totalGroups}})" class="profile-groups-container filter-list-panel no-padding-card" fxFlex="33">
+      <cca-profile-group (totalGroups)='displayTotalGroups($event)' (currentTotal)='displayCurrentGroups($event)'></cca-profile-group>
+    </cca-card-panel>
+    <div fxLayout="row" fxLayoutGap="15px" fxFlex>
+      <cca-card-panel id="roles-panel" data-test-id="roles-panel" header="Roles ({{filteredRoles}}{{totalRoles}})" class="profile-roles-container filter-list-panel  no-padding-card" style="width:50%">
+        <cca-profile-roles (totalRoles)='displayTotalRoles($event)' (currentTotal)='displayCurrentRoles($event)'></cca-profile-roles>
+      </cca-card-panel>
+      <cca-card-panel id="permissions-panel" data-test-id="permissions-panel" header="Permissions ({{filteredPermissions}}{{totalPermissions}})" class="profile-permissions-container filter-list-panel no-padding-card" fxFlex>
+        <cca-profile-permissions (totalPermissions)='displayTotal($event)' (currentTotal)='displayCurrentPermissions($event)'></cca-profile-permissions>
+      </cca-card-panel>
+    </div>
+  </div>
+</div>

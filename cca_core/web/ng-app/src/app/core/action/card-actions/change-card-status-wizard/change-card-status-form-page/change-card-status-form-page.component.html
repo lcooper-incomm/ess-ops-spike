@@ -1,0 +1,12 @@
+<div class="info-container" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.cardChangeStatusRequest.cardStatus !== 'Activate'"
+                                  alignment="start start"
+                                  class="mb-15"
+                                  key="Current Status"
+                                  [value]="wizard.model.currentStatus"></cca-key-value-with-placeholder>
+  <cca-select-field *ngIf="wizard.model.cardChangeStatusRequest.cardStatus !== 'Activate'" [form]="wizardForm" [required]=true [options]="statusOptions" placeholder="New Status" controlName="cardStatus"></cca-select-field>
+  <cca-select-field *ngIf="wizard.model.cardChangeStatusRequest.cardStatus !== 'Activate'" [form]="wizardForm" [required]=true [options]="statusReasons" placeholder="Reason" controlName="statusReason"></cca-select-field>
+  <cca-numeric-text-field *ngIf="wizard.model.cardChangeStatusRequest.cardStatus === 'Activate'"
+                          class="default-field-width-short" [form]="wizardForm" controlName="cvv" placeholder="CVV"></cca-numeric-text-field>
+  <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment"></cca-comment-field>
+</div>

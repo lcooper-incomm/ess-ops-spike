@@ -1,0 +1,29 @@
+<div class="container" fxLayout="column">
+  <cca-select-field [form]="wizardForm"
+                    [options]="methodOptions"
+                    placeholder="Method"
+                    controlName="method"></cca-select-field>
+  <ng-container *ngIf="wizardForm.get('method').value === 'CHECK'">
+    <span class="text-accent">Send check to:</span>
+    <cca-address [address]="wizard.model.address" class="mb-15"></cca-address>
+  </ng-container>
+  <ng-container *ngIf="wizardForm.get('method').value === 'ACH'">
+    <ng-container *ngIf="bankOptions.length > 0">
+      <cca-select-field [form]="wizardForm"
+                        [options]="bankOptions"
+                        placeholder="Account Number"
+                        controlName="id"></cca-select-field>
+    </ng-container>
+    <ng-container *ngIf="bankOptions.length === 0">
+      <div class="text-error mb-15">
+        There are no linked Banks for this account.
+      </div>
+    </ng-container>
+  </ng-container>
+  <cca-currency-field [form]="wizardForm"
+                  placeholder="Amount"
+                  controlName="amount"></cca-currency-field>
+  <cca-comment-field [form]="wizardForm"
+                     placeholder="Comment"
+                     controlName="comment"></cca-comment-field>
+</div>

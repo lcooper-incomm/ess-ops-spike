@@ -1,0 +1,113 @@
+<cca-card-panel class="detail-summary-container horizontal container" [icon]="selection?.iconName" [header]="description" [ngSwitch]="selection?.type">
+  <cca-summary-mode-toggle></cca-summary-mode-toggle>
+  <div *ngSwitchCase="SelectionType.ACCOUNT" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-account-status-section></cca-account-status-section>
+      <cca-account-description-section></cca-account-description-section>
+    </div>
+    <div class="summary-column">
+      <cca-account-biller-section></cca-account-biller-section>
+    </div>
+    <div class="summary-column">
+      <cca-account-fee-section></cca-account-fee-section>
+    </div>
+  </div>
+  <div *ngSwitchCase="SelectionType.CARD" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-card-status-section></cca-card-status-section>
+      <cca-card-description-section></cca-card-description-section>
+    </div>
+    <div class="summary-column">
+      <cca-card-greencard-pan-section></cca-card-greencard-pan-section>
+      <cca-card-incomm-purchase-section></cca-card-incomm-purchase-section>
+      <cca-card-greencard-balance-section></cca-card-greencard-balance-section>
+    </div>
+    <div class="summary-column">
+      <cca-card-greencard-purchase-section></cca-card-greencard-purchase-section>
+      <cca-card-identifiers-section></cca-card-identifiers-section>
+    </div>
+    <div class="summary-column">
+      <cca-card-srl-section></cca-card-srl-section>
+      <cca-card-multipack-section></cca-card-multipack-section>
+      <cca-card-redemption-section></cca-card-redemption-section>
+      <cca-card-redemption-delay-section></cca-card-redemption-delay-section>
+      <cca-card-product-owner-section></cca-card-product-owner-section>
+    </div>
+  </div>
+  <div *ngSwitchCase="SelectionType.CUSTOMER" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-customer-customer-section></cca-customer-customer-section>
+      <cca-customer-balance-section></cca-customer-balance-section>
+    </div>
+    <div class="summary-column" *ngIf="selection?.platform !== PlatformType.CCL">
+      <cca-customer-redemption-delay-section></cca-customer-redemption-delay-section>
+      <cca-customer-fee-section></cca-customer-fee-section>
+    </div>
+    <div class="summary-column">
+      <cca-customer-cards-section></cca-customer-cards-section>
+    </div>
+  </div>
+  <div *ngSwitchCase="SelectionType.LOCATION" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-location-status-section></cca-location-status-section>
+      <cca-location-hierarchy-section></cca-location-hierarchy-section>
+      <cca-location-misc-section></cca-location-misc-section>
+    </div>
+    <div class="summary-column">
+      <cca-location-address-section></cca-location-address-section>
+      <cca-location-contact-section></cca-location-contact-section>
+    </div>
+    <div class="summary-column">
+      <cca-location-terminals-section></cca-location-terminals-section>
+    </div>
+  </div>
+  <div *ngSwitchCase="SelectionType.MAPLES_CUSTOMER" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-encor-customer-section [selection]="selection"></cca-encor-customer-section>
+    </div>
+    <div class="summary-column">
+      <cca-encor-program-section [selection]="selection"></cca-encor-program-section>
+    </div>
+    <div class="summary-column">
+      <cca-encor-products-section [selection]="selection"></cca-encor-products-section>
+    </div>
+  </div>
+  <div *ngSwitchCase="SelectionType.CUSTOMER_ACCOUNT" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="summary-column">
+      <cca-customer-account-account-section></cca-customer-account-account-section>
+    </div>
+    <div class="summary-column">
+      <cca-customer-account-balance-section></cca-customer-account-balance-section>
+    </div>
+    <div class="summary-column">
+      <cca-customer-cards-section></cca-customer-cards-section>
+    </div>
+  </div>
+  <div *ngSwitchCase="SelectionType.ORDER" fxLayout="row wrap" fxLayoutGap="10px">
+    <ng-container *ngIf="selection.platform !== PlatformType.ALDER">
+      <div class="summary-column">
+        <cca-order-status-section></cca-order-status-section>
+        <cca-order-details-section></cca-order-details-section>
+      </div>
+      <div class="summary-column">
+        <cca-order-purchaser-section></cca-order-purchaser-section>
+      </div>
+      <div class="summary-column" *ngIf="selection.platform !== PlatformType.BOL">
+        <cca-order-shipments-section></cca-order-shipments-section>
+      </div>
+      <div class="summary-column">
+        <cca-order-amounts-section></cca-order-amounts-section>
+      </div>
+      <div class="summary-column">
+        <cca-order-purchase-section></cca-order-purchase-section>
+        <cca-order-risk-section></cca-order-risk-section>
+      </div>
+      <div class="summary-column">
+        <cca-order-payment-details-section [selection]="selection"></cca-order-payment-details-section>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selection.platform === PlatformType.ALDER">
+      <cca-order-alder-summary [selection]="selection"></cca-order-alder-summary>
+    </ng-container>
+  </div>
+</cca-card-panel>

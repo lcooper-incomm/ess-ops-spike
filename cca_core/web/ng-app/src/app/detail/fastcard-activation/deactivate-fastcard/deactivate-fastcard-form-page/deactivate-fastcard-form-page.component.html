@@ -1,0 +1,32 @@
+<form [formGroup]="wizardForm">
+  <div fxLayout="row">
+    <mat-form-field class="default-width">
+      <mat-select formControlName="reason" placeholder="Reason" required>
+        <mat-option [value]="option" *ngFor="let option of reasons">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row">
+    <mat-form-field class="default-width">
+      <mat-select formControlName="crediting" placeholder="Credit To" required>
+        <mat-option [value]="option" *ngFor="let option of creditingOptions">
+          {{option.displayValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="column" *ngIf="deactivationLocation">
+    <cca-deactivation-locations
+      [location]="deactivationLocation"
+      [overrideShortPay]="overrideShortPay"
+      [shortPayLocation]="isIncommCrediting ? null : shortPayDeactivationLocation"
+    ></cca-deactivation-locations>
+  </div>
+  <div fxLayout="row" *ngIf="canOverrideShortPay" class="override-short-pay-container">
+    <mat-checkbox formControlName="overrideShortPay">Override Short-Pay Location</mat-checkbox>
+  </div>
+  <br>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</form>

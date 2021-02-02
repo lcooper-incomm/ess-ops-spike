@@ -1,0 +1,13 @@
+.case-tab-badge-container {
+  position: absolute;
+  top: -11px;
+  right: -18px;
+  padding: 8px;
+
+  .case-tab-badge {
+    background-color: red;
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+  }
+}

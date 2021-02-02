@@ -1,0 +1,163 @@
+package com.incomm.cca.model.constant;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class AuditActivityType extends PseudoEnum {
+
+    public static final String ACTIVATE_B2B_CARD = "ACTIVATE_B2B_CARD";
+    public static final String ACTIVATE_FAST_CARD = "ACTIVATE_FAST_CARD";
+    public static final String ACTIVATE_GIFT_CARD_REPLACEMENT = "ACTIVATE_GIFT_CARD_REPLACEMENT";
+    public static final String ADD_CALL_DETAIL = "ADD_CALL_DETAIL";
+    public static final String ADD_SELECTION_TO_SESSION = "ADD_SELECTION_TO_SESSION";
+    public static final String ADJUST_BALANCE = "ADJUST_BALANCE";
+    public static final String AUTO_WRAP_SESSION = "AUTO_WRAP_SESSION";
+    public static final String BULK_DEACTIVATE = "BULK_DEACTIVATE";
+    public static final String BYPASS_VERIFY_ACCOUNT = "BYPASS_VERIFY_ACCOUNT";
+    public static final String CANCEL_SESSION = "CANCEL_SESSION";
+    public static final String CARD_TRANSFER = "CARD_TRANSFER";
+    public static final String CCL_CHANGE_CARD_STATUS = "CCL_CHANGE_CARD_STATUS";
+    public static final String CCL_RELEASE_PRE_AUTH = "CCL_RELEASE_PRE_AUTH";
+    public static final String CCL_REVERSE_FEE = "CCL_REVERSE_FEE";
+    public static final String CHALLENGE_PASSWORD = "CHALLENGE_PASSWORD";
+    public static final String CHANGE_CUSTOMER_ALERT = "CHANGE_CUSTOMER_ALERT";
+    public static final String CHANGE_STATUS = "CHANGE_STATUS";
+    public static final String CLICK_ENTITY_LINK = "CLICK_ENTITY_LINK";
+    public static final String CLICK_LOCATION_LINK = "CLICK_LOCATION_LINK";
+    public static final String CLICK_SERIAL_NUMBER_LINK = "CLICK_SERIAL_NUMBER_LINK";
+    public static final String CLICK_TRANSACTION_ID_LINK = "CLICK_TRANSACTION_ID_LINK";
+    public static final String CLICK_VAN_LINK = "CLICK_VAN_LINK";
+    public static final String CLOSE_SESSION = "CLOSE_SESSION";
+    public static final String CREATE_SESSION = "CREATE_SESSION";
+    public static final String DEACTIVATE_FAST_CARD = "DEACTIVATE_FAST_CARD";
+    public static final String DOWNLOAD_TRANSACTION_HISTORY_EXPORT = "DOWNLOAD_TRANSACTION_HISTORY_EXPORT";
+    public static final String EDIT_SESSION_QUEUE = "EDIT_SESSION_QUEUE";
+    public static final String EDIT_WRAP_UP_CATEGORY = "EDIT_WRAP_UP_CATEGORY";
+    public static final String I3_CALL_WITHOUT_QUEUE_PERMISSION = "I3_CALL_WITHOUT_QUEUE_PERMISSION";
+    public static final String MERCHANDISE_RELEASE = "MERCHANDISE_RELEASE";
+    public static final String NOT_VERIFY_ACCOUNT = "NOT_VERIFY_ACCOUNT";
+    public static final String NOT_VERIFY_CUSTOMER = "NOT_VERIFY_CUSTOMER";
+    public static final String NOT_VERIFY_ORDER = "NOT_VERIFY_ORDER";
+    public static final String OPEN_VERIFY_CUSTOMER = "OPEN_VERIFY_CUSTOMER";
+    public static final String PERSONAL_INFO_REQUEST = "PERSONAL_INFO_REQUEST";
+    public static final String PIN_LOOKUP = "PIN_LOOKUP";
+    public static final String QUICK_LOOKUP = "QUICK_LOOKUP";
+    public static final String RELEASE_PREAUTH = "RELEASE_PREAUTH";
+    public static final String REPLACE_CARD = "REPLACE_CARD";
+    public static final String RESEND_DELIVERY = "RESEND_DELIVERY";
+    public static final String RESEND_EMAIL = "RESEND_EMAIL";
+    public static final String SEARCH = "SEARCH";
+    public static final String SHOW_FILE_PASSWORD = "SHOW_FILE_PASSWORD";
+    public static final String TRANSACTION_HISTORY_SEARCH = "TRANSACTION_HISTORY_SEARCH";
+    public static final String UNMASK_PAN = "UNMASK_PAN";
+    public static final String UNMASK_PIN = "UNMASK_PIN";
+    public static final String VERIFY_ACCOUNT = "VERIFY_ACCOUNT";
+    public static final String VERIFY_CUSTOMER = "VERIFY_CUSTOMER";
+    public static final String VERIFY_ORDER = "VERIFY_ORDER";
+    public static final String VIEW_ACCOUNT_HISTORY = "VIEW_ACCOUNT_HISTORY";
+    public static final String VIEW_NOTES = "VIEW_NOTES";
+    public static final String VIEW_SESSION = "VIEW_SESSION";
+    public static final String VIEW_TERMINALS = "VIEW_TERMINALS";
+    public static final String VMS_ACTIVATE_CARD = "VMS_ACTIVATE_CARD";
+    public static final String VMS_C2C_TRANSFER_APPROVE = "VMS_C2C_TRANSFER_APPROVE";
+    public static final String VMS_C2C_TRANSFER_REQUEST = "VMS_C2C_TRANSFER_REQUEST";
+    public static final String VMS_CHANGE_CARD_STATUS = "VMS_CHANGE_CARD_STATUS";
+    public static final String VMS_EDIT_CARD_HOLDER = "VMS_EDIT_CARD_HOLDER";
+    public static final String VMS_ORDER_NEW_CARD = "VMS_ORDER_NEW_CARD";
+    public static final String VMS_RAISE_DISPUTE = "VMS_RAISE_DISPUTE";
+    public static final String VMS_REGISTER_CARD = "VMS_REGISTER_CARD";
+    public static final String VMS_RELEASE_PREAUTH = "VMS_RELEASE_PREAUTH";
+    public static final String VMS_REPLACE_CARD = "VMS_REPLACE_CARD";
+    public static final String VMS_RESET_ONLINE_PASSWORD = "VMS_RESET_ONLINE_PASSWORD";
+    public static final String VMS_RESET_PIN = "VMS_RESET_PIN";
+    public static final String VMS_REVERSE_FEE = "VMS_REVERSE_FEE";
+    public static final String VMS_SEND_FORM = "VMS_SEND_FORM";
+    public static final String VMS_SUBMIT_DOCUMENT = "VMS_SUBMIT_DOCUMENT";
+    public static final String VMS_TOGGLE_ONE_TIME_FRAUD_OVERRIDE = "VMS_TOGGLE_ONE_TIME_FRAUD_OVERRIDE";
+    public static final String VMS_TOGGLE_PERMANENT_FRAUD_OVERRIDE = "VMS_TOGGLE_PERMANENT_FRAUD_OVERRIDE";
+    public static final String VMS_UPDATE_DEVICE_STATUS = "VMS_UPDATE_DEVICE_STATUS";
+    public static final String VMS_UPDATE_TRANSACTION = "VMS_UPDATE_TRANSACTION";
+    public static final String WRAP_UP_SESSION = "WRAP_UP_SESSION";
+    private static Set<String> values = new HashSet<>();
+
+    static {
+        values.add(ACTIVATE_B2B_CARD);
+        values.add(ACTIVATE_FAST_CARD);
+        values.add(ACTIVATE_GIFT_CARD_REPLACEMENT);
+        values.add(ADD_CALL_DETAIL);
+        values.add(ADD_SELECTION_TO_SESSION);
+        values.add(ADJUST_BALANCE);
+        values.add(AUTO_WRAP_SESSION);
+        values.add(BULK_DEACTIVATE);
+        values.add(BYPASS_VERIFY_ACCOUNT);
+        values.add(CANCEL_SESSION);
+        values.add(CARD_TRANSFER);
+        values.add(CCL_CHANGE_CARD_STATUS);
+        values.add(CCL_RELEASE_PRE_AUTH);
+        values.add(CCL_REVERSE_FEE);
+        values.add(CHALLENGE_PASSWORD);
+        values.add(CHANGE_CUSTOMER_ALERT);
+        values.add(CHANGE_STATUS);
+        values.add(CLICK_ENTITY_LINK);
+        values.add(CLICK_LOCATION_LINK);
+        values.add(CLICK_SERIAL_NUMBER_LINK);
+        values.add(CLICK_TRANSACTION_ID_LINK);
+        values.add(CLICK_VAN_LINK);
+        values.add(CLOSE_SESSION);
+        values.add(CREATE_SESSION);
+        values.add(DEACTIVATE_FAST_CARD);
+        values.add(DOWNLOAD_TRANSACTION_HISTORY_EXPORT);
+        values.add(EDIT_SESSION_QUEUE);
+        values.add(EDIT_WRAP_UP_CATEGORY);
+        values.add(I3_CALL_WITHOUT_QUEUE_PERMISSION);
+        values.add(MERCHANDISE_RELEASE);
+        values.add(NOT_VERIFY_ACCOUNT);
+        values.add(NOT_VERIFY_CUSTOMER);
+        values.add(NOT_VERIFY_ORDER);
+        values.add(OPEN_VERIFY_CUSTOMER);
+        values.add(PERSONAL_INFO_REQUEST);
+        values.add(PIN_LOOKUP);
+        values.add(RELEASE_PREAUTH);
+        values.add(REPLACE_CARD);
+        values.add(RESEND_DELIVERY);
+        values.add(SEARCH);
+        values.add(SHOW_FILE_PASSWORD);
+        values.add(TRANSACTION_HISTORY_SEARCH);
+        values.add(UNMASK_PAN);
+        values.add(UNMASK_PIN);
+        values.add(VERIFY_ACCOUNT);
+        values.add(VERIFY_CUSTOMER);
+        values.add(VERIFY_ORDER);
+        values.add(VIEW_ACCOUNT_HISTORY);
+        values.add(VIEW_NOTES);
+        values.add(VIEW_SESSION);
+        values.add(VIEW_TERMINALS);
+        values.add(VMS_ACTIVATE_CARD);
+        values.add(VMS_C2C_TRANSFER_APPROVE);
+        values.add(VMS_C2C_TRANSFER_REQUEST);
+        values.add(VMS_CHANGE_CARD_STATUS);
+        values.add(VMS_EDIT_CARD_HOLDER);
+        values.add(VMS_ORDER_NEW_CARD);
+        values.add(VMS_RAISE_DISPUTE);
+        values.add(VMS_REGISTER_CARD);
+        values.add(VMS_RELEASE_PREAUTH);
+        values.add(VMS_REPLACE_CARD);
+        values.add(VMS_RESET_ONLINE_PASSWORD);
+        values.add(VMS_RESET_PIN);
+        values.add(VMS_REVERSE_FEE);
+        values.add(VMS_SEND_FORM);
+        values.add(VMS_SUBMIT_DOCUMENT);
+        values.add(VMS_UPDATE_DEVICE_STATUS);
+        values.add(VMS_UPDATE_TRANSACTION);
+        values.add(WRAP_UP_SESSION);
+    }
+
+    @Override
+    public Set<String> getValues() {
+        return values;
+    }
+
+    public static String valueOf(String value) {
+        return new AuditActivityType().validateValue(value);
+    }
+}

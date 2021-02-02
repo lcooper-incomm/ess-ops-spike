@@ -1,0 +1,82 @@
+@import '~@angular/material/theming';
+@import '../../../../../../colors.scss';
+
+.session-workspace-card {
+  position: relative;
+  background-color: white;
+  color: black;
+  font-size: 12px;
+  margin-bottom: 5px;
+
+  &.active {
+
+    .highlight {
+      background-color: mat-color($cca-app-session);
+    }
+  }
+
+  &.queued {
+
+    .highlight {
+      background-color: mat-color($cca-app-accent);
+    }
+  }
+
+  &.selected {
+
+    .highlight {
+      background-color: mat-color($cca-app-muted, 900);
+    }
+  }
+
+  .highlight {
+    background-color: mat-color($cca-app-muted);
+    color: white;
+    padding: 5px;
+    width: 34px;
+
+    fa-icon {
+      font-size: 24px;
+      line-height: 24px;
+    }
+  }
+
+  .card-content {
+    padding: 5px;
+
+    .summary {
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      white-space: nowrap;
+      max-width: 80%;
+    }
+
+    .caller-section {
+      font-size: 10px;
+
+      fa-icon {
+        font-size: 12px;
+        line-height: 12px;
+        margin-right: 5px;
+      }
+    }
+
+    .created-section {
+      margin-top: 8px;
+    }
+
+    .selection-count-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 5px;
+      z-index: 1;
+
+      fa-icon {
+        font-size: 12px;
+        line-height: 12px;
+        margin-right: 5px;
+      }
+    }
+  }
+}

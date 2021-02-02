@@ -1,0 +1,11 @@
+<form [formGroup]="wizardForm" class="container key-50" fxLayout="column">
+  <cca-key-value-with-placeholder *ngIf="wizard.model.editMode"
+                                  key="ID"
+                                  [value]="wizard.model.team.id"
+                                  class="mb-15"></cca-key-value-with-placeholder>
+  <div fxLayout="column" fxFlex="grow">
+    <cca-text-field [form]="wizardForm" controlName="systemName" placeholder="System Name"></cca-text-field>
+    <cca-text-field [form]="wizardForm" controlName="displayName" placeholder="Display Name"></cca-text-field>
+    <cca-text-field [form]="wizardForm" controlName="description" placeholder="Description"></cca-text-field>
+  </div>
+</form>

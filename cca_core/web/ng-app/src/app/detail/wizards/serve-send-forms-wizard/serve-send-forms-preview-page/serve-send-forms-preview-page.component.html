@@ -1,0 +1,10 @@
+<cca-select-field [form]="wizardForm"
+                  [options]="templateOptions"
+                  placeholder="Template"
+                  panelClass="send-form-selection"
+                  class="send-form-selection"
+                  controlName="actionCode"></cca-select-field>
+<cca-spinner [size]="spinnerSize" style="margin-left: auto; margin-right: auto;"></cca-spinner>
+<div *ngIf="notificationPreview && !loadingSpinner.on"
+     class="form-preview"
+     [innerHTML]="notificationPreview?.template"></div>

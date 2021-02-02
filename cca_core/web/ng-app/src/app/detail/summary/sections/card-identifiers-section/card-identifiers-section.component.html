@@ -1,0 +1,10 @@
+<div class="summary-section card-identifiers-section container">
+  <cca-key-value-with-placeholder key="VAN" [value]="selection?.getCard()?.identifiers.van"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Serial Number" [value]="selection?.getCard()?.identifiers.serialNumber"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Vendor Serial Number" [value]="selection?.getCard()?.identifiers.vendorSerialNumber" *ngIf="selection?.platform === PlatformType.INCOMM || selection?.platform === PlatformType.GREENCARD"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="PIN" [value]="selection?.getCard()?.identifiers.pin"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="FastPIN" [value]="selection?.getCard()?.identifiers.vendorPin" *ngIf="selection?.platform === PlatformType.INCOMM"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Proxy ID" [value]="selection?.getCard()?.identifiers.spNumber" *ngIf="selection?.getCard().identifiers.spNumber"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="CAN" [value]="selection?.getCard()?.identifiers.can" *ngIf="selection?.platform === PlatformType.GREENCARD"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Transaction ID" [value]="selection?.getCard()?.identifiers?.transactionId" *ngIf="selection?.getCard().identifiers.transactionId"></cca-key-value-with-placeholder>
+</div>

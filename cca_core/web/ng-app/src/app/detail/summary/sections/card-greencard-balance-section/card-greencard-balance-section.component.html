@@ -1,0 +1,12 @@
+<div class="summary-section card-greencard-balance-section container" *ngIf="selection?.platform === PlatformType.GREENCARD">
+  <cca-key-value key="Initial Value">
+    <div *ngIf="selection?.getCard()?.amounts.initialLoadAmount" fxLayout="row" fxLayoutGap="3px">
+      <span>{{selection.getCard().amounts.initialLoadAmount.displayValue}}</span>
+      <span *ngIf="selection.getCard().amounts.initialLoadAmount.descriptor?.description">({{selection.getCard().amounts.initialLoadAmount.descriptor.description}})</span>
+    </div>
+    <div class="text-muted" *ngIf="!selection?.getCard()?.amounts.initialLoadAmount">Not Available</div>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Current Balance" [value]="selection?.getCard()?.amounts.currentBalance?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Pending Balance" [value]="selection?.getCard()?.amounts.pendingAmount?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Available Balance" [value]="selection?.getCard()?.amounts.availableBalance?.displayValue"></cca-key-value-with-placeholder>
+</div>

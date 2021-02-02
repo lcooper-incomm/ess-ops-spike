@@ -1,0 +1,16 @@
+<div [formGroup]="wizardForm" fxLayout="column" fxLayoutGap="10px">
+  <div formArrayName="questions" *ngFor="let question of wizard.model.probingQuestions; let i = index;">
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-form-field>
+        <textarea matInput rows="3" [formControl]="wizardForm.get('questions').controls[i]" [placeholder]="question.question" style="resize:none;"></textarea>
+        <mat-hint align="end">{{wizardForm.get( 'questions' ).controls[ i ].value?.length || 0}}/500</mat-hint>
+        <mat-error *ngIf="wizardForm.get('questions').controls[i].hasError('required')">This field is required</mat-error>
+        <mat-error *ngIf="!wizardForm.get('questions').controls[i].hasError('required') && wizardForm.get('questions').controls[i].hasError('minlength')">Must be at least 2 characters in length</mat-error>
+        <mat-error *ngIf="!wizardForm.get('questions').controls[i].hasError('required') && wizardForm.get('questions').controls[i].hasError('maxlength')" fxLayout="row" fxLayoutGap="20px">
+          <div fxFlex="grow">Must be less than 500 characters in length</div>
+          <div>{{wizardForm.get( 'questions' ).controls[ i ].value?.length || 0}}/500</div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

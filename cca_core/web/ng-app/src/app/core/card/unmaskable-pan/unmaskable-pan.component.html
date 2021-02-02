@@ -1,0 +1,7 @@
+<div class="unmaskable-pan-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <span>{{(hasUnmaskPermission && !!unmaskedPan) ? unmaskedPan : card.identifiers.panMasked}}</span>
+  <div class="container">
+    <fa-icon class="clickable text-primary" icon="unlock" ccaClickSwallower *ngIf="hasUnmaskPermission && !unmaskedPan" (click)="unmask()" matTooltip="Unmask PAN"></fa-icon>
+    <cca-spinner color="accent"></cca-spinner>
+  </div>
+</div>

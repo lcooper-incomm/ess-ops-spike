@@ -1,0 +1,15 @@
+<form [formGroup]="wizardForm" fxLayout="column">
+  <div class="info-container">
+    <h3>Transaction Summary</h3>
+    <cca-transaction-summary [transaction]="transaction"></cca-transaction-summary>
+  </div>
+  <mat-form-field class="default-width">
+    <mat-select formControlName="reason" placeholder="Reason" required>
+      <mat-option [value]="option" *ngFor="let option of reasons | orderBy: 'label'">
+        {{ option.displayValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</form>
+  

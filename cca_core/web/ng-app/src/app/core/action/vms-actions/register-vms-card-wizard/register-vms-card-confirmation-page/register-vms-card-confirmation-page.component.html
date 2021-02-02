@@ -1,0 +1,57 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div>
+    <h3 class="text-primary section-heading">Card</h3>
+    <cca-key-value-with-placeholder key="Card Number" [value]="cardNumber" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Enrollment Type" [value]="enrollmentType.description" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+  </div>
+  <ng-container [ngSwitch]="enrollmentType.code">
+    <cca-key-value-with-placeholder
+      *ngSwitchCase="EnrollmentTypeCode.SPEND_DOWN"
+      key="Postal Code"
+      [value]="postalCode"
+      [keyWidthPercent]="50"
+    ></cca-key-value-with-placeholder>
+    <ng-container *ngSwitchCase="EnrollmentTypeCode.PERSONALIZED">
+      <div>
+        <h3 class="text-primary section-heading">Personal</h3>
+        <cca-key-value-with-placeholder key="First Name" [value]="personal.firstName" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Last Name" [value]="personal.lastName" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Date of Birth" [value]="personal.dateOfBirth" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Mother's Maiden Name" [value]="personal.mothersMaidenName" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+      </div>
+      <div>
+        <h3 class="text-primary section-heading">Contact</h3>
+        <cca-key-value-with-placeholder key="Email Address" [value]="contact.email" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Mobile Phone" [value]="contact.mobilePhone?.number" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="Home Phone" [value]="contact.homePhone?.number" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <cca-key-value-address key="Physical Address" [address]="contact.physicalAddress" [keyWidthPercent]="50"></cca-key-value-address>
+        <cca-key-value-address key="Mailing Address" [address]="contact.mailingAddress" [keyWidthPercent]="50"></cca-key-value-address>
+      </div>
+      <div>
+        <h3 class="text-primary section-heading">Identification</h3>
+        <cca-key-value-with-placeholder key="ID Type" [value]="identification.type.description" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <cca-key-value-with-placeholder key="ID Number" [value]="identification.number" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        <ng-container *ngIf="isCanadian">
+          <cca-key-value-with-placeholder key="Occupation" [value]="identification.occupation.name" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+          <cca-key-value-with-placeholder key="Province" [value]="identification.stateProvince" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+          <cca-key-value-with-placeholder key="Expiration Date" [value]="identification.expirationDate" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+          <cca-key-value-with-placeholder key="Verification Date" [value]="identification.verificationDate" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+          <cca-key-value-with-placeholder key="Taxpayer ID" [value]="identification.taxpayerId" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+          <cca-key-value-with-placeholder
+            *ngIf="identification.noTaxpayerIdReason"
+            key="No Taxpayer ID Reason"
+            [value]="identification.noTaxpayerIdReason.reasonDescription"
+            [keyWidthPercent]="50"
+          ></cca-key-value-with-placeholder>
+          <cca-key-value-with-placeholder
+            *ngIf="identification.noTaxpayerIdReasonDescription"
+            key="No Taxpayer ID Explanation"
+            [value]="identification.noTaxpayerIdReasonDescription"
+            [keyWidthPercent]="50"
+          ></cca-key-value-with-placeholder>
+          <cca-key-value-with-placeholder key="Tax Residence Jurisdiction" [value]="identification.residence" [keyWidthPercent]="50"></cca-key-value-with-placeholder>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

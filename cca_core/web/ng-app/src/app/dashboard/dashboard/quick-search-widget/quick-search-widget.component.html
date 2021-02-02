@@ -1,0 +1,16 @@
+<form [formGroup]="quickSearchForm" fxLayout="row" fxLayoutGap="15px" (ngSubmit)="search()">
+  <mat-form-field fxFlex="45">
+    <mat-select formControlName="quickSearchControl">
+      <mat-optgroup *ngFor="let container of containers | orderBy : 'name'" [label]="container.searchType.name" [disabled]="container.disabled">
+        <mat-option *ngFor="let param of container.searchType.quickSearchParameters | orderBy : 'name'" [value]="param">
+          {{param.name}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+  <cca-text-field fxFlex="40" [form]="quickSearchForm" controlName="searchTextControl" placeholder="Search Text"></cca-text-field>
+  <button fxFlex="15" type="submit" mat-raised-button color="accent" [disabled]="!quickSearchForm.valid" style="height: 36px;">
+    Search
+  </button>
+</form>
+

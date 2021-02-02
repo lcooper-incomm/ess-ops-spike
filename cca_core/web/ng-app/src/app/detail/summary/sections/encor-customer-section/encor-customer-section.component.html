@@ -1,0 +1,6 @@
+<div class="summary-section container" fxFlex="100%" fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value-with-placeholder key="Date of Birth" [value]="selection?.getMaplesCustomer()?.dateOfBirth"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Email" [value]="selection?.getMaplesCustomer()?.getPrimaryEmailAddress(true)?.email"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Phone Number" [value]="selection?.getMaplesCustomer()?.getPrimaryPhoneNumber(true)?.number"></cca-key-value-with-placeholder>
+  <cca-key-value-address key="Address" [address]="selection?.getMaplesCustomer()?.getPrimaryAddress(true)"></cca-key-value-address>
+</div>

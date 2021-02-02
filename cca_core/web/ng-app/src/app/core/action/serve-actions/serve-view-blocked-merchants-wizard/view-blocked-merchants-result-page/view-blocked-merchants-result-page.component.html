@@ -1,0 +1,13 @@
+<div *ngIf="wizard.model.success" class="text-accent">
+  Those merchants were successfully unblocked.
+</div>
+<div *ngIf="!wizard.model.success" class="text-error">
+  Failed to unblock the following merchants
+  <ng-container *ngFor="let merchant of wizard.model.failedMerchants">
+    <div fxLayout="row" style="margin-left: 15px;" style="justify-content: space-between;">
+      <span>{{merchant.name}}</span>
+      <span>{{merchant.merchantId}}</span>
+      <span>{{merchant.createDate?.displayValue}}</span>
+    </div>
+  </ng-container>
+</div>

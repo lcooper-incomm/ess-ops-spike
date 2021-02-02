@@ -1,0 +1,7 @@
+<form [formGroup]="wizardForm" fxLayout="column" fxLayoutGap="15px">
+  <cca-text-field id="email-support-subject-input" data-test-id="email-support-subject-input" class="default-field-width" [form]="wizardForm" controlName="emailSubject" placeholder="Subject"></cca-text-field>
+  <mat-form-field>
+    <textarea id="email-support-textarea-input" data-test-id="email-support-textarea-input" formControlName="emailMessage" matInput placeholder="Message" rows="5" resize="false"></textarea>
+  </mat-form-field>
+
+</form>

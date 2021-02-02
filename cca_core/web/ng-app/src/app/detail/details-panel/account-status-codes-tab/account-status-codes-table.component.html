@@ -1,0 +1,134 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h3 class="text-primary" fxLayout="row" fxLayoutGap="3px">
+    Fraud Status Codes - {{getTypeLabel()}}
+  </h3>
+  <div fxFlex></div>
+  <div class="action-toolbar-button-container container">
+  <button class="toolbar-button" mat-raised-button
+          [disabled]="!enableAddStatusCodeButton()" [title] ="!enableAddStatusCodeButton() ? 'You do not have permission to perform this action' : getTypeDescription()"
+          [cscorePopoverAnchor]="addPopover"
+          (click)="openPopover(addPopover, 'Add')"
+          matTooltip={{getTypeDescription()}}>
+    {{getTypeDescription()}}
+  </button>
+</div>
+</div>
+<div class="table-container condensed-table bottomless-table"
+     [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">
+    No Results Available
+  </div>
+  <cscore-table [columns]="columns" [dataSource]="dataSource" [hidden]="!dataSource.data?.length">
+    <div *cscoreTableCellDef="let item; key: 'endDate'" ccaClickSwallower fxLayoutAlign="center center">
+      {{ item.endDate ? item.endDate.displayValue : 'PERMANENT' }}
+    </div>
+
+    <div *cscoreTableCellDef="let item; key: 'delete'" ccaClickSwallower fxLayoutAlign="center center"
+         class="text-primary" [ngStyle]=" { 'position': 'relative',
+                             'left':'100px'}">
+      <div [attr.title]="!enableAddStatusCodeButton() ? 'You do not have permission to perform this action' :'' ">
+        <fa-icon [cscorePopoverAnchor]="deletePopover"
+               [ngStyle] = "{'pointer-events': enableAddStatusCodeButton() ? 'auto' :'none',
+                             'color':!enableAddStatusCodeButton() ? 'gray' : 'red'}"
+
+      (click)="openPopover(deletePopover, 'Delete', item)" [icon]="['fas', 'trash-alt']" class="text-error"></fa-icon>
+      </div>
+      <cscore-popover #deletePopover
+                      color="#fff"
+                      defaultPosition="left"
+                      panelClass="cscore-popover-compact">
+        <div fxLayout="row">
+          <div fxLayout="column" style="justify-content: center;">
+            Are you sure you want to remove this record?
+          </div>
+          <div fxLayout="column" style="justify-content: space-between; margin-bottom: 10px; min-width: 30px; align-items: flex-end;">
+            <cca-icon-button (click)="deletePopover.close()"
+                             class="mb-15"
+                             icon="window-close"
+                             color="primary"></cca-icon-button>
+            <cca-icon-button (click)="deleteCode(deletePopover, item)"
+                             icon="trash-alt"
+                             color="text-error"></cca-icon-button>
+          </div>
+        </div>
+        <cca-spinner #deleteSpinner></cca-spinner>
+      </cscore-popover>
+    </div>
+    <div *cscoreTableCellDef="let item; key: 'edit'" ccaClickSwallower fxLayoutAlign="center center"
+         class="text-primary">
+      <div [attr.title]="!enableAddStatusCodeButton() ? 'You do not have permission to perform this action' :'' ">
+      <fa-icon *ngIf="item.endDate"
+               [cscorePopoverAnchor]="editPopover"
+               [ngStyle] = "{'pointer-events': enableAddStatusCodeButton() ? 'auto' :'none',
+                             'color':enableAddStatusCodeButton() ? '#337ab7' : 'gray'}"
+               (click)="openPopover(editPopover, 'Edit', item)" [icon]="['fas', 'calendar-alt']"></fa-icon>
+      </div>
+      <cscore-popover #editPopover
+                      color="#fff"
+                      defaultPosition="left"
+                      panelClass="cscore-popover-compact">
+        <cca-spinner #editSpinner></cca-spinner>
+        <div fxLayout="row" style="min-width: 350px;">
+          <div fxLayout="column" fxFlex>
+            <h4 class="text-accent">
+              Update {{item.code}}
+            </h4>
+            <cca-key-value-with-placeholder *ngIf="type === 'Address'" key="Address" [value]="getAddress(item.targetId)"></cca-key-value-with-placeholder>
+            <cca-key-value-with-placeholder *ngIf="type === 'FundingSource'" key="Funding Source" [value]="item.targetId"></cca-key-value-with-placeholder>
+            <form [formGroup]="statusCodeForm">
+              <mat-slide-toggle class="mb-15" formControlName="permanent" (change)="togglePermanent($event)">Permanent</mat-slide-toggle>
+              <cca-datepicker-field *ngIf="!statusCodeForm.get('permanent').value" [form]="statusCodeForm"
+                                    controlName="endDate" placeholder="End Date"></cca-datepicker-field>
+            </form>
+          </div>
+          <div fxLayout="column" style="justify-content: space-between; margin-bottom: 10px; min-width: 30px; align-items: flex-end;">
+            <cca-icon-button (click)="editPopover.close()"
+                             icon="window-close"
+                             color="primary"></cca-icon-button>
+            <cca-icon-button (click)="editCode(editPopover, item)"
+                             icon="check-square"
+                             [isDisabled]="!statusCodeForm.valid"
+                             color="primary"></cca-icon-button>
+          </div>
+        </div>
+      </cscore-popover>
+    </div>
+  </cscore-table>
+  <mat-paginator [length]="dataSource.data?.length" [pageSize]="10"
+                 [hidden]="!dataSource.data?.length || dataSource.data?.length <= 10"></mat-paginator>
+</div>
+
+<cscore-popover #addPopover
+                color="#fff"
+                defaultPosition="left"
+                panelClass="cscore-popover-compact">
+  <cca-spinner #addSpinner></cca-spinner>
+  <div fxLayout="row" style="min-width: 350px;">
+    <div fxLayout="column" fxFlex>
+      <h4 class="text-accent">
+        {{getTypeDescription()}}
+      </h4>
+      <form [formGroup]="statusCodeForm">
+        <cca-select-field *ngIf="type !== 'Account'"
+                          [required]="true"
+                          [form]="statusCodeForm" controlName="targetId" [options]="getTargets()"
+                          [placeholder]="type === 'Address' ? 'Address' : 'Funding Source'"></cca-select-field>
+        <cca-select-field [form]="statusCodeForm" controlName="code" [options]="codes"
+                          [required]="true"
+                          placeholder="Code"></cca-select-field>
+        <mat-slide-toggle class="mb-15" formControlName="permanent" (change)="togglePermanent($event)">Permanent</mat-slide-toggle>
+        <cca-datepicker-field *ngIf="!statusCodeForm.get('permanent').value" [form]="statusCodeForm"
+                              controlName="endDate" placeholder="End Date"></cca-datepicker-field>
+      </form>
+    </div>
+    <div fxLayout="column" style="justify-content: space-between; margin-bottom: 10px; min-width: 30px; align-items: flex-end;">
+      <cca-icon-button (click)="addPopover.close()"
+                       icon="window-close"
+                       color="primary"></cca-icon-button>
+      <cca-icon-button (click)="addCode(addPopover)"
+                       icon="check-square"
+                       [isDisabled]="!statusCodeForm.valid"
+                       color="primary"></cca-icon-button>
+    </div>
+  </div>
+</cscore-popover>

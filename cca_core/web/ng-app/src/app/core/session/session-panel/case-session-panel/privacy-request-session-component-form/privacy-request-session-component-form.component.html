@@ -1,0 +1,41 @@
+<div class="privacy-request-component-container">
+  <form [formGroup]="form">
+    <div fxLayout="column" fxLayoutGap="15px">
+      <div fxLayout="row nowrap" fxLayoutGap="15px">
+        <div fxLayout="column" fxLayoutGap="15px">
+          <div fxLayout="row" fxLayoutGap="5px">
+            <!-- Instead of providing options, provide a dictionary class name to build options from. -->
+            <cca-select-field id="session-privacy-request-product"
+                              data-test-id="session-privacy-request-product"
+                              class="default-field-width"
+                              [form]="form"
+                              controlName="productId"
+                              [typeAhead]="true"
+                              dictionary="com.incomm.cca.model.dictionary.BankProductDictionary"
+                              placeholder="Product"></cca-select-field>
+          </div>
+          <h4 class="session-heading">Customer</h4>
+          <div fxLayout="row" fxLayoutGap="5px">
+            <cca-text-field id="session-privacy-request-first-name" data-test-id="session-privacy-request-first-name" class="default-field-width" [form]="form" controlName="firstName" placeholder="First Name"></cca-text-field>
+            <cca-text-field id="session-privacy-request-last-name" data-test-id="session-privacy-request-last-name" class="default-field-width" [form]="form" controlName="lastName" placeholder="Last Name"></cca-text-field>
+          </div>
+          <div fxLayout="row" fxLayoutGap="5px">
+            <cca-email-address-field id="session-privacy-request-email-address" data-test-id="session-privacy-request-email-address" [form]="form" controlName="email"></cca-email-address-field>
+            <cca-text-field id="session-privacy-request-phone-number" data-test-id="session-privacy-request-phone-number" class="default-field-width" [form]="form" controlName="phoneNumber" placeholder="Phone Number"></cca-text-field>
+          </div>
+          <div fxLayout="row" fxLayoutGap="5px">
+            <cca-text-field id="session-privacy-request-job-title" data-test-id="session-privacy-request-job-title" class="default-field-width" [form]="form" controlName="jobTitle" placeholder="Job Title"></cca-text-field>
+            <cca-text-field id="session-privacy-request-account" data-test-id="session-privacy-request-account" class="default-field-width" [form]="form" controlName="account" placeholder="Account"></cca-text-field>
+          </div>
+        </div>
+        <div>
+          <h4 class="session-heading">Address</h4>
+          <cca-address-form [form]="form.get('address')"></cca-address-form>
+        </div>
+      </div>
+      <div fxFlex="grow">
+        <cca-comment-field id="session-privacy-request-comment" data-test-id="session-privacy-request-comment" [form]="form" controlName="comment"></cca-comment-field>
+      </div>
+    </div>
+  </form>
+</div>

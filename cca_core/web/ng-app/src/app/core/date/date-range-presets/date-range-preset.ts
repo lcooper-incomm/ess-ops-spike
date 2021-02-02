@@ -1,0 +1,17 @@
+export enum DateRangePreset {
+  DEFAULT             = 'DEFAULT',
+  TODAY               = 'TODAY',
+  YESTERDAY           = 'YESTERDAY',
+  WEEK_TO_DATE        = 'WEEK_TO_DATE',
+  MONTH_TO_DATE       = 'MONTH_TO_DATE',
+  YEAR_TO_DATE        = 'YEAR_TO_DATE',
+  MONTH_OF_ACTIVATION = 'MONTH_OF_ACTIVATION',
+  FIRST_6_MONTHS      = 'FIRST_6_MONTHS',
+  PREVIOUS_WEEK       = 'PREVIOUS_WEEK',
+  PREVIOUS_MONTH      = 'PREVIOUS_MONTH',
+  LAST_7_DAYS         = 'LAST_7_DAYS',
+  LAST_30_DAYS        = 'LAST_30_DAYS',
+  LAST_60_DAYS        = 'LAST_60_DAYS',
+  LAST_90_DAYS        = 'LAST_90_DAYS',
+  LAST_6_MONTHS       = 'LAST_6_MONTHS'
+}

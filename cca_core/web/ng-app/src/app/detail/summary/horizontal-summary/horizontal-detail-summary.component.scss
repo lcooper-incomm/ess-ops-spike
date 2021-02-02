@@ -1,0 +1,12 @@
+.detail-summary-container {
+
+  .summary-column {
+    width: 360px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+
+    &:not(:last-child) {
+      border-right: 1px solid #eee;
+    }
+  }
+}

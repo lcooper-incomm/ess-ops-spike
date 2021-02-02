@@ -1,0 +1,17 @@
+<div [formGroup]="form">
+  <mat-form-field>
+    <input class="datepicker-field form-field" matInput [matDatepicker]="datepicker" [formControlName]="controlName" [placeholder]="placeholder" [required]="isControlRequired(form.get(controlName))"/>
+    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker></mat-datepicker>
+    <mat-hint *ngIf="!form.get(controlName)?.value || !form.get(controlName)?.valid"><i>Format: mm/dd/yyyy</i></mat-hint>
+    <mat-error *ngIf="form.get(controlName)?.hasError('pattern') && !form.get(controlName)?.hasError('required')">
+      <i>Format: mm/dd/yyyy</i>
+    </mat-error>
+    <mat-error *ngIf="form.get(controlName)?.hasError('futureDate') && !form.get(controlName)?.hasError('required')">
+      <i>Date must be in the future</i>
+    </mat-error>
+    <mat-error *ngIf="form.get(controlName)?.hasError('required')">
+      <i>This field is required</i>
+    </mat-error>
+  </mat-form-field>
+</div>

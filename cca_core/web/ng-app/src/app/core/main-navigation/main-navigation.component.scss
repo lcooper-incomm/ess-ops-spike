@@ -1,0 +1,38 @@
+@import '~@angular/material/theming';
+@import '../../../colors.scss';
+
+.main-navigation {
+  position: fixed;
+  height: 40px;
+  padding-right: 5px;
+  z-index: 100;
+  top: 0;
+  padding-left: 0px;
+
+  cca-user-chip {
+    margin-right: 10px;
+  }
+
+  .create-session-button {
+    background-color: mat-color($cca-app-session, A700);
+    margin-right: 8px;
+  }
+
+  .mat-button {
+    height: 40px;
+
+    &.active {
+      background-color: mat-color($cca-app-primary, A400);
+    }
+  }
+
+  .toolbar-text {
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+}
+
+.not-bold {
+  font-weight: normal;
+}

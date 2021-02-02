@@ -1,0 +1,5 @@
+<h4 class="text-error" *ngIf="this.wizard.model.isFailed">An error occurred while completing the action.</h4>
+<div *ngIf="!this.wizard.model.isFailed">
+  <h4 class="text-accent">The request has been submitted successfully.</h4>
+  <cca-key-value-with-placeholder key="Job Id" [value]="wizard.model.jobId"></cca-key-value-with-placeholder>
+</div>

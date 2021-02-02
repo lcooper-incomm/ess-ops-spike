@@ -1,0 +1,22 @@
+<div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Data Available</div>
+  <table mat-table [dataSource]="dataSource" [hidden]="!dataSource.data?.length" matSort matSortActive="remaining" matSortDirection="asc">
+    <ng-container matColumnDef="amount">
+      <th class="text-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Load Amount</th>
+      <td class="text-right" mat-cell *matCellDef="let element">{{element.loadAmount.displayValue}}</td>
+    </ng-container>
+    <ng-container matColumnDef="merchant">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Merchant</th>
+      <td mat-cell *matCellDef="let element">{{element.merchantName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="remaining">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Remaining</th>
+      <td mat-cell *matCellDef="let element">
+        <cca-running-timer [start]="element.availableDate" *ngIf="isFutureDate(element.availableDate)"></cca-running-timer>
+        <div *ngIf="!isFutureDate(element.availableDate)">Available Now</div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

@@ -1,0 +1,8 @@
+<div class="container" fxLayout="column">
+  <div class="mb-15">
+    Archive document
+    <span style="font-weight: bold;">{{wizard.model.document.fileDescription}}</span>
+    (ID = {{wizard.model.document.id}})?
+  </div>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</div>

@@ -1,0 +1,18 @@
+<div *ngIf="!wizard.model.isLoadDispute" class="transactions-container">
+  <h3 class="text-primary">Disputed Transactions</h3>
+  <cca-simple-transaction-table [transactions]="wizard.model.transactions"></cca-simple-transaction-table>
+</div>
+<div>
+  <h3 class="text-primary">Dispute Details</h3>
+  <cca-key-value-with-placeholder key="Type" [value]="wizard.model.disputeType.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Queue" [value]="wizard.model.queue.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Reason" [value]="wizard.model.reason.description"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder *ngIf="wizard.model.isLoadDispute" key="Load Amount" [value]="wizard.model.loadDisputeAmount"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="First Name" [value]="wizard.model.firstName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Last Name" [value]="wizard.model.lastName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Date of Birth" [value]="wizard.model.dateOfBirth"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Mobile Phone" [value]="wizard.model.mobilePhone?.number"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Home Phone" [value]="wizard.model.homePhone?.number"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+  <cca-key-value-address key="Mailing Address" [address]="wizard.model.address"></cca-key-value-address>
+</div>

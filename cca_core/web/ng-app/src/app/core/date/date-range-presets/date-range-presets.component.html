@@ -1,0 +1,8 @@
+<button class="muted" mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="Date Range Presets">
+  <fa-icon [icon]="['far', 'calendar-alt']"></fa-icon>
+</button>
+<mat-menu #menu="matMenu" [overlapTrigger]="false">
+  <button class="condensed-menu-option" mat-menu-item (click)="selectPreset(option.value)" *ngFor="let option of options">
+    {{ option.displayValue }}
+  </button>
+</mat-menu>

@@ -1,0 +1,20 @@
+<ng-container [ngSwitch]="wizard.model.selectedComponent">
+  <cca-selection-to-cards-component
+    *ngSwitchCase="SessionComponentType.CARDS"
+    [card]="wizard.model.selectedCard"
+    [form]="wizardForm"
+    [selection]="wizard.model.selection"
+    [session]="wizard.model.session"
+  ></cca-selection-to-cards-component>
+  <cca-selection-to-customer-component
+    *ngSwitchCase="SessionComponentType.CUSTOMER"
+    [form]="wizardForm"
+    [selection]="wizard.model.selection"
+  ></cca-selection-to-customer-component>
+  <cca-selection-to-merchant-component
+    *ngSwitchCase="SessionComponentType.MERCHANT"
+    [form]="wizardForm"
+    [selection]="wizard.model.selection"
+  ></cca-selection-to-merchant-component>
+</ng-container>
+

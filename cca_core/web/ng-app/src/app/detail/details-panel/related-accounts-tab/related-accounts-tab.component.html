@@ -1,0 +1,23 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div *ngIf="this.selection.data.accountType == subaccount" class="container">
+    <h3 class="text-primary title-header">Primary Account</h3>
+    <cca-related-accounts-table [accounts]="[primaryAccount]" [type]="primary"></cca-related-accounts-table>
+  </div>
+  <div *ngIf="this.selection.data.accountType == primary" class="container">
+    <h3 class="text-primary title-header">Sub Accounts
+      ({{this.selection.data.subAccounts ? this.selection.data.subAccounts.length  : 0}})</h3>
+    <cca-related-accounts-table [type]="subaccount"></cca-related-accounts-table>
+  </div>
+  <div class="container" id="reserve-accounts-section" data-test-id="reserve-accounts-section">
+    <mat-panel-title>
+      <h3 class="text-primary title-header">Reserve Accounts ({{this.selection.data.reserveAccounts? this.selection.data.reserveAccounts.length : 0}}) </h3>
+    </mat-panel-title>
+    <cca-reserve-accounts-table></cca-reserve-accounts-table>
+  </div>
+  <div class="container">
+    <h3 class="text-primary title-header">Associated Accounts
+      ({{this.selection.data.associatedAccounts ? this.selection.associatedAccounts.length : 0}})</h3>
+    <cca-related-accounts-table *ngIf="this.selection?.data.associatedAccounts?.length > 0" [accounts]="this.selection.data?.associatedAccounts" [type]="associated"></cca-related-accounts-table>
+  </div>
+</div>
+

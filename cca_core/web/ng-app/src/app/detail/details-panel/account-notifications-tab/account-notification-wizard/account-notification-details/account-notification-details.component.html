@@ -1,0 +1,16 @@
+<div class="notification-details">
+  <h4 class="text-primary">Account Notification Details</h4>
+  <cca-key-value-with-placeholder key="ID" [value]="this.wizard.model.data.id"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Type" [value]="this.wizard.model.data.type"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="To" [value]="this.wizard.model.data.toAddress"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="From" [value]="this.wizard.model.data.fromAddress"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Subject" [value]="this.wizard.model.data.subject"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Sent Date" [value]="this.wizard.model.data.dateCreated?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Status" [value]="this.wizard.model.data.deliveryStatus"></cca-key-value-with-placeholder>
+</div>
+<div class="notification-details">
+  <h4 class="text-primary">Notification Contents</h4>
+  <div class="email-template container mat-elevation-z1">
+    <div [innerHTML]="this.emailTemplate"></div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<cca-expansion-panel
+  class="alt-expansion-panel "
+  title="Identification Information"
+  [expanded]="true"
+  [hasActionRow]="false"
+  [buildingActions]="buildingActions">
+
+  <div class="alt-panel-container">
+    <h4 class="text-accent">SSN Last Four</h4>
+    <div fxLayout="row">
+      <!--Start SSN Element(s)-->
+      <div>
+        <cca-icon-button
+          class="edit-btn"
+          [isDisabled]="false"
+          color="primary"
+          icon="edit"
+          [cscorePopoverAnchor]="editSsnAnchor"
+          (click)="openEditSsnPopover(editSsnAnchor)"
+          matTooltip="Edit SSN"
+          color="edit"
+        ></cca-icon-button>
+      </div>
+
+      <div style="margin-left: 10px; margin-bottom: 15px">
+        ***-**-{{ssn?.value}}
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-accent">DL / State ID</h4>
+      {{driversLicense?.value || 'Not Available'}}
+    </div>
+
+  </div>
+
+</cca-expansion-panel>
+
+
+<!--Start Edit SSN-->
+<cscore-popover
+  #editSsnAnchor
+  color="#fff"
+  defaultPosition="right"
+  panelClass="cscore-popover-compact">
+
+  <div fxLayout="row">
+    <cca-spinner color="primary" #ssnSpinner></cca-spinner>
+    <cca-text-field [form]="form" controlName="ssn" placeholder="SSN"></cca-text-field>
+    <cca-icon-button
+      (click)="closePopover(editSsnAnchor)"
+      icon="window-close"
+      color="primary"
+    ></cca-icon-button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start end">
+    <span fxFlex></span>
+    <div>
+      <button
+        class="submit-add-button"
+        mat-icon-button
+        (click)="updateSsn(editSsnAnchor)"
+        [disabled]="!form.get('ssn').valid"
+      >
+        <fa-icon icon="check-square"></fa-icon>
+      </button>
+    </div>
+  </div>
+</cscore-popover>

@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Card was successfully replaced.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: Card could not be replaced. A replacement may already be in shipment or not activated yet.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Card successfully replaced, but an audit could not be registered.
+</div>

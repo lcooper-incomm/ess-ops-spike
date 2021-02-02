@@ -1,0 +1,38 @@
+<div [formGroup]="wizardForm" fxLayout="column">
+  <div fxLayout="row" fxLayoutGap="5px">
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="disputeType" placeholder="Type" [compareWith]="compareById">
+        <mat-option *ngFor="let option of wizard.model.typeOptions | orderBy : 'displayValue'" [value]="option.value">{{option.displayValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="disputeQueue" placeholder="Queue" [compareWith]="compareById">
+        <mat-option *ngFor="let option of wizard.model.queueOptions | orderBy : 'displayValue'" [value]="option.value">{{option.displayValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="disputeReason" placeholder="Reason" (selectionChange)="reasonChanged()" required>
+        <mat-option *ngFor="let option of wizard.model.reasonOptions | orderBy : 'displayValue'" [value]="option.value">{{option.displayValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="customer?.isVmsGiftCard  || wizard.model.isGreenCard" fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="5px">
+      <cca-text-field placeholder="First Name" controlName="firstName" [form]="wizardForm" class="default-field-width"></cca-text-field>
+      <cca-text-field placeholder="Last Name" controlName="lastName" [form]="wizardForm" class="default-field-width"></cca-text-field>
+      <cca-date-field placeholder="Date of Birth" controlName="dateOfBirth" [form]="wizardForm" ></cca-date-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="5px">
+      <cca-phone-number-field placeholder="Mobile Phone" controlName="mobilePhone" [form]="wizardForm" class="default-field-width"></cca-phone-number-field>
+      <cca-phone-number-field placeholder="Home Phone" controlName="homePhone" [form]="wizardForm" class="default-field-width"></cca-phone-number-field>
+    </div>
+    <cca-address-form [form]="wizardForm.get('address')"></cca-address-form>
+  </div>
+  <div class="transactions-container">
+    <h3 class="text-primary">Disputed Transactions</h3>
+    <mat-card>
+      <cca-simple-transaction-table [transactions]="transactions"></cca-simple-transaction-table>
+    </mat-card>
+  </div>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</div>

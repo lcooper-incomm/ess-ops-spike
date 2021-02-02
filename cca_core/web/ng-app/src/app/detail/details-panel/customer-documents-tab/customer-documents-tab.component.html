@@ -1,0 +1,41 @@
+<div class="customer-documents-tab-container container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="3px" style="margin-bottom:10px;">
+    <h3 class="text-primary" fxLayout="row" fxLayoutGap="3px">
+      <span>{{dataSource.data?.length || 0}}</span>
+      <span>Documents</span>
+    </h3>
+    <div fxFlex></div>
+    <button mat-mini-fab color="primary" (click)="openUploadDocumentDialog()" matTooltip="Upload" *ngIf="!selection?.getCustomer()?.isVmsGiftCard">
+      <fa-icon icon="file-upload"></fa-icon>
+    </button>
+  </div>
+  <div class="content-container container">
+    <div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!selection?.getCustomer()?.isVmsGiftCard && !dataSource.data?.length">No Results Available</div>
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="selection?.getCustomer()?.isVmsGiftCard">Documents are not supported for this product</div>
+      <table mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc" [hidden]="!dataSource.data?.length">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>File Type</th>
+          <td mat-cell *matCellDef="let element">{{element.type}}</td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>File Date</th>
+          <td mat-cell *matCellDef="let element">{{element.date?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>File Name</th>
+          <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="clickable" mat-row *matRowDef="let row; columns: displayedColumns;" matTooltip="Click to Download" (click)="download(row)"></tr>
+      </table>
+      <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource.data?.length <= 50"></mat-paginator>
+    </div>
+    <cca-spinner #documentsSpinner></cca-spinner>
+  </div>
+</div>

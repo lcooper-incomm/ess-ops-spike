@@ -1,0 +1,115 @@
+<div class="selection-group-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+  
+  <div class="selection-container container" fxFlex>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <div class="checkbox-container" *ngIf="(tabState$ | async).isBulkModeEnabled" fxLayout="row" fxLayoutAlign="center center">
+        <mat-checkbox class="dock-checkbox" [checked]="isSelected" (change)="toggleIsSelected()"></mat-checkbox>
+      </div>
+      <div class="icon-container" fxLayout="row" fxLayoutAlign="center center" (click)="toggleIsCollapsed()" [ngClass]="{invisible: !selectionGroupItem.isCollapsible}">
+        <fa-icon class="extra-small" [ngClass]="{'clickable': !(tabState$ | async)?.isBulkModeEnabled, 'disabled': (tabState$ | async)?.isBulkModeEnabled}" [icon]="selectionGroupItem.isCollapsed ? 'plus-square' : 'minus-square'"></fa-icon>
+      </div>
+      <div class="selection-group-item-button clickable mat-elevation-z1" [class.active]="isCurrentSelection" (click)="select()">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="icon-container" fxLayout="row" fxLayoutAlign="center center">
+            <fa-icon class="small" [icon]="selectionGroupItem.selection.iconName"></fa-icon>
+          </div>
+          <div class="description-container" fxFlex>
+            <div class="description" [ngClass]="{'bulk-mode': (tabState$ | async)?.isBulkModeEnabled}" [matTooltip]="selectionGroupItem.selection.description + ((selectionGroupItem.selection.selectedCard && selectionGroupItem.selection.selectedCard.identifiers && selectionGroupItem.selection.selectedCard.identifiers.pan) ? (' (**' + selectionGroupItem.selection.selectedCard.identifiers.pan.slice(-4) + ')') : '')">
+              {{selectionGroupItem.selection.description}}
+              <span *ngIf="selectionGroupItem.selection.selectedCard && selectionGroupItem.selection.selectedCard.identifiers && selectionGroupItem.selection.selectedCard.identifiers.pan">&nbsp;(**{{selectionGroupItem.selection.selectedCard.identifiers.pan.slice( -4 )}})</span>
+            </div>
+          </div>
+          <div class="status-widget-container">
+            <div class="status-container" *ngIf="!selectionGroupItem.selection.data" matTooltip="Click to load additional info" style="width:100%" ccaClickSwallower (click)="loadSelection()" fxLayout="row" fxLayoutAlign="center center">
+              <fa-icon icon="redo-alt"></fa-icon>
+            </div>
+            <cca-selection-group-item-status
+              *ngIf="!!selectionGroupItem.selection.data"
+              [selection]="selectionGroupItem.selection"
+            ></cca-selection-group-item-status>
+          </div>
+          <div class="menu-button-container" *ngIf="hasRemoveSelectionPermission || isSelectionMergeable">
+            <button mat-icon-button ccaClickSwallower [mat-menu-trigger-for]="selectionOptionsMenu" matTooltip="Options">
+              <fa-icon class="small" icon="ellipsis-h"></fa-icon>
+            </button>
+            <mat-menu #selectionOptionsMenu="matMenu" [overlapTrigger]="false">
+              <button mat-menu-item (click)="openRemoveSelection()" *ngIf="hasRemoveSelectionPermission">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div style="width:30px;" fxLayout="row" fxLayoutAlign="center center">
+                    <fa-icon icon="times-circle"></fa-icon>
+                  </div>
+                  <div fxFlex>Remove Selection</div>
+                </div>
+              </button>
+              <button mat-menu-item (click)="openMergeSelection()" *ngIf="isSelectionMergeable">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div style="width:30px;" fxLayout="row" fxLayoutAlign="center center">
+                    <fa-icon icon="level-up-alt"></fa-icon>
+                  </div>
+                  <div fxFlex>Merge Selection</div>
+                </div>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="selection-drawer mat-elevation-z1" [ngClass]="{'bulk-mode': (tabState$ | async)?.isBulkModeEnabled}" *ngIf="!selectionGroupItem.isCollapsed">
+      <div class="selection-drawer-inner-container" [ngSwitch]="selectionGroupItem.selection.type">
+        <div *ngSwitchCase="'CUSTOMER'">
+          <div class="helper-label">{{selectionGroupItem.getTotalChildrenCount()}} {{selectionGroupItem.getTotalChildrenCount() === 1 ? 'Card' : 'Cards'}} on Account</div>
+          <div class="selection-child-button-container" [ngClass]="{'fixed-height': selectionGroupItem.getTotalChildrenCount() > selectionGroupItem.paginationPageSize}" fxLayout="row wrap" fxLayoutGap="3px">
+            <cca-selection-child-card
+              *ngFor="let card of selectionGroupItem.selection.data.cards | selectionGroupItemCustomerChildren | limit : paginationStart : paginationCount"
+              class="clickable"
+              [card]="card"
+              [isActive]="card.identifiers.pan?.slice(-4) === currentActiveCard"
+              [isSearching]="card.isSearching"
+              (click)="linkToCustomerCard(card)"
+            ></cca-selection-child-card>
+          </div>
+          <cca-selection-drawer-paginator
+            *ngIf="selectionGroupItem.getTotalChildrenCount() > selectionGroupItem.paginationPageSize"
+            [selectionGroupItem]="selectionGroupItem"
+            (page)="onPage($event)"
+          ></cca-selection-drawer-paginator>
+        </div>
+        <div *ngSwitchCase="'CUSTOMER_ACCOUNT'">
+          <div class="helper-label">{{selectionGroupItem.getTotalChildrenCount()}} {{selectionGroupItem.getTotalChildrenCount() === 1 ? 'Card' : 'Cards'}} on Account</div>
+          <div class="selection-child-button-container" [ngClass]="{'fixed-height': selectionGroupItem.getTotalChildrenCount() > selectionGroupItem.paginationPageSize}" fxLayout="row wrap" fxLayoutGap="3px">
+            <cca-selection-child-card
+              *ngFor="let card of selectionGroupItem.selection.data.cards | selectionGroupItemAccountChildren | limit : paginationStart : paginationCount"
+              class="clickable"
+              [card]="card"
+              [isActive]="card.identifiers.pan?.slice(-4) === currentActiveCard"
+              (click)="linkToAccountCard(card)"
+            ></cca-selection-child-card>
+          </div>
+          <cca-selection-drawer-paginator
+            *ngIf="selectionGroupItem.getTotalChildrenCount() > selectionGroupItem.paginationPageSize"
+            [selectionGroupItem]="selectionGroupItem"
+            (page)="onPage($event)"
+          ></cca-selection-drawer-paginator>
+        </div>
+        <div *ngSwitchCase="'ORDER'">
+          <div class="helper-label text-muted">{{selectionGroupItem.getTotalChildrenCount()}} {{selectionGroupItem.getTotalChildrenCount() === 1 ? 'Card' : 'Cards'}} in Order</div>
+          <div class="selection-child-button-container" [ngClass]="{'fixed-height': cardQuantity > selectionGroupItem.paginationPageSize}" fxLayout="row wrap" fxLayoutGap="3px">
+            <cca-selection-child-card
+              *ngFor="let card of selectionGroupItem.selection.getAllCardsInOrder() | selectionGroupItemOrderChildren | limit : paginationStart : paginationCount"
+              class="clickable"
+              [card]="card"
+              [isSearching]="card.isSearching"
+              (click)="linkToOrderItemCard(card)"
+            ></cca-selection-child-card>
+          </div>
+          <cca-selection-drawer-paginator
+            *ngIf="selectionGroupItem.getTotalChildrenCount() > selectionGroupItem.paginationPageSize"
+            [selectionGroupItem]="selectionGroupItem"
+            (page)="onPage($event)"
+          ></cca-selection-drawer-paginator>
+        </div>
+      </div>
+    </div>
+    <cca-spinner [size]="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+  </div>
+</div>

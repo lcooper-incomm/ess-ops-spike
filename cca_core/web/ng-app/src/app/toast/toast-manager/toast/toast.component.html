@@ -1,0 +1,21 @@
+<div class="toast mat-elevation-z5 {{className}}" fxLayout="row" fxLayoutAlign="start center">
+  <div class="icon-container" fxLayout="row" fxLayoutAlign="center center">
+    <fa-icon icon="{{icon}}"></fa-icon>
+  </div>
+  <div class="content-container" fxFlex>
+    {{toast.message}}
+    <ul *ngIf="toast.submessages?.length">
+      <li class="indented" *ngFor="let submessage of toast.submessages">
+        {{submessage}}
+      </li>
+    </ul>
+    <div class="splunk-link-container" *ngIf="toast.correlationId && showCorrelationId">
+      <a class="splunk-link" target="_blank" [href]="splunkLink">View Error Logs</a>
+    </div>
+  </div>
+  <div class="action-container" fxLayout="column" fxLayoutAlign="center center">
+    <button mat-icon-button matTooltip="Dismiss" (click)="dismiss()">
+      <fa-icon icon="times"></fa-icon>
+    </button>
+  </div>
+</div>

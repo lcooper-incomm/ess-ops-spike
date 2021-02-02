@@ -1,0 +1,4 @@
+<cca-key-value-with-placeholder key="Transaction ID" [value]="this.transaction?.id"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Date" [value]="this.transaction?.createDate?.displayValue"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Entity" [value]="this.transaction?.getPreferredEntityNode()?.name"></cca-key-value-with-placeholder>
+<cca-key-value-with-placeholder key="Amount" [value]="this.transaction?.amounts?.authorizedAmount?.displayValue"></cca-key-value-with-placeholder>

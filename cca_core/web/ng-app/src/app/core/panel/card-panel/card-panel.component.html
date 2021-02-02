@@ -1,0 +1,9 @@
+<div class="card-container container mat-elevation-z1" fxLayout="column">
+  <div class="card-header {{color}}" [ngClass]="{clickable: isCollapsible && !disableCollapse}" (click)="toggleCollapsed()" [matTooltip]="tooltip" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <fa-icon [icon]="icon" *ngIf="icon"></fa-icon>
+    <h4>{{header}}</h4>
+  </div>
+  <div class="card-content" *ngIf="!isCollapsed" fxFlex>
+    <ng-content></ng-content>
+  </div>
+</div>

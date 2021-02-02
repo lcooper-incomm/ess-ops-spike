@@ -1,0 +1,24 @@
+<div class="incomm-transaction-history-detail-container container" fxLayout="row">
+  <div class="container" fxFlex="33">
+    <cca-key-value-with-placeholder key="Merchant" [value]="transaction.nodes?.merchant?.name"></cca-key-value-with-placeholder>
+    <cca-key-value key="Location">
+      <span *ngIf="transaction.nodes?.location?.name && hasPermission"><a href="javascript:void(0)" (click)="linkToWorkFlow()">{{transaction.nodes?.location?.name}}</a></span>
+      <span *ngIf="!hasPermission">{{transaction.nodes?.location?.name || 'Not Available'}}</span>
+    </cca-key-value>
+    <cca-key-value-with-placeholder key="Terminal ID" [value]="transaction.nodes.terminal.name"></cca-key-value-with-placeholder>
+    <cca-key-value key="Address" alignment="start start">
+      <div class="text-muted" *ngIf="!transaction.nodes?.location?.getAddressByType(AddressType.PHYSICAL)">Not Available</div>
+      <cca-address [address]="transaction.nodes?.location?.getAddressByType(AddressType.PHYSICAL)" *ngIf="transaction.nodes?.location?.getAddressByType(AddressType.PHYSICAL)"></cca-address>
+    </cca-key-value>
+    <cca-spinner #hierarchySpinner></cca-spinner>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Currency Code" [value]="transaction.amounts.authorizedAmount.descriptor.description"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="ANI" [value]="transaction.identifiers.ani"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="PreAuth Release Date" [value]="transaction?.settlement?.preAuthReleaseDate?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Process/OpCode" [value]="transaction.getRequestDisplayValue()"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Comment  " [value]="transaction.comment"></cca-key-value-with-placeholder>
+  </div>
+</div>

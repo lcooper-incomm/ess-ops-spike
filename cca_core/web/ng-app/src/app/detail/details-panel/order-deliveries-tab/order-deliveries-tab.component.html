@@ -1,0 +1,83 @@
+<div class="container">
+  <div fxLayout="row">
+    <div>
+      <h4 class="text-primary">{{dataSource.data.length}} {{dataSource.data.length === 1 ? 'Order Delivery' : 'Order Deliveries'}}</h4>
+    </div>
+    <span fxFlex></span>
+    <div>
+      <mat-form-field class="default-field-width">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" [formControl]="filterControl">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="table-container condensed-table bottomless-table expansion-panel-wrapper" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Delivery Information Available</div>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z1" matSort matSortActive="shipmentDate" matSortDirection="asc" [hidden]="!dataSource.data?.length">
+
+      <ng-container matColumnDef="caret">
+        <th mat-header-cell *matHeaderCellDef ccaClickSwallower [preventDefault]="false">
+        </th>
+        <td mat-cell *matCellDef="let element" ccaClickSwallower [preventDefault]="false">
+          <div (click)="toggleExpanded(element)" class="row-caret"></div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="shipmentDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Shipment Date</th>
+        <td mat-cell *matCellDef="let element">{{element.createdDate?.getDateOnly()}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="trackingNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tracking</th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="selection.simplePartner === MaplesPartner.WALMART">{{element.tracking?.trackingNumber}}</div>
+          <div *ngIf="selection.simplePartner !== MaplesPartner.WALMART">
+            <a href="javascript:void(0)" (click)="linkToFedex(element.tracking.trackingNumber)" ccaClickSwallower>{{element.tracking?.trackingNumber}}</a>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="recipient">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Recipient</th>
+        <td mat-cell *matCellDef="let element">
+          <div fxLayout="column">
+            <div *ngIf="element.recipient?.getDisplayName()">{{element.recipient?.getDisplayName()}}</div>
+            <div *ngIf="element.recipient?.emailAddress" style="font-size:12px; line-height:12px; margin-bottom:3px">{{element.recipient?.emailAddress}}</div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cardCount">
+        <th class="column-center" mat-header-cell *matHeaderCellDef mat-sort-header>Card Count</th>
+        <td class="column-center" mat-cell *matCellDef="let element">{{element.itemCount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="shippingMethod">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Method</th>
+        <td mat-cell *matCellDef="let element">{{getShippingMethod(element)}}</td>
+      </ng-container>
+
+      <!-- Expanded Content Column -->
+      <ng-container matColumnDef="expandedDetail">
+        <td class="muted" mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="expansion-element-detail"
+               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="expansion-panel-content">
+              <cca-order-delivery-detail [selection]="selection" [shipment]="element"></cca-order-delivery-detail>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr class="clickable expansion-element-row" mat-row *matRowDef="let element; columns: displayedColumns;"
+          [class.expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="expansion-detail-row"></tr>
+    </table>
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="50" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+  </div>
+  <cca-spinner #loadingSpinner color="primary"></cca-spinner>
+</div>
+

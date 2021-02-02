@@ -1,0 +1,78 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+
+  <!-- Linked bank accounts -->
+  <mat-expansion-panel hideToggle [expanded]="true">
+    <mat-expansion-panel-header expandedHeight="48px">
+      <mat-panel-title>
+        <h3 class="text-primary title-header">Linked Bank Accounts</h3>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container" fxLayout="column" fxLayoutGap="10px">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!linkedBankDataSource.data?.length">No Linked Banks</div>
+
+      <cscore-table [columns]="linkedBankColumns"
+                    initialSortColumn="status"
+                    initialSortDirection="asc"
+                    [dataSource]="linkedBankDataSource"
+                    [hidden]="!linkedBankDataSource.data?.length">
+      </cscore-table>
+    </div>
+  </mat-expansion-panel>
+
+  <!-- Linked cards -->
+  <mat-expansion-panel hideToggle [expanded]="true">
+    <mat-expansion-panel-header expandedHeight="48px">
+      <mat-panel-title>
+        <h3 class="text-primary title-header">Linked Cards</h3>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container" fxLayout="column" fxLayoutGap="10px">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!linkedCardDataSource.data?.length">No Linked Cards</div>
+
+      <cscore-table [columns]="linkedCardColumns"
+                    initialSortColumn="status"
+                    initialSortDirection="asc"
+                    [dataSource]="linkedCardDataSource"
+                    [hidden]="!linkedCardDataSource.data?.length">
+      </cscore-table>
+    </div>
+  </mat-expansion-panel>
+
+  <!-- Funding Activity  -->
+  <mat-expansion-panel hideToggle [expanded]="true">
+    <mat-expansion-panel-header expandedHeight="48px">
+      <mat-panel-title>
+        <h3 class="text-primary title-header">Account Funding Activity</h3>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="table-container expansion-panel-wrapper" fxLayout="column" fxLayoutGap="10px">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!fundingActivityDataSource.data?.length">No Results Available</div>
+
+      <cscore-table #transactionTable
+                    [columns]="fundingActivityColumns"
+                    initialSortColumn="linkedDate"
+                    initialSortDirection="desc"
+                    [dataSource]="fundingActivityDataSource"
+                    [hidden]="!fundingActivityDataSource.data?.length">
+
+        <div *cscoreTableCellDef="let item; key: 'caret'" class="row-caret" style="border-bottom-width: 0;" fxLayout="row" fxLayoutAlign="center center"></div>
+
+        <ng-container *cscoreTableExpandedContent="let item">
+          <cca-funding-activity-detail [expanded]="transactionTable._isExpanded(item)"
+                                       [fundingActivity]="item"
+                                       [selection]="selection"
+                                       fxFlex="1 1 auto"></cca-funding-activity-detail>
+        </ng-container>
+
+      </cscore-table>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-paginator #fundingActivityPaginator
+                       fxFlex="100%"
+                       [length]="fundingActivityDataSource.data?.length"
+                       [pageSize]="10"
+                       [style.display]="!fundingActivityDataSource.data?.length || fundingActivityDataSource?.data?.length <= 10 ? 'none' : 'block'">
+        </mat-paginator>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</div>

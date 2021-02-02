@@ -1,0 +1,11 @@
+<h4>Complete the form below by asking the caller these questions:</h4>
+<ol>
+  <li>What is your year of birth?</li>
+  <li>What is the Expiration Date printed on the card?"</li>
+</ol>
+
+<form [formGroup]="wizardForm" fxLayout="column" fxLayoutGap="15px">
+  <cca-numeric-text-field id="replace-greencard-gift-birth" class="default-field-width" [form]="wizardForm" controlName="birthYear" placeholder="Birth Year"></cca-numeric-text-field>
+  <cca-cc-expiration-date-field class="default-field-width" [form]="wizardForm"
+                                controlName="expDate" placeholder="MM/YY (Ex:'01/18')"></cca-cc-expiration-date-field>
+</form>

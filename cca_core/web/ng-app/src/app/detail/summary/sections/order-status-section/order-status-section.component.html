@@ -1,0 +1,23 @@
+<div class="summary-section order-status-section container" fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value [key]="platformStatusKey">
+    <cca-bol-order-state [status]="selection?.getOrder()?.status?.current" fxFlex *ngIf="selection?.platform === PlatformType.BOL"></cca-bol-order-state>
+    <cca-ecomm-order-state [status]="selection?.getOrder()?.status?.current" fxFlex *ngIf="selection?.platform === PlatformType.ECOMM"></cca-ecomm-order-state>
+    <div class="text-muted" *ngIf="!selection?.getOrder()?.status?.current">Not Available</div>
+  </cca-key-value>
+  <cca-key-value key="InComm Status">
+    <cca-bol-order-status [status]="selection?.getOrder()?.status?.current" fxFlex *ngIf="selection?.platform === PlatformType.BOL"></cca-bol-order-status>
+    <cca-ecomm-order-status [status]="selection?.getOrder()?.status?.current" fxFlex *ngIf="selection?.platform === PlatformType.ECOMM"></cca-ecomm-order-status>
+    <div class="text-muted" *ngIf="!selection?.getOrder()?.status?.current">Not Available</div>
+  </cca-key-value>
+  <ng-container  *ngIf="selection?.getOrder()?.type === 'MIXED'">
+    <cca-key-value key="Physical Status">
+      <cca-bol-order-status [statusString]="selection?.getOrder()?.aggregatedState?.physical" fxFlex></cca-bol-order-status>
+    </cca-key-value>
+    <cca-key-value key="Digital Status">
+      <cca-bol-order-status [statusString]="selection?.getOrder()?.aggregatedState?.digital" fxFlex></cca-bol-order-status>
+    </cca-key-value>
+  </ng-container>
+  <cca-key-value key="Payment Status" *ngIf="selection?.platform === PlatformType.ALDER">
+    <cca-alder-order-status [status]="selection?.getOrder()?.payment?.status?.message" fxFlex></cca-alder-order-status>
+  </cca-key-value>
+</div>

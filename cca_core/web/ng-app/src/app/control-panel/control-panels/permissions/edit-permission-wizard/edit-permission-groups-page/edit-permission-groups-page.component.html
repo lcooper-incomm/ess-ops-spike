@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutGap="15px">
+  <mat-form-field class="default-field-width" [formGroup]="addGroupForm">
+    <mat-select formControlName="addGroupControl" placeholder="Select Group">
+      <mat-option [value]="option.id" *ngFor="let option of masterGroups  | orderBy: 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <span fxFlex></span>
+  <mat-form-field class="default-field-width" [formGroup]="wizardForm">
+    <input type="text" matInput placeholder="Filter Groups" aria-label="Filter Group" formControlName="groupControl">
+  </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-permission-group-card #auto *ngFor="let group of groups | orderBy : 'displayName'" [groupData]="group" [permissionId]="wizard.model.permission.id" (updateGroups)='updateGroups($event)'></cca-permission-group-card>
+</div>

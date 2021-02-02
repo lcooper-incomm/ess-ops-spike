@@ -1,0 +1,18 @@
+<div [formGroup]="form">
+  <h3 class="text-primary">Contact Information</h3>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <cca-email-address-field [form]="form" controlName="emailAddress"></cca-email-address-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <cca-phone-number-field [form]="form" controlName="mobilePhone" placeholder="Mobile Phone"></cca-phone-number-field>
+    <cca-phone-number-field [form]="form" controlName="homePhone" placeholder="Home Phone"></cca-phone-number-field>
+  </div>
+  <h3 class="text-primary">Physical Address</h3>
+  <cca-address-form [form]="form.get('physicalAddress')"></cca-address-form>
+  <div fxLayout="row" fxLayoutAlign="start center" style="width:400px; margin-bottom:15px;">
+    <h3 class="text-primary" style="margin-bottom:0;">Mailing Address</h3>
+    <div fxFlex></div>
+    <mat-checkbox formControlName="isMailingSameAsPhysical" (change)="toggleMailingAddress()">Same as Physical</mat-checkbox>
+  </div>
+  <cca-address-form [form]="form.get('mailingAddress')" *ngIf="!form.get('isMailingSameAsPhysical').value"></cca-address-form>
+</div>

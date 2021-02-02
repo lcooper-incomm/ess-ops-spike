@@ -1,0 +1,61 @@
+<div class="receipt-component-container">
+  <form [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutGap="15px">
+      <div>
+        <h4 class="session-heading">Receipt Information</h4>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-text-field id="session-receipt-receipt-id" data-test-id="session-receipt-receipt-id" class="default-field-width" [form]="form" controlName="receiptId" placeholder="Receipt ID"></cca-text-field>
+          <cca-currency-field id="session-receipt-receipt-total" data-test-id="session-receipt-receipt-total" class="default-field-width" [form]="form" controlName="totalAmount" placeholder="Receipt Total"></cca-currency-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-date-field id="session-receipt-transaction-date" data-test-id="session-receipt-transaction-date" class="default-field-width" [form]="form" controlName="transactionDate" placeholder="Transaction Date"></cca-date-field>
+          <cca-text-field id="session-receipt-transaction-time" data-test-id="session-receipt-transaction-time" class="default-field-width" [form]="form" controlName="transactionTime" placeholder="Transaction Time"></cca-text-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+          <cca-currency-field id="session-receipt-transaction-amount" data-test-id="session-receipt-transaction-amount" class="default-field-width" [form]="form" controlName="transactionAmount" placeholder="Transaction Amount"></cca-currency-field>
+          <mat-form-field class="default-width">
+            <mat-select id="session-receipt-payment-method" data-test-id="session-receipt-payment-method" formControlName="paymentMethod" placeholder="Payment Method" [required]="isControlRequired(form.get('paymentMethod'))">
+              <mat-option *ngFor="let option of paymentMethodOptions | orderBy : 'displayValue'" [value]="option.value">{{option.displayValue}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4 class="session-heading">Cards on Receipt</h4>
+          <button id="add-receipt-card-button" data-test-id="add-receipt-card-button" color="primary" mat-icon-button matTooltip="Add Card from Receipt" (click)="openAddReceiptCardDialog()">
+            <fa-icon icon="plus-circle"></fa-icon>
+          </button>
+        </div>
+        <div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource.data.length}">
+          <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data.length">No Cards Available</div>
+          <table mat-table [dataSource]="dataSource" matSort [hidden]="!dataSource.data?.length">
+            <ng-container matColumnDef="van">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Four</th>
+              <td mat-cell *matCellDef="let element">{{element.van}}</td>
+            </ng-container>
+            <ng-container matColumnDef="serialNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial Number</th>
+              <td mat-cell *matCellDef="let element">{{element.serialNumber}}</td>
+            </ng-container>
+            <ng-container matColumnDef="packageVan">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Package VAN</th>
+              <td mat-cell *matCellDef="let element">{{element.packageVan}}</td>
+            </ng-container>
+            <ng-container matColumnDef="productType">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Type</th>
+              <td mat-cell *matCellDef="let element">{{element.productType}}</td>
+            </ng-container>
+            <ng-container matColumnDef="initialLoadAmount">
+              <th class="text-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Amount</th>
+              <td class="text-right" mat-cell *matCellDef="let element">{{element.initialLoadAmount ? element.initialLoadAmount.displayValue : ''}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable" (click)="openEditReceiptCardDialog(row)"></tr>
+          </table>
+          <mat-paginator [pageSize]="5" [hidden]="!dataSource.data?.length || dataSource.data?.length <= 5"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

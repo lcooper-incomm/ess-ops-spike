@@ -1,0 +1,18 @@
+<div class="center-form">
+  <form [formGroup]="wizardForm" fxLayout="column">
+    <div fxLayout="row">
+      <cca-account-number-field fxFlex="50" id="account-number" data-test-id="account-number" class="default-field-width" [form]="wizardForm"
+                                controlName="accountId"></cca-account-number-field>
+      <button class="container" mat-mini-fab color="primary" [disabled]="isAccountValid" (click)="validateAccount()">
+        <fa-icon [icon]="isAccountValid ? 'check' : 'search'"></fa-icon>
+        <cca-spinner #validateSpinner [rounded]="true" [size]="SpinnerSize.EXTRA_SMALL" color="accent"></cca-spinner>
+      </button>
+    </div>
+    <div fxLayout="row" *ngIf="isAccountValid">
+      <div fxFlex="grow" fxLayout="column" fxLayoutGap="5px">
+        <cca-key-value-with-placeholder key="Customer Name"
+                                        [value]="validatedAccount?.customer?.getDisplayName()"></cca-key-value-with-placeholder>
+      </div>
+    </div>
+  </form>
+</div>

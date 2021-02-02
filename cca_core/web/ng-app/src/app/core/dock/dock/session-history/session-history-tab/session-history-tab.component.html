@@ -1,0 +1,15 @@
+<div class="session-history-tab-container">
+  <div class="dock-header case-header" fxLayout="row" fxLayoutAlign="start center">
+    <h3>Session History</h3>
+  </div>
+  <div class="session-history-items-container hide-scroll" fxLayout="column" fxLayoutGap="5px">
+    <cca-session-history-item *ngFor="let item of history?.content" [item]="item"></cca-session-history-item>
+    <button class="load-more" mat-raised-button color="primary" (click)="loadMore()" *ngIf="currentPage < totalPages - 1">
+      <span fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <fa-icon icon="plus"></fa-icon>
+        <span>Load More</span>
+      </span>
+      <cca-spinner color="accent" [on]="loading"></cca-spinner>
+    </button>
+  </div>
+</div>

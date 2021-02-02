@@ -1,0 +1,19 @@
+<div class="history-item mat-elevation-z1">
+  <div class="history-item-main-content" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
+    <div class="description" fxFlex>
+      {{ item.description }}
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="5px">
+      <cca-user-chip [user]="item.user"></cca-user-chip>
+      <div class="date">
+        {{ item.date?.displayValue }}
+      </div>
+    </div>
+  </div>
+  <div class="history-item-secondary-content" [ngSwitch]="item.type">
+    <div *ngSwitchCase="SessionHistoryItemType.STATUS_CHANGE">
+      <cca-key-value key="To" [keyWidthPercent]="15">{{ getStatusDisplayValue(item.toStatus) }}</cca-key-value>
+      <cca-key-value key="From" [keyWidthPercent]="15">{{ getStatusDisplayValue(item.fromStatus) }}</cca-key-value>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div *ngIf="!this.loadingState">
+  <h4 class="text-accent">Session Details</h4>
+  <cca-key-value-with-placeholder key="ID" [value]="this.commentDetail?.sessionId"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Owner" [value]="this.getOwnerString(commentDetail?.createdBy)"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Created Date" [value]="this.commentDetail?.createdDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Closed Date" [value]="this.commentDetail?.closedDate?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Queue" [value]="this.commentDetail?.queue?.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Wrap-Up Category" [value]="this.commentDetail?.wrapUpCodeCategory?.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Wrap-Up Code" [value]="this.commentDetail?.wrapUpCode?.displayName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Caller Name" [value]="this.commentDetail?.callerName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Callback Number" [value]="this.commentDetail?.callbackNumber"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="DNIS" [value]="this.commentDetail?.dnis"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="ANI" [value]="this.commentDetail?.ani"></cca-key-value-with-placeholder>
+  <h4 class="text-accent" style="margin-top: 15px">Also Associated With</h4>
+</div>
+<div class="table-container condensed-table bottomless-table" [ngClass]="{'mat-elevation-z1': dataSource?.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Data Available</div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort matSortActive="platform" matSortDirection="asc" [hidden]="!dataSource.data?.length">
+    <ng-container matColumnDef="platform">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Platform</th>
+      <td mat-cell *matCellDef="let element">{{element.platform}}</td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let element">{{element.type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Identifier</th>
+      <td mat-cell *matCellDef="let element">{{element.value}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="10" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 10"></mat-paginator>
+</div>

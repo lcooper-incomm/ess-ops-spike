@@ -1,0 +1,6 @@
+<div class="summary-section location-address-section container">
+  <cca-key-value key="Address" alignment="start start">
+    <div class="text-muted" *ngIf="!selection?.getLocation()?.getAddressByType(AddressType.PHYSICAL)">Not Available</div>
+    <cca-address [address]="selection?.getLocation()?.getAddressByType(AddressType.PHYSICAL)" *ngIf="selection?.getLocation()?.getAddressByType(AddressType.PHYSICAL)"></cca-address>
+  </cca-key-value>
+</div>

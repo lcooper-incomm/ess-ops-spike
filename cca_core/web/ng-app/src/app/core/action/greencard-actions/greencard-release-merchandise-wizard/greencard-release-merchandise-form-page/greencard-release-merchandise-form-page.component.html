@@ -1,0 +1,35 @@
+<form [formGroup]="wizardForm">
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field class="default-field-width">
+      <mat-select formControlName="decision" placeholder="Decision" required>
+        <mat-option [value]="option" *ngFor="let option of decisions | orderBy: 'label'">
+          {{option.displayValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field class="default-width">
+      <mat-select formControlName="reason" placeholder="Reason" required>
+        <mat-option [value]="option" *ngFor="let option of reasons | orderBy: 'label'">
+          {{option.displayValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row">
+    <mat-form-field hintLabel="Max 500 characters">
+      <textarea
+        matInput
+        formControlName="comment"
+        placeholder="Comment"
+        aria-label="Comment"
+        minlength="5"
+        maxlength="500"
+        rows="5"
+        required
+      ></textarea>
+      <mat-hint align="end">{{wizardForm.get('comment').value?.length || 0}}/500</mat-hint>
+    </mat-form-field>
+  </div>
+</form>

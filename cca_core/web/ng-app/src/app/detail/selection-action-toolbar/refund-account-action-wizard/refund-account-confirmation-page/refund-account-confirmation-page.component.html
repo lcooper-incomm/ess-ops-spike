@@ -1,0 +1,11 @@
+<div class="container" fxLayout="column">
+  <cca-key-value-with-placeholder key="Method" [value]="wizard.model.request.method"></cca-key-value-with-placeholder>
+  <ng-container *ngIf="wizard.model.request.method === 'CHECK'" fxLayout="column">
+    <cca-address [address]="wizard.model.address" class="mb-15"></cca-address>
+  </ng-container>
+  <ng-container *ngIf="wizard.model.request.method === 'ACH'">
+    <cca-key-value-with-placeholder key="Account Number" [value]="getAccountNumber(wizard.model.request.id)"></cca-key-value-with-placeholder>
+  </ng-container>
+  <cca-key-value-with-placeholder key="Amount" [value]="wizard.model.request.amount"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Comment" [value]="wizard.model.comment"></cca-key-value-with-placeholder>
+</div>

@@ -1,0 +1,46 @@
+<div class="customer-limits-tab-container container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <h3 class="text-primary" style="margin:0;">Account Limits</h3>
+    <div fxFlex></div>
+    <form [formGroup]="filterForm" style="margin:0;" [hidden]="!dataSource.data?.length">
+      <cca-text-field controlName="filter" [form]="filterForm" placeholder="Filter"></cca-text-field>
+    </form>
+  </div>
+  <div class="content-container container">
+    <div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+      <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" [hidden]="!dataSource.data?.length">
+        <ng-container matColumnDef="transaction">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Transaction Limit Code</th>
+          <td mat-cell *matCellDef="let element">{{element.transactionLimitCode? element.transactionLimitCode : element.type }}</td>
+        </ng-container>
+        <ng-container matColumnDef="frequency_code">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Frequency Code</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.frequency}}</td>
+        </ng-container>
+        <ng-container matColumnDef="count_limit">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Count Limit</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.countLimit}}</td>
+        </ng-container>
+        <ng-container matColumnDef="amount_limit">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Amount Limit</th>
+          <td class="column-right" mat-cell
+              *matCellDef="let element">{{element.accountLimits? element.accountLimits[0].accountLimit.displayValue : element.withdrawLimit.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="amount_actual">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Amount Actual</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.accountLimits? element.accountLimits[1].accountLimit.displayValue : null}}</td>
+        </ng-container>
+        <ng-container matColumnDef="count_actual">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Count Actual</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.count}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource.data?.length <= 50"></mat-paginator>
+    </div>
+    <cca-spinner #limitsSpinner></cca-spinner>
+  </div>
+</div>
+

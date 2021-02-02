@@ -1,0 +1,167 @@
+<div class="transaction-history-table-summary-container" *ngIf="selection?.transactions" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="3px">
+  <h4 class="transaction-history-summary-header text-primary" fxLayout="row" fxLayoutGap="3px">
+    <span *ngIf="dataSource.filter">{{dataSource.filteredData?.length}} of</span>
+    <span>{{selection.transactions.transactions.length}} Transactions</span>
+    <span *ngIf="dataSource.filter">(Filtered)</span>
+  </h4>
+  <div class="transaction-history-filter-summary text-muted">{{filterSummary}}</div>
+</div>
+<div class="table-container condensed-table transaction-history-table expansion-panel-wrapper" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort [hidden]="!dataSource.data?.length" matSortActive="createdDate" matSortDirection="desc">
+
+    <ng-container matColumnDef="caret">
+      <th mat-header-cell *matHeaderCellDef ccaClickSwallower [preventDefault]="false">
+      </th>
+      <td mat-cell *matCellDef="let element" ccaClickSwallower [preventDefault]="false">
+        <div (click)="toggleExpanded(element)" class="row-caret"></div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="selection">
+      <th id="select-all-box" data-test-id="select-all-box" mat-header-cell *matHeaderCellDef ccaClickSwallower [preventDefault]="false">
+        <mat-checkbox class="small-checkbox" [disableRipple]="true" (change)="toggleSelectAll()" [checked]="selection.transactionRequests?.isSelectAllChecked" [matTooltip]="selection.transactionRequests?.isSelectAllChecked ? 'Deselect All' : 'Select All'"></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let element" ccaClickSwallower [preventDefault]="false">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="3px">
+          <mat-checkbox class="small-checkbox" [disableRipple]="true" (change)="toggleSelectTransaction(element)" [checked]="element.isSelected || selection.transactionRequests?.isSelectAllChecked" [disabled]="selection.transactionRequests?.isSelectAllChecked"></mat-checkbox>
+          <fa-icon class="text-error" *ngIf="element.flags.isFraudulent" icon="user-secret" matTooltip="This Transaction has been reported as Fraudulent"></fa-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acquirerEntity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Entity</th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.getPreferredEntityNode()?.tooltip" matTooltipClass="multiline-tooltip">{{element.getPreferredEntityNode()?.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="authorizedAmount">
+      <th id="authorized-amount-column" data-test-id="authorized-amount-column" class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Authorized Amount" arrowPosition="before">Amount</th>
+      <td class="column-right" mat-cell *matCellDef="let element">
+        <div>
+          <span *ngIf="element.isDebit">-</span>
+          <span
+            *ngIf="element.amounts.authorizedAmount.value !== 0; else requestedAmount">{{element.amounts.authorizedAmount?.displayValue}}</span>
+          <ng-template #requestedAmount>{{element.amounts.requestedAmount?.displayValue}}</ng-template>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="availableBalance">
+      <th id="available-balance-column" data-test-id="available-balance-column" class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Available Balance" arrowPosition="before">Available</th>
+      <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts.availableBalance?.displayValue}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDate">
+      <th id="date-column" data-test-id="date-column" mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let element">{{element.createDate?.displayValue}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th id="description-column" data-test-id="description-column" mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let element">{{element.description}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="entity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Entity</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.isUserCodeDisplayable">{{element.request.userCode}}</div>
+        <div *ngIf="!element.isUserCodeDisplayable" [matTooltip]="element.getPreferredEntityNode()?.tooltip" matTooltipClass="multiline-tooltip">
+          <div *ngIf="element.getPreferredEntityNode()?.isLinkableEntity() && hasLocationSearchPermission && selection.type !== SelectionType.LOCATION" ccaClickSwallower>
+            <a class="container" href="javascript:void(0)" (click)="linkToNode(element)">{{element.getPreferredEntityNode()?.name}}</a>
+          </div>
+          <div *ngIf="!element.getPreferredEntityNode()?.isLinkableEntity() || !hasLocationSearchPermission || selection.type === SelectionType.LOCATION">
+            <span>{{element.getPreferredEntityNode()?.name}}</span>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fee">
+      <th id="fee-column" data-test-id="fee-column" class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Fee</th>
+      <td class="column-right" mat-cell *matCellDef="let element">
+        <a href="javascript:void(0)" (click)="navigateToFeesTab()" *ngIf="selection.type !== SelectionType.ACCOUNT">{{element.fee?.amount?.displayValue}}</a>
+        <div *ngIf="selection.type === SelectionType.ACCOUNT">{{element.fee?.amount?.displayValue}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="holds">
+      <th id="holds-column" data-test-id="holds-column" class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Holds</th>
+      <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts.pendingAmount?.displayValue}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th id="ID-column" data-test-id="ID-column" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastFour">
+      <th id="card-last-four-column" data-test-id="card-last-four-column" mat-header-cell *matHeaderCellDef mat-sort-header>Card #</th>
+      <td mat-cell *matCellDef="let element">{{element.identifiers.panLastFour}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="locationEntity">
+      <th id="location-entity-column" data-test-id="location-entity-column" mat-header-cell *matHeaderCellDef mat-sort-header>Entity</th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.nodes?.location?.tooltip" matTooltipClass="multiline-tooltip">{{element.nodes?.location?.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="merchantSource">
+      <th id="merchant-source-column" data-test-id="merchant-source-column" mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.nodes?.merchant?.tooltip" matTooltipClass="multiline-tooltip">{{element.nodes?.merchant?.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="request">
+      <th id="request-column" data-test-id="request-column" mat-header-cell *matHeaderCellDef mat-sort-header>Request</th>
+      <td mat-cell *matCellDef="let element">{{element.getRequestDisplayValue()}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="response">
+      <th id="response-column" data-test-id="response-column" mat-header-cell *matHeaderCellDef mat-sort-header>Response</th>
+      <td mat-cell *matCellDef="let element">{{element.getResponseDisplayValue()}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="serialNumber">
+      <th id="serial-number-column" data-test-id="serial-number-column" mat-header-cell *matHeaderCellDef mat-sort-header>Serial #</th>
+      <td mat-cell *matCellDef="let element">
+        <div ccaClickSwallower *ngIf="element.isSerialNumberLinkable && hasFastCardSearchPermission">
+          <a href="javascript:void(0)" (click)="linkToCard(element)">{{element.identifiers.serialNumber}}</a>
+        </div>
+        <div *ngIf="!element.isSerialNumberLinkable || !hasFastCardSearchPermission">{{element.identifiers.serialNumber}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="source">
+      <th id="source-column" data-test-id="source-column" mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
+      <td mat-cell *matCellDef="let element">{{element.getCodeByType( CsCoreCodeType.DELIVERY_CHANNEL )?.description}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalAmount">
+      <th id="total-column" data-test-id="total-column" class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Total</th>
+      <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts.totalAmount?.displayValue}}</td>
+    </ng-container>
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length" class="expansion-cell">
+        <div class="transaction-element-detail"
+             [@detailExpand]="isExpanded(element) ? 'expanded' : 'collapsed'">
+          <cca-transaction-detail [selection]="selection" [transaction]="element" [expanded]="isExpanded(element)"></cca-transaction-detail>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="transaction-element-row clickable expansion-element-row transaction"
+        [class.expanded-row]="isExpanded(element)"
+        [class.red]="element.flags?.isInDispute || element.flags?.isFraudulent"
+        [class.yellow]="element.isHighlightableAsPending && hasGreenCardReleasePreAuthPermission"
+        (click)="toggleExpanded(element)">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="transaction-detail-row"></tr>
+  </table>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="text-muted last-page-hint" *ngIf="showLastPageHint" fxFlex="100%">Not seeing certain transactions? Try narrowing your search.</div>
+    <mat-paginator fxFlex="100%" [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+  </div>
+</div>

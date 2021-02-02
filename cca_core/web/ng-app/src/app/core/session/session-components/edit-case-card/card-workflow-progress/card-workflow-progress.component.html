@@ -1,0 +1,48 @@
+<div class="card-workflow-progress-container" [class.expanded]="expanded" fxLayout="row">
+  <div class="workflow-progress-column" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
+    <div class="wrapper clickable" fxLayout="column" fxLayoutAlign="center center">
+      <h4 class="text-primary">Workflow Progress</h4>
+      <div class="progress-container">
+        <mat-progress-spinner class="foreground" [diameter]="80" mode="determinate" [value]="workflow.percentComplete"></mat-progress-spinner>
+        <mat-progress-spinner class="background" [diameter]="80" mode="determinate" [value]="100"></mat-progress-spinner>
+        <div class="progress-count-container" fxLayout="column" fxLayoutAlign="center center">
+          <strong class="text-primary">{{ workflow.percentComplete }}%</strong>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h4 class="text-primary reduce-bottom-margin">Current Step</h4>
+      <div>{{ workflow.currentState.displayValue }}</div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" *ngIf="workflow.nextOptions.length">
+      <h4 class="text-primary">Next Steps</h4>
+      <div fxLayout="column">
+        <mat-checkbox
+          *ngFor="let option of workflow.nextOptions"
+          [checked]="card[option.value]"
+          (change)="stepChanged(option.value, $event)"
+        >
+          {{ option.displayValue }}
+        </mat-checkbox>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" class="expand-button-container">
+    <button mat-icon-button class="expand-button" color="primary" [matTooltip]="expandTooltip" (click)="toggleExpand()">
+      <fa-icon [icon]="expanded ? 'chevron-left' : 'chevron-right'"></fa-icon>
+    </button>
+  </div>
+  <div *ngIf="expanded" class="workflow-progress-column completed-steps-column" fxLayout="column" fxLayoutAlign="start stretch">
+    <h4 class="text-primary">Completed Steps</h4>
+    <div fxLayout="column">
+      <mat-checkbox
+        *ngFor="let option of completedSteps; let i = index"
+        [checked]="card[option.value]"
+        (change)="stepChanged(option.value, $event)"
+        [disabled]="i !== completedSteps.length - 1"
+      >
+        {{ option.displayValue }}
+      </mat-checkbox>
+    </div>
+  </div>
+</div>

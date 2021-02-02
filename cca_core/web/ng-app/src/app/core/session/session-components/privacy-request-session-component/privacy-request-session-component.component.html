@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutGap="5px">
+  <cca-key-value-with-placeholder key="Product"
+                                  [value]="component.productId"
+                                  dictionary="com.incomm.cca.model.dictionary.BankProductDictionary"></cca-key-value-with-placeholder>
+  <h4 class="session-heading">Customer</h4>
+  <cca-key-value-with-placeholder key="First Name" [value]="component.firstName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Last Name" [value]="component.lastName"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Email" [value]="component.email"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Phone Number" [value]="component.phoneNumber"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Job Title" [value]="component.jobTitle"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Account" [value]="component.account"></cca-key-value-with-placeholder>
+  <h4 class="session-heading">Address</h4>
+  <cca-key-value-address key="Address" [address]="component.address"></cca-key-value-address>
+  <cca-key-value-with-placeholder key="Comment" [value]="component.comment"></cca-key-value-with-placeholder>
+</div>

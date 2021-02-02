@@ -1,0 +1,9 @@
+<div class="summary-section order-purchaser-section container">
+  <cca-key-value-with-placeholder key="Purchaser" [value]="selection?.getOrder()?.customer?.getDisplayName()"></cca-key-value-with-placeholder>
+  <cca-key-value key="Purchaser Address" alignment="start start">
+    <cca-address [address]="getPreferredAddress()" *ngIf="getPreferredAddress()"></cca-address>
+    <div class="text-muted" *ngIf="!getPreferredAddress()">Not Available</div>
+  </cca-key-value>
+  <cca-key-value-with-placeholder key="Purchaser Email" [value]="selection?.getOrder()?.customer?.emailAddress"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Purchaser Phone" [value]="getPreferredPhoneNumber()?.number"></cca-key-value-with-placeholder>
+</div>

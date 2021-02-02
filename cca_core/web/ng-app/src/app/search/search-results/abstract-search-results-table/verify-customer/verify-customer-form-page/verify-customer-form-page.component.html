@@ -1,0 +1,36 @@
+<ng-container *ngIf="wizard.model.maplesCustomer">
+  <cca-key-value key="Member Number">{{wizard.model.maplesCustomer.getIdentification('MEMBER')}}</cca-key-value>
+  <cca-key-value key="Name">{{wizard.model.maplesCustomer.getDisplayName()}}</cca-key-value>
+  <cca-key-value-address key="Address" [address]="wizard.model.maplesCustomer.getPrimaryAddress(true)"></cca-key-value-address>
+  <cca-key-value key="Phone">{{wizard.model.maplesCustomer.getPrimaryPhoneNumber(true)?.number}}</cca-key-value>
+  <cca-key-value key="Email">{{wizard.model.maplesCustomer.getPrimaryEmailAddress(true)?.email}}</cca-key-value>
+  <cca-key-value key="Last 4 SSN">{{wizard.model.maplesCustomer.getIdentification('LAST_4_SSN')}}</cca-key-value>
+  <cca-key-value key="Last 4 Card">{{wizard.model.maplesCustomer.getIdentification('LAST_4_CARD')}}</cca-key-value>
+</ng-container>
+<ng-container *ngIf="wizard.model.customer">
+  <div *ngIf="wizard.model.customer.isRegistered && !wizard.model.customer.isVmsGiftCard; else giftCard;">
+    <cca-key-value key="Card Number">{{wizard.model.card.identifiers.pan}}</cca-key-value>
+    <br/>
+    <cca-key-value key="Customer Name">{{wizard.model.customer.getDisplayName()}}</cca-key-value>
+    <cca-key-value key="Mother's Maiden">{{wizard.model.customer.mothersMaidenName}}</cca-key-value>
+    <cca-key-value key="Date of Birth">{{wizard.model.customer.dateOfBirth}}</cca-key-value>
+    <cca-key-value [key]="wizard.model.customer.identification.type">{{wizard.model.customer.identification.number}}</cca-key-value>
+    <cca-key-value-address [address]="address"></cca-key-value-address>
+  </div>
+  <ng-template #giftCard>
+    <cca-key-value key="Card Number">{{wizard.model.card.identifiers.pan}}</cca-key-value>
+    <br/>
+    <cca-key-value key="Load Amount">{{wizard.model.customer.accounts.initialLoadAmount?.displayValue}}</cca-key-value>
+  </ng-template>
+</ng-container>
+<div *ngIf="wizard.model.order">
+  <cca-key-value key="Order Number">{{wizard.model.order.number}}</cca-key-value>
+  <cca-key-value key="Order Date">{{wizard.model.order.createdDate?.displayValue}}</cca-key-value>
+  <cca-key-value key="Order Total">{{wizard.model.order.totals.grandTotal?.displayValue}}</cca-key-value>
+  <cca-key-value key="Last 4 of Payment Card">{{wizard.model.order.payment?.ccLastFour}}</cca-key-value>
+  <br/>
+  <cca-key-value key="Purchaser Name">{{wizard.model.order.customer.getDisplayName()}}</cca-key-value>
+  <cca-key-value key="Purchaser Email">{{wizard.model.order.customer.emailAddress}}</cca-key-value>
+  <cca-key-value key="Purchaser Phone">{{wizard.model.order.customer.phoneNumber?.number}}</cca-key-value>
+  <cca-key-value-address [address]="address" key="Purchaser Address"></cca-key-value-address>
+</div>

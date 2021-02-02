@@ -1,0 +1,13 @@
+<cca-key-value key="Customer Name" *ngIf="!wizard.model.selection.getCustomer().isVmsGiftCard"><strong>{{wizard.model.selection.getCustomer().firstName}} {{wizard.model.selection.getCustomer().lastName}}</strong></cca-key-value>
+<cca-key-value key="Customer Name" *ngIf="wizard.model.selection.getCustomer().isVmsGiftCard"><strong>{{wizard.model.missingFirstName}} {{wizard.model.missingLastName}}</strong></cca-key-value>
+<cca-key-value key="Account Number"><strong>{{wizard.model.selection.getAccount().identifiers.accountNumber}}</strong></cca-key-value>
+<cca-key-value key="Form Type">{{wizard.model.selectedFormType}}</cca-key-value>
+<cca-key-value key="Statement for" *ngIf="wizard.model.selectedFormType === 'Account Statement'">{{easyMonth}}, {{wizard.model.selectedYear}}</cca-key-value>
+<cca-key-value-fee key="Statement Fee" *ngIf="wizard.model.selectedFormType === 'Account Statement'" [value]="wizard.model.statementFee"></cca-key-value-fee>
+<cca-key-value key="Delivery Method" id="send-form-confirm-delivery-method">{{wizard.model.deliveryMethod.displayValue}}</cca-key-value>
+<ng-container [ngSwitch]="wizard.model.deliveryMethod">
+  <cca-key-value key="Email Address" *ngSwitchCase="DeliveryMethodCode.EMAIL">{{wizard.model.email}}</cca-key-value>
+  <cca-key-value key="Fax Number" *ngSwitchCase="DeliveryMethodCode.FAX">{{wizard.model.faxNumber.number}}</cca-key-value>
+  <cca-key-value-address key="Mailing Address" [address]="wizard.model.confirmedAddress" *ngSwitchCase="DeliveryMethodCode.MAIL"></cca-key-value-address>
+</ng-container>
+

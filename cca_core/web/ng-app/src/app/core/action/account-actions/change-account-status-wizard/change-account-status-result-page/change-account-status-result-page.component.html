@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  Account status/reason successfully changed.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: account status could not be changed.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Account status/reason successfully changed, but a comment could not be registered.
+</div>

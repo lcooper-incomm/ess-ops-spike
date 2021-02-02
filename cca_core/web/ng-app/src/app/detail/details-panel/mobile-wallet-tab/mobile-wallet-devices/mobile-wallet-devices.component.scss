@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+@import '../../../../../colors.scss';
+
+.device-type-icon-container {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+.status {
+  max-width: 220px;
+}
+
+.action-row {
+  padding: 0;
+
+  .action-toolbar {
+    width: 100%;
+  }
+}

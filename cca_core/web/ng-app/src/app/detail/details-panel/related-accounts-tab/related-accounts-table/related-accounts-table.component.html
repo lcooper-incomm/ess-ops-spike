@@ -1,0 +1,36 @@
+<cca-spinner #accountSpinner></cca-spinner>
+<div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': accounts?.length}">
+  <table mat-table [dataSource]="accounts" matSort matSortActive="accountHolder" matSortDirection="asc" >
+    <ng-container matColumnDef="accountHolder">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ accountHolderLabel }}</th>
+      <td mat-cell *matCellDef="let account">{{ accountHolder(account) }}</td>
+    </ng-container>
+    <ng-container matColumnDef="accountId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Account ID</th>
+      <td mat-cell *matCellDef="let account">{{ account.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="cardNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Card Number</th>
+      <td mat-cell *matCellDef="let account">{{account.getPrimaryCard().identifiers.pan}}</td>
+    </ng-container>
+    <ng-container matColumnDef="availableReserveBalance">
+      <th mat-header-cell class="text-right" *matHeaderCellDef mat-sort-header>Available Balance</th>
+      <td mat-cell class="text-right" *matCellDef="let account">{{availableReserveBalance(account)}}</td>
+    </ng-container>
+    <ng-container matColumnDef="availableBalance">
+      <th mat-header-cell class="text-right" *matHeaderCellDef mat-sort-header>Available Balance</th>
+      <td mat-cell class="text-right" *matCellDef="let account">{{availableBalance(account)}}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let account">
+        <cca-serve-account-status [status]="{name : account.getAccountStatus().name}"></cca-serve-account-status>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let account; columns: displayedColumns;" class="clickable"
+        (click)="openAccount(account)"></tr>
+  </table>
+</div>
+

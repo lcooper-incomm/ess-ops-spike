@@ -1,0 +1,30 @@
+<div class="identification-field form-field default-field-width" [formGroup]="form">
+  <div fxLayout="row">
+    <div [matTooltip]="!isIdentificationTypeMenuEnabled ? 'You do not have permission to use this field' : null">
+      <button type="button" mat-icon-button [matMenuTriggerFor]="identificationTypeMenu" matTooltip="Identification Type" [disabled]="!isIdentificationTypeMenuEnabled">
+        <fa-icon icon="id-card"></fa-icon>
+      </button>
+      <mat-menu #identificationTypeMenu="matMenu">
+        <button *ngFor="let identificationType of identificationTypes" mat-menu-item (click)="setIdentificationType(identificationType.type)">{{ identificationType.description }}</button>
+      </mat-menu>
+    </div>
+    <div class="container" style="width:140px;">
+      <mat-form-field [matTooltip]="tooltip">
+        <input type="text" matInput *ngIf="form.get(typeControlName)?.value === 'SSN'" [ccaNumericFormat]="form.get(numberControlName)" [formControlName]="numberControlName" [placeholder]="placeholder" [required]="isControlRequired(form.get(numberControlName))"/>
+        <input type="text" matInput *ngIf="form.get(typeControlName)?.value !== 'SSN'" [formControlName]="numberControlName" [placeholder]="placeholder" [required]="isControlRequired(form.get(numberControlName))"/>
+        <button type="button" mat-button *ngIf="form.get(typeControlName).value" matSuffix mat-icon-button (click)="clear()" matTooltip="Clear">
+          <fa-icon class="small" icon="times"></fa-icon>
+        </button>
+        <mat-error *ngIf="form.get(numberControlName).hasError('required')">
+          <i>This field is required</i>
+        </mat-error>
+        <mat-error *ngIf="form.get(numberControlName).hasError('minlength') && !form.get(numberControlName).hasError('required')">
+          <i>Must be at least {{form.get(numberControlName).getError('minlength').requiredLength}} digits</i>
+        </mat-error>
+        <mat-error *ngIf="form.get(numberControlName).hasError('lengthequals') && !form.get(numberControlName).hasError('required')">
+          <i>Must be {{form.get(numberControlName).getError('lengthequals').value}} digits</i>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

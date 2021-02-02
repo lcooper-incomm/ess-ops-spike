@@ -1,0 +1,69 @@
+<div class="customer-authentication origin-zero" fxLayout="row">
+  <div [formGroup]="form" fxLayout="column" fxLayoutGap="30px" fxFlex>
+
+    <div class="authenticate-header" fxLayout="row">
+      <div fxLayout="column" fxFlex="50">
+        <cca-key-value key="Name" alignment="start start">{{wizard.model.account.customer.getDisplayName()}}</cca-key-value>
+      </div>
+      <div fxLayout="column" fxFlex="50">
+        <cca-key-value key="Card Number" alignment="start start">{{wizard.model.account.getPrimaryCard().identifiers.pan}}</cca-key-value>
+      </div>
+    </div>
+
+    <div class="authenticate-body">
+      <div class="element-height" fxLayout="row" *ngIf="showCsc3Field">
+        <div fxFlex="9">
+          <cca-validated-status [status]="getValidatedStatus('csc3CodeVerified')"></cca-validated-status>
+        </div>
+        <div fxFlex="40">
+          <h5 class="text-grey">CSC3 Code Authenticated.</h5>
+          <h6 class="sub-text text-muted">DO NOT ask the customer for their CSC3 code.</h6>
+        </div>
+      </div>
+      <div class="element-height" fxLayout="row">
+        <div fxFlex="9">
+          <cca-validated-status [status]="getValidatedStatus('ssnLastFour')"></cca-validated-status>
+        </div>
+        <h5 class="text-grey" fxFlex="40">What are the last 4 of SSN?</h5>
+        <cca-numeric-text-field class="align-text-up" [form]="form" controlName="ssnLastFour"
+                                fxFlex="51"></cca-numeric-text-field>
+      </div>
+      <div class="element-height" fxLayout="row">
+        <div fxFlex="9">
+          <cca-validated-status [status]="getValidatedStatus('dateOfBirth')"></cca-validated-status>
+        </div>
+        <h5 class="text-grey" fxFlex="40">What is your date of birth?</h5>
+        <cca-date-field class="align-text-up" [form]="form" controlName="dateOfBirth" fxFlex="51"></cca-date-field>
+      </div>
+      <div class="element-height" fxLayout="row" *ngIf="securityQuestion">
+        <mat-slide-toggle disableRipple="true" formControlName="securityQuestionVerified" fxFlex="9"></mat-slide-toggle>
+        <div fxFlex="40">
+          <h5 class="text-grey">{{securityQuestion.question}}</h5>
+          <h6 class="sub-text text-muted">Did the customer validate?</h6>
+        </div>
+        <div fxFlex="51">
+          <cca-value-display [value]="securityQuestion.answer.answer"></cca-value-display>
+        </div>
+      </div>
+
+      <div class="element-height" fxLayout="row">
+        <mat-slide-toggle disableRipple="true" formControlName="emailVerified" fxFlex="9"></mat-slide-toggle>
+        <div fxFlex="40">
+          <h5 class="text-grey">What is your email address</h5>
+          <h6 class="sub-text text-muted">Did the customer validate?</h6>
+        </div>
+        <div fxFlex="51">
+          <cca-value-display [value]="email"></cca-value-display>
+        </div>
+      </div>
+
+      <div fxLayout="row" style="margin-left: 14px">
+        <div><h4 class="text-accent">{{ formHint }}</h4></div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showActionButtons" class="action-buttons-container" fxLayout="column" fxFlex="124px">
+    <button type="button" *ngIf="canBypass" mat-raised-button (click)="bypass()">Bypass</button>
+    <button type="button" *ngIf="canLockCard" mat-raised-button (click)="lockCard()" style="margin-top: 5px;">Lock Card</button>
+  </div>
+</div>

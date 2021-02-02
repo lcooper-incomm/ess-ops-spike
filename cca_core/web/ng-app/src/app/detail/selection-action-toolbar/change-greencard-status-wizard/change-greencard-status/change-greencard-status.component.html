@@ -1,0 +1,14 @@
+<cca-key-value-with-placeholder key="Card Number:" [value]="this.wizard.model.card.identifiers.panMasked"></cca-key-value-with-placeholder>
+<cca-key-value key="Current Status">
+  <cca-greencard-status [status]="this.wizard.model.currentStatus" style="width:40%"></cca-greencard-status>
+</cca-key-value>
+<form [formGroup]="wizardForm" fxLayout="column">
+  <mat-form-field class="default-field-width">
+    <mat-select formControlName="cardStatusCode" placeholder="New Status" [required]="true">
+      <mat-option [value]="option.cardStatusCode" *ngFor="let option of this.wizard.model.allowedStatuses | orderBy: 'displayName' ">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</form>

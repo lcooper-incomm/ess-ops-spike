@@ -1,0 +1,63 @@
+<div>
+  <div class="table-container condensed-table element-history-table mat-elevation-z1">
+    <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="sentDate" matSortDirection="desc" [hidden]="!dataSource.data?.length">
+      <ng-container matColumnDef="transactionId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{element?.transactionId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sourceRefNum">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ref Num</th>
+        <td mat-cell *matCellDef="let element">{{element?.sourceRefNum}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="businessDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+        <td mat-cell *matCellDef="let element">{{element?.businessDate?.displayValue}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="disputeId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Dispute ID</th>
+        <td mat-cell *matCellDef="let element">{{element?.disputeId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th class="text-right" mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Authorized Amount" arrowPosition="before">Amount</th>
+        <td class="text-right" mat-cell *matCellDef="let element">{{element?.amount?.displayValue}}</td>
+      </ng-container>
+
+      <div *ngIf="isGreenCard">
+        <ng-container matColumnDef="request">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Request</th>
+          <td mat-cell *matCellDef="let element">{{element?.request}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="response">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Response</th>
+          <td mat-cell *matCellDef="let element">{{element?.response}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+      </div>
+
+      <div *ngIf="!isGreenCard">
+        <ng-container matColumnDef="requestCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Request Code</th>
+          <td mat-cell *matCellDef="let element">{{element?.requestCode}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="responseCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Response Code</th>
+          <td mat-cell *matCellDef="let element">{{element?.responseCode}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="clickable" (click)="getTransactionDetails(element)" mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+      </div>
+    </table>
+    <mat-paginator #paginator [length]="dataSource?.data?.length" [pageSize]="5" [hidden]="!dataSource?.data?.length || dataSource?.data?.length <= 5"></mat-paginator>
+    <cca-spinner #disputeSpinner color="primary"></cca-spinner>
+  </div>
+</div>

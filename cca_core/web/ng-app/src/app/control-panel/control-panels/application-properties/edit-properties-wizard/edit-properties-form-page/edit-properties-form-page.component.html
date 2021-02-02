@@ -1,0 +1,12 @@
+<h4 class="text-accent">{{wizard.model.property.displayName}}</h4>
+<div>{{wizard.model.property.description}}</div>
+<form [formGroup]="wizardForm">
+  <mat-form-field *ngIf="!this.wizard.model.isCsCoreLogger">
+    <textarea formControlName="valueControl" matInput placeholder="Value" rows="3" resize="false"></textarea>
+  </mat-form-field>
+  <mat-form-field *ngIf="this.wizard.model.isCsCoreLogger">
+    <mat-select formControlName="valueControl" placeholder="Value">
+      <mat-option *ngFor="let option of loggingOptions | orderBy:'value'" [value]="option.value">{{option.value}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

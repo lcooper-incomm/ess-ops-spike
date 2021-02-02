@@ -1,0 +1,5 @@
+<div class="summary-section account-fees-section">
+  <cca-key-value-with-placeholder key="Fee" [value]="selection?.getAccount()?.fees?.fixedTransactionFee?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Convenience Fee" [value]="selection?.getAccount()?.fees?.convenienceFee?.displayValue"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Posting" [value]="selection?.getAccount()?.nodes?.biller?.moneyTransferTerm ? selection?.getAccount()?.nodes?.biller?.moneyTransferTerm + ' Days' : null"></cca-key-value-with-placeholder>
+</div>

@@ -1,0 +1,22 @@
+<div fxLayout="row">
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Type" [value]="transaction?.typeCode"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Type Category" [value]="transaction?.typeCategory"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Ref Number" [value]="transaction?.sourceRefNum"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="MCC Code" [value]="transaction?.getCodeByType('MCC')?.code"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="SIC Code" [value]="transaction?.getCodeByType('SIC')?.code"></cca-key-value-with-placeholder>
+
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Merchant Name" [value]="merchant?.name"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="City" [value]="merchantAddress?.city"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="State" [value]="merchantAddress?.state"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Zip" [value]="merchantAddress?.postalCode"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Country" [value]="merchantAddress?.country"></cca-key-value-with-placeholder>
+  </div>
+  <div fxFlex="33">
+    <cca-key-value-with-placeholder key="Pre Auth Balance" [value]="transaction?.amounts?.preAuthBalance?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Authorized Amount" [value]="transaction?.amounts?.authorizedAmount?.displayValue"></cca-key-value-with-placeholder>
+    <cca-key-value-with-placeholder key="Available Balance" [value]="transaction?.amounts?.availableBalance?.displayValue"></cca-key-value-with-placeholder>
+  </div>
+</div>

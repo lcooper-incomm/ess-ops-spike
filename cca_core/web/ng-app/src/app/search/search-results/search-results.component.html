@@ -1,0 +1,37 @@
+<div class="search-results-container" [ngSwitch]="searchType">
+  <div class="search-results-toolbar" fxLayout="row" fxLayoutAlign="start center">
+    <cca-search-result-summary></cca-search-result-summary>
+    <div fxFlex></div>
+    <form [formGroup]="filterForm">
+      <cca-text-field [form]="filterForm" controlName="filter" placeholder="Filter"></cca-text-field>
+    </form>
+  </div>
+  <div class="search-results-table-container">
+
+    <!-- TODO I think all of these could get collapsed into one component, and the column definitions could be moved into the database -->
+    <!-- TODO with the searchTypes themselves. Preferences could be added to configure the columns from the master list of all available -->
+    <!-- TODO options. Column definitions would have to include the SelectionType, and options filtered per searchType by the searchType's -->
+    <!-- TODO SelectionType. We then would also not need to duplicate our click event handling... -->
+
+    <cca-ccl-gift-search-results-table *ngSwitchCase="SearchTypeType.CCL_GIFT"></cca-ccl-gift-search-results-table>
+    <cca-ddp-search-results-table *ngSwitchCase="SearchTypeType.DDP"></cca-ddp-search-results-table>
+    <div *ngIf="subSearchType == AlderSearchtype.ORDER">
+      <cca-alder-order-search-results-table *ngSwitchCase="SearchTypeType.ALDER"></cca-alder-order-search-results-table>
+    </div>
+    <cca-bol-order-search-results-table *ngSwitchCase="SearchTypeType.BOL_ORDER"></cca-bol-order-search-results-table>
+    <cca-ecomm-order-search-results-table *ngSwitchCase="SearchTypeType.ECOMM_ORDER"></cca-ecomm-order-search-results-table>
+    <cca-encor-search-results-table *ngSwitchCase="SearchTypeType.ENCOR"></cca-encor-search-results-table>
+    <cca-fastcard-fastpin-search-results-table *ngSwitchCase="SearchTypeType.FASTCARD_FASTPIN"></cca-fastcard-fastpin-search-results-table>
+    <cca-financial-gift-search-results-table *ngSwitchCase="SearchTypeType.FINANCIAL_GIFT"></cca-financial-gift-search-results-table>
+    <cca-jira-search-results-table *ngSwitchCase="SearchTypeType.JIRA"></cca-jira-search-results-table>
+    <cca-kyc-search-results-table *ngSwitchCase="SearchTypeType.KYC_FAILURE"></cca-kyc-search-results-table>
+    <cca-location-search-results-table *ngSwitchCase="SearchTypeType.LOCATION"></cca-location-search-results-table>
+    <cca-lottery-search-results-table *ngSwitchCase="SearchTypeType.LOTTERY"></cca-lottery-search-results-table>
+    <cca-serve-account-search-results-table *ngSwitchCase="SearchTypeType.SERVE"></cca-serve-account-search-results-table>
+    <cca-session-search-results-table *ngSwitchCase="SearchTypeType.SESSION"></cca-session-search-results-table>
+    <cca-vanilla-direct-search-results-table *ngSwitchCase="SearchTypeType.VANILLA_DIRECT"></cca-vanilla-direct-search-results-table>
+    <cca-vms-gift-search-results-table *ngSwitchCase="SearchTypeType.VMS_GIFT"></cca-vms-gift-search-results-table>
+    <cca-vms-gpr-search-results-table *ngSwitchCase="SearchTypeType.VMS_GPR"></cca-vms-gpr-search-results-table>
+    <cca-vrn-swipe-reload-search-results-table *ngSwitchCase="SearchTypeType.VRN_SWIPE_RELOAD"></cca-vrn-swipe-reload-search-results-table>
+  </div>
+</div>

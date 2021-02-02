@@ -1,0 +1,12 @@
+<div class="session-auto-save-feedback-container text-muted" fxLayout="row">
+  <i>Created {{session.createdDate?.displayValue}}</i>
+  <div class="spacer"></div>
+  <i *ngIf="isSaving; else counter">* Auto-saving...</i>
+  <ng-template #counter>
+    <i class="last-saved-counter" fxLayout="row" fxLayoutGap="3px" *ngIf="lastSavedDate">
+      <div>* Last saved</div>
+      <cca-running-timer [start]="lastSavedDate"></cca-running-timer>
+      <div>ago</div>
+    </i>
+  </ng-template>
+</div>

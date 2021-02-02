@@ -1,0 +1,7 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <button mat-raised-button color="primary" (click)="triggerFileSelect()">{{ label }}</button>
+  <div class="text-muted" *ngIf="uploader?.queue?.length">{{uploader.queue[ 0 ]?.file?.name}}</div>
+  <div class="text-error" *ngIf="!fileSelectError && !uploader?.queue?.length">Required</div>
+  <div class="text-error" *ngIf="fileSelectError">{{fileSelectError}}</div>
+</div>
+<input *ngIf="uploader" #fileInput type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="handleFileSelected()" [hidden]="true"/>

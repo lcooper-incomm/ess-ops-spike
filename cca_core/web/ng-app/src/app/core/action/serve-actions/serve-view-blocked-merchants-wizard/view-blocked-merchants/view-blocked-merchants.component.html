@@ -1,0 +1,31 @@
+<div class="">
+  <h4 class="text-primary">Blocked Merchant Details (Select merchants to unblock)</h4>
+  <div class="table-container condensed-table expansion-panel-wrapper">
+    <cscore-table
+                  [columns]="displayedColumns"
+                  initialSortColumn="merchantName"
+                  initialSortDirection="desc"
+                  [dataSource]="dataSource"
+                  [hidden]="!dataSource.data?.length">
+
+      <div *cscoreTableHeaderDef="let item; key: 'selection'">
+        <mat-checkbox class="small-checkbox"
+                      [disableRipple]="true"
+                      (change)="toggleSelectAll()"
+                      ccaClickSwallower
+                      [preventDefault]="false"
+                      [checked]="isSelectAllChecked"></mat-checkbox>
+      </div>
+      <div *cscoreTableCellDef="let item; key: 'selection'" style="border-bottom-width: 0;" fxLayout="row"
+           fxLayoutAlign="center center">
+        <mat-checkbox class="small-checkbox"
+                      [disableRipple]="true"
+                      (change)="toggleSelect(item)"
+                      ccaClickSwallower
+                      [preventDefault]="false"
+                      [checked]="item.isSelected"></mat-checkbox>
+      </div>
+
+    </cscore-table>
+  </div>
+</div>

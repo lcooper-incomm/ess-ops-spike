@@ -1,0 +1,5 @@
+<div class="spinner" [ngClass]="{rounded: rounded}" fxLayout="row" fxLayoutAlign="center center" *ngIf="on" (click)="$event.stopPropagation(); $event.preventDefault()" ccaClickSwallower>
+  <div>
+    <mat-spinner [color]="color" mode="indeterminate" [diameter]="size"></mat-spinner>
+  </div>
+</div>

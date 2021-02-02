@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <cca-key-value key="PIN Status">
+    <strong *ngIf="validating" class="text-muted">Validating...</strong>
+    <strong *ngIf="!validating && card.alerts.isPinSet" class="text-success">PIN Set</strong>
+    <strong *ngIf="!validating && !card.alerts.isPinSet" class="text-danger">PIN Not Set</strong>
+  </cca-key-value>
+  <div fxLayout="row">
+    <button *ngIf="!card.alerts.isPinSet" mat-raised-button color="primary" id="validate" (click)="validate()">
+      Validate
+      <cca-spinner [on]="validating" size="SpinnerSize.EXTRA_SMALL"></cca-spinner>
+    </button>
+  </div>
+</div>

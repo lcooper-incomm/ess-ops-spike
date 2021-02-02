@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutGap="15px" [formGroup]="wizardForm">
+  <mat-form-field class="default-field-width">
+    <input type="text" placeholder="Add a Member" aria-label="Add a Member" matInput [formControl]="addMemberControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayNull" (optionSelected)="addMember($event)">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.username">
+        {{option.username}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <span fxFlex></span>
+  <mat-form-field class="default-field-width">
+    <input type="text" matInput placeholder="Filter Members" aria-label="Filter Members" formControlName="memberControl">
+  </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <cca-member-card #auto *ngFor="let member of members | orderBy : 'displayName'" [memberData]="member" [roleId]="wizard.model.role.id" (updateMembers)='updateMembers($event)'></cca-member-card>
+</div>

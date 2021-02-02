@@ -1,0 +1,23 @@
+<form [formGroup]="wizardForm" fxLayout="column">
+  <cca-text-field [form]="wizardForm" controlName="displayName" placeholder="Display Name"></cca-text-field>
+  <mat-form-field>
+    <textarea formControlName="description" matInput placeholder="Description" rows="3" resize="false"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="group" placeholder="Group">
+      <mat-option [value]="option" *ngFor="let option of groups | orderBy : 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="wizard.model.isClone">
+    <mat-select formControlName="rolesListControl" placeholder="Copy from Roles" [required]="true">
+      <mat-option [value]="option.id" *ngFor="let option of wizard.model.roles | orderBy : 'displayName'">
+        {{option.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-slide-toggle formControlName="active">
+    <span [ngClass]="wizardForm.value.active ? 'text-success' : 'text-error'"><strong>{{wizardForm.value.active ? 'Active' : 'Inactive'}}</strong></span>
+  </mat-slide-toggle>
+</form>

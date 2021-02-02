@@ -1,0 +1,26 @@
+<ng-container [ngSwitch]="selection.type">
+  <ng-container *ngSwitchCase="'ACCOUNT'">
+    <cca-vanilla-direct-status [status]="selection.getAccount().status" [useAbbreviation]="true"></cca-vanilla-direct-status>
+  </ng-container>
+  <ng-container *ngSwitchCase="'CUSTOMER'">
+    <cca-fsapi-status [status]="selection.selectedCard.getStatusByPlatform('VMS')" [useAbbreviation]="true" *ngIf="selection.selectedCard"></cca-fsapi-status>
+  </ng-container>
+  <ng-container *ngSwitchCase="'CUSTOMER_ACCOUNT'">
+    <cca-serve-account-status *ngIf="selection.platform === 'SERVE'" [status]="selection.getCustomerAccount()?.getAccountStatus()" [useAbbreviation]="true"></cca-serve-account-status>
+  </ng-container>
+  <ng-container *ngSwitchCase="'LOCATION'">
+    <cca-location-status [status]="selection.getLocation().getStatusByPlatform('MDM')" [useAbbreviation]="true"></cca-location-status>
+  </ng-container>
+  <ng-container *ngSwitchCase="'ORDER'">
+    <cca-ecomm-order-state [status]="selection.getOrder().status.current" [useAbbreviation]="true"></cca-ecomm-order-state>
+  </ng-container>
+  <ng-container *ngSwitchCase="'CARD'" [ngSwitch]="selection.platform">
+    <cca-ddp-status *ngSwitchCase="'DDP'" [status]="selection.getCard().getStatusByPlatform('DDP')" [useAbbreviation]="true"></cca-ddp-status>
+    <cca-greencard-status *ngSwitchCase="'GREENCARD'" [status]="selection.getCard().getStatusByPlatform('GREENCARD')" [useAbbreviation]="true"></cca-greencard-status>
+    <cca-status *ngSwitchCase="'SRL'" [status]="selection.getCard().getStatusByPlatform('SRL')" [useAbbreviation]="true"></cca-status>
+    <cca-incomm-status *ngSwitchDefault [status]="selection.getCard().getStatusByPlatform('INCOMM')" [useAbbreviation]="true"></cca-incomm-status>
+  </ng-container>
+  <div class="text-muted" *ngSwitchDefault>
+    --
+  </div>
+</ng-container>

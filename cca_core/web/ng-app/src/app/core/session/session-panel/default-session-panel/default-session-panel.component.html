@@ -1,0 +1,19 @@
+<div class="default-session-panel-container" fxLayout="row" fxFlex="">
+  <div class="component-container" fxFlex="1 1 auto">
+    <cca-general-session-component-form [form]="form.get('generalComponent')">
+      <h4 class="session-heading">General Information</h4>
+    </cca-general-session-component-form>
+  </div>
+  <div class="component-container" *ngIf="form.get('callComponent')" fxFlex="1 1 auto">
+    <h4 class="session-heading">Call Information</h4>
+    <cca-call-session-component-form [form]="form.get('callComponent')"></cca-call-session-component-form>
+  </div>
+  <cca-session-comments
+    [form]="form.get('commentsComponent')"
+    [session]="session"
+    (commentAdded)="onCommentAdded($event)"
+    (commentChange)="onCommentChanged($event)"
+    fxFlex="1 1 auto"
+    class="mt-15 max-width-50"
+  ></cca-session-comments>
+</div>

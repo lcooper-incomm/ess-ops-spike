@@ -1,0 +1,13 @@
+.auto-scroll-session-header-container {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  right: 0px;
+  margin-bottom: 0;
+  background-color: white;
+  z-index: 100;
+
+  &.dock-pinned {
+    left: 350px !important;
+  }
+}

@@ -1,0 +1,30 @@
+<div class="table-container condensed-table vanilla-direct-search-results-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+  <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+  <table mat-table [dataSource]="dataSource" matSort [hidden]="!dataSource.data?.length">
+    <ng-container matColumnDef="accountNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Number</th>
+      <td mat-cell *matCellDef="let element">{{element.identifiers.van16}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let element">{{element.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="billerName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Biller</th>
+      <td mat-cell *matCellDef="let element">{{element.nodes?.biller?.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let element">{{element.createDate?.displayValue}}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element">
+        <cca-vanilla-direct-status [status]="element.status"></cca-vanilla-direct-status>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable" (click)="selectResult(row)"></tr>
+  </table>
+  <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource?.data?.length <= 50"></mat-paginator>
+</div>

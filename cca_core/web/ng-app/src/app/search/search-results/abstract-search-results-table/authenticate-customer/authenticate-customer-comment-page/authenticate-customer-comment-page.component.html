@@ -1,0 +1,23 @@
+<div class="customer-authentication origin-zero" fxLayout="row">
+  <div [formGroup]="wizardForm" fxLayout="column" fxFlex>
+    <div class="authenticate-header" fxLayout="row">
+      <div fxLayout="column" fxFlex="50">
+        <cca-key-value key="Name" alignment="start start">{{wizard.model.account.customer.getDisplayName()}}
+        </cca-key-value>
+      </div>
+      <div fxLayout="column" fxFlex="50">
+        <cca-key-value key="Card Number" alignment="start start">
+          {{wizard.model.account.getPrimaryCard().identifiers.pan}}
+        </cca-key-value>
+      </div>
+    </div>
+    <div class="comment-container">
+      <h4 class="text-accent">Please explain why the customer could not be authenticated.</h4>
+      <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment"></cca-comment-field>
+    </div>
+  </div>
+  <div *ngIf="showActionButtons" class="action-buttons-container" fxLayout="column" fxFlex="124px">
+    <button type="button" *ngIf="canBypass" mat-raised-button (click)="bypass()">Bypass</button>
+    <button type="button" *ngIf="canLockCard" mat-raised-button (click)="lockCard()" style="margin-top: 5px;">Lock Card</button>
+  </div>
+</div>

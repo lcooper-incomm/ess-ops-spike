@@ -1,0 +1,12 @@
+<div *ngIf="wizard.model.success === 0 && wizard.model.cardChangeStatusRequest.cardStatus !== 'Activate'" class="text-accent">
+  Card status successfully changed to {{wizard.model.cardChangeStatusRequest.cardStatus}}.
+</div>
+<div *ngIf="wizard.model.success === 0 && wizard.model.cardChangeStatusRequest.cardStatus === 'Activate'" class="text-accent">
+  Card successfully activated.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  Error: card status could not be changed to {{wizard.model.cardChangeStatusRequest.cardStatus}}.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  Card status successfully changed to {{wizard.model.cardChangeStatusRequest.cardStatus}}, but a comment could not be registered.
+</div>

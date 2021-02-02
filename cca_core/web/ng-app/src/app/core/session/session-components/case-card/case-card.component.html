@@ -1,0 +1,29 @@
+<div class="card container" [class.clickable]="editable" [class.highlight]="isCurrentSelection" (click)="edit()" fxLayout="row">
+  <ng-container *ngIf="selection?.data">
+    <div class="selection-data-container" fxFlex>
+      <div class="information-container" fxLayout="row">
+        <div>**{{card.lastFour}}</div>
+        <div fxFlex></div>
+        <div style="text-align:right;">{{ balance?.displayValue }}</div>
+      </div>
+      <div class="card-status-container">
+        <cca-card-status
+          *ngIf="status"
+          class="status-wrapper-small"
+          [platform]="selection.platform"
+          [status]="status"
+        ></cca-card-status>
+      </div>
+    </div>
+    <div
+      class="status-container"
+      [class.warning]="card.needsWork()"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      [matTooltip]="card.needsWork() ? 'Needs Attention' : 'Complete'"
+    >
+      <fa-icon [icon]="card.needsWork() ? 'exclamation-triangle' : 'check-circle'"></fa-icon>
+    </div>
+  </ng-container>
+  <cca-spinner [on]="loading"></cca-spinner>
+</div>

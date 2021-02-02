@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import '../../../../../colors.scss';
+
+.session-panel-header {
+  background-color: mat-color($cca-app-session);
+  color: white;
+  padding: 8px 15px;
+
+  .auto-wrap-progress-container {
+    position: absolute;
+    top: 32px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .mat-progress-bar {
+      height: 8px;
+    }
+  }
+
+  .header-section {
+    margin-right: 5px;
+  }
+
+  h4 {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,1005 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import 'themes.scss';
+
+*:focus {
+  outline: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
+  padding-top: 50px;
+  min-width: 992px;
+  overflow-x: hidden;
+}
+
+.case-tabs {
+
+  .mat-tab-label-container {
+
+    .mat-tab-list {
+
+      .mat-tab-labels {
+
+        .mat-tab-label {
+          height: 40px;
+          padding: 0 12px;
+        }
+      }
+    }
+  }
+
+  .mat-ink-bar {
+    height: 3px;
+    background-color: mat-color($cca-app-session) !important;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.condensed-menu-option {
+  line-height: 24px !important;
+  height: 24px !important;
+}
+
+.container {
+  position: relative;
+}
+
+.customer-authentication {
+  mat-slide-toggle {
+    transform: scale(0.9);
+  }
+
+  mat-slide-toggle.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f058";
+    color: #4CAF50;
+    font-size: 20px;
+    position: relative;
+    top: -2px
+  }
+
+  mat-slide-toggle.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #fff;
+  }
+
+  mat-slide-toggle.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #9E9E9E;
+  }
+
+  mat-slide-toggle.mat-slide-toggle .mat-slide-toggle-ripple {
+    height: 0;
+    width: 0;
+  }
+}
+
+.customer-card-menu {
+  width: 330px;
+  max-width: 330px !important;
+}
+
+
+.default-field-width,
+.default-field-width .mat-form-field {
+  max-width: 180px;
+  width: 180px;
+}
+
+.default-field-width-short {
+  max-width: 120px;
+  width: 120px;
+}
+
+.default-field-width-long {
+  max-width: 220px;
+  width: 220px;
+}
+
+.default-field-width-ex-long {
+  max-width: 570px;
+  width: 570px;
+}
+
+.detail-summary-container {
+  &.horizontal {
+    .summary-section-container {
+      display: flex;
+      flex-direction: row;
+    }
+    .summary-section {
+      margin-right: 15px;
+    }
+    .card-container {
+      width: 100%;
+    }
+  }
+
+  &.vertical {
+    .summary-section-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-container {
+      width: 400px;
+      min-height: 100px;
+
+      h4 {
+        @extend .truncate-with-ellipsis;
+        max-width: 90%;
+      }
+
+      .card-content {
+        overflow-y: auto;
+      }
+    }
+
+  }
+
+  cca-summary-mode-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+  }
+}
+
+.case-session-panel-container {
+
+  .mat-tab-label {
+    height: 40px;
+    min-width: 80px;
+  }
+}
+
+.alt-expansion-panel {
+  > mat-expansion-panel {
+    .mat-expansion-panel-content {
+      background-color: #f0f1f9;
+    }
+    .mat-expansion-panel-body {
+      padding: 10px !important;
+    }
+    .alt-panel-container {
+      padding: 16px;
+      background-color: white;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.control-panel-container {
+  > mat-card {
+    padding: 0;
+  }
+}
+
+.control-panel-group-dialog {
+  min-width: 610px;
+
+  > mat-dialog-container cca-control-panel-edit-group-dialog mat-dialog-content > div {
+    padding: 0;
+  }
+
+  mat-accordion > .mat-expansion-panel {
+    box-shadow: none;
+  }
+
+  mat-expansion-panel-header {
+    padding: 0;
+  }
+
+  mat-expansion-panel-header mat-panel-title {
+    color: mat-color($cca-app-primary);
+  }
+}
+
+.dock-checkbox {
+  margin-top: -3px;
+
+  .mat-checkbox-frame {
+    border-color: white;
+  }
+
+  .mat-checkbox-inner-container {
+    height: 12px;
+    width: 12px;
+  }
+
+  .mat-checkbox-ripple {
+    display: none;
+  }
+}
+
+.dock-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: mat-color($cca-app-accent, 900);
+  color: white;
+  padding: 0 10px;
+
+  &.case-header {
+    background-color: mat-color($cca-app-session);
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  .mat-icon-button {
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+
+    fa-icon {
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+}
+
+.dock-pinned.session-collapsed {
+
+  .session-panel-container {
+    left: 350px !important;
+  }
+}
+
+.dynamic-expansion-panel {
+  mat-expansion-panel {
+    border-radius: 0;
+    mat-expansion-panel-header {
+      padding: 0;
+      border-bottom: 1px solid #E0E0E0;
+
+      &:before {
+        display: flex;
+        width: 40px;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 1.2em;
+        justify-content: center;
+        align-items: center;
+        content: "\f105";
+      }
+    }
+    .mat-expansion-panel-header.mat-expanded {
+      &:before {
+        content: "\f107";
+      }
+    }
+
+    .mat-expansion-panel-body {
+      padding: 0;
+    }
+    .dynamic-expansion-panel-content {
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-bottom: 1px solid #E0E0E0;
+      .divider {
+        border-bottom: 1px solid #E0E0E0;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
+
+}
+
+fa-icon {
+  font-size: 18px;
+  line-height: 18px;
+
+  &.disabled {
+    color: mat-color($cca-app-muted);
+  }
+
+  &.small {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  &.extra-small {
+    font-size: 10px;
+    line-height: 10px;
+  }
+}
+
+.hide-scroll {
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.highlighted {
+
+  fa-icon {
+    color: darkorange;
+  }
+
+  .ng-untouched {
+
+    .mat-form-field-label,
+    .mat-select-arrow {
+      color: darkorange !important;
+    }
+  }
+
+  .mat-form-field-underline {
+    background-color: darkorange !important;
+  }
+}
+
+.inline-slide {
+  margin-top: 13px;
+  margin-bottom: 15px;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+//TODO: remove once all mat-expansion-panels have been updated to the new cca-expansion-panel component
+.mat-expansion-panel {
+  .mat-action-row {
+    border-top-style: none;
+    padding: 0;
+
+    .action-toolbar {
+      width: 100%;
+    }
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 5px;
+
+  &.comment-field {
+
+    .mat-form-field-infix {
+      border-top: none !important;
+    }
+
+    textarea {
+      resize: none;
+    }
+  }
+
+  &.default-width {
+    width: 180px;
+  }
+
+  &.no-bottom-padding {
+    margin-bottom: -1.25em;
+  }
+}
+
+.default-width {
+  width: 180px;
+}
+
+// TODO: move this into the cca-expansion-panel component styles
+.mat-expansion-panel-body {
+  padding: 20px 20px 24px 20px;
+}
+
+.mat-hint {
+  color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-mini-fab {
+
+  &.mini,
+  &.create-session-button,
+  &.user-menu-button {
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+
+    .mat-button-wrapper {
+      margin-top: -5px;
+
+      fa-icon {
+        font-size: 20px !important;
+        line-height: 20px !important;
+      }
+    }
+  }
+
+  fa-icon {
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+.mat-progress-container {
+  padding: 5px;
+  .mat-progress-bar {
+    height: 6px;
+    padding-top: 5px;
+  }
+}
+
+.mat-tooltip {
+  font-size: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.multiline-tooltip {
+  white-space: pre-wrap;
+  font-family: 'Roboto Mono', monospace;
+  line-height: 14px;
+}
+
+.muted {
+  background-color: mat-color($cca-app-muted, 100) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.no-content-padding {
+
+  .card-content {
+    padding: 0 !important;
+  }
+}
+
+.profile-container {
+
+  .profile-user-container, .profile-preferences-container {
+    .card-header {
+      background-color: mat-color($cca-app-primary);
+    }
+  }
+
+  .profile-groups-container,
+  .profile-roles-container,
+  .profile-permissions-container {
+
+    .avatar {
+      height: 30px;
+      width: 30px;
+      margin-right: 10px;
+      border-radius: 100%;
+      font-size: 18px;
+      text-transform: uppercase;
+      background-color: mat-color($cca-app-muted);
+      color: #fff;
+    }
+
+    .card-header {
+      background-color: mat-color($cca-app-muted);
+    }
+
+    .filter-container {
+      padding: 0 10px;
+    }
+
+    .mat-list-item {
+      height: auto;
+      padding: 5px 0;
+
+      &:hover {
+        background-color: mat-color($cca-app-muted, 100);
+      }
+    }
+  }
+
+  .scroll-card {
+    height: 500px;
+    overflow-y: auto;
+  }
+
+  .no-padding-card > .card-container .card-content {
+    padding: 0 !important;
+  }
+
+  .display-name-text {
+    line-height: 18px;
+    font-size: 16px;
+  }
+
+  .description-text {
+    white-space: normal;
+    text-align: left;
+    line-height: 13px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .01em;
+  }
+}
+
+.report-container {
+  iframe {
+    width: 100%;
+  }
+
+  .tableauViz {
+    width: 100%;
+  }
+
+  .tableauPlaceholder {
+    width: 100%;
+  }
+}
+
+.router-outlet-container {
+  position: fixed;
+  top: 40px;
+  bottom: 0;
+  left: 40px;
+  right: 0;
+  overflow-y: auto;
+  padding: 15px;
+
+  &.login-layout {
+    top: 0;
+    left: 0;
+  }
+
+  &.details-view {
+    bottom: 40px;
+  }
+
+  &.dock-pinned {
+    left: 350px;
+  }
+
+  &.session-collapsed {
+    top: 80px;
+  }
+}
+
+.sat-popover-container {
+  .cscore-popover-container {
+    .cscore-popover-content {
+      border-radius: 6px;
+      padding: 15px 15px !important;
+      .mat-icon-button {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.selected-card-backlight {
+  background-color: rgba(46, 199, 255, 0.2) !important;
+}
+
+.session-heading {
+  color: mat-color($cca-app-primary);
+  margin: 0 !important;
+}
+
+.session-panel-header {
+
+  .call-timer-container {
+    @extend .mat-subheading-1;
+    margin-bottom: 0;
+  }
+}
+
+.small-checkbox {
+
+  .mat-checkbox-inner-container {
+    height: 14px;
+    width: 14px;
+  }
+}
+
+.status-container {
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
+  color: rgba(0, 0, 0, .87);
+  background-color: #E0E0E0;
+  border-radius: 3px;
+
+  &.blue {
+    color: white;
+    background-color: #2196F3;
+  }
+
+  &.light-blue {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #b3dbfc;
+  }
+
+  &.green {
+    color: white;
+    background-color: #4CAF50;
+  }
+
+  &.light-green {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #b2ffb5;
+  }
+
+  &.orange {
+    color: white;
+    background-color: #FF9800;
+  }
+
+  &.light-orange {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #ffc672;
+  }
+
+  &.red {
+    color: white;
+    background-color: #F44336;
+  }
+
+  &.light-red {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #ffb5af;
+  }
+
+  &.dark-grey {
+    color: white;
+    background-color: #757575;
+  }
+
+  &.light-grey {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #E0E0E0;
+  }
+}
+
+.status-wrapper-small .status-container {
+  font-size: 10px;
+  height: 14px;
+  line-height: 14px;
+}
+
+.summary-section {
+  margin-bottom: 15px;
+
+  .currency-field {
+    @extend .text-right;
+    width: 80px;
+  }
+}
+
+.super-menu {
+  padding: 15px;
+  max-width: none !important;
+
+  .super-menu-column {
+    margin-right: 15px;
+    padding-right: 15px;
+
+    &:not(:last-child) {
+      border-right: 1px solid #eee;
+    }
+
+    .super-menu-column-header {
+      font-weight: bold;
+      @extend .text-muted;
+      margin-bottom: 5px;
+    }
+
+    .super-menu-link {
+      padding-left: 10px;
+      text-decoration: none;
+      color: rgb(0, 0, 238);
+    }
+  }
+}
+
+.super-menu-trigger-parent {
+  padding-right: 0 !important;
+}
+
+.super-menu-trigger-button {
+  padding: 10px;
+  height: 100%;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.table-container {
+  width: 100%;
+
+  .mat-sort-header-container {
+
+    .column-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .mat-header-cell.column-center,
+  td.column-center {
+    text-align: center;
+
+    .mat-sort-header-container {
+      justify-content: center;
+    }
+  }
+
+  td.column-right {
+    text-align: right;
+  }
+
+  tr.mat-row.clickable:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+
+  &.condensed-table {
+
+    tr {
+      height: 30px;
+
+      &.clickable:hover {
+        background-color: #eee;
+      }
+
+      .right {
+
+        .mat-cell {
+          display: flex;
+        }
+      }
+
+      th {
+
+        &.text-right {
+          padding-top: 5px;
+          padding-bottom: 4px;
+        }
+      }
+
+      td.mat-cell,
+      td.mat-footer-cell,
+      th.mat-header-cell {
+        padding-left: 5px;
+      }
+    }
+  }
+
+  &.expansion-panel-wrapper {
+
+    .row-caret {
+      &:before {
+        display: flex;
+        height: 40px;
+        width: 40px;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 1.2em;
+        justify-content: center;
+        align-items: center;
+        content: "\f105";
+      }
+    }
+
+    .expanded-row, .cscore-expanded {
+      .row-caret {
+        &:before {
+          content: "\f107";
+        }
+      }
+    }
+
+    .expansion-element-detail {
+      overflow: hidden;
+
+      .expansion-panel-content {
+        padding: 10px;
+      }
+    }
+
+    .expansion-element-row td {
+      border-bottom-width: 0;
+    }
+
+    tr.expansion-detail-row {
+      height: 0;
+
+      td.mat-cell {
+        padding: 0;
+      }
+    }
+  }
+
+  .mat-paginator[hidden] {
+    display: none;
+  }
+
+  .no-data-container {
+    @extend .text-muted;
+    height: 50px;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+
+      &.text-right {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    tr td.mat-cell.cdk-column-expandedContent {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  // Hide the border on the last row
+  &.bottomless-table table tr:nth-last-of-type(1) td {
+    border-bottom-width: 0;
+  }
+
+  &.bottomless-table table.cscore-table.cscore-expandable tr.cscore-table-detail-row:nth-last-of-type(1) td {
+    border-bottom-width: 0;
+  }
+}
+
+.text-accent {
+  color: mat-color($cca-app-accent);
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-error {
+  color: mat-color($cca-app-warn);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-grey {
+  color: #90A4AE;
+  font-weight: 400;
+}
+
+.text-muted {
+  color: mat-color($cca-app-muted, 400);
+}
+
+.text-primary {
+  color: mat-color($cca-app-primary);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-success {
+  color: green;
+}
+
+//This has to be used with a fixed width, not a percentage!
+.truncate-with-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.workspace-form {
+
+  .mat-form-field-label {
+    color: white;
+  }
+
+  .mat-form-field-underline {
+    background-color: white;
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.max-width-50 {
+  max-width: 50%;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mb-15 {
+  margin-bottom: 15px;
+}
+
+.mr-15 {
+  margin-right: 15px !important;
+}
+
+.mr-10 {
+  margin-right: 10px !important;
+}
+
+.p-4 {
+  padding: 4px;
+}
+
+.form-preview {
+  background-color: rgba(0, 0, 0, 0.075);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.mat-tab-body-wrapper {
+  flex-grow: 1;
+}
+
+.key-50 .key-value-container .key {
+  max-width: 50% !important;
+}
+
+.add-card {
+  margin-left: auto;
+  margin-right: 6% !important;
+}
+
+.cscore-table-row.red {
+  background-color: rgba(255, 0, 0, 0.5);
+  &:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+}
+
+cscore-table.highlight-rows tr.cscore-table-row:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+cscore-table {
+  .disputed {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+
+  .pending {
+    background-color: rgba(244, 235, 66, 0.5);
+  }
+}

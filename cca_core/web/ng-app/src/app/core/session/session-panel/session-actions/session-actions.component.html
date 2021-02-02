@@ -1,0 +1,29 @@
+<div class="session-actions-container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <h4 class="session-heading">Actions</h4>
+  <button id="dismiss-session-button" data-test-id="dismiss-session-button" mat-mini-fab color="background" matTooltip="Save and Dismiss" matTooltipPosition="left" (click)="dismissSession()">
+    <fa-icon [icon]="['far', 'save']"></fa-icon>
+    <cca-spinner size="SMALL" #dismissSessionSpinner></cca-spinner>
+  </button>
+  <div class="close-button-container container" [matTooltip]="closeTooltip || 'Close'" matTooltipPosition="left" [matTooltipClass]="closeTooltip ? 'multiline-tooltip' : null" [ccaFormFieldToucher]="form">
+    <button id="close-session-button" data-test-id="close-session-button" mat-mini-fab color="primary" [disabled]="closeTooltip || form.disabled || !form.valid" (click)="closeSession()">
+      <fa-icon icon="check"></fa-icon>
+    </button>
+    <cca-spinner size="SMALL" color="accent" #closeSessionSpinner></cca-spinner>
+  </div>
+  <button id="change-session-type-button" data-test-id="change-session-type-button" mat-mini-fab color="background" matTooltip="Change Type" matTooltipPosition="left" *ngIf="permittedSessionDefinitions.length > 1 && session.sessionClassType !== SessionClassType.CALL_CENTER" (click)="openChangeSessionTypeDialog()">
+    <fa-icon icon="wrench"></fa-icon>
+  </button>
+  <button id="ivr-data-button" data-test-id="ivr-data-button" mat-mini-fab color="background" [matTooltip]="ivrTooltip" matTooltipClass="multiline-tooltip" matTooltipPosition="left" *ngIf="session.sessionClassType === SessionClassType.CALL_CENTER" (click)="retryCallConnectSearch()">
+    IVR
+    <cca-spinner size="SMALL" #ivrSpinner></cca-spinner>
+  </button>
+  <button id="raise-case-button" data-test-id="raise-case-button" mat-mini-fab color="background" matTooltip="Raise Case" matTooltipPosition="left" *ngIf="session.sessionClassType !== SessionClassType.CASE" (click)="openRaiseCase()" [disabled]="form.disabled">
+    <fa-icon [icon]="['far', 'paper-plane']"></fa-icon>
+  </button>
+  <button id="log-complaint-button" data-test-id="log-complaint-button" mat-mini-fab color="background" matTooltip="Log Complaint" matTooltipPosition="left" *ngIf="!!session.callComponent && hasPermissionToLogComplaint" (click)="openLogComplaint()">
+    <fa-icon icon="comment-dots"></fa-icon>
+  </button>
+  <button id="personal-info-request-button" data-test-id="personal-info-request-button" mat-mini-fab color="background" matTooltip="Personal Info Request" matTooltipPosition="left" (click)="openPersonalInfo()" *ngIf="hasPersonalInfoRequestPermission">
+    <fa-icon icon="info-circle"></fa-icon>
+  </button>
+</div>

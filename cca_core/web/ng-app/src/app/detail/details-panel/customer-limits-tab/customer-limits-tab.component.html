@@ -1,0 +1,53 @@
+<div class="customer-limits-tab-container container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <h3 class="text-primary" style="margin:0;">Account Limits</h3>
+    <div fxFlex></div>
+    <form [formGroup]="filterForm" style="margin:0;" [hidden]="!dataSource.data?.length">
+      <cca-text-field controlName="filter" [form]="filterForm" placeholder="Filter"></cca-text-field>
+    </form>
+  </div>
+  <div class="content-container container">
+    <div class="table-container condensed-table" [ngClass]="{'mat-elevation-z1': dataSource.data?.length}">
+      <div class="no-data-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!dataSource.data?.length">No Results Available</div>
+      <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" [hidden]="!dataSource.data?.length">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Group Name</th>
+          <td mat-cell *matCellDef="let element">{{element.groupName || ('ID - ' + element.id)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="min">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Min Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts?.minAmount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="max">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Max Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts?.maxAmount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="daily">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Daily Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts?.dailyAmount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="weekly">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Weekly Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts?.weeklyAmount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="monthly">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Monthly Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts?.monthlyAmount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="yearly">
+          <th class="column-right" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before">Yearly Amount</th>
+          <td class="column-right" mat-cell *matCellDef="let element">{{element.amounts?.yearlyAmount?.displayValue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="count">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Daily Count</th>
+          <td mat-cell *matCellDef="let element">{{element.getVelocityByType( 'DAILY_TRANSACTION_COUNT' )?.displayValue || '0'}}</td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [length]="dataSource.data?.length" [pageSize]="50" [hidden]="!dataSource.data?.length || dataSource.data?.length <= 50"></mat-paginator>
+    </div>
+    <cca-spinner #limitsSpinner></cca-spinner>
+  </div>
+</div>

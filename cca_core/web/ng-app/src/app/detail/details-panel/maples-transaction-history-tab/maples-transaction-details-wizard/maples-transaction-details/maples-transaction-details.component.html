@@ -1,0 +1,19 @@
+<h4 class="text-accent">Summary</h4>
+
+<div *ngFor="let row of summary">
+  <cca-key-value-with-placeholder key="{{row.key}}" [value]="row.value"></cca-key-value-with-placeholder>
+</div>
+
+<h4 class="text-accent" style="margin-top: 14px;">Preauth Details</h4>
+<div *ngFor="let row of preauthDetails">
+  <cca-key-value-with-placeholder key="{{row.key}}" [value]="row.value"></cca-key-value-with-placeholder>
+</div>
+<div fxLayout="row">
+  <h4 class="text-accent" style="margin-top: 14px;">Details</h4>
+  <form [formGroup]="filterForm" style="margin-left: 180px;">
+    <cca-text-field [form]="filterForm" controlName="filter" placeholder="Filter"></cca-text-field>
+  </form>
+</div>
+<div *ngFor="let row of details">
+  <cca-key-value-with-placeholder key="{{row.key}}" [value]="row.value"></cca-key-value-with-placeholder>
+</div>

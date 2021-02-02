@@ -1,0 +1,6 @@
+<div class="container" fxLayout="column">
+  <cca-select-field [form]="wizardForm" controlName="mode" [options]="options" placeholder="Mode"></cca-select-field>
+  <cca-text-field *ngIf="wizard.model.showEmail" [form]="wizardForm" controlName="name" placeholder="Name"></cca-text-field>
+  <cca-text-field *ngIf="wizard.model.showEmail" [form]="wizardForm" controlName="emailAddress" placeholder="Email"></cca-text-field>
+  <cca-comment-field [form]="wizardForm" controlName="comment" placeholder="Comment"></cca-comment-field>
+</div>

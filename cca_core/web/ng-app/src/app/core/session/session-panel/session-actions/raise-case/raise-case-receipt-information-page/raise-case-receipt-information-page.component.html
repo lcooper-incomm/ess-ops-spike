@@ -1,0 +1,20 @@
+<div [formGroup]="wizardForm" fxLayout="column" fxLayoutGap="10px">
+  <div>
+    <div fxLayout="row" fxLayoutGap="5px">
+      <cca-text-field class="default-field-width" [form]="wizardForm" controlName="receiptId" placeholder="Receipt ID"></cca-text-field>
+      <cca-currency-field class="default-field-width" [form]="wizardForm" controlName="totalAmount" placeholder="Receipt Total"></cca-currency-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="5px">
+      <cca-date-field class="default-field-width" [form]="wizardForm" controlName="transactionDate" placeholder="Transaction Date"></cca-date-field>
+      <cca-text-field class="default-field-width" [form]="wizardForm" controlName="transactionTime" placeholder="Transaction Time"></cca-text-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="5px">
+      <cca-currency-field class="default-field-width" [form]="wizardForm" controlName="transactionAmount" placeholder="Transaction Amount"></cca-currency-field>
+      <mat-form-field class="default-width">
+        <mat-select formControlName="paymentMethod" placeholder="Payment Method">
+          <mat-option *ngFor="let option of paymentMethodOptions | orderBy : 'displayValue'" [value]="option.value">{{option.displayValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

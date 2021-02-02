@@ -1,0 +1,45 @@
+tr.transaction-detail-row {
+  height: 0;
+}
+
+.transaction-history-table {
+
+  .transaction {
+
+    &.red {
+      background-color: rgba(255, 0, 0, 0.5);
+    }
+
+    &.yellow {
+      background-color: rgba(244, 235, 66, 0.5);
+    }
+  }
+}
+
+.transaction-history-table-summary-container {
+  margin-bottom: 10px;
+
+  .transaction-history-filter-summary {
+    height: 24px;
+    line-height: 24px;
+  }
+
+  .transaction-history-summary-header {
+    margin: 0 0 1px;
+  }
+}
+
+.last-page-hint {
+  margin-left: 20px;
+}
+
+.transaction-element-detail {
+  overflow: hidden;
+}
+
+::ng-deep {
+  .table-container.condensed-table tr td.mat-cell.expansion-cell {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

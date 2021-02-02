@@ -1,0 +1,9 @@
+<div *ngIf="wizard.model.success === 0" class="text-accent">
+  The transaction has been adjusted.
+</div>
+<div *ngIf="wizard.model.success === 1" class="text-error">
+  The transaction could not be adjusted.
+</div>
+<div *ngIf="wizard.model.success === 2" class="text-error">
+  The transaction has been adjusted but could not be audited.
+</div>

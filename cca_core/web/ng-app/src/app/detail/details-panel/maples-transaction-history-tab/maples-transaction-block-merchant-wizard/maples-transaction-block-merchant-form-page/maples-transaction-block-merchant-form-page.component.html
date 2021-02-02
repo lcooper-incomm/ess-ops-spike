@@ -1,0 +1,10 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <cca-key-value-with-placeholder key="Merchant Name" [value]="merchant?.name"></cca-key-value-with-placeholder>
+  <cca-key-value-with-placeholder key="Merchant ID" [value]="merchant?.id"></cca-key-value-with-placeholder>
+  <div class="center-form">
+    <form [formGroup]="wizardForm">
+      <cca-comment-field [form]="wizardForm" placeholder="Comment" controlName="comment"
+                         appearance="outline"></cca-comment-field>
+    </form>
+  </div>
+</div>

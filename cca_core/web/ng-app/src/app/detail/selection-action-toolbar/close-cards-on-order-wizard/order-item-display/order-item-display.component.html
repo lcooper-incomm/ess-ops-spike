@@ -1,0 +1,7 @@
+<h4 class="text-accent">{{cards.length}} Selected Card<span *ngIf="cards.length > 1">s</span></h4>
+<div fxLayout="row wrap" fxLayoutGap="10px">
+  <div *ngFor="let card of cards | orderBy : 'serialNumber' | limit : 0 : showAll ? cards.length : limit">
+    {{card.serialNumber}}
+  </div>
+</div>
+<a href="javascript:void(0)" (click)="showAll =! showAll" *ngIf="limit < cards.length">{{showAll ? 'Show Less' : 'Show All'}}</a>

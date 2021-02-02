@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="cca-local-ie-acceptance" verbose="1" parallel="classes" thread-count="2">
+
+    <test name="Acceptance">
+
+        <!-- WebDriver Configuration -->
+        <parameter name="browser" value="internet explorer"/>
+        <parameter name="browserVersion" value=""/>
+        <parameter name="testType" value="acceptance"/>
+        <parameter name="platform" value="WINDOWS"/>
+
+        <groups>
+            <run>
+                <include name="acceptance"/>
+                <include name="base"/>
+            </run>
+        </groups>
+
+        <!-- Test Package Configuration -->
+        <packages>
+            <package name="com.incomm.cca.qa.functional.*"/>
+            <package name="com.incomm.cca.qa.acceptance.*"/>
+            <package name="com.incomm.cca.qa.integration.*"/>
+        </packages>
+
+    </test>
+
+</suite>

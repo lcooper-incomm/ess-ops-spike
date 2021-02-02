@@ -1,0 +1,18 @@
+<div class="selections-group-container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <div class="checkbox-container" *ngIf="(state$ | async).isBulkModeEnabled" fxLayout="row" fxLayoutAlign="center center">
+      <mat-checkbox class="dock-checkbox" [checked]="isGroupSelected()" (change)="toggleIsSelected()"></mat-checkbox>
+    </div>
+    <div fxFlex>
+      <div class="clickable" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" (click)="toggleIsCollapsed()">
+        <div class="icon-container" fxLayout="row" fxLayoutAlign="center center">
+          <fa-icon class="extra-small" [icon]="group.isCollapsed ? 'plus-square' : 'minus-square'"></fa-icon>
+        </div>
+        <div fxFlex><strong>{{group.displayValue}}s ({{group.selections.length}})</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="group-items-container" fxLayout="column" fxLayoutGap="5px" *ngIf="!group.isCollapsed">
+    <cca-selection-group-item [selectionGroupItem]="item" *ngFor="let item of selections | selectionGroupItem | orderBy : 'id'"></cca-selection-group-item>
+  </div>
+</div>

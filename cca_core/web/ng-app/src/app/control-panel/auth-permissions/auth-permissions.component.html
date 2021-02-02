@@ -1,0 +1,40 @@
+<div class="auth-permissions-container container">
+  <div fxLayout="row" [formGroup]="permissionsForm">
+    <div>
+      <mat-form-field class="default-field-width">
+        <mat-select formControlName="categoriesControl" placeholder="Filter Categories">
+          <mat-option value="All">All Categories</mat-option>
+          <mat-option [value]="option.displayName" *ngFor="let option of permissions | orderBy: 'displayName'">
+            {{option.displayName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <span fxFlex></span>
+    <div>
+      <mat-form-field class="default-field-width">
+        <input type="text" matInput placeholder="Filter Permissions" aria-label="Filter Permissions" formControlName="permissionsControl">
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div *ngIf="allPermissions">
+    <div *ngFor="let category of permissions | orderBy : 'displayName'; index as i" fxFlexAlign="center" style="margin-bottom: 10px">
+      <div *ngIf="category?.permissions?.length!==0">
+        <mat-card *ngIf="!filteredByCategory  || filteredByCategory == category.displayName || filteredByCategory === 'All'">
+          <cca-spinner #catSpinner color="primary" size="20" id="i"></cca-spinner>
+          <div class="permissions-main-item-container">
+            <mat-checkbox [checked]="category?.isAssigned" (change)="toggleCategory($event.checked, category.id,i)" [disabled]="filteredByPermissions"><strong fxLayout="row">{{category.displayName}}</strong></mat-checkbox>
+          </div>
+          <div fxLayout="row wrap">
+            <div class="permissions-item-container container" *ngFor="let permission of category?.permissions | orderBy : 'displayName'; index as j">
+              <cca-spinner #permissionSpinner color="primary" size="20" [id]="i+'-'+j"></cca-spinner>
+              <mat-checkbox [checked]="permission?.isAssigned" (change)="togglePermission($event.checked, permission.id, i, j)">{{permission.displayName}}</mat-checkbox>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <cca-spinner #authPermissionsSpinner [size]="SpinnerSize.MEDIUM" [on]="isLoading"></cca-spinner>
+</div>

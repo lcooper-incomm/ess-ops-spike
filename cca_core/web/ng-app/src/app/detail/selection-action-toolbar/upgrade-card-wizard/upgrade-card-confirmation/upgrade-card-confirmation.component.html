@@ -1,0 +1,6 @@
+<h4 class="text-error" *ngIf="this.wizard.model.isFailed">An error occurred while completing the action.</h4>
+<div *ngIf="!this.wizard.model.isFailed">
+  <h4 class="text-accent">The action completed successfully.</h4>
+  <cca-key-value key="Replacement Card">{{this.wizard.model.newCardNumber}}</cca-key-value>
+</div>
+

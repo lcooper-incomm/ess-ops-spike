@@ -1,0 +1,1 @@
+EXECUTE add_permission 'CREDIT_ORDER', 'Credit Order', 'Ability to credit an Order.';
