@@ -59,7 +59,7 @@ jobs:
       - name: Run a multiline script
         run: |
           echo 1. What is in this directory?
-          la -a
+          ls -a
           echo
           echo 2. Is Java installed?
           java -version
