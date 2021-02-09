@@ -53,3 +53,44 @@ jobs:
               echo GITHUB_GRAPHQL_URL=${GITHUB_GRAPHQL_URL}
               echo
               echo ****FINISHED READING VARIABLES!****
+              
+              
+      # Runs a set of shell commands to show env and workspace info
+      - name: Run a multiline script
+        run: |
+          echo 1. What is in this directory?
+          la -a
+          echo
+          echo 2. Is Java installed?
+          java -version
+          echo
+          echo 3. Is Git installed?
+          git --version
+          echo
+          echo 4. What build tools are instaleld?
+          mvn --version
+          gradle --version
+          ant -version
+          echo
+          echo 5. BLANK
+          echo
+          echo 6. Where are the Selenium jars?
+          echo $SELENIUM_JAR_PATH
+          echo
+          echo 7. What is the workspace location?
+          echo $RUNNER_WORKSPACE
+          echo 8. Who is running this script?
+          whoami
+          echo
+          echo 9. How is the disc laid out?
+          df
+          echo 10. What enviornment variiables are there?
+          env
+          
+          
+          
+          
+      - name: Read out multiple variables
+        run: |          
+          echo  "END of Readout" 
+          
