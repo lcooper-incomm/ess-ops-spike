@@ -79,13 +79,16 @@ jobs:
           echo
           echo 7. What is the workspace location?
           echo $RUNNER_WORKSPACE
+          echo
           echo 8. Who is running this script?
           whoami
           echo
           echo 9. How is the disc laid out?
           df
+          echo
           echo 10. What enviornment variiables are there?
           env
+          echo
           
           
           
